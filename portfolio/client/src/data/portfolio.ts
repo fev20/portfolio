@@ -1,0 +1,317 @@
+// =============================================================
+// 포트폴리오 데이터 파일
+// 이 파일에서 모든 내용을 수정하세요.
+// =============================================================
+
+// ─── 기본 정보 ───────────────────────────────────────────────
+export const profile = {
+  name: "유수민",
+  nameEn: "Sumin Yoo",
+  tagline: "하드웨어 보안과 웹 보안을 공부하는 컴퓨터공학 전공 학생입니다.",
+  taglineEn: "Computer Engineering Student interested in Hardware Security, Web Security, and Secure Systems.",
+  email: "isemy0317@kku.ac.kr",
+  github: "https://github.com/fev20",
+  blog: "https://infobox7013.tistory.com/",
+  notion: "",                       // ← 노션 URL (나중에 추가)
+  linkedin: "",
+};
+
+// ─── 파일 & 링크 목록 ─────────────────────────────────────────
+// type: "download" → 클릭 시 파일 다운로드
+// type: "link"     → 클릭 시 외부 페이지(노션 등)로 이동
+export const files = [
+  {
+    id: "resume",
+    label: "이력서 PDF",
+    labelEn: "Resume",
+    url: "",                        // ← 업로드 후 URL 입력
+    type: "download" as const,
+    icon: "file-text",
+    description: "최신 이력서 다운로드",
+  },
+];
+
+// ─── About ───────────────────────────────────────────────────
+export const about = {
+  quote: "어제보다 더 나은 내가 되자",
+  paragraphs: [
+    "건국대학교 글로컬캠퍼스 컴퓨터공학과에 재학 중이며, 매일 새로운 것을 배우고 익히며 더 나은 실력을 얻고 시야를 넓혀가고 있습니다.",
+    "교내 보안 소모임 seKUrity에서 활동하며 웹 취약점 분석, CTF 문제 풀이, Fault Injection 등 다양한 분야를 공부하고 있습니다. 이론에 그치지 않고 Arduino와 Raspberry Pi 같은 하드웨어 플랫폼을 직접 다루며 실습 기반의 이해를 쌓고 있습니다.",
+    "보안은 단순한 기술이 아니라 사고방식이라고 생각합니다. 시스템을 공격자의 시선으로 바라보고, 그 취약점을 이해하는 것이 진정한 방어의 시작이라 믿습니다.",
+  ],
+};
+
+// ─── Skills ──────────────────────────────────────────────────
+export const skills = [
+  {
+    category: "Security",
+    icon: "shield",
+    color: "#64ffda",
+    items: [
+      "Web Security",
+      "XSS",
+      "CTF",
+      "Fault Injection / Voltage Glitching",
+      "Network Packet Analysis",
+      "CORS",
+    ],
+  },
+  {
+    category: "Development",
+    icon: "code",
+    color: "#a78bfa",
+    items: [
+      "React",
+      "TypeScript",
+      "JavaScript",
+      "HTML / CSS",
+      "Node.js",
+    ],
+  },
+  {
+    category: "Tools",
+    icon: "wrench",
+    color: "#38bdf8",
+    items: [
+      "Burp Suite",
+      "Wireshark",
+      "Fiddler",
+      "Linux",
+      "Git / GitHub",
+      "Arduino",
+      "Raspberry Pi",
+    ],
+  },
+];
+
+// ─── Projects ────────────────────────────────────────────────
+export const projects = [
+  // ── Security Research ──────────────────────────────────────────
+  {
+    id: "fault-injection",
+    number: "01",
+    category: "Security Research",
+    title: "Fault Injection Study",
+    description:
+      "Voltage Glitching 원리를 학습하고 하드웨어 보안 공격 및 방어 메커니즘을 분석한 연구 프로젝트. 전압 조작을 통해 마이크로컨트롤러의 실행 흐름을 변조하는 공격 기법을 실험하고 문서화했습니다.",
+    role: "연구 및 분석",
+    learned:
+      "하드웨어 레벨의 보안 취약점이 소프트웨어와 어떻게 연결되는지 이해했습니다. 물리적 공격 벡터가 실제 시스템에 미치는 영향을 직접 확인했습니다.",
+    tags: ["Hardware Security", "Voltage Glitching", "Fault Injection", "Security Analysis"],
+    links: { github: "", report: "" },
+    color: "#f59e0b",
+  },
+
+  // ── CTF & Security Activities ──────────────────────────────────
+  {
+    id: "escape-room",
+    number: "02",
+    category: "CTF & Security Activities",
+    title: "React Escape Room Game",
+    description:
+      "msg CTF 행사에서 참가자용 방탈출 게임 제작. CTF 문제 형식을 인터랙티브 웹 게임으로 구현하여 참가자들이 보안 개념을 직접 체험할 수 있도록 설계했습니다.",
+    role: "프론트엔드 개발 및 퍼즐 설계",
+    learned:
+      "CTF 문제 설계 관점에서 공격자와 방어자 사고방식을 동시에 적용하는 경험을 했습니다. React 상태 관리 패턴과 사용자 경험 설계의 중요성도 체감했습니다.",
+    tags: ["CTF", "React", "JavaScript", "Puzzle Design", "Security"],
+    links: { github: "https://github.com/minsuk330/room-escape.git", report: "" },
+    color: "#64ffda",
+  },
+
+  // ── Interactive Web Projects ───────────────────────────────────
+  {
+    id: "balloon-ride",
+    number: "03",
+    category: "Interactive Web Projects",
+    title: "Balloon Ride",
+    description:
+      "풍선을 위아래로 움직여 장애물을 피하며 점수를 얻는 인터랙티브 웹 게임. 단체 프로젝트로 React 기반 점수 시스템과 게임 상태 관리 파트를 담당했습니다.",
+    role: "React 점수 시스템 구현",
+    learned:
+      "팀 프로젝트에서 역할 분담과 컴포넌트 단위 개발의 효율성을 배웠습니다. 게임 루프와 React 렌더링 사이클을 조율하는 방법을 익혔습니다.",
+    tags: ["React", "JavaScript", "Game", "Team Project"],
+    links: { github: "https://github.com/soooonho/balloonride.git", report: "" },
+    color: "#a78bfa",
+  },
+
+  // ── Service Operation & Improvement ───────────────────────────
+  {
+    id: "sekurity-renewal",
+    number: "04",
+    category: "Service Operation & Improvement",
+    title: "seKUrity 홈페이지 리뉴얼",
+    description:
+      "교내 보안 소모임 seKUrity 공식 홈페이지 리뉴얼 프로젝트 참여. 기존 사이트의 구조를 분석하고 UI 개선, 페이지 구조 재편, 콘텐츠 정리를 통해 운영 효율을 높였습니다.",
+    role: "UI 개선 및 페이지 구조 재편",
+    learned:
+      "실제 운영 중인 서비스를 팀으로 개선하며 기존 코드베이스 파악, 협업 워크플로우, 코드 리뷰 문화를 경험했습니다.",
+    tags: ["Web Renewal", "UI Improvement", "Team Project", "Service Operation"],
+    links: { github: "https://github.com/kku-seKUrity/seku_homePage.git", report: "" },
+    color: "#38bdf8",
+  },
+];
+
+// ─── Experience ──────────────────────────────────────────────
+export const experiences = [
+  {
+    period: "2026.03 — 현재",
+    title: "코딩 동아리 부회장",
+    role: "제 5세대 부회장",
+    description: "코딩 동아리 제 5세대 부회장으로 활동 중입니다.",
+    tags: ["Leadership", "Programming"],
+  },
+  {
+    period: "2026.01 — 현재",
+    title: "보안 스터디",
+    role: "스터디 참여",
+    description: "보안 분야 심화 스터디에 참여하며 지속적으로 역량을 키우고 있습니다.",
+    tags: ["Security", "Study"],
+  },
+  {
+    period: "2025.09 — 현재",
+    title: "seKUrity 멘토",
+    role: "교내 보안 소모임 멘토",
+    description: "건국대학교 글로컬캠퍼스 보안 소모임 seKUrity에서 멘토로 활동하며 신입 부원들을 지도하고 있습니다.",
+    tags: ["Mentoring", "Web Security", "CTF"],
+  },
+  {
+    period: "2025.09 — 현재",
+    title: "코딩 동아리 임원진",
+    role: "제 5세대 임원진",
+    description: "코딩 동아리 제 5세대 임원진으로 활동하며 동아리 운영에 참여하고 있습니다.",
+    tags: ["Leadership", "Programming"],
+  },
+  {
+    period: "2025.03 — 2025.06",
+    title: "seKUrity 신입 부원",
+    role: "교내 보안 소모임 활동",
+    description: "건국대학교 글로컬캠퍼스 보안 소모임 seKUrity에서 신입 부원으로 활동했습니다. 웹 보안, CTF, 하드웨어 보안 등 다양한 분야를 스터디했습니다.",
+    tags: ["Web Security", "CTF", "Hardware Security"],
+  },
+  {
+    period: "2025.03 — 현재",
+    title: "코딩 동아리 부원",
+    role: "제 5세대 부원",
+    description: "코딩 동아리 제 5세대 부원으로 활동하며 다양한 프로젝트에 참여하고 있습니다.",
+    tags: ["Programming", "Project"],
+  },
+];
+
+// ─── Education & Certifications ──────────────────────────────
+export const education = [
+  {
+    type: "education",
+    period: "2025.03 — 재학 중",
+    title: "건국대학교 글로컬캠퍼스",
+    subtitle: "컴퓨터공학과",
+    description: "",
+    icon: "graduation-cap",
+  },
+  {
+    type: "education",
+    period: "2025.07.02 — 2025.07.08",
+    title: "정보보호 제품군 실습훈련 - 기초1 (5차)",
+    subtitle: "KISA Academy",
+    description: "",
+    icon: "shield",
+    pdfFile: "/portfolio/basic1_5.pdf",
+  },
+  {
+    type: "education",
+    period: "2025.07.23 — 2025.07.29",
+    title: "정보보호 제품군 실습훈련 - 기초1 (6차)",
+    subtitle: "KISA Academy",
+    description: "",
+    icon: "shield",
+    pdfFile: "/portfolio/basic1_6.pdf",
+  },
+  {
+    type: "education",
+    period: "2025.07.09 — 2025.07.15",
+    title: "정보보호 제품군 실습훈련 - 기초2 (6차)",
+    subtitle: "KISA Academy",
+    description: "",
+    icon: "shield",
+    pdfFile: "/portfolio/basic2_6.pdf",
+  },
+  {
+    type: "education",
+    period: "2025.07.30 — 2025.08.05",
+    title: "정보보호 제품군 실습훈련 - 기초2 (7차)",
+    subtitle: "KISA Academy",
+    description: "",
+    icon: "shield",
+    pdfFile: "/portfolio/basic2_7.pdf",
+  },
+  {
+    type: "education",
+    period: "2025.08.20 — 2025.08.26",
+    title: "정보보호 제품군 실습훈련 - 기본1 (7차)",
+    subtitle: "KISA Academy",
+    description: "",
+    icon: "shield",
+    pdfFile: "/portfolio/standard1_7.pdf",
+  },
+  {
+    type: "education",
+    period: "2025.08.20 — 2025.08.26",
+    title: "정보보호 제품군 실습훈련 - 기본2 (7차)",
+    subtitle: "KISA Academy",
+    description: "",
+    icon: "shield",
+    pdfFile: "/portfolio/standard2_7.pdf",
+  },
+  {
+    type: "education",
+    period: "2025.08.06 — 2025.08.12",
+    title: "침해사고 대응훈련 - MITRE ATT&CK 활용 훈련 (7차)",
+    subtitle: "KISA Academy",
+    description: "",
+    icon: "shield",
+    pdfFile: "/portfolio/mitre.pdf",
+  },
+  {
+    type: "education",
+    period: "2025.08.19 — 2025.09.01",
+    title: "K-shield 주니어 기초과정 (15차)",
+    subtitle: "KISA",
+    description: "",
+    icon: "shield",
+    pdfFile: "/portfolio/k-shield.pdf",
+  },
+  {
+    type: "education",
+    period: "2026.03.08 — 2025.06.09",
+    title: "반도체 설계 입문",
+    subtitle: "디지털 세상의 기본 회로 배우기",
+    description: "",
+    icon: "cpu",
+  },
+];
+
+export const certifications = [
+  {
+    type: "cert",
+    year: "2024.10.31",
+    title: "IEQ 인터넷 윤리 자격 지도사",
+    issuer: "국가공인",
+    icon: "award",
+    pdfFile: "/portfolio/IEQ.pdf",
+  },
+  {
+    type: "cert",
+    year: "2025.12.08",
+    title: "MOS PowerPoint 2016",
+    issuer: "Microsoft 국제공인",
+    icon: "award",
+    pdfFile: "/portfolio/MOS_Powerpoint_2016.pdf",
+  },
+  {
+    type: "cert",
+    year: "2025.12.12",
+    title: "MOS Excel 2016 Expert",
+    issuer: "Microsoft 국제공인",
+    icon: "award",
+    pdfFile: "/portfolio/MOS_Excel_Expert_2016.pdf",
+  },
+];
