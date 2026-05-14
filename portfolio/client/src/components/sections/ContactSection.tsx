@@ -64,39 +64,27 @@ export default function ContactSection() {
         }}
       />
 
-            <div className="container relative z-10">
+      <div className="container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="flex flex-col gap-1 mb-14"
+          className="flex items-center gap-3 mb-14"
         >
-          <span
-            style={{
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: "0.62rem",
-              color: "#64ffda55",
-              letterSpacing: "0.12em",
-            }}
-          >
-            contact.exe
-          </span>
-          <div className="flex items-center gap-3">
-            <h2
-              style={{
-                fontFamily: "'Space Grotesk', sans-serif",
-                fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
-                fontWeight: 700,
-                color: "#ccd6f6",
-              }}
-            >
-              Contact
-            </h2>
-            <div
-              className="flex-1 h-px"
-              style={{ background: "rgba(100,255,218,0.15)", maxWidth: "200px" }}
-            />
-          </div>
+        <h2
+          style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
+            fontWeight: 700,
+            color: "#ccd6f6",
+          }}
+        >
+          Contact
+        </h2>
+          <div
+            className="flex-1 h-px"
+            style={{ background: "rgba(100,255,218,0.15)", maxWidth: "200px" }}
+          />
         </motion.div>
 
         <div>
