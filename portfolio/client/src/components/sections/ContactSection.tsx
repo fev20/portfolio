@@ -71,17 +71,27 @@ export default function ContactSection() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-3 mb-14"
         >
-          <span className="section-number">06.</span>
-          <h2
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
-              fontWeight: 700,
-              color: "#ccd6f6",
-            }}
-          >
-            Contact
-          </h2>
+          <div
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: "0.65rem",
+            color: "#64ffda66",
+            letterSpacing: "0.12em",
+            marginBottom: "4px",
+          }}
+        >
+          contact.exe
+        </div>
+        <h2
+          style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
+            fontWeight: 700,
+            color: "#ccd6f6",
+          }}
+        >
+          Contact
+        </h2>
           <div
             className="flex-1 h-px"
             style={{ background: "rgba(100,255,218,0.15)", maxWidth: "200px" }}

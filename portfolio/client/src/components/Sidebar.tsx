@@ -255,7 +255,7 @@ export default function Sidebar() {
         {/* ── 구분선 ── */}
         <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(100,255,218,0.25), transparent)", flexShrink: 0 }} />
 
-        {/* ── contact.exe 고정 하단 ── */}
+                {/* ── contact.exe 고정 하단 ── */}
         <div className="flex-shrink-0">
           <div
             style={{
@@ -274,7 +274,7 @@ export default function Sidebar() {
             style={{ background: activeSection === "contact" && isMainPage ? "rgba(100,255,218,0.06)" : "transparent" }}
           >
             <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.58rem", color: activeSection === "contact" && isMainPage ? "#64ffda" : "#475569", minWidth: "18px" }}>
-              06
+              &gt;_
             </span>
             <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.82rem", color: activeSection === "contact" && isMainPage ? "#e2e8f0" : "#94a3b8", fontWeight: activeSection === "contact" && isMainPage ? 600 : 400 }}>
               Contact
