@@ -269,9 +269,6 @@ export default function Sidebar() {
                       ))}
                     </div>
                   )}
-                  {item.subItems.length > 0 && !collapsed[item.id] && (
-  <div style={{ height: "1px", background: "rgba(100,255,218,0.8)", margin: "6px 12px 0" }} />
-)}
                 </div>
               );
             })}
