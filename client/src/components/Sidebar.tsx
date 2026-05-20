@@ -231,7 +231,7 @@ export default function Sidebar() {
                   </button>
 
                   {item.subItems.length > 0 && !collapsed[item.id] && (
-                    <div className="ml-8 mt-0.5 space-y-0">
+                    <div className="ml-8 mt-0.5 space-y-0" style={{ borderTop: "1px solid rgba(100,255,218,0.08)", paddingTop: "4px" }}>
                       {item.subItems.map((sub, si) => (
                         <div
                           key={si}
