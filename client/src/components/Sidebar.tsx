@@ -129,7 +129,7 @@ export default function Sidebar() {
           </div>
           <div className="flex items-center gap-1">
             {["—", "□", "×"].map((s) => (
-              <span key={s} style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem", color: "#2d3748", padding: "0 2px" }}>{s}</span>
+              <span key={s} style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.85rem", color: "#2d3748", padding: "0 2px" }}>{s}</span>
             ))}
           </div>
         </div>
@@ -205,7 +205,7 @@ export default function Sidebar() {
       style={{ background: "#64ffda" }}
     />
   )}
-  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.58rem", color: isActive ? "#64ffda" : "#475569", minWidth: "18px" }}>
+  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.85rem", color: isActive ? "#64ffda" : "#475569", minWidth: "18px" }}>
     {item.num}
   </span>
   <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.82rem", color: isActive ? "#e2e8f0" : "#94a3b8", fontWeight: isActive ? 600 : 400, flex: 1, textAlign: "left" }}>
@@ -216,12 +216,12 @@ export default function Sidebar() {
       onClick={(e) => { e.stopPropagation(); toggleCollapse(item.id); }}
       style={{
         fontFamily: "'JetBrains Mono', monospace",
-        fontSize: "0.55rem",
+        fontSize: "0.85rem",
         color: isActive ? "#64ffda88" : "#47556988",
         display: "inline-block",
         transform: collapsed[item.id] ? "rotate(-90deg)" : "rotate(0deg)",
         transition: "transform 0.2s",
-        padding: "2px 4px",
+        padding: "2px 6px",
       }}
     >
       ▾
