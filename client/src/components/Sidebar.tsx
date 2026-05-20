@@ -31,6 +31,12 @@ export default function Sidebar() {
   const router = useRouter();
   const isMainPage = location === "/";
 
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});  // ← 추가
+
+  const toggleCollapse = (id: string) => {
+  setCollapsed(prev => ({ ...prev, [id]: !prev[id] }));
+};
+
   const navigate = (path: string) => {
     window.location.hash = path;
   };
@@ -195,19 +201,35 @@ export default function Sidebar() {
                     {isActive && (
                       <motion.div
                         layoutId="nav-active"
-                        className="absolute left-0 top-1 bottom-1 w-0.5 rounded-full"
-                        style={{ background: "#64ffda" }}
-                      />
-                    )}
-                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.58rem", color: isActive ? "#64ffda" : "#475569", minWidth: "18px" }}>
-                      {item.num}
-                    </span>
-                    <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.82rem", color: isActive ? "#e2e8f0" : "#94a3b8", fontWeight: isActive ? 600 : 400 }}>
-                      {item.label}
-                    </span>
-                  </button>
+      className="absolute left-0 top-1 bottom-1 w-0.5 rounded-full"
+      style={{ background: "#64ffda" }}
+    />
+  )}
+  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.58rem", color: isActive ? "#64ffda" : "#475569", minWidth: "18px" }}>
+    {item.num}
+  </span>
+  <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.82rem", color: isActive ? "#e2e8f0" : "#94a3b8", fontWeight: isActive ? 600 : 400, flex: 1, textAlign: "left" }}>
+    {item.label}
+  </span>
+  {item.subItems.length > 0 && (
+    <span
+      onClick={(e) => { e.stopPropagation(); toggleCollapse(item.id); }}
+      style={{
+        fontFamily: "'JetBrains Mono', monospace",
+        fontSize: "0.55rem",
+        color: isActive ? "#64ffda88" : "#47556988",
+        display: "inline-block",
+        transform: collapsed[item.id] ? "rotate(-90deg)" : "rotate(0deg)",
+        transition: "transform 0.2s",
+        padding: "2px 4px",
+      }}
+    >
+      ▾
+    </span>
+  )}
+</button>
 
-                  {item.subItems.length > 0 && (
+                  {item.subItems.length > 0 && !collapsed[item.id] && (
                     <div className="ml-8 mt-0.5 space-y-0">
                       {item.subItems.map((sub, si) => (
                         <div
