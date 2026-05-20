@@ -191,7 +191,7 @@ export default function Sidebar() {
                   ? location.startsWith("/education")
                   : location.startsWith(`/${item.id}`);
               return (
-                <div key={item.id} className="mb-1">
+                <div key={item.id} className="mb-1" style={{ borderBottom: "1px solid rgba(100,255,218,0.04)" }}>
                   <button
                     onClick={() => scrollTo(item.id)}
                     className="w-full flex items-center gap-2 px-3 py-1.5 rounded transition-all relative"
