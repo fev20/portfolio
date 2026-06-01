@@ -255,8 +255,8 @@ export default function Sidebar() {
                             cursor: sub.path || sub.scrollId ? "pointer" : "default",
                             marginTop: sub.label === "── Certifications ──" ? "10px" : undefined,
                           }}
-                          onMouseEnter={(e) => { if (sub.path) (e.currentTarget.querySelector('span') as HTMLElement).style.color = "#64ffda"; }}
-                          onMouseLeave={(e) => { if (sub.path) (e.currentTarget.querySelector('span') as HTMLElement).style.color = isActive ? "#64ffda" : "#64748b"; }}
+                          onMouseEnter={(e) => { if (sub.path || sub.scrollId) (e.currentTarget.querySelector('span') as HTMLElement).style.color = "#64ffda"; }}
+                          onMouseLeave={(e) => { if (sub.path || sub.scrollId) (e.currentTarget.querySelector('span') as HTMLElement).style.color = isActive ? "#64ffda" : "#64748b"; }}
                         >
                           <span
                             style={{
@@ -270,7 +270,7 @@ export default function Sidebar() {
                               transition: "color 0.2s",
                             }}
                           >
-                            {sub.path ? "> " : ""}{sub.label}
+                            {sub.path || sub.scrollId ? "> " : ""}{sub.label}
                           </span>
                         </div>
                       ))}
