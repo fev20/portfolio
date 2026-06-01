@@ -156,7 +156,7 @@ export default function Sidebar() {
               }}
             >
               <img
-                src="/portfolio/Me.jpg"
+                src="/Me.jpg"
                 alt="profile"
                 style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", filter: "brightness(0.9) contrast(1.05)" }}
               />

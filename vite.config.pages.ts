@@ -18,7 +18,7 @@ export default defineConfig({
     },
   },
   root: path.resolve(import.meta.dirname, "client"),
-  base: "/portfolio/",   // ← GitHub Pages 커스텀 도메인 사용 시 "/"
+  base: "/",   // ← GitHub Pages 커스텀 도메인 사용 시 "/"
                // ← username.github.io/portfolio 형태라면 "/portfolio/"로 변경
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),

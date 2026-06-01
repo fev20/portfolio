@@ -214,7 +214,7 @@ export const education = [
     subtitle: "KISA Academy",
     description: "",
     icon: "shield",
-    pdfFile: "/portfolio/basic1_5.pdf",
+    pdfFile: "/basic1_5.pdf",
   },
   {
     type: "education",
@@ -223,7 +223,7 @@ export const education = [
     subtitle: "KISA Academy",
     description: "",
     icon: "shield",
-    pdfFile: "/portfolio/basic1_6.pdf",
+    pdfFile: "/basic1_6.pdf",
   },
   {
     type: "education",
@@ -232,7 +232,7 @@ export const education = [
     subtitle: "KISA Academy",
     description: "",
     icon: "shield",
-    pdfFile: "/portfolio/basic2_6.pdf",
+    pdfFile: "/basic2_6.pdf",
   },
   {
     type: "education",
@@ -241,7 +241,7 @@ export const education = [
     subtitle: "KISA Academy",
     description: "",
     icon: "shield",
-    pdfFile: "/portfolio/basic2_7.pdf",
+    pdfFile: "/basic2_7.pdf",
   },
   {
     type: "education",
@@ -250,7 +250,7 @@ export const education = [
     subtitle: "KISA Academy",
     description: "",
     icon: "shield",
-    pdfFile: "/portfolio/standard1_7.pdf",
+    pdfFile: "/standard1_7.pdf",
   },
   {
     type: "education",
@@ -259,7 +259,7 @@ export const education = [
     subtitle: "KISA Academy",
     description: "",
     icon: "shield",
-    pdfFile: "/portfolio/standard2_7.pdf",
+    pdfFile: "/standard2_7.pdf",
   },
   {
     type: "education",
@@ -268,7 +268,7 @@ export const education = [
     subtitle: "KISA Academy",
     description: "",
     icon: "shield",
-    pdfFile: "/portfolio/mitre.pdf",
+    pdfFile: "/mitre.pdf",
   },
   {
     type: "education",
@@ -277,7 +277,7 @@ export const education = [
     subtitle: "KISA",
     description: "",
     icon: "shield",
-    pdfFile: "/portfolio/k-shield.pdf",
+    pdfFile: "/k-shield.pdf",
   },
   {
     type: "education",
@@ -296,7 +296,7 @@ export const certifications = [
     title: "IEQ 인터넷 윤리 자격 지도사",
     issuer: "국가공인",
     icon: "award",
-    pdfFile: "/portfolio/IEQ.pdf",
+    pdfFile: "/IEQ.pdf",
   },
   {
     type: "cert",
@@ -304,7 +304,7 @@ export const certifications = [
     title: "MOS PowerPoint 2016",
     issuer: "Microsoft 국제공인",
     icon: "award",
-    pdfFile: "/portfolio/MOS_Powerpoint_2016.pdf",
+    pdfFile: "/MOS_Powerpoint_2016.pdf",
   },
   {
     type: "cert",
@@ -312,6 +312,6 @@ export const certifications = [
     title: "MOS Excel 2016 Expert",
     issuer: "Microsoft 국제공인",
     icon: "award",
-    pdfFile: "/portfolio/MOS_Excel_Expert_2016.pdf",
+    pdfFile: "/MOS_Excel_Expert_2016.pdf",
   },
 ];
