@@ -46,7 +46,7 @@ export default function Sidebar() {
   const navItems = NAV_ITEMS.map((item) => {
     if (item.id === "skills") return {
       ...item,
-      subItems: skills.map((s): SubItem => ({ label: s.category, path: `#skill-${s.category}` })),
+      subItems: skills.map((s): SubItem => ({ label: s.category, path: null, scrollId: `skill-${s.category}` })),
     };
     if (item.id === "projects") return {
       ...item,
