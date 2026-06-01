@@ -240,10 +240,18 @@ export default function Sidebar() {
                               if (!isMainPage) {
                                 window.location.href = "/";
                                 setTimeout(() => {
-                                  document.getElementById(sub.scrollId!)?.scrollIntoView({ behavior: "smooth" });
+                                  const el2 = document.getElementById(sub.scrollId!);
+                                  if (el2) {
+                                    const top = el2.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.25;
+                                    window.scrollTo({ top, behavior: "smooth" });
+                                  }
                                 }, 600);
                               } else {
-                                document.getElementById(sub.scrollId)?.scrollIntoView({ behavior: "smooth" });
+                                const el2 = document.getElementById(sub.scrollId!);
+                                if (el2) {
+                                  const top = el2.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.25;
+                                  window.scrollTo({ top, behavior: "smooth" });
+                                }
                               }
                             } else if (sub.path) {
                               navigate(sub.path);
