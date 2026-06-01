@@ -236,8 +236,15 @@ export default function Sidebar() {
                         <div
                           key={si}
                           onClick={() => {
-                            if (isMainPage && sub.scrollId) {
-                              document.getElementById(sub.scrollId)?.scrollIntoView({ behavior: "smooth" });
+                            if (sub.scrollId) {
+                              if (!isMainPage) {
+                                window.location.href = "/";
+                                setTimeout(() => {
+                                  document.getElementById(sub.scrollId!)?.scrollIntoView({ behavior: "smooth" });
+                                }, 600);
+                              } else {
+                                document.getElementById(sub.scrollId)?.scrollIntoView({ behavior: "smooth" });
+                              }
                             } else if (sub.path) {
                               navigate(sub.path);
                             }
@@ -245,7 +252,7 @@ export default function Sidebar() {
                           className="flex items-center gap-1.5 py-0.5 pl-2 transition-all"
                           style={{
                             borderLeft: `1px solid ${isActive ? "rgba(100,255,218,0.18)" : "rgba(100,255,218,0.05)"}`,
-                            cursor: sub.path ? "pointer" : "default",
+                            cursor: sub.path || sub.scrollId ? "pointer" : "default",
                             marginTop: sub.label === "── Certifications ──" ? "10px" : undefined,
                           }}
                           onMouseEnter={(e) => { if (sub.path) (e.currentTarget.querySelector('span') as HTMLElement).style.color = "#64ffda"; }}
