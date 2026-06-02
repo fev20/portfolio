@@ -107,9 +107,15 @@ export default function Sidebar() {
   }, [isMainPage]);
 
   const scrollToSection = (id: string) => {
-    if (!isMainPage) { router.navigate("/"); return; }
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
+  if (!isMainPage) {
+    router.navigate("/");
+    setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }, 300);
+    return;
+  }
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+};
 
   const smoothScrollTo = (scrollId: string) => {
     const el = document.getElementById(scrollId);
