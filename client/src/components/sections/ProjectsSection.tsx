@@ -81,6 +81,7 @@ export default function ProjectsSection() {
             return (
               <motion.div
                 key={group.category}
+                id={`project-cat-${group.category.replace(/\s+/g, "-")}`}
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: gi * 0.1 }}

@@ -25,6 +25,15 @@ const NAV_ITEMS = [
   { id: "education",  label: "Education & Certifications",  num: "05", sub: [] as string[] },
 ];
 
+const CATEGORY_ORDER = [
+  "Security Research",
+  "CTF & Security Activities",
+  "Security Education",
+  "Interactive Web Projects",
+  "Service Operation & Improvement",
+  "Embedded & Hardware Practice",
+];
+
 export default function Sidebar() {
   const [activeSection, setActiveSection] = useState("hero");
   const [location] = useLocation();
@@ -38,11 +47,11 @@ export default function Sidebar() {
   };
 
   const navigate = (path: string) => {
-    window.location.hash = path;
+    router.navigate(path);
   };
 
   // 하위 항목 채우기 (label + path)
-  type SubItem = { label: string; path: string | null; scrollId?: string };
+  type SubItem = { label: string; path: string | null; scrollId?: string; children?: SubItem[] };
   const navItems = NAV_ITEMS.map((item) => {
     if (item.id === "skills") return {
       ...item,
@@ -50,7 +59,14 @@ export default function Sidebar() {
     };
     if (item.id === "projects") return {
       ...item,
-      subItems: projects.map((p): SubItem => ({ label: p.title, path: `/project/${p.id}`, scrollId: `project-${p.id}` })),
+      subItems: CATEGORY_ORDER.map((cat): SubItem => ({
+        label: cat,
+        path: null,
+        scrollId: `project-cat-${cat.replace(/\s+/g, "-")}`,
+        children: projects
+          .filter((p) => p.category === cat)
+          .map((p): SubItem => ({ label: p.title, path: `/project/${p.id}`, scrollId: `project-${p.id}` })),
+      })),
     };
     if (item.id === "experience") return {
       ...item,
@@ -90,9 +106,30 @@ export default function Sidebar() {
     return () => window.removeEventListener("scroll", getActive);
   }, [isMainPage]);
 
-  const scrollTo = (id: string) => {
-    if (!isMainPage) { window.location.hash = `/`; return; }
+  const scrollToSection = (id: string) => {
+    if (!isMainPage) { router.navigate("/"); return; }
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const smoothScrollTo = (scrollId: string) => {
+    const el = document.getElementById(scrollId);
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.25;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
+  const handleSubClick = (scrollId?: string, path?: string | null) => {
+    if (scrollId) {
+      if (!isMainPage) {
+        router.navigate("/");
+        setTimeout(() => smoothScrollTo(scrollId), 600);
+      } else {
+        smoothScrollTo(scrollId);
+      }
+    } else if (path) {
+      navigate(path);
+    }
   };
 
   const displayName = profile.name === "이름" ? "fev20" : profile.name;
@@ -193,7 +230,7 @@ export default function Sidebar() {
               return (
                 <div key={item.id} className="mb-1" style={{ borderBottom: "1px solid rgba(100,255,218,0.15)", paddingBottom: "8px" }}>
                   <button
-                    onClick={() => scrollTo(item.id)}
+                    onClick={() => scrollToSection(item.id)}
                     className="w-full flex items-center gap-2 px-3 py-1.5 rounded transition-all relative"
                     style={{ background: isActive ? "rgba(100,255,218,0.07)" : "transparent" }}
                   >
@@ -233,53 +270,96 @@ export default function Sidebar() {
                   {item.subItems.length > 0 && !collapsed[item.id] && (
                     <div className="ml-8 mt-0.5 space-y-0" style={{ borderTop: "1px solid rgba(100,255,218,0.1)", paddingTop: "4px", marginBottom: "8px" }}>
                       {item.subItems.map((sub, si) => (
-                        <div
-                          key={si}
-                          onClick={() => {
-                            if (sub.scrollId) {
-                              if (!isMainPage) {
-                                window.location.href = "/";
-                                setTimeout(() => {
-                                  const el2 = document.getElementById(sub.scrollId!);
-                                  if (el2) {
-                                    const top = el2.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.25;
-                                    window.scrollTo({ top, behavior: "smooth" });
-                                  }
-                                }, 600);
+                        <div key={si}>
+                          {/* 상위 subItem 행 */}
+                          <div
+                            onClick={() => {
+                              if (sub.children && sub.children.length > 0) {
+                                toggleCollapse(`sub-${item.id}-${si}`);
                               } else {
-                                const el2 = document.getElementById(sub.scrollId!);
-                                if (el2) {
-                                  const top = el2.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.25;
-                                  window.scrollTo({ top, behavior: "smooth" });
-                                }
+                                handleSubClick(sub.scrollId, sub.path);
                               }
-                            } else if (sub.path) {
-                              navigate(sub.path);
-                            }
-                          }}
-                          className="flex items-center gap-1.5 py-0.5 pl-2 transition-all"
-                          style={{
-                            borderLeft: `1px solid ${isActive ? "rgba(100,255,218,0.18)" : "rgba(100,255,218,0.05)"}`,
-                            cursor: sub.path || sub.scrollId ? "pointer" : "default",
-                            marginTop: sub.label === "── Certifications ──" ? "10px" : undefined,
-                          }}
-                          onMouseEnter={(e) => { if (sub.path || sub.scrollId) (e.currentTarget.querySelector('span') as HTMLElement).style.color = "#64ffda"; }}
-                          onMouseLeave={(e) => { if (sub.path || sub.scrollId) (e.currentTarget.querySelector('span') as HTMLElement).style.color = isActive ? "#64ffda" : "#64748b"; }}
-                        >
-                          <span
+                            }}
+                            className="flex items-center gap-1.5 py-0.5 pl-2 transition-all"
                             style={{
-                              fontFamily: "'JetBrains Mono', monospace",
-                              fontSize: "0.6rem",
-                              color: isActive ? "#64ffda" : "#64748b",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              maxWidth: "145px",
-                              transition: "color 0.2s",
+                              borderLeft: `1px solid ${isActive ? "rgba(100,255,218,0.18)" : "rgba(100,255,218,0.05)"}`,
+                              cursor: sub.path || sub.scrollId || (sub.children && sub.children.length > 0) ? "pointer" : "default",
+                              marginTop: sub.label === "── Certifications ──" ? "10px" : undefined,
+                            }}
+                            onMouseEnter={(e) => {
+                              if (sub.path || sub.scrollId || (sub.children && sub.children.length > 0)) {
+                                (e.currentTarget.querySelector('span:first-child') as HTMLElement).style.color = "#64ffda";
+                              }
+                            }}
+                            onMouseLeave={(e) => {
+                              if (sub.path || sub.scrollId || (sub.children && sub.children.length > 0)) {
+                                (e.currentTarget.querySelector('span:first-child') as HTMLElement).style.color = isActive ? "#64ffda" : "#64748b";
+                              }
                             }}
                           >
-                            {sub.path || sub.scrollId ? "> " : ""}{sub.label}
-                          </span>
+                            <span
+                              style={{
+                                fontFamily: "'JetBrains Mono', monospace",
+                                fontSize: "0.6rem",
+                                color: isActive ? "#64ffda" : "#64748b",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                maxWidth: "120px",
+                                transition: "color 0.2s",
+                                flex: 1,
+                              }}
+                            >
+                              {sub.path || sub.scrollId ? "> " : ""}{sub.label}
+                            </span>
+                            {sub.children && sub.children.length > 0 && (
+                              <span
+                                style={{
+                                  fontFamily: "'JetBrains Mono', monospace",
+                                  fontSize: "0.75rem",
+                                  color: isActive ? "#64ffda" : "#64748b",
+                                  display: "inline-block",
+                                  transform: collapsed[`sub-${item.id}-${si}`] ? "rotate(-90deg)" : "rotate(0deg)",
+                                  transition: "transform 0.2s",
+                                  padding: "0 4px",
+                                  lineHeight: 1,
+                                }}
+                              >
+                                ▾
+                              </span>
+                            )}
+                          </div>
+
+                          {/* children 프로젝트 목록 */}
+                          {sub.children && sub.children.length > 0 && !collapsed[`sub-${item.id}-${si}`] && (
+                            <div className="ml-3 mt-0.5" style={{ borderLeft: "1px solid rgba(100,255,218,0.06)" }}>
+                              {sub.children.map((child, ci) => (
+                                <div
+                                  key={ci}
+                                  onClick={() => handleSubClick(child.scrollId, child.path)}
+                                  className="flex items-center py-0.5 pl-3 transition-all"
+                                  style={{ cursor: "pointer" }}
+                                  onMouseEnter={(e) => { (e.currentTarget.querySelector('span') as HTMLElement).style.color = "#64ffda"; }}
+                                  onMouseLeave={(e) => { (e.currentTarget.querySelector('span') as HTMLElement).style.color = "#475569"; }}
+                                >
+                                  <span
+                                    style={{
+                                      fontFamily: "'JetBrains Mono', monospace",
+                                      fontSize: "0.58rem",
+                                      color: "#475569",
+                                      whiteSpace: "nowrap",
+                                      overflow: "hidden",
+                                      textOverflow: "ellipsis",
+                                      maxWidth: "110px",
+                                      transition: "color 0.2s",
+                                    }}
+                                  >
+                                    {">> "}{child.label}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       ))}
                     </div>
@@ -398,19 +478,33 @@ export default function Sidebar() {
       {/* ── Mobile bottom nav ── */}
       <div
         className="fixed bottom-0 left-0 right-0 z-40 lg:hidden flex items-center justify-around py-2"
-        style={{ background: "rgba(5,11,24,0.97)", borderTop: "1px solid rgba(100,255,218,0.08)", backdropFilter: "blur(16px)" }}
+        style={{
+          background: "rgba(8,14,28,0.97)",
+          borderTop: "1px solid rgba(100,255,218,0.12)",
+          backdropFilter: "blur(20px)",
+        }}
       >
-        {[...navItems, { id: "contact", label: "Contact", num: "06", sub: [], subItems: [] }]
-          .filter((i) => i.id !== "hero")
-          .map((item) => {
-            const isActive = activeSection === item.id && isMainPage;
-            return (
-              <button key={item.id} onClick={() => scrollTo(item.id)} className="flex flex-col items-center gap-0.5 px-2 py-1">
-                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem", color: isActive ? "#64ffda" : "#4a5568", fontWeight: 600 }}>{item.num}</span>
-                <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.65rem", color: isActive ? "#ccd6f6" : "#4a5568" }}>{item.label}</span>
-              </button>
-            );
-          })}
+        {NAV_ITEMS.map((item) => {
+          const isActive = isMainPage
+            ? activeSection === item.id
+            : item.id === "education"
+              ? location.startsWith("/education")
+              : location.startsWith(`/${item.id}`);
+          return (
+            <button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+              className="flex flex-col items-center gap-0.5 px-2 py-1"
+            >
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem", color: isActive ? "#64ffda" : "#475569" }}>
+                {item.num}
+              </span>
+              <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.65rem", color: isActive ? "#e2e8f0" : "#64748b", fontWeight: isActive ? 600 : 400 }}>
+                {item.label}
+              </span>
+            </button>
+          );
+        })}
       </div>
     </>
   );
