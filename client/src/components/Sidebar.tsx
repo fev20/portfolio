@@ -22,7 +22,7 @@ const NAV_ITEMS = [
   { id: "skills",     label: "Skills",     num: "02", sub: [] as string[] },
   { id: "projects",   label: "Projects",   num: "03", sub: [] as string[] },
   { id: "experience", label: "Experience", num: "04", sub: [] as string[] },
-  { id: "education",  label: "Education & Certifications",  num: "05", sub: [] as string[] },
+  { id: "education",  label: "Education & Certifications", num: "05", sub: [] as string[] },
 ];
 
 const CATEGORY_ORDER = [
@@ -50,8 +50,8 @@ export default function Sidebar() {
     router.navigate(path);
   };
 
-  // 하위 항목 채우기 (label + path)
   type SubItem = { label: string; path: string | null; scrollId?: string; children?: SubItem[] };
+
   const navItems = NAV_ITEMS.map((item) => {
     if (item.id === "skills") return {
       ...item,
@@ -273,31 +273,26 @@ export default function Sidebar() {
                         <div key={si}>
                           {/* 상위 subItem 행 */}
                           <div
-                            onClick={() => {
-                              if (sub.children && sub.children.length > 0) {
-                                toggleCollapse(`sub-${item.id}-${si}`);
-                              } else {
-                                handleSubClick(sub.scrollId, sub.path);
-                              }
-                            }}
                             className="flex items-center gap-1.5 py-0.5 pl-2 transition-all"
                             style={{
                               borderLeft: `1px solid ${isActive ? "rgba(100,255,218,0.18)" : "rgba(100,255,218,0.05)"}`,
-                              cursor: sub.path || sub.scrollId || (sub.children && sub.children.length > 0) ? "pointer" : "default",
+                              cursor: sub.path || sub.scrollId ? "pointer" : "default",
                               marginTop: sub.label === "── Certifications ──" ? "10px" : undefined,
                             }}
                             onMouseEnter={(e) => {
-                              if (sub.path || sub.scrollId || (sub.children && sub.children.length > 0)) {
+                              if (sub.path || sub.scrollId) {
                                 (e.currentTarget.querySelector('span:first-child') as HTMLElement).style.color = "#64ffda";
                               }
                             }}
                             onMouseLeave={(e) => {
-                              if (sub.path || sub.scrollId || (sub.children && sub.children.length > 0)) {
+                              if (sub.path || sub.scrollId) {
                                 (e.currentTarget.querySelector('span:first-child') as HTMLElement).style.color = isActive ? "#64ffda" : "#64748b";
                               }
                             }}
                           >
+                            {/* 글자 클릭 → 스크롤 이동 */}
                             <span
+                              onClick={() => handleSubClick(sub.scrollId, sub.path)}
                               style={{
                                 fontFamily: "'JetBrains Mono', monospace",
                                 fontSize: "0.6rem",
@@ -308,12 +303,19 @@ export default function Sidebar() {
                                 maxWidth: "120px",
                                 transition: "color 0.2s",
                                 flex: 1,
+                                cursor: sub.path || sub.scrollId ? "pointer" : "default",
                               }}
                             >
                               {sub.path || sub.scrollId ? "> " : ""}{sub.label}
                             </span>
+
+                            {/* 토글 버튼 클릭 → 토글만 */}
                             {sub.children && sub.children.length > 0 && (
                               <span
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  toggleCollapse(`sub-${item.id}-${si}`);
+                                }}
                                 style={{
                                   fontFamily: "'JetBrains Mono', monospace",
                                   fontSize: "0.75rem",
@@ -323,6 +325,8 @@ export default function Sidebar() {
                                   transition: "transform 0.2s",
                                   padding: "0 4px",
                                   lineHeight: 1,
+                                  cursor: "pointer",
+                                  flexShrink: 0,
                                 }}
                               >
                                 ▾
