@@ -167,26 +167,15 @@ function NowBlock({
                       </button>
 
                       {/* 펼쳐지는 내용 */}
-                      {openSubIds.includes(`${cat.id}-${item.id}`) && (
-                        <div
-                          style={{
-                            marginLeft: "3.5rem",
-                            marginTop: "0.25rem",
-                            padding: "0.75rem 1rem",
-                            borderRadius: "8px",
-                            background: "rgba(100,255,218,0.02)",
-                            border: "1px solid rgba(100,255,218,0.06)",
-                          }}
-                        >
-                          {item.content?.texts && item.content.texts.length > 0 ? (
-                            <div className="space-y-2">
-                              {item.content.texts.map((t, i) => (
-                                <p key={i} style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.82rem", color: "#8892b0", lineHeight: 1.7 }}>
-                                  {t}
-                                </p>
-                              ))}
-                            </div>
-                          ) : null}
+                      {openSubIds.includes(cat.id + "-" + item.id) && item.content?.texts && item.content.texts.length > 0 && (
+                        <div style={{ marginLeft: "3.5rem", marginTop: "0.25rem", padding: "0.75rem 1rem", borderRadius: "8px", background: "rgba(100,255,218,0.02)", border: "1px solid rgba(100,255,218,0.06)" }}>
+                          <div className="space-y-2">
+                            {item.content.texts.map((t, i) => (
+                              <p key={i} style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.82rem", color: "#8892b0", lineHeight: 1.7 }}>
+                                {t}
+                              </p>
+                            ))}
+                          </div>
                         </div>
                       )}
                     </div>
