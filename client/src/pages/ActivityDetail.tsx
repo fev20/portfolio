@@ -116,42 +116,37 @@ export default function ActivityDetail() {
           {/* 파일 */}
           {item.content?.files && item.content.files.length > 0 && (
             <div className="mt-6 space-y-2">
-              {item.content.files.map((file, i) => {
-                return (
-                  
+              {item.content.files.map((file, i) => (
+                <button
                     key={i}
-                    href={file.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200"
+                    onClick={() => window.open(file.url, "_blank")}
+                    className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 w-full text-left"
                     style={{
-                      background: "rgba(100,255,218,0.03)",
-                      border: "1px solid rgba(100,255,218,0.1)",
-                      textDecoration: "none",
-                      display: "flex",
+                    background: "rgba(100,255,218,0.03)",
+                    border: "1px solid rgba(100,255,218,0.1)",
+                    cursor: "pointer",
                     }}
-                  >
+                >
                     <span
-                      style={{
+                    style={{
                         fontFamily: "'JetBrains Mono', monospace",
                         fontSize: "0.75rem",
                         color: "rgba(100,255,218,0.5)",
-                      }}
+                    }}
                     >
-                      📄
+                    📄
                     </span>
                     <span
-                      style={{
+                    style={{
                         fontFamily: "'Space Grotesk', sans-serif",
                         fontSize: "0.85rem",
                         color: "#a8b2d8",
-                      }}
+                    }}
                     >
-                      {file.name}
+                    {file.name}
                     </span>
-                  </a>
-                );
-              })}
+                </button>
+                ))}
             </div>
           )}
         </div>
