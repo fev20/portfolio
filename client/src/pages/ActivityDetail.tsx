@@ -12,7 +12,9 @@ export default function ActivityDetail() {
   if (!category || !item) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p style={{ color: "#64ffda", fontFamily: "'JetBrains Mono', monospace" }}>페이지를 찾을 수 없어요.</p>
+        <p style={{ color: "#64ffda", fontFamily: "'JetBrains Mono', monospace" }}>
+          페이지를 찾을 수 없어요.
+        </p>
       </div>
     );
   }
@@ -32,13 +34,21 @@ export default function ActivityDetail() {
             color: "rgba(100,255,218,0.6)",
             marginBottom: "2rem",
             display: "block",
+            padding: 0,
           }}
         >
           ← 돌아가기
         </button>
 
-        {/* 카테고리 breadcrumb */}
-        <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", color: "#4a5568", marginBottom: "0.5rem" }}>
+        {/* breadcrumb */}
+        <p
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: "0.75rem",
+            color: "#4a5568",
+            marginBottom: "0.5rem",
+          }}
+        >
           나는 지금 / {category.label}
         </p>
 
@@ -64,13 +74,26 @@ export default function ActivityDetail() {
             minHeight: "300px",
           }}
         >
-          {/* 텍스트 내용 */}
+          {/* 텍스트 */}
           {item.content?.text ? (
-            <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.95rem", color: "#8892b0", lineHeight: 1.8 }}>
+            <p
+              style={{
+                fontFamily: "'Space Grotesk', sans-serif",
+                fontSize: "0.95rem",
+                color: "#8892b0",
+                lineHeight: 1.8,
+              }}
+            >
               {item.content.text}
             </p>
           ) : (
-            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.8rem", color: "#4a5568" }}>
+            <p
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "0.8rem",
+                color: "#4a5568",
+              }}
+            >
               // 내용을 채워주세요
             </p>
           )}
@@ -79,7 +102,13 @@ export default function ActivityDetail() {
           {item.content?.images && item.content.images.length > 0 && (
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {item.content.images.map((src, i) => (
-                <img key={i} src={src} alt="" className="rounded-lg w-full object-cover" style={{ border: "1px solid rgba(100,255,218,0.1)" }} />
+                <img
+                  key={i}
+                  src={src}
+                  alt=""
+                  className="rounded-lg w-full object-cover"
+                  style={{ border: "1px solid rgba(100,255,218,0.1)" }}
+                />
               ))}
             </div>
           )}
@@ -87,19 +116,42 @@ export default function ActivityDetail() {
           {/* 파일 */}
           {item.content?.files && item.content.files.length > 0 && (
             <div className="mt-6 space-y-2">
-              {item.content.files.map((file, i) => (
-                
-                  key={i}
-                  href={file.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200"
-                  style={{ background: "rgba(100,255,218,0.03)", border: "1px solid rgba(100,255,218,0.1)", textDecoration: "none" }}
-                >
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", color: "rgba(100,255,218,0.5)" }}>📄</span>
-                  <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.85rem", color: "#a8b2d8" }}>{file.name}</span>
-                </a>
-              ))}
+              {item.content.files.map((file, i) => {
+                return (
+                  
+                    key={i}
+                    href={file.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200"
+                    style={{
+                      background: "rgba(100,255,218,0.03)",
+                      border: "1px solid rgba(100,255,218,0.1)",
+                      textDecoration: "none",
+                      display: "flex",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontSize: "0.75rem",
+                        color: "rgba(100,255,218,0.5)",
+                      }}
+                    >
+                      📄
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "'Space Grotesk', sans-serif",
+                        fontSize: "0.85rem",
+                        color: "#a8b2d8",
+                      }}
+                    >
+                      {file.name}
+                    </span>
+                  </a>
+                );
+              })}
             </div>
           )}
         </div>
