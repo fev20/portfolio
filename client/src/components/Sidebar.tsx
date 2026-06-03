@@ -106,16 +106,23 @@ export default function Sidebar() {
     return () => window.removeEventListener("scroll", getActive);
   }, [isMainPage]);
 
+  useEffect(() => {
+    if (!isMainPage) return;
+    const pending = sessionStorage.getItem("pendingScroll");
+    if (!pending) return;
+    sessionStorage.removeItem("pendingScroll");
+    const timer = setTimeout(() => smoothScrollTo(pending), 800);
+    return () => clearTimeout(timer);
+  }, [isMainPage]);
+
   const scrollToSection = (id: string) => {
-  if (!isMainPage) {
-    router.navigate("/");
-    setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    }, 300);
-    return;
-  }
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-};
+    if (!isMainPage) {
+      sessionStorage.setItem("pendingScroll", id);
+      router.navigate("/");
+      return;
+    }
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const smoothScrollTo = (scrollId: string) => {
     const el = document.getElementById(scrollId);
@@ -128,8 +135,8 @@ export default function Sidebar() {
   const handleSubClick = (scrollId?: string, path?: string | null) => {
     if (scrollId) {
       if (!isMainPage) {
+        sessionStorage.setItem("pendingScroll", scrollId);
         router.navigate("/");
-        setTimeout(() => smoothScrollTo(scrollId), 600);
       } else {
         smoothScrollTo(scrollId);
       }

@@ -37,7 +37,7 @@ export default function ActivityDetail() {
             padding: 0,
           }}
         >
-          ← 돌아가기
+          ← cd ../about
         </button>
 
         {/* breadcrumb */}
