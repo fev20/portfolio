@@ -18,6 +18,13 @@ function NowBlock({
   navigate: (path: string) => void;
 }) {
   const [openIds, setOpenIds] = useState<string[]>([]);
+  const [openSubIds, setOpenSubIds] = useState<string[]>([]);
+
+  const toggleSub = (id: string) => {
+    setOpenSubIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
+  };
 
   const toggle = (id: string) => {
     setOpenIds((prev) =>
@@ -124,62 +131,65 @@ function NowBlock({
               {isOpen && cat.items.length > 0 && (
                 <div className="mt-1 space-y-1">
                   {cat.items.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => item.path && navigate(item.path)}
-                      className="w-full text-left group"
-                      style={{ background: "none", border: "none", padding: 0, cursor: item.path ? "pointer" : "default" }}
-                    >
-                      <div
-                        className="flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200"
-                        style={{
-                          background: "rgba(100,255,218,0.02)",
-                          border: "1px solid rgba(100,255,218,0.06)",
-                          marginLeft: "2.5rem",
-                        }}
-                        onMouseEnter={(e) => {
-                          (e.currentTarget as HTMLDivElement).style.background = "rgba(100,255,218,0.06)";
-                          (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(100,255,218,0.2)";
-                        }}
-                        onMouseLeave={(e) => {
-                          (e.currentTarget as HTMLDivElement).style.background = "rgba(100,255,218,0.02)";
-                          (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(100,255,218,0.06)";
-                        }}
+                    <div key={item.id}>
+                      <button
+                        onClick={() => toggleSub(`${cat.id}-${item.id}`)}
+                        className="w-full text-left group"
+                        style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}
                       >
-                        <span
+                        <div
+                          className="flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200"
                           style={{
+                            background: openSubIds.includes(`${cat.id}-${item.id}`) ? "rgba(100,255,218,0.05)" : "rgba(100,255,218,0.02)",
+                            border: `1px solid ${openSubIds.includes(`${cat.id}-${item.id}`) ? "rgba(100,255,218,0.2)" : "rgba(100,255,218,0.06)"}`,
+                            marginLeft: "2.5rem",
+                          }}
+                          onMouseEnter={(e) => {
+                            (e.currentTarget as HTMLDivElement).style.background = "rgba(100,255,218,0.06)";
+                            (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(100,255,218,0.2)";
+                          }}
+                          onMouseLeave={(e) => {
+                            (e.currentTarget as HTMLDivElement).style.background = openSubIds.includes(`${cat.id}-${item.id}`) ? "rgba(100,255,218,0.05)" : "rgba(100,255,218,0.02)";
+                            (e.currentTarget as HTMLDivElement).style.borderColor = openSubIds.includes(`${cat.id}-${item.id}`) ? "rgba(100,255,218,0.2)" : "rgba(100,255,218,0.06)";
+                          }}
+                        >
+                          <span style={{
                             fontFamily: "'JetBrains Mono', monospace",
                             fontSize: "0.65rem",
                             color: "rgba(100,255,218,0.3)",
                             flexShrink: 0,
-                          }}
-                        >
-                          —
-                        </span>
-                        <span
+                            display: "inline-block",
+                            transition: "transform 0.2s",
+                            transform: openSubIds.includes(`${cat.id}-${item.id}`) ? "rotate(90deg)" : "rotate(0deg)",
+                          }}>▸</span>
+                          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.83rem", color: "#8892b0", flex: 1 }}>{item.label}</span>
+                        </div>
+                      </button>
+
+                      {/* 펼쳐지는 내용 */}
+                      {openSubIds.includes(`${cat.id}-${item.id}`) && (
+                        <div
                           style={{
-                            fontFamily: "'Space Grotesk', sans-serif",
-                            fontSize: "0.83rem",
-                            color: "#8892b0",
-                            flex: 1,
+                            marginLeft: "3.5rem",
+                            marginTop: "0.25rem",
+                            padding: "0.75rem 1rem",
+                            borderRadius: "8px",
+                            background: "rgba(100,255,218,0.02)",
+                            border: "1px solid rgba(100,255,218,0.06)",
                           }}
                         >
-                          {item.label}
-                        </span>
-                        <span
-                          className="group-hover:opacity-100"
-                          style={{
-                            fontFamily: "'JetBrains Mono', monospace",
-                            fontSize: "0.65rem",
-                            color: "rgba(100,255,218,0.3)",
-                            opacity: 0,
-                            transition: "opacity 0.2s",
-                          }}
-                        >
-                          →
-                        </span>
-                      </div>
-                    </button>
+                          {item.content?.text ? (
+                            <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.82rem", color: "#8892b0", lineHeight: 1.7 }}>
+                              {item.content.text}
+                            </p>
+                          ) : (
+                            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.72rem", color: "#4a5568" }}>
+                              // 내용을 채워주세요
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               )}
