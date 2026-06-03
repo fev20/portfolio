@@ -86,7 +86,27 @@ export default function HeroSection() {
   ].filter((l) => l.show);
 
   return (
-    <section
+    <>
+      {/* 모바일 전용 안내 문구 */}
+      <div
+        className="lg:hidden w-full text-center py-1.5"
+        style={{
+          background: "rgba(100,255,218,0.03)",
+          borderBottom: "1px solid rgba(100,255,218,0.06)",
+        }}
+      >
+        <span
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: "0.65rem",
+            color: "#4a5568",
+            letterSpacing: "0.05em",
+          }}
+        >
+          데스크탑 환경에 최적화된 포트폴리오입니다
+        </span>
+      </div>
+      <section
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{ paddingTop: "80px" }}
     >
@@ -255,5 +275,6 @@ export default function HeroSection() {
         </div>
       </div>
     </section>
+    </>
   );
 }
