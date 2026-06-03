@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useLocation, useRouter } from "wouter";
+import { useLocation } from "wouter";
 import {
   profile,
   skills,
@@ -36,10 +36,8 @@ const CATEGORY_ORDER = [
 
 export default function Sidebar() {
   const [activeSection, setActiveSection] = useState("hero");
-  const [location] = useLocation();
-  const router = useRouter();
+  const [location, setLocation] = useLocation();
   const isMainPage = location === "/";
-
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
 
   const toggleCollapse = (id: string) => {
@@ -47,7 +45,7 @@ export default function Sidebar() {
   };
 
   const navigate = (path: string) => {
-    router.navigate(path);
+    setLocation(path);
   };
 
   type SubItem = { label: string; path: string | null; scrollId?: string; children?: SubItem[] };
@@ -118,7 +116,7 @@ export default function Sidebar() {
   const scrollToSection = (id: string) => {
     if (!isMainPage) {
       sessionStorage.setItem("pendingScroll", id);
-      router.navigate("/");
+      setLocation("/");
       return;
     }
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -136,7 +134,7 @@ export default function Sidebar() {
     if (scrollId) {
       if (!isMainPage) {
         sessionStorage.setItem("pendingScroll", scrollId);
-        router.navigate("/");
+        setLocation("/");
       } else {
         smoothScrollTo(scrollId);
       }
