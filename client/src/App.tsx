@@ -10,6 +10,7 @@ import ProjectDetail from "./pages/ProjectDetail";
 import ExperienceDetail from "./pages/ExperienceDetail";
 import EducationDetail from "./pages/EducationDetail";
 import Sidebar from "./components/Sidebar";
+import ActivityDetail from "@/pages/ActivityDetail";
 
 function AppRoutes() {
   return (
@@ -17,6 +18,7 @@ function AppRoutes() {
       <Route path="/" component={Home} />
       <Route path="/project/:id" component={ProjectDetail} />
       <Route path="/experience/:index" component={ExperienceDetail} />
+      <Route path="/activity/:category/:item" component={ActivityDetail} />
       <Route path="/education/:type/:index" component={EducationDetail} />
       <Route component={NotFound} />
     </Switch>

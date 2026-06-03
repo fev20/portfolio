@@ -322,3 +322,65 @@ export const certifications = [
     pdfFile: "/MOS_Excel_Expert_2016.pdf",
   },
 ];
+
+export type ActivityContent = {
+  text?: string;
+  images?: string[];   // 이미지 URL 또는 경로
+  files?: { name: string; url: string }[];
+};
+
+export type ActivityItem = {
+  id: string;
+  label: string;
+  path: string;
+  content?: ActivityContent;
+};
+
+export type ActivityCategory = {
+  id: string;
+  label: string;
+  items: ActivityItem[];
+};
+
+export const nowActivities: ActivityCategory[] = [
+  {
+    id: "sekurity",
+    label: "seKUrity",
+    items: [
+      { id: "mentor", label: "멘토", path: "/activity/sekurity/mentor", content: { text: "", images: [], files: [] } },
+      { id: "project", label: "프로젝트", path: "/activity/sekurity/project", content: { text: "", images: [], files: [] } },
+    ],
+  },
+  {
+    id: "gen5",
+    label: "제5세대",
+    items: [
+      { id: "executive", label: "임원진", path: "/activity/gen5/executive", content: { text: "", images: [], files: [] } },
+      { id: "web-project", label: "웹 프로젝트", path: "/activity/gen5/web-project", content: { text: "", images: [], files: [] } },
+    ],
+  },
+  {
+    id: "school",
+    label: "학교",
+    items: [
+      { id: "data-science", label: "데이터과학(R)", path: "/activity/school/data-science", content: { text: "", images: [], files: [] } },
+      { id: "computer-systems", label: "컴퓨터시스템(C언어, 어셈블리어)", path: "/activity/school/computer-systems", content: { text: "", images: [], files: [] } },
+      { id: "web-programming", label: "웹 프로그래밍(HTML5, CSS3, JavaScript)", path: "/activity/school/web-programming", content: { text: "", images: [], files: [] } },
+      { id: "programming-practice", label: "프로그래밍실습(C언어)", path: "/activity/school/programming-practice", content: { text: "", images: [], files: [] } },
+      { id: "java", label: "Java 프로그래밍1(Java)", path: "/activity/school/java", content: { text: "", images: [], files: [] } },
+    ],
+  },
+  {
+    id: "hw-hacking",
+    label: "하드웨어 해킹",
+    items: [
+      { id: "fault-injection", label: "Fault Injection", path: "/activity/hw-hacking/fault-injection", content: { text: "", images: [], files: [] } },
+      { id: "postech", label: "Detecting Compiler-Introduced Security Bugs via IR Mutation and Coverage-Guided Fuzzing_Postech", path: "/activity/hw-hacking/postech", content: { text: "", images: [], files: [] } },
+    ],
+  },
+  {
+    id: "whs",
+    label: "WHS",
+    items: [],
+  },
+];
