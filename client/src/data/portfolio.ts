@@ -347,6 +347,7 @@ export const nowActivities: ActivityCategory[] = [
     id: "sekurity",
     label: "seKUrity",
     items: [
+      { id: "mentor", label: "멘토", path: null, content: { texts: [], images: [], files: [] } },
       { id: "project", label: "프로젝트", path: null, content: { texts: ["- 암호학 분석 경진대회"], images: [], files: [] } },
     ],
   },
