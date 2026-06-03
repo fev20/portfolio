@@ -4,11 +4,17 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { about } from "@/data/portfolio";
+import { useLocation } from "wouter";
+import { about, experiences } from "@/data/portfolio";
+
+const currentActivities = experiences
+  .map((exp, i) => ({ ...exp, index: i }))
+  .filter((exp) => exp.period.includes("현재"));
 
 export default function AboutSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [, navigate] = useLocation();
 
   return (
     <section id="about" className="relative py-28" ref={ref}>
@@ -129,6 +135,53 @@ export default function AboutSection() {
                   </div>
                 </div>
               ))}
+              {/* 나는 지금 블록 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.65 }}
+                  className="mt-8"
+                >
+                  <div className="mb-3">
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "1.05rem", fontWeight: 700, color: "#64ffda" }}>
+                      나는 지금
+                    </span>
+                    <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.8rem", color: "#4a5568", marginLeft: "0.75rem" }}>
+                      이런 걸 하고 있어요
+                    </span>
+                  </div>
+
+                  <div className="space-y-2">
+                    {currentActivities.map((act, i) => (
+                      <motion.button
+                        key={act.index}
+                        initial={{ opacity: 0, x: -16 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ duration: 0.4, delay: 0.7 + i * 0.08 }}
+                        onClick={() => navigate(`/experience/${act.index}`)}
+                        className="w-full text-left group"
+                        style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}
+                      >
+                        <div
+                          className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200"
+                          style={{ background: "rgba(100,255,218,0.03)", border: "1px solid rgba(100,255,218,0.1)", marginLeft: "1rem" }}
+                          onMouseEnter={(e) => {
+                            (e.currentTarget as HTMLDivElement).style.background = "rgba(100,255,218,0.07)";
+                            (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(100,255,218,0.3)";
+                          }}
+                          onMouseLeave={(e) => {
+                            (e.currentTarget as HTMLDivElement).style.background = "rgba(100,255,218,0.03)";
+                            (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(100,255,218,0.1)";
+                          }}
+                        >
+                          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", color: "rgba(100,255,218,0.4)", flexShrink: 0 }}>▸</span>
+                          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.88rem", color: "#a8b2d8", flex: 1 }}>{act.title}</span>
+                          <span className="group-hover:opacity-100" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.68rem", color: "rgba(100,255,218,0.35)", opacity: 0, transition: "opacity 0.2s" }}>→</span>
+                        </div>
+                      </motion.button>
+                    ))}
+                  </div>
+                </motion.div>
             </motion.div>
           </motion.div>
 
