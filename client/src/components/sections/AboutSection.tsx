@@ -282,7 +282,7 @@ export default function AboutSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mt-12"
+              className="grid grid-cols-5 gap-3 mt-12"
             >
               {[
                 { value: "seKUrity", label: "Security Club" },
@@ -302,7 +302,7 @@ export default function AboutSection() {
                   <div
                     style={{
                       fontFamily: "'JetBrains Mono', monospace",
-                      fontSize: "0.85rem",
+                      fontSize: "0.8rem",
                       fontWeight: 600,
                       color: "#64ffda",
                       marginBottom: "2px",
@@ -313,7 +313,7 @@ export default function AboutSection() {
                   <div
                     style={{
                       fontFamily: "'Space Grotesk', sans-serif",
-                      fontSize: "0.72rem",
+                      fontSize: "0.7rem",
                       color: "#4a5568",
                     }}
                   >
