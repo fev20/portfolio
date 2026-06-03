@@ -217,7 +217,7 @@ export default function AboutSection() {
           className="mt-20"
         >
           <div className="mb-4">
-            <span
+            <div
               style={{
                 fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "clamp(1.8rem, 3vw, 2.4rem)",
@@ -227,17 +227,17 @@ export default function AboutSection() {
               }}
             >
               나는 지금
-            </span>
-            <span
+            </div>
+            <div
               style={{
                 fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "0.9rem",
                 color: "#4a5568",
-                marginLeft: "0.75rem",
+                paddingLeft: "1.5rem",
               }}
             >
               이런 걸 하고 있어요
-            </span>
+            </div>
           </div>
 
           <div className="space-y-2">
