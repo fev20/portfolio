@@ -302,7 +302,7 @@ export default function AboutSection() {
                   <div
                     style={{
                       fontFamily: "'JetBrains Mono', monospace",
-                      fontSize: "0.8rem",
+                      fontSize: "0.75rem",
                       fontWeight: 600,
                       color: "#64ffda",
                       marginBottom: "2px",
@@ -313,7 +313,7 @@ export default function AboutSection() {
                   <div
                     style={{
                       fontFamily: "'Space Grotesk', sans-serif",
-                      fontSize: "0.7rem",
+                      fontSize: "0.65rem",
                       color: "#4a5568",
                     }}
                   >
