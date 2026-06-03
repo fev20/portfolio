@@ -324,7 +324,7 @@ export const certifications = [
 ];
 
 export type ActivityContent = {
-  text?: string;
+  texts?: string;
   images?: string[];   // 이미지 URL 또는 경로
   files?: { name: string; url: string }[];
 };
@@ -347,35 +347,34 @@ export const nowActivities: ActivityCategory[] = [
     id: "sekurity",
     label: "seKUrity",
     items: [
-      { id: "mentor", label: "멘토", path: "/activity/sekurity/mentor", content: { text: "", images: [], files: [] } },
-      { id: "project", label: "프로젝트", path: "/activity/sekurity/project", content: { text: "", images: [], files: [] } },
+      { id: "project", label: "프로젝트", path: null, content: { texts: "", images: [], files: [] } },
     ],
   },
   {
     id: "gen5",
     label: "제5세대",
     items: [
-      { id: "executive", label: "임원진", path: "/activity/gen5/executive", content: { text: "", images: [], files: [] } },
-      { id: "web-project", label: "웹 프로젝트", path: "/activity/gen5/web-project", content: { text: "", images: [], files: [] } },
+      { id: "executive", label: "임원진", path: null, content: { texts: "", images: [], files: [] } },
+      { id: "web-project", label: "웹 프로젝트", path: null, content: { texts: "웹 프로젝트 요소 페이지 생성", images: [], files: [] } },
     ],
   },
   {
     id: "school",
     label: "학교",
     items: [
-      { id: "data-science", label: "데이터과학(R)", path: null, content: { text: "", images: [], files: [] } },
-      { id: "computer-systems", label: "컴퓨터시스템(C언어, 어셈블리어)", path: null, content: { text: "", images: [], files: [] } },
-      { id: "web-programming", label: "웹 프로그래밍(HTML5, CSS3, JavaScript)", path: null, content: { text: "", images: [], files: [] } },
-      { id: "programming-practice", label: "프로그래밍실습(C언어)", path: null, content: { text: "", images: [], files: [] } },
-      { id: "java", label: "Java 프로그래밍1(Java)", path: null, content: { text: "", images: [], files: [] } },
+      { id: "data-science", label: "데이터과학(R)", path: null, content: { texts: "", images: [], files: [] } },
+      { id: "computer-systems", label: "컴퓨터시스템(C언어, 어셈블리어)", path: null, content: { texts: "", images: [], files: [] } },
+      { id: "web-programming", label: "웹 프로그래밍(HTML5, CSS3, JavaScript)", path: null, content: { texts: "", images: [], files: [] } },
+      { id: "programming-practice", label: "프로그래밍실습(C언어)", path: null, content: { texts: "", images: [], files: [] } },
+      { id: "java", label: "Java 프로그래밍1(Java)", path: null, content: { texts: "", images: [], files: [] } },
     ],
   },
   {
     id: "hw-hacking",
     label: "하드웨어 해킹",
     items: [
-      { id: "fault-injection", label: "Fault Injection", path: "/activity/hw-hacking/fault-injection", content: { text: "", images: [], files: [] } },
-      { id: "postech", label: "Detecting Compiler-Introduced Security Bugs via IR Mutation and Coverage-Guided Fuzzing_Postech", path: "/activity/hw-hacking/postech", content: { text: "", images: [], files: [] } },
+      { id: "hobby", label: "Hobby", path: null, content: { texts: "Fault Injection", images: [], files: [] } },
+      { id: "research paper", label: "Research Paper", path: null, content: { texts: "Detecting Compiler-Introduced Security Bugs via IR Mutation and Coverage-Guided Fuzzing_Postech", images: [], files: [] } },
     ],
   },
   {

@@ -178,15 +178,15 @@ function NowBlock({
                             border: "1px solid rgba(100,255,218,0.06)",
                           }}
                         >
-                          {item.content?.text ? (
-                            <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.82rem", color: "#8892b0", lineHeight: 1.7 }}>
-                              {item.content.text}
-                            </p>
-                          ) : (
-                            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.72rem", color: "#4a5568" }}>
-                              // 내용을 채워주세요
-                            </p>
-                          )}
+                          {item.content?.texts && item.content.texts.length > 0 ? (
+                            <div className="space-y-2">
+                              {item.content.texts.map((t, i) => (
+                                <p key={i} style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.82rem", color: "#8892b0", lineHeight: 1.7 }}>
+                                  {t}
+                                </p>
+                              ))}
+                            </div>
+                          ) : null}
                         </div>
                       )}
                     </div>
