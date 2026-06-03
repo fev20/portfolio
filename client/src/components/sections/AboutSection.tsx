@@ -285,9 +285,11 @@ export default function AboutSection() {
               className="grid grid-cols-3 gap-4 mt-8"
             >
               {[
-                { value: "seKUrity", label: "보안 동아리" },
-                { value: "CTF", label: "참여 경험" },
-                { value: "HW+SW", label: "관심 분야" },
+                { value: "seKUrity", label: "Security Club" },
+                { value: "CTF", label: "Player" },
+                { value: "Web Pentest", label: "Security Testing" },
+                { value: "Fault Injection", label: "HW Security" },
+                { value: "Vice President", label: "Leadership" },
               ].map((stat) => (
                 <div
                   key={stat.label}
