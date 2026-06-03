@@ -363,11 +363,11 @@ export const nowActivities: ActivityCategory[] = [
     id: "school",
     label: "학교",
     items: [
-      { id: "data-science", label: "데이터과학(R)", path: "/activity/school/data-science", content: { text: "", images: [], files: [] } },
-      { id: "computer-systems", label: "컴퓨터시스템(C언어, 어셈블리어)", path: "/activity/school/computer-systems", content: { text: "", images: [], files: [] } },
-      { id: "web-programming", label: "웹 프로그래밍(HTML5, CSS3, JavaScript)", path: "/activity/school/web-programming", content: { text: "", images: [], files: [] } },
-      { id: "programming-practice", label: "프로그래밍실습(C언어)", path: "/activity/school/programming-practice", content: { text: "", images: [], files: [] } },
-      { id: "java", label: "Java 프로그래밍1(Java)", path: "/activity/school/java", content: { text: "", images: [], files: [] } },
+      { id: "data-science", label: "데이터과학(R)", path: null, content: { text: "", images: [], files: [] } },
+      { id: "computer-systems", label: "컴퓨터시스템(C언어, 어셈블리어)", path: null, content: { text: "", images: [], files: [] } },
+      { id: "web-programming", label: "웹 프로그래밍(HTML5, CSS3, JavaScript)", path: null, content: { text: "", images: [], files: [] } },
+      { id: "programming-practice", label: "프로그래밍실습(C언어)", path: null, content: { text: "", images: [], files: [] } },
+      { id: "java", label: "Java 프로그래밍1(Java)", path: null, content: { text: "", images: [], files: [] } },
     ],
   },
   {

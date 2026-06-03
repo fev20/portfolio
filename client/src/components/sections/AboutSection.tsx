@@ -126,9 +126,9 @@ function NowBlock({
                   {cat.items.map((item) => (
                     <button
                       key={item.id}
-                      onClick={() => navigate(item.path)}
+                      onClick={() => item.path && navigate(item.path)}
                       className="w-full text-left group"
-                      style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}
+                      style={{ background: "none", border: "none", padding: 0, cursor: item.path ? "pointer" : "default" }}
                     >
                       <div
                         className="flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200"
