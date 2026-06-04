@@ -240,14 +240,14 @@ export default function ProjectsSection() {
                               >
                                 {project.description}
                               </p>
-                              <div
+                              {/* <div
                                 className="p-3 rounded-lg"
                                 style={{
                                   background: "rgba(100,255,218,0.03)",
                                   border: "1px solid rgba(100,255,218,0.08)",
                                 }}
                               >
-                                {/* <div
+                                <div
                                   style={{
                                     fontFamily: "'JetBrains Mono', monospace",
                                     fontSize: "0.62rem",
@@ -257,7 +257,7 @@ export default function ProjectsSection() {
                                   }}
                                 >
                                   ROLE
-                                </div> */}
+                                </div>
                                 <div
                                   style={{
                                     fontFamily: "'Space Grotesk', sans-serif",
@@ -267,7 +267,7 @@ export default function ProjectsSection() {
                                 >
                                   {project.role}
                                 </div>
-                              </div>
+                              </div> */}
                               <p
                                 style={{
                                   fontFamily: "'JetBrains Mono', monospace",
