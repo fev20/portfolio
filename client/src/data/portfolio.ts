@@ -101,7 +101,7 @@ export const projects = [
     learned: "",
     tags: ["CORS", "Web Security", "Security Research"],
     links: { github: "", report: "" },
-    color: "#f59e0b",
+    color: "#FB923C",
   },
   {
     id: "atm-skimming",
@@ -113,7 +113,7 @@ export const projects = [
     learned: "",
     tags: ["ATM Skimming", "Hardware Security", "Security Research"],
     links: { github: "", report: "" },
-    color: "#f59e0b",
+    color: "#FB923C",
   },
   {
     id: "crypto-contest",
@@ -125,7 +125,7 @@ export const projects = [
     learned: "",
     tags: ["Cryptography", "Contest", "Security Research"],
     links: { github: "", report: "" },
-    color: "#f59e0b",
+    color: "#FB923C",
   },
 
   // ── CTF & Security Activities ──────────────────────────────────
@@ -139,7 +139,7 @@ export const projects = [
     learned: "",
     tags: ["CTF", "msg CTF", "Web Security"],
     links: { github: "", report: "" },
-    color: "#64ffda",
+    color: "#22C55E",
   },
   {
     id: "sejong-hacktheon",
@@ -151,7 +151,7 @@ export const projects = [
     learned: "",
     tags: ["CTF", "Hackathon", "Security"],
     links: { github: "", report: "" },
-    color: "#64ffda",
+    color: "#22C55E",
   },
   {
     id: "chungcheong-contest",
@@ -163,7 +163,7 @@ export const projects = [
     learned: "",
     tags: ["CTF", "사이버보안", "경진대회"],
     links: { github: "", report: "" },
-    color: "#64ffda",
+    color: "#22C55E",
   },
   {
     id: "kuctf",
@@ -175,7 +175,7 @@ export const projects = [
     learned: "",
     tags: ["CTF", "KUCTF", "Security"],
     links: { github: "", report: "" },
-    color: "#64ffda",
+    color: "#22C55E",
   },
 
   // ── Security Education ─────────────────────────────────────────
@@ -189,7 +189,7 @@ export const projects = [
     learned: "",
     tags: ["seKUrity", "Security Club", "Education"],
     links: { github: "", report: "" },
-    color: "#a78bfa",
+    color: "#A855F7",
   },
   {
     id: "web-vuln-education",
@@ -201,7 +201,7 @@ export const projects = [
     learned: "",
     tags: ["Web Security", "Education", "Teaching"],
     links: { github: "", report: "" },
-    color: "#a78bfa",
+    color: "#A855F7",
   },
   {
     id: "crypto-study",
@@ -213,7 +213,7 @@ export const projects = [
     learned: "",
     tags: ["Cryptography", "Study", "Presentation"],
     links: { github: "", report: "" },
-    color: "#a78bfa",
+    color: "#A855F7",
   },
   {
     id: "sekurity-seminar",
@@ -225,7 +225,7 @@ export const projects = [
     learned: "",
     tags: ["Seminar", "Presentation", "Security"],
     links: { github: "", report: "" },
-    color: "#a78bfa",
+    color: "#A855F7",
   },
 
   // ── Interactive Web Projects ───────────────────────────────────
@@ -239,7 +239,7 @@ export const projects = [
     learned: "",
     tags: ["Web Development", "React", "seKUrity"],
     links: { github: "https://github.com/kku-seKUrity/seku_homePage.git", report: "" },
-    color: "#38bdf8",
+    color: "#38BDF8",
   },
   {
     id: "portfolio-site",
@@ -251,7 +251,7 @@ export const projects = [
     learned: "",
     tags: ["React", "TypeScript", "Portfolio"],
     links: { github: "https://github.com/fev20", report: "" },
-    color: "#38bdf8",
+    color: "#38BDF8",
   },
   {
     id: "escape-room",
@@ -263,7 +263,7 @@ export const projects = [
     learned: "",
     tags: ["CTF", "React", "JavaScript", "Game"],
     links: { github: "https://github.com/minsuk330/room-escape.git", report: "" },
-    color: "#38bdf8",
+    color: "#38BDF8",
   },
   {
     id: "balloon-ride",
@@ -275,7 +275,7 @@ export const projects = [
     learned: "",
     tags: ["React", "JavaScript", "Game", "Team Project"],
     links: { github: "https://github.com/soooonho/balloonride.git", report: "" },
-    color: "#38bdf8",
+    color: "#38BDF8",
   },
 
   // ── Embedded & Hardware Security ───────────────────────────────
@@ -289,7 +289,7 @@ export const projects = [
     learned: "",
     tags: ["Fault Injection", "Voltage Glitching", "Hardware Security"],
     links: { github: "", report: "" },
-    color: "#f472b6",
+    color: "#EC4899",
   },
 
   // ── Leadership & Community ─────────────────────────────────────
@@ -303,7 +303,7 @@ export const projects = [
     learned: "",
     tags: ["Leadership", "Club", "Management"],
     links: { github: "", report: "" },
-    color: "#34d399",
+    color: "#FACC15",
   },
   {
     id: "pentest-collaboration",
@@ -315,7 +315,7 @@ export const projects = [
     learned: "",
     tags: ["Collaboration", "Web Hacking", "Team Project"],
     links: { github: "", report: "" },
-    color: "#34d399",
+    color: "#FACC15",
   },
 ];
 

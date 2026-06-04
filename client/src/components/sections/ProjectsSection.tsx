@@ -9,12 +9,12 @@ import { ArrowUpRight, Shield, Terminal, BookOpen, Globe, Settings, Cpu } from "
 import { projects } from "@/data/portfolio";
 
 const CATEGORY_META: Record<string, { icon: React.ElementType; subtitle: string; color: string }> = {
-  "Security Research":              { icon: Shield,   subtitle: "연구/분석형",         color: "#f59e0b" },
-  "CTF & Security Activities":      { icon: Terminal, subtitle: "보안 활동형",          color: "#64ffda" },
-  "Security Education":             { icon: BookOpen, subtitle: "교육/발표형",          color: "#a78bfa" },
-  "Interactive Web Projects":       { icon: Globe,    subtitle: "인터랙션/웹 제작형",   color: "#38bdf8" },
-  "Embedded & Hardware Security":{ icon: Settings, subtitle: "하드웨어 실습형",          color: "#34d399" },
-  "Leadership & Community":   { icon: Cpu,      subtitle: "리더십/커뮤니티형",      color: "#fb923c" },
+  "Security Research":              { icon: Shield,   subtitle: "연구/분석형",         color: "#FB923C" },
+  "CTF & Security Activities":      { icon: Terminal, subtitle: "보안 활동형",          color: "#22C55E" },
+  "Security Education":             { icon: BookOpen, subtitle: "교육/발표형",          color: "#A855F7" },
+  "Interactive Web Projects":       { icon: Globe,    subtitle: "인터랙션/웹 제작형",   color: "#38BDF8" },
+  "Embedded & Hardware Security":{ icon: Settings, subtitle: "하드웨어 실습형",          color: "#EC4899" },
+  "Leadership & Community":   { icon: Cpu,      subtitle: "리더십/커뮤니티형",      color: "#FACC15" },
 };
 
 // 카테고리 순서 고정
