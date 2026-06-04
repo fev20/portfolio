@@ -13,8 +13,8 @@ const CATEGORY_META: Record<string, { icon: React.ElementType; subtitle: string;
   "CTF & Security Activities":      { icon: Terminal, subtitle: "보안 활동형",          color: "#64ffda" },
   "Security Education":             { icon: BookOpen, subtitle: "교육/발표형",          color: "#a78bfa" },
   "Interactive Web Projects":       { icon: Globe,    subtitle: "인터랙션/웹 제작형",   color: "#38bdf8" },
-  "Service Operation & Improvement":{ icon: Settings, subtitle: "운영/개선형",          color: "#34d399" },
-  "Embedded & Hardware Practice":   { icon: Cpu,      subtitle: "하드웨어 실습형",      color: "#fb923c" },
+  "Embedded & Hardware Security":{ icon: Settings, subtitle: "하드웨어 실습형",          color: "#34d399" },
+  "Leadership & Community":   { icon: Cpu,      subtitle: "리더십/커뮤니티형",      color: "#fb923c" },
 };
 
 // 카테고리 순서 고정
@@ -23,8 +23,8 @@ const CATEGORY_ORDER = [
   "CTF & Security Activities",
   "Security Education",
   "Interactive Web Projects",
-  "Service Operation & Improvement",
-  "Embedded & Hardware Practice",
+  "Embedded & Hardware Security",
+  "Leadership & Community",
 ];
 
 export default function ProjectsSection() {

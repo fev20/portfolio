@@ -89,7 +89,7 @@ export default function HeroSection() {
     <>
       {/* 모바일 전용 안내 문구 */}
       <div
-        className="lg:hidden w-full text-center py-1.5"
+  className="lg:hidden fixed top-0 left-0 right-0 z-50 w-full text-center py-1.5"
         style={{
           background: "rgba(100,255,218,0.03)",
           borderBottom: "1px solid rgba(100,255,218,0.06)",
