@@ -131,7 +131,7 @@ export const projects = [
   // ── CTF & Security Activities ──────────────────────────────────
   {
     id: "msg-ctf",
-    number: "04",
+    number: "01",
     category: "CTF & Security Activities",
     title: "msg CTF 참가",
     description: "",
@@ -143,7 +143,7 @@ export const projects = [
   },
   {
     id: "sejong-hacktheon",
-    number: "05",
+    number: "02",
     category: "CTF & Security Activities",
     title: "세종 핵테온",
     description: "",
@@ -155,7 +155,7 @@ export const projects = [
   },
   {
     id: "chungcheong-contest",
-    number: "06",
+    number: "03",
     category: "CTF & Security Activities",
     title: "충청권 사이버보안 경진대회",
     description: "",
@@ -167,7 +167,7 @@ export const projects = [
   },
   {
     id: "kuctf",
-    number: "07",
+    number: "04",
     category: "CTF & Security Activities",
     title: "KUCTF",
     description: "",
@@ -181,7 +181,7 @@ export const projects = [
   // ── Security Education ─────────────────────────────────────────
   {
     id: "sekurity-activity",
-    number: "08",
+    number: "01",
     category: "Security Education",
     title: "seKUrity 활동",
     description: "",
@@ -193,7 +193,7 @@ export const projects = [
   },
   {
     id: "web-vuln-education",
-    number: "09",
+    number: "02",
     category: "Security Education",
     title: "신입부원 웹 취약점 교육",
     description: "",
@@ -205,7 +205,7 @@ export const projects = [
   },
   {
     id: "crypto-study",
-    number: "10",
+    number: "03",
     category: "Security Education",
     title: "암호학 스터디 발표",
     description: "",
@@ -217,7 +217,7 @@ export const projects = [
   },
   {
     id: "sekurity-seminar",
-    number: "11",
+    number: "04",
     category: "Security Education",
     title: "제6회 seKUrity 보안 세미나 발표",
     description: "",
@@ -231,7 +231,7 @@ export const projects = [
   // ── Interactive Web Projects ───────────────────────────────────
   {
     id: "web-pentest-project",
-    number: "12",
+    number: "01",
     category: "Interactive Web Projects",
     title: "웹 모의해킹 프로젝트",
     description: "",
@@ -243,7 +243,7 @@ export const projects = [
   },
   {
     id: "sekurity-homepage",
-    number: "13",
+    number: "02",
     category: "Interactive Web Projects",
     title: "seKUrity 홈페이지 개발",
     description: "",
@@ -255,7 +255,7 @@ export const projects = [
   },
   {
     id: "portfolio-site",
-    number: "14",
+    number: "03",
     category: "Interactive Web Projects",
     title: "React 포트폴리오 사이트 제작",
     description: "",
@@ -267,7 +267,7 @@ export const projects = [
   },
   {
     id: "escape-room",
-    number: "15",
+    number: "04",
     category: "Interactive Web Projects",
     title: "React 방탈출 게임 제작",
     description: "",
@@ -279,7 +279,7 @@ export const projects = [
   },
   {
     id: "balloon-ride",
-    number: "16",
+    number: "05",
     category: "Interactive Web Projects",
     title: "Balloon Ride",
     description: "",
@@ -293,7 +293,7 @@ export const projects = [
   // ── Embedded & Hardware Security ───────────────────────────────
   {
     id: "fault-injection",
-    number: "17",
+    number: "01",
     category: "Embedded & Hardware Security",
     title: "Fault Injection 연구",
     description: "",
@@ -307,7 +307,7 @@ export const projects = [
   // ── Leadership & Community ─────────────────────────────────────
   {
     id: "vice-president",
-    number: "18",
+    number: "01",
     category: "Leadership & Community",
     title: "제5세대 부회장",
     description: "",
@@ -319,7 +319,7 @@ export const projects = [
   },
   {
     id: "pentest-collaboration",
-    number: "19",
+    number: "02",
     category: "Leadership & Community",
     title: "웹 모의해킹 프로젝트 협업",
     description: "",
