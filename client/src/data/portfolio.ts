@@ -332,7 +332,7 @@ export type ActivityContent = {
 export type ActivityItem = {
   id: string;
   label: string;
-  path: string;
+  path: string | null;
   content?: ActivityContent;
 };
 
