@@ -230,53 +230,14 @@ export default function ProjectsSection() {
 
                             {/* Right: Description + Role */}
                             <div className="lg:col-span-2 space-y-4">
-                              <p
-                                style={{
-                                  fontFamily: "'Space Grotesk', sans-serif",
-                                  fontSize: "0.95rem",
-                                  color: "#8892b0",
-                                  lineHeight: 1.7,
-                                }}
-                              >
+                              {/* 자세히 보기 — 오른쪽 상단 */}
+                              <div className="flex justify-end">
+                                <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.72rem", color: project.color, opacity: 0.6 }}>
+                                  클릭하여 자세히 보기 →
+                                </p>
+                              </div>
+                              <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.95rem", color: "#8892b0", lineHeight: 1.7 }}>
                                 {project.description}
-                              </p>
-                              {/* <div
-                                className="p-3 rounded-lg"
-                                style={{
-                                  background: "rgba(100,255,218,0.03)",
-                                  border: "1px solid rgba(100,255,218,0.08)",
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    fontFamily: "'JetBrains Mono', monospace",
-                                    fontSize: "0.62rem",
-                                    color: "#64ffda",
-                                    letterSpacing: "0.1em",
-                                    marginBottom: "4px",
-                                  }}
-                                >
-                                  ROLE
-                                </div>
-                                <div
-                                  style={{
-                                    fontFamily: "'Space Grotesk', sans-serif",
-                                    fontSize: "0.85rem",
-                                    color: "#ccd6f6",
-                                  }}
-                                >
-                                  {project.role}
-                                </div>
-                              </div> */}
-                              <p
-                                style={{
-                                  fontFamily: "'JetBrains Mono', monospace",
-                                  fontSize: "0.72rem",
-                                  color: project.color,
-                                  opacity: 0.6,
-                                }}
-                              >
-                                클릭하여 자세히 보기 →
                               </p>
                             </div>
                           </div>
