@@ -230,9 +230,8 @@ export default function ProjectsSection() {
 
                             {/* Right: Description + Role */}
                             <div className="lg:col-span-2 space-y-4">
-                              {/* 자세히 보기 — 오른쪽 상단 */}
                               <div className="flex justify-end">
-                                <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.72rem", color: project.color, opacity: 0.6 }}>
+                                <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "1rem", color: project.color, opacity: 0.6 }}>
                                   클릭하여 자세히 보기 →
                                 </p>
                               </div>
