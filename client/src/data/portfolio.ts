@@ -230,20 +230,8 @@ export const projects = [
 
   // ── Interactive Web Projects ───────────────────────────────────
   {
-    id: "web-pentest-project",
-    number: "01",
-    category: "Interactive Web Projects",
-    title: "웹 모의해킹 프로젝트",
-    description: "",
-    role: "",
-    learned: "",
-    tags: ["Web Hacking", "Pentest", "Security"],
-    links: { github: "", report: "" },
-    color: "#38bdf8",
-  },
-  {
     id: "sekurity-homepage",
-    number: "02",
+    number: "01",
     category: "Interactive Web Projects",
     title: "seKUrity 홈페이지 개발",
     description: "",
@@ -255,7 +243,7 @@ export const projects = [
   },
   {
     id: "portfolio-site",
-    number: "03",
+    number: "02",
     category: "Interactive Web Projects",
     title: "React 포트폴리오 사이트 제작",
     description: "",
@@ -267,7 +255,7 @@ export const projects = [
   },
   {
     id: "escape-room",
-    number: "04",
+    number: "03",
     category: "Interactive Web Projects",
     title: "React 방탈출 게임 제작",
     description: "",
@@ -279,7 +267,7 @@ export const projects = [
   },
   {
     id: "balloon-ride",
-    number: "05",
+    number: "04",
     category: "Interactive Web Projects",
     title: "Balloon Ride",
     description: "",
