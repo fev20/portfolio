@@ -348,7 +348,7 @@ export const nowActivities: ActivityCategory[] = [
     label: "seKUrity",
     items: [
       { id: "mentor", label: "멘토", path: null, content: { texts: [], images: [], files: [] } },
-      { id: "project", label: "프로젝트", path: null, content: { texts: ["- 암호학 분석 경진대회"], images: [], files: [] } },
+      { id: "project", label: "프로젝트", path: null, content: { texts: ["-  암호학 분석 경진대회"], images: [], files: [] } },
     ],
   },
   {
@@ -356,7 +356,7 @@ export const nowActivities: ActivityCategory[] = [
     label: "제5세대",
     items: [
       { id: "executive", label: "임원진", path: null, content: { texts: [], images: [], files: [] } },
-      { id: "web-project", label: "웹 프로젝트", path: null, content: { texts: ["- 웹 프로젝트 요소 페이지 생성"], images: [], files: [] } },
+      { id: "web-project", label: "웹 프로젝트", path: null, content: { texts: ["-  웹 프로젝트 요소 페이지 생성"], images: [], files: [] } },
     ],
   },
   {
@@ -374,8 +374,8 @@ export const nowActivities: ActivityCategory[] = [
     id: "hw-hacking",
     label: "하드웨어 해킹",
     items: [
-      { id: "hobby", label: "Hobby", path: null, content: { texts: ["- Fault Injection"], images: [], files: [] } },
-      { id: "research paper", label: "Research Paper", path: null, content: { texts: ["- Detecting Compiler-Introduced Security Bugs via IR Mutation and Coverage-Guided Fuzzing_Postech"], images: [], files: [] } },
+      { id: "hobby", label: "Hobby", path: null, content: { texts: ["-  Fault Injection"], images: [], files: [] } },
+      { id: "research paper", label: "Research Paper", path: null, content: { texts: ["-  Detecting Compiler-Introduced Security Bugs via IR Mutation and Coverage-Guided Fuzzing_Postech"], images: [], files: [] } },
     ],
   },
   {
