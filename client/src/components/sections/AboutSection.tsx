@@ -130,58 +130,66 @@ function NowBlock({
               {/* 서브 아이템 */}
               {isOpen && cat.items.length > 0 && (
                 <div className="mt-1 space-y-1">
-                  {cat.items.map((item) => (
-                    <div key={item.id}>
-                      <button
-                        onClick={() => toggleSub(`${cat.id}-${item.id}`)}
-                        className="w-full text-left group"
-                        style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}
-                      >
-                        <div
-                          className="flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200"
-                          style={{
-                            background: openSubIds.includes(`${cat.id}-${item.id}`) ? "rgba(100,255,218,0.05)" : "rgba(100,255,218,0.02)",
-                            border: `1px solid ${openSubIds.includes(`${cat.id}-${item.id}`) ? "rgba(100,255,218,0.2)" : "rgba(100,255,218,0.06)"}`,
-                            marginLeft: "2.5rem",
-                          }}
-                          onMouseEnter={(e) => {
-                            (e.currentTarget as HTMLDivElement).style.background = "rgba(100,255,218,0.06)";
-                            (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(100,255,218,0.2)";
-                          }}
-                          onMouseLeave={(e) => {
-                            (e.currentTarget as HTMLDivElement).style.background = openSubIds.includes(`${cat.id}-${item.id}`) ? "rgba(100,255,218,0.05)" : "rgba(100,255,218,0.02)";
-                            (e.currentTarget as HTMLDivElement).style.borderColor = openSubIds.includes(`${cat.id}-${item.id}`) ? "rgba(100,255,218,0.2)" : "rgba(100,255,218,0.06)";
-                          }}
-                        >
-                          <span style={{
-                            fontFamily: "'JetBrains Mono', monospace",
-                            fontSize: "0.65rem",
-                            color: "rgba(100,255,218,0.3)",
-                            flexShrink: 0,
-                            display: "inline-block",
-                            transition: "transform 0.2s",
-                            transform: openSubIds.includes(`${cat.id}-${item.id}`) ? "rotate(90deg)" : "rotate(0deg)",
-                          }}>▸</span>
-                          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.83rem", color: "#8892b0", flex: 1 }}>{item.label}</span>
-                        </div>
-                      </button>
-
-                      {/* 펼쳐지는 내용 */}
-                      {openSubIds.includes(cat.id + "-" + item.id) && (
-                        <div style={{ marginLeft: "3.5rem", marginTop: "0.25rem", padding: "0.75rem 1rem", borderRadius: "8px", background: "rgba(100,255,218,0.02)", border: "1px solid rgba(100,255,218,0.06)" }}>
-                          {item.content?.texts && item.content.texts.length > 0 ? (
-                            <div className="space-y-2">
-                              {item.content.texts.map((t, i) => (
-                                <p key={i} style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.82rem", color: "#8892b0", lineHeight: 1.7 }}>{t}</p>
-                              ))}
+                  {cat.items.map((item) => {
+                    const hasContent = item.content?.texts && item.content.texts.length > 0;
+                    const isSchool = cat.id === "school";
+                    return (
+                      <div key={item.id}>
+                        {isSchool ? (
+                          // 학교: 토글 없이 그냥 텍스트
+                          <div
+                            className="flex items-center gap-3 px-4 py-2 rounded-lg"
+                            style={{ background: "rgba(100,255,218,0.02)", border: "1px solid rgba(100,255,218,0.06)", marginLeft: "2.5rem" }}
+                          >
+                            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "rgba(100,255,218,0.15)", flexShrink: 0 }}>—</span>
+                            <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.83rem", color: "#4a5568", flex: 1 }}>{item.label}</span>
+                          </div>
+                        ) : (
+                          // 나머지: 토글 버튼
+                          <button
+                            onClick={() => toggleSub(cat.id + "-" + item.id)}
+                            className="w-full text-left group"
+                            style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}
+                          >
+                            <div
+                              className="flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200"
+                              style={{
+                                background: openSubIds.includes(cat.id + "-" + item.id) ? "rgba(100,255,218,0.05)" : "rgba(100,255,218,0.02)",
+                                border: `1px solid ${openSubIds.includes(cat.id + "-" + item.id) ? "rgba(100,255,218,0.2)" : "rgba(100,255,218,0.06)"}`,
+                                marginLeft: "2.5rem",
+                              }}
+                              onMouseEnter={(e) => {
+                                (e.currentTarget as HTMLDivElement).style.background = "rgba(100,255,218,0.06)";
+                                (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(100,255,218,0.2)";
+                              }}
+                              onMouseLeave={(e) => {
+                                (e.currentTarget as HTMLDivElement).style.background = openSubIds.includes(cat.id + "-" + item.id) ? "rgba(100,255,218,0.05)" : "rgba(100,255,218,0.02)";
+                                (e.currentTarget as HTMLDivElement).style.borderColor = openSubIds.includes(cat.id + "-" + item.id) ? "rgba(100,255,218,0.2)" : "rgba(100,255,218,0.06)";
+                              }}
+                            >
+                              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "rgba(100,255,218,0.3)", flexShrink: 0, display: "inline-block", transition: "transform 0.2s", transform: openSubIds.includes(cat.id + "-" + item.id) ? "rotate(90deg)" : "rotate(0deg)" }}>▸</span>
+                              <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.83rem", color: "#8892b0", flex: 1 }}>{item.label}</span>
                             </div>
-                          ) : (
-                            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.72rem", color: "#2d3748" }}>// 정리 중</p>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                          </button>
+                        )}
+
+                        {/* 펼쳐지는 내용 — 학교 제외 */}
+                        {!isSchool && openSubIds.includes(cat.id + "-" + item.id) && (
+                          <div style={{ marginLeft: "3.5rem", marginTop: "0.25rem", padding: "0.75rem 1rem", borderRadius: "8px", background: "rgba(100,255,218,0.02)", border: "1px solid rgba(100,255,218,0.06)" }}>
+                            {hasContent ? (
+                              <div className="space-y-2">
+                                {item.content!.texts!.map((t, i) => (
+                                  <p key={i} style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.82rem", color: "#8892b0", lineHeight: 1.7 }}>{t}</p>
+                                ))}
+                              </div>
+                            ) : (
+                              <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.72rem", color: "#2d3748" }}>// 정리 중</p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </motion.div>
