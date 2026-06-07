@@ -116,7 +116,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
               </div>
 
               {/* Terminal body */}
-              <div className="p-5 min-h-[180px]">
+              <div className="p-5 min-h-[100px]">
                 {BOOT_LINES.map((line, i) => (
                   <motion.div
                     key={i}
