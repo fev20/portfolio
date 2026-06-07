@@ -6,8 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const BOOT_LINES = [
   { text: "$ initializing secure connection...", delay: 0 },
-  { text: "$ scanning for vulnerabilities...", delay: 200 },
-  { text: "> access granted.", delay: 420, highlight: true },
+  { text: "$ scanning for vulnerabilities...", delay: 250 },
+  { text: "> access granted.", delay: 500, highlight: true },
 ];
 
 interface LoadingScreenProps {
@@ -116,7 +116,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
               </div>
 
               {/* Terminal body */}
-              <div className="p-5 min-h-[100px]">
+              <div className="p-5 min-h-[120px]">
                 {BOOT_LINES.map((line, i) => (
                   <motion.div
                     key={i}
