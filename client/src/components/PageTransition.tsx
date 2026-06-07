@@ -35,7 +35,7 @@ export default function PageTransition({
       timers.push(
         setTimeout(() => {
           setVisibleLines((prev) => [...prev, i]);
-        }, i * 280)
+        }, i * 120)
       );
     });
 
@@ -43,8 +43,8 @@ export default function PageTransition({
     timers.push(
       setTimeout(() => {
         setDone(true);
-        setTimeout(onComplete, 400);
-      }, bootLines.length * 280 + 200)
+        setTimeout(onComplete, 200);
+      }, bootLines.length * 120 + 100)
     );
 
     return () => timers.forEach(clearTimeout);
@@ -57,7 +57,7 @@ export default function PageTransition({
           key="page-transition"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 0.98 }}
-          transition={{ duration: 0.35 }}
+          transition={{ duration: 0.2 }}
           className="fixed inset-0 z-50 flex flex-col items-center justify-center"
           style={{ background: "#050b18" }}
         >
@@ -181,7 +181,7 @@ export default function PageTransition({
                   style={{ background: `linear-gradient(90deg, ${color}, ${color}66)` }}
                   initial={{ width: "0%" }}
                   animate={{ width: "100%" }}
-                  transition={{ duration: bootLines.length * 0.28 + 0.2, ease: "linear" }}
+                  transition={{ duration: bootLines.length * 0.12 + 0.1, ease: "linear" }}
                 />
               </motion.div>
             </div>
