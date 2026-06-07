@@ -317,6 +317,18 @@ export const projects = [
     links: { github: "", report: "" },
     color: "#FACC15",
   },
+  {
+    id: "pentest-collaboration",
+    number: "03",
+    category: "Leadership & Community",
+    title: "화이트햇 스쿨 반장",
+    description: "",
+    role: "",
+    learned: "",
+    tags: ["Leadership", "Communication", "Community"],
+    links: { github: "", report: "" },
+    color: "#FACC15",
+  },
 ];
 
 // ─── Experience ──────────────────────────────────────────────
