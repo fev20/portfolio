@@ -6,12 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const BOOT_LINES = [
   { text: "$ initializing secure connection...", delay: 0 },
-  { text: "$ loading kernel modules...", delay: 180 },
-  { text: "$ mounting encrypted filesystem...", delay: 360 },
-  { text: "$ establishing neural link...", delay: 540 },
-  { text: "$ scanning for vulnerabilities...", delay: 720 },
-  { text: "> all systems nominal.", delay: 900, highlight: true },
-  { text: "> welcome to the void.", delay: 1050, highlight: true },
+  { text: "$ scanning for vulnerabilities...", delay: 200 },
+  { text: "> access granted.", delay: 420, highlight: true },
 ];
 
 interface LoadingScreenProps {
@@ -35,7 +31,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
     setTimeout(() => {
       setDone(true);
       setTimeout(onComplete, 300);
-    }, 1300);
+    }, 600);
   }, [onComplete]);
 
   return (
