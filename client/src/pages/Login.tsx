@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { login, UserRole } from "@/utils/auth";
 
@@ -9,6 +9,12 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setPassword("");
+    setSelectedRole("");
+    setError("");
+  }, []);
 
   const accounts = [
     { id: "admin", label: "admin", desc: "관리자", color: "#f59e0b" },
@@ -185,6 +191,7 @@ export default function Login() {
         <div className="mb-6">
           <input
             type="password"
+            autoComplete="new-password"
             value={password}
             onChange={(e) => { setPassword(e.target.value); setError(""); }}
             onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
