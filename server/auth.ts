@@ -13,13 +13,13 @@ const USERS = [
   {
     id: "sekurity",
     username: "sekurity",
-    passwordHash: bcrypt.hashSync("sekurity2025", 10),
+    passwordHash: bcrypt.hashSync("sekurity2026", 10),
     role: "sekurity",
   },
   {
     id: "whs",
     username: "whs",
-    passwordHash: bcrypt.hashSync("whs2025", 10),
+    passwordHash: bcrypt.hashSync("whs2026", 10),
     role: "whs",
   },
 ];
