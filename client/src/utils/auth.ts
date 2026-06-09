@@ -1,3 +1,5 @@
+const API_URL = "https://portfolio-8ihh.onrender.com";
+
 export type UserRole = "admin" | "sekurity" | "whs";
 export type FileProtection = "sekurity" | "whs" | "admin" | false;
 
@@ -20,7 +22,7 @@ export const login = async (
   password: string
 ): Promise<{ role: UserRole } | null> => {
   try {
-    const res = await fetch("/api/login", {
+    const res = await fetch(`${API_URL}/api/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
@@ -42,7 +44,7 @@ export const verifyAuth = async (): Promise<{
   const token = getToken();
   if (!token) return { valid: false };
   try {
-    const res = await fetch("/api/verify", {
+    const res = await fetch(`${API_URL}/api/verify`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return await res.json();

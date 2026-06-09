@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = "portfolio_secret_key_2024";
+const JWT_SECRET = process.env.JWT_SECRET || "portfolio_secret_key_2026";
 
 const USERS = [
   {
