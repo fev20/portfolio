@@ -1,10 +1,8 @@
-// Sidebar.tsx — 하나의 큰 터미널 창 사이드바
-// Design: Nebula Hacker × Retro Terminal
-// Layout: [profile.exe 이미지] → [components.exe 섹션 목록] → [contact.exe 고정]
-
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
+import { verifyAuth, logout, UserRole } from "@/utils/auth";
+import LoginModal from "@/components/LoginModal";
 import {
   profile,
   skills,
@@ -33,6 +31,138 @@ const CATEGORY_ORDER = [
   "Service Operation & Improvement",
   "Embedded & Hardware Practice",
 ];
+
+function LoginBlock() {
+  const [userRole, setUserRole] = useState<UserRole | null>(null);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    verifyAuth().then((res) => {
+      if (res?.valid && res.role) setUserRole(res.role as UserRole);
+    });
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+    setUserRole(null);
+  };
+
+  const roleLabel: Record<UserRole, string> = {
+    admin: "admin",
+    sekurity: "seKUrity",
+    whs: "WHS",
+  };
+
+  const roleColor: Record<UserRole, string> = {
+    admin: "#f59e0b",
+    sekurity: "#64ffda",
+    whs: "#a78bfa",
+  };
+
+  return (
+    <>
+      <div className="px-4 pb-3">
+        {userRole ? (
+          <div
+            className="flex items-center justify-between px-3 py-2 rounded-lg"
+            style={{
+              background: "rgba(100,255,218,0.04)",
+              border: "1px solid rgba(100,255,218,0.1)",
+            }}
+          >
+            <div>
+              <div
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: "0.6rem",
+                  color: "rgba(100,255,218,0.4)",
+                  marginBottom: "1px",
+                }}
+              >
+                logged in as
+              </div>
+              <div
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: "0.72rem",
+                  fontWeight: 600,
+                  color: roleColor[userRole],
+                }}
+              >
+                {roleLabel[userRole]}
+              </div>
+            </div>
+            <button
+              onClick={handleLogout}
+              style={{
+                background: "none",
+                border: "1px solid rgba(100,255,218,0.1)",
+                borderRadius: "6px",
+                padding: "3px 8px",
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "0.6rem",
+                color: "#4a5568",
+                cursor: "pointer",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.color = "#64ffda";
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.3)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.color = "#4a5568";
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.1)";
+              }}
+            >
+              logout
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={() => setShowModal(true)}
+            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200"
+            style={{
+              background: "rgba(100,255,218,0.03)",
+              border: "1px solid rgba(100,255,218,0.08)",
+              cursor: "pointer",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.background = "rgba(100,255,218,0.07)";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.2)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.background = "rgba(100,255,218,0.03)";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.08)";
+            }}
+          >
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a5568" strokeWidth="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <span
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "0.68rem",
+                color: "#4a5568",
+              }}
+            >
+              $ login
+            </span>
+          </button>
+        )}
+      </div>
+
+      {showModal && (
+        <LoginModal
+          onSuccess={(role) => {
+            setUserRole(role);
+            setShowModal(false);
+          }}
+          onClose={() => setShowModal(false)}
+        />
+      )}
+    </>
+  );
+}
 
 export default function Sidebar() {
   const [activeSection, setActiveSection] = useState("hero");
@@ -387,6 +517,9 @@ export default function Sidebar() {
 
         {/* ── 구분선 ── */}
         <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(100,255,218,0.25), transparent)", flexShrink: 0 }} />
+
+        {/* ── login 블록 ── */}
+        <LoginBlock />
 
         {/* ── contact.exe 블록 ── */}
         <div className="flex-shrink-0 pb-4">
