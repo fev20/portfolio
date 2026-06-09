@@ -37,9 +37,15 @@ function LoginBlock() {
   const [, setLocation] = useLocation();
 
   useEffect(() => {
-    verifyAuth().then((res) => {
-      if (res?.valid && res.role) setUserRole(res.role as UserRole);
-    });
+    const check = () => {
+      verifyAuth().then((res) => {
+        if (res?.valid && res.role) setUserRole(res.role as UserRole);
+        else setUserRole(null);
+      });
+    };
+    check();
+    window.addEventListener("focus", check);
+    return () => window.removeEventListener("focus", check);
   }, []);
 
   const handleLogout = () => {
