@@ -11,11 +11,13 @@ import ExperienceDetail from "./pages/ExperienceDetail";
 import EducationDetail from "./pages/EducationDetail";
 import Sidebar from "./components/Sidebar";
 import ActivityDetail from "@/pages/ActivityDetail";
+import Login from "@/pages/Login";
 
 function AppRoutes() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/login" component={Login} />
       <Route path="/project/:id" component={ProjectDetail} />
       <Route path="/experience/:index" component={ExperienceDetail} />
       <Route path="/activity/:category/:item" component={ActivityDetail} />

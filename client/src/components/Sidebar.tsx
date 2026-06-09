@@ -32,152 +32,9 @@ const CATEGORY_ORDER = [
   "Embedded & Hardware Practice",
 ];
 
-function SidebarLoginModal({
-  onSuccess,
-  onClose,
-}: {
-  onSuccess: (role: UserRole) => void;
-  onClose: () => void;
-}) {
-  const [selected, setSelected] = useState<string>("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const accounts = [
-    { id: "admin", label: "admin", desc: "관리자", color: "#f59e0b" },
-    { id: "sekurity", label: "seKUrity", desc: "세쿠리티 소속", color: "#64ffda" },
-    { id: "whs", label: "WHS", desc: "화이트햇스쿨 소속", color: "#a78bfa" },
-  ];
-
-  const handleSubmit = async () => {
-    if (!selected || !password) return;
-    setLoading(true);
-    setError("");
-    const { login } = await import("@/utils/auth");
-    const result = await login(selected, password);
-    setLoading(false);
-    if (!result) {
-      setError("// 비밀번호가 올바르지 않습니다");
-      setPassword("");
-    } else {
-      onSuccess(result.role);
-    }
-  };
-
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center"
-      style={{ background: "rgba(5,11,24,0.92)", backdropFilter: "blur(8px)" }}
-      onClick={onClose}
-    >
-      <div
-        className="relative w-full max-w-sm mx-4 rounded-xl p-6"
-        style={{ background: "rgba(15,23,42,0.98)", border: "1px solid rgba(100,255,218,0.15)" }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* 헤더 */}
-        <div className="mb-5">
-          <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.5)", marginBottom: "0.5rem" }}>
-            $ authenticate --user
-          </p>
-          <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "1.15rem", fontWeight: 700, color: "#ccd6f6" }}>
-            로그인
-          </h2>
-          <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.8rem", color: "#4a5568", marginTop: "0.25rem" }}>
-            권한이 필요한 파일을 열람하려면 로그인해주세요.
-          </p>
-        </div>
-
-        {/* 계정 선택 */}
-        <div className="flex gap-2 mb-4">
-          {accounts.map((acc) => (
-            <button
-              key={acc.id}
-              onClick={() => { setSelected(acc.id); setError(""); }}
-              className="flex-1 py-2 rounded-lg transition-all duration-200"
-              style={{
-                background: selected === acc.id ? `${acc.color}18` : "rgba(100,255,218,0.03)",
-                border: `1px solid ${selected === acc.id ? acc.color + "55" : "rgba(100,255,218,0.08)"}`,
-                cursor: "pointer",
-              }}
-            >
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.68rem", fontWeight: 600, color: selected === acc.id ? acc.color : "#4a5568" }}>
-                {acc.label}
-              </div>
-              <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.6rem", color: selected === acc.id ? acc.color + "aa" : "#2d3748", marginTop: "2px" }}>
-                {acc.desc}
-              </div>
-            </button>
-          ))}
-        </div>
-
-        {/* 비밀번호 */}
-        <div className="mb-4">
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => { setPassword(e.target.value); setError(""); }}
-            onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-            placeholder="password"
-            autoFocus
-            className="w-full px-4 py-2.5 rounded-lg outline-none"
-            style={{
-              background: "rgba(100,255,218,0.04)",
-              border: `1px solid ${error ? "rgba(255,100,100,0.4)" : "rgba(100,255,218,0.15)"}`,
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: "0.88rem",
-              color: "#ccd6f6",
-              letterSpacing: "0.1em",
-            }}
-          />
-          {error && (
-            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.72rem", color: "rgba(255,100,100,0.8)", marginTop: "0.4rem" }}>
-              {error}
-            </p>
-          )}
-        </div>
-
-        {/* 버튼 */}
-        <div className="flex gap-2">
-          <button
-            onClick={handleSubmit}
-            disabled={loading || !selected}
-            className="flex-1 py-2.5 rounded-lg transition-all duration-200"
-            style={{
-              background: "rgba(100,255,218,0.1)",
-              border: "1px solid rgba(100,255,218,0.2)",
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: "0.8rem",
-              color: loading || !selected ? "#4a5568" : "#64ffda",
-              cursor: loading || !selected ? "default" : "pointer",
-            }}
-          >
-            {loading ? "확인 중..." : "로그인"}
-          </button>
-          <button
-            onClick={onClose}
-            className="px-4 py-2.5 rounded-lg"
-            style={{
-              background: "rgba(100,255,218,0.03)",
-              border: "1px solid rgba(100,255,218,0.08)",
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: "0.8rem",
-              color: "#4a5568",
-              cursor: "pointer",
-            }}
-          >
-            취소
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function LoginBlock() {
   const [userRole, setUserRole] = useState<UserRole | null>(null);
-  const [showModal, setShowModal] = useState(false);
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
     verifyAuth().then((res) => {
@@ -203,87 +60,75 @@ function LoginBlock() {
   };
 
   return (
-    <>
-      <div className="px-4 py-3" style={{ borderBottom: "1px solid rgba(100,255,218,0.08)" }}>
-        {userRole ? (
-          <div
-            className="flex items-center justify-between px-3 py-2 rounded-lg"
-            style={{
-              background: "rgba(100,255,218,0.06)",
-              border: "1px solid rgba(100,255,218,0.15)",
-            }}
-          >
-            <div>
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", color: "rgba(100,255,218,0.4)", marginBottom: "1px" }}>
-                logged in as
-              </div>
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.72rem", fontWeight: 600, color: roleColor[userRole] }}>
-                {roleLabel[userRole]}
-              </div>
+    <div className="px-4 py-3">
+      {userRole ? (
+        <div
+          className="flex items-center justify-between px-3 py-2 rounded-lg"
+          style={{
+            background: "rgba(100,255,218,0.06)",
+            border: "1px solid rgba(100,255,218,0.15)",
+          }}
+        >
+          <div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", color: "rgba(100,255,218,0.4)", marginBottom: "1px" }}>
+              logged in as
             </div>
-            <button
-              onClick={handleLogout}
-              style={{
-                background: "none",
-                border: "1px solid rgba(100,255,218,0.15)",
-                borderRadius: "6px",
-                padding: "3px 8px",
-                fontFamily: "'JetBrains Mono', monospace",
-                fontSize: "0.6rem",
-                color: "#64748b",
-                cursor: "pointer",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.color = "#64ffda";
-                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.4)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.color = "#64748b";
-                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.15)";
-              }}
-            >
-              logout
-            </button>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.72rem", fontWeight: 600, color: roleColor[userRole] }}>
+              {roleLabel[userRole]}
+            </div>
           </div>
-        ) : (
           <button
-            onClick={() => setShowModal(true)}
-            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200"
+            onClick={handleLogout}
             style={{
-              background: "rgba(100,255,218,0.06)",
-              border: "1px solid rgba(100,255,218,0.2)",
+              background: "none",
+              border: "1px solid rgba(100,255,218,0.15)",
+              borderRadius: "6px",
+              padding: "3px 8px",
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: "0.6rem",
+              color: "#64748b",
               cursor: "pointer",
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.background = "rgba(100,255,218,0.12)";
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.35)";
+              (e.currentTarget as HTMLButtonElement).style.color = "#64ffda";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.4)";
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.background = "rgba(100,255,218,0.06)";
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.2)";
+              (e.currentTarget as HTMLButtonElement).style.color = "#64748b";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.15)";
             }}
           >
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#64ffda" strokeWidth="2">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-            </svg>
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.68rem", color: "#64ffda" }}>
-              $ login
-            </span>
+            logout
           </button>
-        )}
-      </div>
-
-      {showModal && (
-        <SidebarLoginModal
-          onSuccess={(role) => {
-            setUserRole(role);
-            setShowModal(false);
+        </div>
+      ) : (
+        <button
+          onClick={() => setLocation("/login")}
+          className="w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200"
+          style={{
+            background: "rgba(100,255,218,0.06)",
+            border: "1px solid rgba(100,255,218,0.2)",
+            cursor: "pointer",
           }}
-          onClose={() => setShowModal(false)}
-        />
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background = "rgba(100,255,218,0.12)";
+            (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.35)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background = "rgba(100,255,218,0.06)";
+            (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.2)";
+          }}
+        >
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#64ffda" strokeWidth="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.68rem", color: "#64ffda" }}>
+            $ login
+          </span>
+        </button>
       )}
-    </>
+    </div>
   );
 }
 
