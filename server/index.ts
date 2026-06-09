@@ -51,6 +51,13 @@ async function startServer() {
   server.listen(port, () => {
     console.log(`Server running on http://localhost:${port}/`);
   });
+
+  if (process.env.NODE_ENV === "production") {
+    setInterval(() => {
+      fetch("https://portfolio-8ihh.onrender.com/api/verify")
+        .catch(() => {});
+    }, 5 * 60 * 1000);
+  }
 }
 
 startServer().catch(console.error);
