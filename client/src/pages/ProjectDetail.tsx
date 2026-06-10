@@ -184,7 +184,7 @@ export default function ProjectDetail() {
                   </p>
                   <div className="rounded-xl overflow-hidden" style={{ border: `1px solid ${project.color}20` }}>
                     <iframe
-                      src={project.files[0].url}
+                      src={`${project.files[0].url}#toolbar=0&navpanes=0&scrollbar=0&page=1&view=FitH`}
                       title={project.files[0].name}
                       className="w-full"
                       style={{ height: "500px", border: "none" }}
