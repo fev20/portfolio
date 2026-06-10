@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { verifyAuth, canAccess, UserRole, FileProtection } from "@/utils/auth";
 import LoginModal from "@/components/LoginModal";
 
-const [accessDenied, setAccessDenied] = useState(false);
-
 interface ProtectedDownloadProps {
   url: string;
   filename: string;
@@ -19,6 +17,7 @@ export default function ProtectedDownload({
 }: ProtectedDownloadProps) {
   const [userRole, setUserRole] = useState<UserRole | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [accessDenied, setAccessDenied] = useState(false);
 
   useEffect(() => {
     verifyAuth().then((res) => {
