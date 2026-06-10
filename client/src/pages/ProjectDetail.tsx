@@ -175,6 +175,24 @@ export default function ProjectDetail() {
                   )}
                 </div>
               )}
+
+              {/* Preview */}
+              {project.files && project.files.length > 0 && !project.files[0].protection && (
+                <div>
+                  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.4)", marginBottom: "0.5rem" }}>
+                    PREVIEW
+                  </p>
+                  <div className="rounded-xl overflow-hidden" style={{ border: `1px solid ${project.color}20` }}>
+                    <iframe
+                      src={project.files[0].url}
+                      title={project.files[0].name}
+                      className="w-full"
+                      style={{ height: "500px", border: "none" }}
+                    />
+                  </div>
+                </div>
+              )}
+
               {/* Files */}
               {project.files && project.files.length > 0 && (
                 <div className="mt-4 space-y-2">
