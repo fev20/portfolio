@@ -482,6 +482,7 @@ export const certifications = [
     issuer: "국가공인",
     icon: "award",
     pdfFile: "/IEQ.pdf",
+    image: "/IEQ-1.png",
   },
   {
     type: "cert",
@@ -490,6 +491,7 @@ export const certifications = [
     issuer: "Microsoft 국제공인",
     icon: "award",
     pdfFile: "/MOS_Powerpoint_2016.pdf",
+    image: "/MOS_Powerpoint_2016-1.png",
   },
   {
     type: "cert",
@@ -498,6 +500,7 @@ export const certifications = [
     issuer: "Microsoft 국제공인",
     icon: "award",
     pdfFile: "/MOS_Excel_Expert_2016.pdf",
+    image: "/MOS_Excel_Expert_2016-1.png",
   },
 ];
 

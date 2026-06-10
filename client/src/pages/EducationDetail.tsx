@@ -168,41 +168,41 @@ export default function EducationDetail() {
   </motion.div>
 )}
 
-        {isEdu
-          ? "image" in item && (item as any).image && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="rounded-xl overflow-hidden"
-                style={{ border: `1px solid ${color}12` }}
-              >
-                <img src={(item as any).image} alt={item.title} className="w-full h-auto" />
-              </motion.div>
-            )
-          : (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="p-6 rounded-xl"
+        {"image" in item && (item as any).image ? (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="rounded-xl overflow-hidden"
+            style={{ border: `1px solid ${color}12` }}
+          >
+            <img src={(item as any).image} alt={item.title} className="w-full h-auto" />
+          </motion.div>
+        ) : (
+          !isEdu && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="p-6 rounded-xl"
+              style={{
+                background: "rgba(15,23,42,0.8)",
+                border: `1px solid ${color}12`,
+              }}
+            >
+              <p
                 style={{
-                  background: "rgba(15,23,42,0.8)",
-                  border: `1px solid ${color}12`,
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontSize: "0.95rem",
+                  color: "#8892b0",
+                  lineHeight: 1.8,
                 }}
               >
-                <p
-                  style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    fontSize: "0.95rem",
-                    color: "#8892b0",
-                    lineHeight: 1.8,
-                  }}
-                >
-                  {`${(item as typeof certifications[0]).issuer} 자격증으로, 관련 분야의 전문 역량을 인증받았습니다.`}
-                </p>
-              </motion.div>
-            )}
+                {`${(item as typeof certifications[0]).issuer} 자격증으로, 관련 분야의 전문 역량을 인증받았습니다.`}
+              </p>
+            </motion.div>
+          )
+        )}
       </div>
     </div>
       )}
