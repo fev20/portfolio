@@ -466,6 +466,7 @@ export const education = [
     subtitle: "디지털 세상의 기본 회로 배우기",
     description: "",
     icon: "cpu",
+    pdfFile: "/semiconductor.pdf",
   },
 ];
 
