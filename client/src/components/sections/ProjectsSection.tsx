@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { useLocation } from "wouter";
-import { ArrowUpRight, Shield, Terminal, BookOpen, Globe, Settings, Cpu } from "lucide-react";
+import { Shield, Terminal, BookOpen, Globe, Settings, Cpu } from "lucide-react";
 import { projects } from "@/data/portfolio";
 
 const CATEGORY_META: Record<string, { icon: React.ElementType; subtitle: string; color: string }> = {
@@ -196,11 +196,6 @@ export default function ProjectsSection() {
                                 >
                                   {project.title}
                                 </h3>
-                                <ArrowUpRight
-                                  size={16}
-                                  className="flex-shrink-0 mt-1 transition-all opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                                  style={{ color: project.color }}
-                                />
                               </div>
                               {/* Tags */}
                               <div className="flex flex-wrap gap-1.5 mt-3">
