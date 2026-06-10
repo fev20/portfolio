@@ -55,6 +55,7 @@ export const verifyAuth = async (): Promise<{
 
 export const logout = () => {
   removeToken();
+  setCachedRole(null);
 };
 
 export const canAccess = (
@@ -68,10 +69,11 @@ export const canAccess = (
   return userRole === protection;
 };
 
-let cachedRole: UserRole | null = null;
-
-export const getCachedRole = () => cachedRole;
+export const getCachedRole = (): UserRole | null => {
+  return sessionStorage.getItem("cached_role") as UserRole | null;
+};
 
 export const setCachedRole = (role: UserRole | null) => {
-  cachedRole = role;
+  if (role) sessionStorage.setItem("cached_role", role);
+  else sessionStorage.removeItem("cached_role");
 };
