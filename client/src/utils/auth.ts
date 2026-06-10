@@ -67,3 +67,11 @@ export const canAccess = (
   if (protection === "admin") return false;
   return userRole === protection;
 };
+
+let cachedRole: UserRole | null = null;
+
+export const getCachedRole = () => cachedRole;
+
+export const setCachedRole = (role: UserRole | null) => {
+  cachedRole = role;
+};

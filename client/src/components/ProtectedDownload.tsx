@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { verifyAuth, canAccess, UserRole, FileProtection } from "@/utils/auth";
+import { verifyAuth, canAccess, getCachedRole, setCachedRole, UserRole, FileProtection } from "@/utils/auth";
 import LoginModal from "@/components/LoginModal";
 
 interface ProtectedDownloadProps {
@@ -20,8 +20,16 @@ export default function ProtectedDownload({
   const [accessDenied, setAccessDenied] = useState(false);
 
   useEffect(() => {
+    const cached = getCachedRole();
+    if (cached) {
+      setUserRole(cached);
+      return;
+    }
     verifyAuth().then((res) => {
-      if (res?.valid && res.role) setUserRole(res.role);
+      if (res?.valid && res.role) {
+        setCachedRole(res.role as UserRole);
+        setUserRole(res.role as UserRole);
+      }
     });
   }, []);
 
@@ -44,6 +52,7 @@ export default function ProtectedDownload({
   };
 
   const handleLoginSuccess = (role: UserRole) => {
+    setCachedRole(role);
     setUserRole(role);
     setShowModal(false);
     if (canAccess(role, protection)) {
