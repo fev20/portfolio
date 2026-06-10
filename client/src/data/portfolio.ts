@@ -102,7 +102,9 @@ export const projects = [
     tags: ["CORS", "Web Security", "Security Research"],
     links: { github: "", report: "" },
     color: "#64ffda",
-    files: [],
+    files: [
+      {name: "보안 스터디 CORS 분석 보고서", url: "/files/CORS_Misconfiguration.docx", protection: false}
+    ],
   },
   {
     id: "atm-skimming",
@@ -115,7 +117,7 @@ export const projects = [
     tags: ["ATM Skimming", "Hardware Security", "Security Research"],
     links: { github: "", report: "" },
     color: "#64ffda",
-    files: [],
+    files: [{name: "보안 스터디 ATM Skimming 분석 보고서", url: "/files/ATM_Skimming.docx", protection: false}],
   },
   {
     id: "crypto-contest",
@@ -197,7 +199,17 @@ export const projects = [
     tags: ["seKUrity", "Security Club", "Education"],
     links: { github: "", report: "" },
     color: "#A855F7",
-    files: [],
+    files: [
+      {name: "seKUrity 1주차 과제(네트워크, HTTP, 웹, 개발자도구, 피들러(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity1.docx", protection: "sekurity"},
+      {name: "seKUrity 2주차 과제(XSS)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity2.docx", protection: "sekurity"},
+      {name: "seKUrity 3주차 과제(불충분한 인증과 인가)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity3.docx", protection: "sekurity"},
+      {name: "seKUrity 4주차 과제(SQLi)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity4.docx", protection: "sekurity"},
+      {name: "seKUrity 5주차 과제(파일 다운로드 취약점)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity5.docx", protection: "sekurity"},
+      {name: "seKUrity 6주차 과제(파일 업로드 취약점)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity6.docx", protection: "sekurity"},
+      {name: "seKUrity 7주차 과제(OSi)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity7.docx", protection: "sekurity"},
+      {name: "seKUrity 8주차 과제(SSTi)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity8.docx", protection: "sekurity"},
+      {name: "seKUrity 9주차 과제(실습)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity9.docx", protection: "sekurity"}
+    ],
   },
   {
     id: "web-vuln-education",
