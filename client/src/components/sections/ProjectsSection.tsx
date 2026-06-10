@@ -226,13 +226,10 @@ export default function ProjectsSection() {
                             {/* Right: Description + Role */}
                             <div className="lg:col-span-2 space-y-4">
                               <div className="flex justify-end">
-                                <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "1rem", color: project.color, opacity: 0.6 }}>
+                                <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.8rem", color: project.color, opacity: 0.6 }}>
                                   클릭하여 자세히 보기 →
                                 </p>
                               </div>
-                              <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.95rem", color: "#8892b0", lineHeight: 1.7 }}>
-                                {project.description}
-                              </p>
                             </div>
                           </div>
                         </div>
