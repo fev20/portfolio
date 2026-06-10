@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
-import { verifyAuth, logout, UserRole } from "@/utils/auth";
+import { verifyAuth, logout, setCachedRole, UserRole } from "@/utils/auth";
 import LoginModal from "@/components/LoginModal";
 import {
   profile,
@@ -50,6 +50,7 @@ function LoginBlock() {
 
   const handleLogout = () => {
     logout();
+    setCachedRole(null);
     setUserRole(null);
   };
 
