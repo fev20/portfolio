@@ -50,8 +50,7 @@ function LoginBlock() {
 
   const handleLogout = () => {
     logout();
-    setCachedRole(null);
-    setUserRole(null);
+    window.location.href = "/";
   };
 
   const roleLabel: Record<UserRole, string> = {
