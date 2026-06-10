@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { verifyAuth, canAccess, UserRole, FileProtection } from "@/utils/auth";
 import LoginModal from "@/components/LoginModal";
 
+const [accessDenied, setAccessDenied] = useState(false);
+
 interface ProtectedDownloadProps {
   url: string;
   filename: string;
@@ -34,6 +36,9 @@ export default function ProtectedDownload({
   const handleClick = () => {
     if (canAccess(userRole, protection)) {
       download();
+    } else if (userRole) {
+      setAccessDenied(true);
+      setTimeout(() => setAccessDenied(false), 3000);
     } else {
       setShowModal(true);
     }
@@ -80,6 +85,20 @@ export default function ProtectedDownload({
           </span>
         )}
       </button>
+
+      {accessDenied && (
+        <p
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: "0.72rem",
+            color: "rgba(255,100,100,0.8)",
+            marginTop: "0.4rem",
+            paddingLeft: "0.5rem",
+          }}
+        >
+          // 현재 계정으로는 이 파일을 다운로드할 수 없습니다
+        </p>
+      )}
 
       {showModal && (
         <LoginModal

@@ -6,17 +6,26 @@ interface LoginModalProps {
   onClose: () => void;
 }
 
+const accounts = [
+  { id: "admin", label: "admin", desc: "관리자", color: "#f59e0b" },
+  { id: "sekurity", label: "seKUrity", desc: "세쿠리티 소속", color: "#64ffda" },
+  { id: "whs", label: "WHS", desc: "화이트햇스쿨 소속", color: "#a78bfa" },
+];
+
 export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
-  const [username, setUsername] = useState("");
+  const [selectedRole, setSelectedRole] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const selected = accounts.find((a) => a.id === selectedRole);
+
   const handleSubmit = async () => {
-    if (!username || !password) return;
+    if (!selectedRole || !password) return;
     setLoading(true);
     setError("");
-    const result = await login(username, password);
+    const result = await login(selectedRole, password);
     setLoading(false);
     if (!result) {
       setError("// 아이디 또는 비밀번호가 올바르지 않습니다");
@@ -53,30 +62,59 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
           </p>
         </div>
 
-        {/* 아이디 */}
-        <div className="mb-3">
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => { setUsername(e.target.value); setError(""); }}
-            onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-            placeholder="username"
-            autoFocus
-            className="w-full px-4 py-2.5 rounded-lg outline-none"
+        {/* 계정 선택 드롭다운 */}
+        <div className="mb-3 relative">
+          <button
+            onClick={() => setDropdownOpen((v) => !v)}
+            className="w-full flex items-center justify-between px-4 py-2.5 rounded-lg"
             style={{
               background: "rgba(100,255,218,0.04)",
-              border: "1px solid rgba(100,255,218,0.15)",
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: "0.88rem",
-              color: "#ccd6f6",
+              border: `1px solid ${selected ? selected.color + "55" : "rgba(100,255,218,0.15)"}`,
+              cursor: "pointer",
             }}
-          />
+          >
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.85rem", color: selected ? selected.color : "#4a5568" }}>
+              {selected ? `${selected.label} — ${selected.desc}` : "계정 선택"}
+            </span>
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.4)", display: "inline-block", transition: "transform 0.2s", transform: dropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}>▾</span>
+          </button>
+
+          {dropdownOpen && (
+            <div
+              className="absolute w-full mt-1 rounded-lg overflow-hidden z-10"
+              style={{ background: "rgba(15,23,42,0.99)", border: "1px solid rgba(100,255,218,0.15)" }}
+            >
+              {accounts.map((acc) => (
+                <button
+                  key={acc.id}
+                  onClick={() => { setSelectedRole(acc.id); setDropdownOpen(false); setError(""); }}
+                  className="w-full flex items-center gap-3 px-4 py-3 transition-all duration-150"
+                  style={{
+                    background: selectedRole === acc.id ? `${acc.color}12` : "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                    borderBottom: "1px solid rgba(100,255,218,0.06)",
+                    textAlign: "left",
+                  }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = `${acc.color}10`; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = selectedRole === acc.id ? `${acc.color}12` : "transparent"; }}
+                >
+                  <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: acc.color, flexShrink: 0 }} />
+                  <div>
+                    <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.8rem", fontWeight: 600, color: acc.color }}>{acc.label}</div>
+                    <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.7rem", color: "#4a5568" }}>{acc.desc}</div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* 비밀번호 */}
         <div className="mb-4">
           <input
             type="password"
+            autoComplete="new-password"
             value={password}
             onChange={(e) => { setPassword(e.target.value); setError(""); }}
             onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
@@ -102,15 +140,15 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
         <div className="flex gap-2">
           <button
             onClick={handleSubmit}
-            disabled={loading}
+            disabled={loading || !selectedRole}
             className="flex-1 py-2.5 rounded-lg transition-all duration-200"
             style={{
               background: "rgba(100,255,218,0.1)",
               border: "1px solid rgba(100,255,218,0.2)",
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "0.8rem",
-              color: loading ? "#4a5568" : "#64ffda",
-              cursor: loading ? "default" : "pointer",
+              color: loading || !selectedRole ? "#4a5568" : "#64ffda",
+              cursor: loading || !selectedRole ? "default" : "pointer",
             }}
           >
             {loading ? "확인 중..." : "로그인"}
