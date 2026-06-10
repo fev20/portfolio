@@ -48,7 +48,7 @@ export const loginUser = (
     role: user.role as UserRole,
   };
 
-  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "15m" });
   return { token, role: user.role as UserRole };
 };
 

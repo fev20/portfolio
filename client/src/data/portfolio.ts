@@ -102,6 +102,7 @@ export const projects = [
     tags: ["CORS", "Web Security", "Security Research"],
     links: { github: "", report: "" },
     color: "#64ffda",
+    files: [],
   },
   {
     id: "atm-skimming",
@@ -114,6 +115,7 @@ export const projects = [
     tags: ["ATM Skimming", "Hardware Security", "Security Research"],
     links: { github: "", report: "" },
     color: "#64ffda",
+    files: [],
   },
   {
     id: "crypto-contest",
@@ -126,6 +128,7 @@ export const projects = [
     tags: ["Cryptography", "Contest", "Security Research"],
     links: { github: "", report: "" },
     color: "#64ffda",
+    files: [],
   },
 
   // ── CTF & Security Activities ──────────────────────────────────
@@ -140,6 +143,7 @@ export const projects = [
     tags: ["CTF", "msg CTF", "Web Security"],
     links: { github: "", report: "" },
     color: "#38BDF8",
+    files: [],
   },
   {
     id: "sejong-hacktheon",
@@ -152,6 +156,7 @@ export const projects = [
     tags: ["CTF", "Hackathon", "Security"],
     links: { github: "", report: "" },
     color: "#38BDF8",
+    files: [],
   },
   {
     id: "chungcheong-contest",
@@ -164,6 +169,7 @@ export const projects = [
     tags: ["CTF", "사이버보안", "경진대회"],
     links: { github: "", report: "" },
     color: "#38BDF8",
+    files: [],
   },
   {
     id: "kuctf",
@@ -176,6 +182,7 @@ export const projects = [
     tags: ["CTF", "KUCTF", "Security"],
     links: { github: "", report: "" },
     color: "#38BDF8",
+    files: [],
   },
 
   // ── Security Education ─────────────────────────────────────────
@@ -190,6 +197,7 @@ export const projects = [
     tags: ["seKUrity", "Security Club", "Education"],
     links: { github: "", report: "" },
     color: "#A855F7",
+    files: [],
   },
   {
     id: "web-vuln-education",
@@ -202,6 +210,7 @@ export const projects = [
     tags: ["Web Security", "Education", "Teaching"],
     links: { github: "", report: "" },
     color: "#A855F7",
+    files: [],
   },
   {
     id: "crypto-study",
@@ -214,6 +223,7 @@ export const projects = [
     tags: ["Cryptography", "Study", "Presentation"],
     links: { github: "", report: "" },
     color: "#A855F7",
+    files: [],
   },
   {
     id: "sekurity-seminar",
@@ -226,6 +236,7 @@ export const projects = [
     tags: ["Seminar", "Presentation", "Security"],
     links: { github: "", report: "" },
     color: "#A855F7",
+    files: [],
   },
 
   // ── Interactive Web Projects ───────────────────────────────────
@@ -240,6 +251,7 @@ export const projects = [
     tags: ["Web Development", "React", "seKUrity"],
     links: { github: "https://github.com/kku-seKUrity/seku_homePage.git", report: "" },
     color: "#EC4899",
+    files: [],
   },
   {
     id: "portfolio-site",
@@ -252,6 +264,7 @@ export const projects = [
     tags: ["React", "TypeScript", "Portfolio"],
     links: { github: "https://github.com/fev20", report: "" },
     color: "#EC4899",
+    files: [],
   },
   {
     id: "escape-room",
@@ -264,6 +277,7 @@ export const projects = [
     tags: ["CTF", "React", "JavaScript", "Game"],
     links: { github: "https://github.com/minsuk330/room-escape.git", report: "" },
     color: "#EC4899",
+    files: [],
   },
   {
     id: "balloon-ride",
@@ -276,6 +290,7 @@ export const projects = [
     tags: ["React", "JavaScript", "Game", "Team Project"],
     links: { github: "https://github.com/soooonho/balloonride.git", report: "" },
     color: "#EC4899",
+    files: [],
   },
 
   // ── Embedded & Hardware Security ───────────────────────────────
@@ -290,6 +305,7 @@ export const projects = [
     tags: ["Fault Injection", "Voltage Glitching", "Hardware Security"],
     links: { github: "", report: "" },
     color: "#FB923C",
+    files: [],
   },
 
   // ── Leadership & Community ─────────────────────────────────────
@@ -304,6 +320,7 @@ export const projects = [
     tags: ["Leadership", "Club", "Management"],
     links: { github: "", report: "" },
     color: "#FACC15",
+    files: [],
   },
   {
     id: "pentest-collaboration",
@@ -316,6 +333,7 @@ export const projects = [
     tags: ["Collaboration", "Web Hacking", "Team Project"],
     links: { github: "", report: "" },
     color: "#FACC15",
+    files: [],
   },
   {
     id: "pentest-collaboration",
@@ -328,6 +346,7 @@ export const projects = [
     tags: ["Leadership", "Communication", "Community"],
     links: { github: "", report: "" },
     color: "#FACC15",
+    files: [],
   },
 ];
 

@@ -1,11 +1,9 @@
-// ProjectDetail.tsx — 프로젝트 상세 페이지
-// Design: Nebula Hacker — full detail view with page transition loading
-
 import { useState } from "react";
 import { useParams, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowLeft, Github, BookOpen, Tag } from "lucide-react";
 import { projects } from "@/data/portfolio";
+import ProtectedDownload from "@/components/ProtectedDownload";
 import PageTransition from "@/components/PageTransition";
 
 export default function ProjectDetail() {
@@ -251,6 +249,47 @@ export default function ProjectDetail() {
                       보고서 보기
                     </a>
                   )}
+                </div>
+              )}
+              {/* Files */}
+              {project.files && project.files.length > 0 && (
+                <div className="mt-4 space-y-2">
+                  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.4)", marginBottom: "0.5rem" }}>
+                    $ ls ./files
+                  </p>
+                  {project.files.map((file: any, i: number) => (
+                    file.protection ? (
+                      <ProtectedDownload
+                        key={i}
+                        url={file.url}
+                        filename={file.name}
+                        label={file.name}
+                        protection={file.protection}
+                      />
+                    ) : (
+                      <button
+                        key={i}
+                        onClick={() => window.open(file.url, "_blank")}
+                        className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 w-full text-left"
+                        style={{
+                          background: "rgba(100,255,218,0.03)",
+                          border: "1px solid rgba(100,255,218,0.1)",
+                          cursor: "pointer",
+                        }}
+                        onMouseEnter={(e) => {
+                          (e.currentTarget as HTMLButtonElement).style.background = "rgba(100,255,218,0.07)";
+                          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.25)";
+                        }}
+                        onMouseLeave={(e) => {
+                          (e.currentTarget as HTMLButtonElement).style.background = "rgba(100,255,218,0.03)";
+                          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.1)";
+                        }}
+                      >
+                        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", color: "rgba(100,255,218,0.5)" }}>📄</span>
+                        <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.85rem", color: "#a8b2d8", flex: 1 }}>{file.name}</span>
+                      </button>
+                    )
+                  ))}
                 </div>
               )}
             </motion.div>
