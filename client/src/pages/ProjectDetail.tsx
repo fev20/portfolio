@@ -136,92 +136,16 @@ export default function ProjectDetail() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="space-y-8"
             >
-              Description
-              {/* <section>
-                <h2
-                  className="mb-3"
-                  style={{
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: "0.72rem",
-                    color: project.color,
-                    letterSpacing: "0.15em",
-                  }}
-                >
-                  OVERVIEW
-                </h2>
-                <p
-                  style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    fontSize: "1rem",
-                    color: "#8892b0",
-                    lineHeight: 1.8,
-                  }}
-                >
-                  {project.description}
-                </p>
-              </section> */}
-
-              {/* Role & Learned */}
-              {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div
-                  className="p-5 rounded-xl"
-                  style={{
-                    background: "rgba(15,23,42,0.8)",
-                    border: `1px solid ${project.color}15`,
-                  }}
-                >
-                  <h3
-                    className="mb-2"
-                    style={{
-                      fontFamily: "'JetBrains Mono', monospace",
-                      fontSize: "0.65rem",
-                      color: project.color,
-                      letterSpacing: "0.15em",
-                    }}
-                  >
-                    MY ROLE
-                  </h3>
-                  <p
-                    style={{
-                      fontFamily: "'Space Grotesk', sans-serif",
-                      fontSize: "0.92rem",
-                      color: "#ccd6f6",
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    {project.role}
+              {project.description && (
+                <div>
+                  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.4)", marginBottom: "0.5rem" }}>
+                    OVERVIEW
+                  </p>
+                  <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "1rem", color: "#8892b0", lineHeight: 1.8 }}>
+                    {project.description}
                   </p>
                 </div>
-                <div
-                  className="p-5 rounded-xl"
-                  style={{
-                    background: "rgba(15,23,42,0.8)",
-                    border: "1px solid rgba(167,139,250,0.15)",
-                  }}
-                >
-                  <h3
-                    className="mb-2"
-                    style={{
-                      fontFamily: "'JetBrains Mono', monospace",
-                      fontSize: "0.65rem",
-                      color: "#a78bfa",
-                      letterSpacing: "0.15em",
-                    }}
-                  >
-                    WHAT I LEARNED
-                  </h3>
-                  <p
-                    style={{
-                      fontFamily: "'Space Grotesk', sans-serif",
-                      fontSize: "0.92rem",
-                      color: "#ccd6f6",
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    {project.learned}
-                  </p>
-                </div>
-              </div> */}
+              )}
 
               {/* Links */}
               {(project.links.github || project.links.report) && (
