@@ -182,12 +182,13 @@ export default function ProjectDetail() {
                   <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.4)", marginBottom: "0.5rem" }}>
                     PREVIEW
                   </p>
-                  <div className="rounded-xl overflow-hidden" style={{ border: `1px solid ${project.color}20` }}>
+                  <div className="rounded-xl overflow-hidden" style={{ border: `1px solid ${project.color}20`, aspectRatio: "1 / 1.4142" }}>
                     <iframe
                       src={`${project.files[0].url}#toolbar=0&navpanes=0&scrollbar=0&page=1&view=FitH`}
                       title={project.files[0].name}
-                      className="w-full"
-                      style={{ height: "500px", border: "none" }}
+                      className="w-full h-full"
+                      style={{ border: "none" }}
+                      scrolling="no"
                     />
                   </div>
                 </div>
