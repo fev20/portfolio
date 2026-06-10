@@ -130,13 +130,13 @@ export default function ProjectDetail() {
             />
 
             {/* Content */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="space-y-8"
             >
-              {/* Description */}
+              Description
               <section>
                 <h2
                   className="mb-3"
@@ -159,10 +159,10 @@ export default function ProjectDetail() {
                 >
                   {project.description}
                 </p>
-              </section>
+              </section> */}
 
               {/* Role & Learned */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div
                   className="p-5 rounded-xl"
                   style={{
@@ -221,7 +221,7 @@ export default function ProjectDetail() {
                     {project.learned}
                   </p>
                 </div>
-              </div>
+              </div> */}
 
               {/* Links */}
               {(project.links.github || project.links.report) && (

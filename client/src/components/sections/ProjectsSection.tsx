@@ -1,6 +1,3 @@
-// ProjectsSection.tsx — 프로젝트 섹션
-// Design: Nebula Hacker — category headers → clickable cards
-
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
@@ -17,7 +14,6 @@ const CATEGORY_META: Record<string, { icon: React.ElementType; subtitle: string;
   "Leadership & Community":   { icon: Cpu,      subtitle: "리더십/커뮤니티형",      color: "#FACC15" },
 };
 
-// 카테고리 순서 고정
 const CATEGORY_ORDER = [
   "Security Research",
   "CTF & Security Activities",
@@ -32,7 +28,6 @@ export default function ProjectsSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [, navigate] = useLocation();
 
-  // 카테고리별로 프로젝트 그룹핑
   const grouped = CATEGORY_ORDER.map((cat) => ({
     category: cat,
     items: projects.filter((p) => p.category === cat),

@@ -200,15 +200,15 @@ export const projects = [
     links: { github: "", report: "" },
     color: "#A855F7",
     files: [
-      {name: "seKUrity 1주차 과제(네트워크, HTTP, 웹, 개발자도구, 피들러(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity1.pdf", protection: "sekurity"},
-      {name: "seKUrity 2주차 과제(XSS)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity2.pdf", protection: "sekurity"},
-      {name: "seKUrity 3주차 과제(불충분한 인증과 인가)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity3.pdf", protection: "sekurity"},
-      {name: "seKUrity 4주차 과제(SQLi)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity4.pdf", protection: "sekurity"},
-      {name: "seKUrity 5주차 과제(파일 다운로드 취약점)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity5.pdf", protection: "sekurity"},
-      {name: "seKUrity 6주차 과제(파일 업로드 취약점)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity6.pdf", protection: "sekurity"},
-      {name: "seKUrity 7주차 과제(OSi)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity7.pdf", protection: "sekurity"},
-      {name: "seKUrity 8주차 과제(SSTi)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity8.pdf", protection: "sekurity"},
-      {name: "seKUrity 9주차 과제(실습)(세쿠리티 소속 멘토들만 확인 가능한 자료입니다.)", url: "/files/seKUrity9.pdf", protection: "sekurity"}
+      {name: "seKUrity 1주차 과제(네트워크, HTTP, 웹, 개발자도구, 피들러", url: "/files/seKUrity1.pdf", protection: "sekurity"},
+      {name: "seKUrity 2주차 과제(XSS)", url: "/files/seKUrity2.pdf", protection: "sekurity"},
+      {name: "seKUrity 3주차 과제(불충분한 인증과 인가)", url: "/files/seKUrity3.pdf", protection: "sekurity"},
+      {name: "seKUrity 4주차 과제(SQLi)", url: "/files/seKUrity4.pdf", protection: "sekurity"},
+      {name: "seKUrity 5주차 과제(파일 다운로드 취약점)", url: "/files/seKUrity5.pdf", protection: "sekurity"},
+      {name: "seKUrity 6주차 과제(파일 업로드 취약점)", url: "/files/seKUrity6.pdf", protection: "sekurity"},
+      {name: "seKUrity 7주차 과제(OSi)", url: "/files/seKUrity7.pdf", protection: "sekurity"},
+      {name: "seKUrity 8주차 과제(SSTi)", url: "/files/seKUrity8.pdf", protection: "sekurity"},
+      {name: "seKUrity 9주차 과제(실습)", url: "/files/seKUrity9.pdf", protection: "sekurity"}
     ],
   },
   {
