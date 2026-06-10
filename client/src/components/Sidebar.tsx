@@ -167,7 +167,7 @@ export default function Sidebar() {
         scrollId: `project-cat-${cat.replace(/\s+/g, "-")}`,
         children: projects
           .filter((p) => p.category === cat)
-          .map((p): SubItem => ({ label: p.title, path: `/project/${p.id}`, scrollId: `project-${p.id}` })),
+          .map((p): SubItem => ({ label: p.title, path: `/project/${p.id}` })),
       })),
     };
     if (item.id === "experience") return {
