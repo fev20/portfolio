@@ -1,6 +1,3 @@
-// EducationSection.tsx — 학력 & 자격증 섹션
-// Design: Nebula Hacker — clickable cards → detail page
-
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";

@@ -1,8 +1,3 @@
-// =============================================================
-// 포트폴리오 데이터 파일
-// 이 파일에서 모든 내용을 수정하세요.
-// =============================================================
-
 // ─── 기본 정보 ───────────────────────────────────────────────
 export const profile = {
   name: "유수민",
@@ -395,6 +390,7 @@ export const education = [
     description: "",
     icon: "shield",
     pdfFile: "/basic1_5.pdf",
+    image: "/basic1_5-1.png",
   },
   {
     type: "education",
@@ -404,6 +400,7 @@ export const education = [
     description: "",
     icon: "shield",
     pdfFile: "/basic1_6.pdf",
+    image: "/basic1_6-1.png",
   },
   {
     type: "education",
@@ -413,6 +410,7 @@ export const education = [
     description: "",
     icon: "shield",
     pdfFile: "/basic2_6.pdf",
+    image: "/basic2_6-1.png",
   },
   {
     type: "education",
@@ -422,6 +420,7 @@ export const education = [
     description: "",
     icon: "shield",
     pdfFile: "/basic2_7.pdf",
+    image: "/basic2_7-1.png",
   },
   {
     type: "education",
@@ -431,6 +430,7 @@ export const education = [
     description: "",
     icon: "shield",
     pdfFile: "/standard1_7.pdf",
+    image: "/standard1_7-1.png",
   },
   {
     type: "education",
@@ -440,6 +440,7 @@ export const education = [
     description: "",
     icon: "shield",
     pdfFile: "/standard2_7.pdf",
+    image: "/standard2_7-1.png",
   },
   {
     type: "education",
@@ -449,6 +450,7 @@ export const education = [
     description: "",
     icon: "shield",
     pdfFile: "/mitre.pdf",
+    image: "/mitre-1.png",
   },
   {
     type: "education",
@@ -458,6 +460,7 @@ export const education = [
     description: "",
     icon: "shield",
     pdfFile: "/k-shield.pdf",
+    image: "/k-shield-1.png",
   },
   {
     type: "education",
@@ -467,6 +470,7 @@ export const education = [
     description: "",
     icon: "cpu",
     pdfFile: "/semiconductor.pdf",
+    image: "/semiconductor-1.png",
   },
 ];
 
