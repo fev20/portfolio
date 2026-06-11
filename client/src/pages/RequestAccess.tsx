@@ -3,8 +3,7 @@ import { useLocation } from "wouter";
 import { profile } from "@/data/portfolio";
 
 const EXAMPLE_TEXT = `이름: 홍길동
-소속: WHS / seKUrity 등
-요청 사유: seKUrity 자료 열람 권한을 요청드립니다.
+소속: WHS / seKUrity 등 (공란은 가능은하나 확인하는데 시간이 오래걸릴 수 있습니다.)
 연락받을 이메일: example@email.com`;
 
 export default function RequestAccess() {
@@ -62,7 +61,7 @@ export default function RequestAccess() {
               color: "#4a5568",
             }}
           >
-            계정이 없으신가요? 아래 형식으로 작성 후 전송해주시면 이메일로 안내드립니다.
+            비밀번호를 모르시나요? 아래 형식으로 작성 후 전송해주시면 이메일로 안내드립니다.
           </p>
         </div>
 
