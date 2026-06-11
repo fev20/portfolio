@@ -1,27 +1,15 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || "portfolio_secret_key_2026";
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  throw new Error("JWT_SECRET 환경변수가 설정되지 않았습니다");
+}
 
 const USERS = [
-  {
-    id: "admin",
-    username: "admin",
-    passwordHash: bcrypt.hashSync("sumin@3997", 10),
-    role: "admin",
-  },
-  {
-    id: "sekurity",
-    username: "sekurity",
-    passwordHash: bcrypt.hashSync("sekurity2026", 10),
-    role: "sekurity",
-  },
-  {
-    id: "whs",
-    username: "whs",
-    passwordHash: bcrypt.hashSync("whs2026", 10),
-    role: "whs",
-  },
+  { id: "admin", username: "admin", passwordHash: process.env.ADMIN_PASSWORD_HASH!, role: "admin" },
+  { id: "sekurity", username: "sekurity", passwordHash: process.env.SEKURITY_PASSWORD_HASH!, role: "sekurity" },
+  { id: "whs", username: "whs", passwordHash: process.env.WHS_PASSWORD_HASH!, role: "whs" },
 ];
 
 export type UserRole = "admin" | "sekurity" | "whs";

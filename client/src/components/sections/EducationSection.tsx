@@ -74,6 +74,7 @@ export default function EducationSection() {
                 return (
                   <motion.div
                     key={i}
+                    id={`education-edu-${i}`}
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
@@ -162,6 +163,7 @@ export default function EducationSection() {
                 return (
                   <motion.div
                     key={i}
+                    id={`education-cert-${i}`}
                     initial={{ opacity: 0, x: 20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.2 + i * 0.08 }}
