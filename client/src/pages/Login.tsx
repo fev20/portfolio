@@ -252,6 +252,22 @@ export default function Login() {
             취소
           </button>
         </div>
+
+        {/* 비밀번호 요청 */}
+        <button
+          onClick={() => setLocation("/request-access")}
+          className="w-full mt-3 py-2.5 rounded-lg transition-all duration-200"
+          style={{
+            background: "transparent",
+            border: "1px solid rgba(100,255,218,0.08)",
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: "0.78rem",
+            color: "#4a5568",
+            cursor: "pointer",
+          }}
+        >
+          비밀번호 요청하기
+        </button>
       </div>
     </div>
   );

@@ -12,12 +12,14 @@ import EducationDetail from "./pages/EducationDetail";
 import Sidebar from "./components/Sidebar";
 import ActivityDetail from "@/pages/ActivityDetail";
 import Login from "@/pages/Login";
+import RequestAccess from "@/pages/RequestAccess";
 
 function AppRoutes() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/login" component={Login} />
+      <Route path="/request-access" component={RequestAccess} />
       <Route path="/project/:id" component={ProjectDetail} />
       <Route path="/experience/:index" component={ExperienceDetail} />
       <Route path="/activity/:category/:item" component={ActivityDetail} />
