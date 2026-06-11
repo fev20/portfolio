@@ -177,35 +177,43 @@ export default function EducationDetail() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="mb-6"
+            className="mb-6 flex flex-wrap gap-2"
           >
-          <a
-            href={item.pdfFile}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-all hover:opacity-80"
-            style={{
-              fontFamily: "'JetBrains Mono', monospace",
-              background: `${color}10`,
-              border: `1px solid ${color}40`,
-              color,
-            }}
-          >
-      <ExternalLink size={14} />
-      수료증 / 자격증 PDF 보기
-    </a>
-  </motion.div>
-)}
+            {(Array.isArray(item.pdfFile) ? item.pdfFile : [item.pdfFile]).map((pdf, i) => (
+              <a
+                key={i}
+                href={pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-all hover:opacity-80"
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  background: `${color}10`,
+                  border: `1px solid ${color}40`,
+                  color,
+                }}
+              >
+                <ExternalLink size={14} />
+                수료증 / 자격증 PDF 보기{Array.isArray(item.pdfFile) && item.pdfFile.length > 1 ? ` ${i + 1}` : ""}
+              </a>
+            ))}
+          </motion.div>
+        )}
 
         {"image" in item && (item as any).image && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="rounded-xl overflow-hidden mb-6"
-            style={{ border: `1px solid ${color}12` }}
+            className="mb-6 space-y-4"
           >
-            <img src={(item as any).image} alt={item.title} className="w-full h-auto" />
+            {(Array.isArray((item as any).image) ? (item as any).image : [(item as any).image]).map(
+              (img: string, i: number) => (
+                <div key={i} className="rounded-xl overflow-hidden" style={{ border: `1px solid ${color}12` }}>
+                  <img src={img} alt={item.title} className="w-full h-auto" />
+                </div>
+              )
+            )}
           </motion.div>
         )}
       </div>
