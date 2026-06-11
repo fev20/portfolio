@@ -50,7 +50,7 @@ export default function EducationDetail() {
 
   // 자격증/수료증 설명 텍스트
   const description = isEdu
-    ? (item as typeof education[0]).description
+    ? `${(item as typeof education[0]).description}을 공부했습니다.`
     : `${(item as typeof certifications[0]).issuer} 자격증으로, 관련 분야의 전문 역량을 인증받았습니다.`;
 
   return (
