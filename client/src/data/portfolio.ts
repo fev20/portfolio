@@ -223,6 +223,17 @@ export const projects = [
     color: "#A855F7",
     files: [],
   },
+  {
+    id: "WHS",
+    number: "05",
+    category: "WHS",
+    title: "화이트햇 스쿨 4기",
+    description: "",
+    tags: ["WHS", "Cyber Security", "Education"],
+    links: { github: "", report: "" },
+    color: "#A855F7",
+    files: [],
+  },
 
   // ── Interactive Web Projects ───────────────────────────────────
   {
