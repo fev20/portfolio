@@ -48,6 +48,11 @@ export default function EducationDetail() {
         `> certification verified.`,
       ];
 
+  // 자격증/수료증 설명 텍스트
+  const description = isEdu
+    ? (item as typeof education[0]).description
+    : `${(item as typeof certifications[0]).issuer} 자격증으로, 관련 분야의 전문 역량을 인증받았습니다.`;
+
   return (
     <>
       {loading && (
@@ -143,6 +148,30 @@ export default function EducationDetail() {
 
         <div className="h-px my-8" style={{ background: `linear-gradient(90deg, ${color}30, transparent)` }} />
 
+        {description && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="p-6 rounded-xl mb-6"
+            style={{
+              background: "rgba(15,23,42,0.8)",
+              border: `1px solid ${color}12`,
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "'Space Grotesk', sans-serif",
+                fontSize: "0.95rem",
+                color: "#8892b0",
+                lineHeight: 1.8,
+              }}
+            >
+              {description}
+            </p>
+          </motion.div>
+        )}
+
         {"pdfFile" in item && item.pdfFile && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -177,30 +206,6 @@ export default function EducationDetail() {
             style={{ border: `1px solid ${color}12` }}
           >
             <img src={(item as any).image} alt={item.title} className="w-full h-auto" />
-          </motion.div>
-        )}
-
-        {!isEdu && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.25 }}
-            className="p-6 rounded-xl"
-            style={{
-              background: "rgba(15,23,42,0.8)",
-              border: `1px solid ${color}12`,
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "'Space Grotesk', sans-serif",
-                fontSize: "0.95rem",
-                color: "#8892b0",
-                lineHeight: 1.8,
-              }}
-            >
-              {`${(item as typeof certifications[0]).issuer} 자격증으로, 관련 분야의 전문 역량을 인증받았습니다.`}
-            </p>
           </motion.div>
         )}
       </div>
