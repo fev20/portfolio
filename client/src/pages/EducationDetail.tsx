@@ -12,6 +12,25 @@ const ICONS: Record<string, React.ElementType> = {
   "external-link": ExternalLink,
 };
 
+// "**텍스트**" 부분을 굵게, "\n"을 줄바꿈으로 처리
+function renderDescription(text: string) {
+  const lines = text.split("\n");
+  return lines.map((line, i) => (
+    <span key={i}>
+      {line.split(/(\*\*.*?\*\*)/g).map((part, j) =>
+        part.startsWith("**") && part.endsWith("**") ? (
+          <strong key={j} style={{ color: "#ccd6f6", fontWeight: 700 }}>
+            {part.slice(2, -2)}
+          </strong>
+        ) : (
+          part
+        )
+      )}
+      {i < lines.length - 1 && <br />}
+    </span>
+  ));
+}
+
 export default function EducationDetail() {
   const { type, index } = useParams<{ type: string; index: string }>();
   const [, navigate] = useLocation();
@@ -50,7 +69,7 @@ export default function EducationDetail() {
 
   // 자격증/수료증 설명 텍스트
   const description = isEdu
-    ? `${(item as typeof education[0]).description}을 공부했습니다.`
+    ? (item as typeof education[0]).description
     : `${(item as typeof certifications[0]).issuer} 자격증으로, 관련 분야의 전문 역량을 인증받았습니다.`;
 
   return (
@@ -167,7 +186,7 @@ export default function EducationDetail() {
                 lineHeight: 1.8,
               }}
             >
-              {description}
+              {renderDescription(description)}
             </p>
           </motion.div>
         )}
