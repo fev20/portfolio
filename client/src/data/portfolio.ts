@@ -449,8 +449,8 @@ export const education = [
     subtitle: "디지털 세상의 기본 회로 배우기",
     description: "반도체 설계 단계, Logic Block, Storage, Timing, 설계 구현, 연산 회로",
     icon: "cpu",
-    pdfFile: "/semiconductor.pdf",
-    image: "/semiconductor-1.png",
+    pdfFile: "/semiconductor_design.pdf",
+    image: "/semiconductor_design-1.png",
   },
 ];
 
