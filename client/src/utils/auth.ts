@@ -1,20 +1,17 @@
-const API_URL = "https://portfolio-8ihh.onrender.com";
+const API_URL =
+  import.meta.env.VITE_API_URL || "https://portfolio-8ihh.onrender.com";
 
 export type UserRole = "admin" | "sekurity" | "whs";
 export type FileProtection = "sekurity" | "whs" | "admin" | false;
 
-const TOKEN_KEY = "portfolio_token";
+const ROLES: UserRole[] = ["admin", "sekurity", "whs"];
 
-export const saveToken = (token: string) => {
-  localStorage.setItem(TOKEN_KEY, token);
+export const buildApiUrl = (path: string) => {
+  return `${API_URL}${path.startsWith("/") ? path : `/${path}`}`;
 };
 
-export const getToken = (): string | null => {
-  return localStorage.getItem(TOKEN_KEY);
-};
-
-export const removeToken = () => {
-  localStorage.removeItem(TOKEN_KEY);
+const isUserRole = (role: unknown): role is UserRole => {
+  return typeof role === "string" && ROLES.includes(role as UserRole);
 };
 
 export const login = async (
@@ -22,14 +19,15 @@ export const login = async (
   password: string
 ): Promise<{ role: UserRole } | null> => {
   try {
-    const res = await fetch(`${API_URL}/api/login`, {
+    const res = await fetch(buildApiUrl("/api/login"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify({ username, password }),
     });
     if (!res.ok) return null;
     const data = await res.json();
-    saveToken(data.token);
+    if (!isUserRole(data.role)) return null;
     return { role: data.role };
   } catch {
     return null;
@@ -41,20 +39,31 @@ export const verifyAuth = async (): Promise<{
   role?: UserRole;
   username?: string;
 } | null> => {
-  const token = getToken();
-  if (!token) return { valid: false };
   try {
-    const res = await fetch(`${API_URL}/api/verify`, {
-      headers: { Authorization: `Bearer ${token}` },
+    const res = await fetch(buildApiUrl("/api/verify"), {
+      credentials: "include",
     });
-    return await res.json();
+    if (!res.ok) return { valid: false };
+    const data = await res.json();
+    return {
+      valid: data.valid === true,
+      role: isUserRole(data.role) ? data.role : undefined,
+      username: typeof data.username === "string" ? data.username : undefined,
+    };
   } catch {
     return { valid: false };
   }
 };
 
-export const logout = () => {
-  removeToken();
+export const logout = async () => {
+  try {
+    await fetch(buildApiUrl("/api/logout"), {
+      credentials: "include",
+      method: "POST",
+    });
+  } catch {
+    /* ignore logout network errors */
+  }
   setCachedRole(null);
 };
 

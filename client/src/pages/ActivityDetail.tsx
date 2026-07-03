@@ -75,17 +75,22 @@ export default function ActivityDetail() {
           }}
         >
           {/* 텍스트 */}
-          {item.content?.text ? (
-            <p
-              style={{
-                fontFamily: "'Space Grotesk', sans-serif",
-                fontSize: "0.95rem",
-                color: "#8892b0",
-                lineHeight: 1.8,
-              }}
-            >
-              {item.content.text}
-            </p>
+          {item.content?.texts && item.content.texts.length > 0 ? (
+            <div className="space-y-3">
+              {item.content.texts.map((text, index) => (
+                <p
+                  key={index}
+                  style={{
+                    fontFamily: "'Space Grotesk', sans-serif",
+                    fontSize: "0.95rem",
+                    color: "#8892b0",
+                    lineHeight: 1.8,
+                  }}
+                >
+                  {text}
+                </p>
+              ))}
+            </div>
           ) : (
             <p
               style={{
@@ -119,7 +124,7 @@ export default function ActivityDetail() {
               {item.content.files.map((file, i) => (
                 <button
                     key={i}
-                    onClick={() => window.open(file.url, "_blank")}
+                    onClick={() => window.open(file.url, "_blank", "noopener,noreferrer")}
                     className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 w-full text-left"
                     style={{
                     background: "rgba(100,255,218,0.03)",

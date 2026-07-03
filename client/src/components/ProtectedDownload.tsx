@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { verifyAuth, canAccess, getCachedRole, setCachedRole, UserRole, FileProtection } from "@/utils/auth";
+import { buildApiUrl, verifyAuth, canAccess, setCachedRole, UserRole, FileProtection } from "@/utils/auth";
 import LoginModal from "@/components/LoginModal";
 
 interface ProtectedDownloadProps {
@@ -20,43 +20,96 @@ export default function ProtectedDownload({
   const [accessDenied, setAccessDenied] = useState(false);
 
   useEffect(() => {
-    const cached = getCachedRole();
-    if (cached) {
-      setUserRole(cached);
-      return;
-    }
     verifyAuth().then((res) => {
       if (res?.valid && res.role) {
         setCachedRole(res.role as UserRole);
         setUserRole(res.role as UserRole);
+      } else {
+        setCachedRole(null);
+        setUserRole(null);
       }
     });
   }, []);
 
-  const download = () => {
+  const showAccessDenied = () => {
+    setAccessDenied(true);
+    setTimeout(() => setAccessDenied(false), 3000);
+  };
+
+  const triggerDownload = (href: string, downloadName: string) => {
     const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
+    a.href = href;
+    a.download = downloadName;
+    a.rel = "noopener noreferrer";
     a.click();
   };
 
-  const handleClick = () => {
-    if (canAccess(userRole, protection)) {
-      download();
-    } else if (userRole) {
-      setAccessDenied(true);
-      setTimeout(() => setAccessDenied(false), 3000);
+  const getFileNameFromUrl = () => {
+    try {
+      const parsed = new URL(url, window.location.origin);
+      return parsed.pathname.split("/").filter(Boolean).pop() ?? filename;
+    } catch {
+      return filename;
+    }
+  };
+
+  const downloadPublicFile = () => {
+    triggerDownload(url, filename);
+  };
+
+  const downloadProtectedFile = async () => {
+    const protectedFileName = getFileNameFromUrl();
+    const response = await fetch(
+      buildApiUrl(`/api/files/${encodeURIComponent(protectedFileName)}`),
+      { credentials: "include" }
+    );
+
+    if (response.status === 401) {
+      setShowModal(true);
+      return;
+    }
+    if (!response.ok) {
+      showAccessDenied();
+      return;
+    }
+
+    const blob = await response.blob();
+    const objectUrl = URL.createObjectURL(blob);
+    triggerDownload(objectUrl, filename);
+    window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+  };
+
+  const handleClick = async () => {
+    if (!protection) {
+      downloadPublicFile();
+      return;
+    }
+
+    const res = await verifyAuth();
+    if (res?.valid && res.role) {
+      setCachedRole(res.role as UserRole);
+      setUserRole(res.role as UserRole);
+
+      if (canAccess(res.role as UserRole, protection)) {
+        await downloadProtectedFile();
+      } else {
+        showAccessDenied();
+      }
     } else {
+      setCachedRole(null);
+      setUserRole(null);
       setShowModal(true);
     }
   };
 
-  const handleLoginSuccess = (role: UserRole) => {
+  const handleLoginSuccess = async (role: UserRole) => {
     setCachedRole(role);
     setUserRole(role);
     setShowModal(false);
     if (canAccess(role, protection)) {
-      download();
+      await downloadProtectedFile();
+    } else {
+      showAccessDenied();
     }
   };
 

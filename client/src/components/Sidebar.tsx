@@ -48,8 +48,8 @@ function LoginBlock() {
     return () => window.removeEventListener("focus", check);
   }, []);
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     window.location.href = "/";
   };
 
