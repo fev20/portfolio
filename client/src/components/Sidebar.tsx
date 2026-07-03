@@ -358,10 +358,10 @@ export default function Sidebar() {
                         style={{ background: "#64ffda" }}
                       />
                     )}
-                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.58rem", color: isActive ? "#64ffda" : "#475569", minWidth: "18px" }}>
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.68rem", color: isActive ? "#64ffda" : "#475569", minWidth: "18px" }}>
                       {item.num}
                     </span>
-                    <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.82rem", color: isActive ? "#e2e8f0" : "#94a3b8", fontWeight: isActive ? 600 : 400, flex: 1, textAlign: "left" }}>
+                    <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.95rem", color: isActive ? "#e2e8f0" : "#94a3b8", fontWeight: isActive ? 600 : 400, flex: 1, textAlign: "left" }}>
                       {item.label}
                     </span>
                     {item.subItems.length > 0 && (
@@ -412,7 +412,7 @@ export default function Sidebar() {
                               onClick={() => handleSubClick(sub.scrollId, sub.path)}
                               style={{
                                 fontFamily: "'JetBrains Mono', monospace",
-                                fontSize: "0.6rem",
+                                fontSize: "0.85rem",
                                 color: isActive ? "#64ffda" : "#64748b",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
