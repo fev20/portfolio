@@ -295,7 +295,7 @@ export default function Sidebar() {
         >
           <div
             className="mb-2"
-            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", color: "#64ffda44", letterSpacing: "0.1em" }}
+            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#64ffda44", letterSpacing: "0.1em" }}
           >
             profile.exe
           </div>
@@ -333,7 +333,7 @@ export default function Sidebar() {
         <div className="flex-1 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
           <div
             className="px-4 pt-3 pb-1"
-            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", color: "#64ffda44", letterSpacing: "0.1em" }}
+            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#64ffda44", letterSpacing: "0.1em" }}
           >
             components.exe
           </div>
@@ -500,7 +500,7 @@ export default function Sidebar() {
             style={{
               padding: "10px 16px 8px",
               fontFamily: "'JetBrains Mono', monospace",
-              fontSize: "0.62rem",
+              fontSize: "0.65rem",
               color: "#64ffda55",
               letterSpacing: "0.12em",
             }}
