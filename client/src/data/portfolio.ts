@@ -246,7 +246,30 @@ export const projects = [
     tags: ["WHS", "Cyber Security", "Education"],
     links: { github: "", report: "" },
     color: "#A855F7",
-    files: [],
+    files: [
+      {
+        type: "folder",
+        name: "공통/개발",
+        files: [
+        ],
+      },
+      {
+        type: "folder",
+        name: "취약점",
+        files: [
+        ],
+      },
+      {
+        type: "folder",
+        name: "포렌식",
+        files: [],
+      },
+      {
+        type: "folder",
+        name: "보안운영관리/인프라/컨설팅",
+        files: [],
+      },
+    ],
   },
 
   // ── Interactive Web Projects ───────────────────────────────────
