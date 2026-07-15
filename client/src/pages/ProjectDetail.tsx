@@ -11,6 +11,7 @@ export default function ProjectDetail() {
   const [, navigate] = useLocation();
   const project = projects.find((p) => p.id === id);
   const [loading, setLoading] = useState(true);
+  const [selectedFolder, setSelectedFolder] = useState<any | null>(null);
 
   if (!project) {
     return (
@@ -26,6 +27,9 @@ export default function ProjectDetail() {
       </div>
     );
   }
+
+  const visibleFiles = selectedFolder ? selectedFolder.files : project.files;
+  const previewFile = project.files?.find((file: any) => file.type !== "folder" && !file.protection && file.url);
 
   return (
     <>
@@ -176,16 +180,49 @@ export default function ProjectDetail() {
                 </div>
               )}
 
+              {project.photos && project.photos.length > 0 && (
+                <div>
+                  <p
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "0.7rem",
+                      color: "rgba(100,255,218,0.4)",
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    PHOTO
+                  </p>
+                  <div
+                    className="rounded-xl overflow-hidden"
+                    style={{
+                      border: `1px solid ${project.color}20`,
+                      marginBottom: "2rem",
+                    }}
+                  >
+                    <img
+                      src={project.photos[0]}
+                      alt={`${project.title} seminar photo`}
+                      className="w-full"
+                      style={{
+                        display: "block",
+                        objectFit: "cover",
+                        maxHeight: "520px",
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
+
               {/* Preview */}
-              {project.files && project.files.length > 0 && !project.files[0].protection && (
+              {previewFile && (
                 <div>
                   <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.4)", marginBottom: "0.5rem" }}>
                     PREVIEW
                   </p>
                   <div className="rounded-xl overflow-hidden" style={{ border: `1px solid ${project.color}20`, aspectRatio: "1 / 1.4142" }}>
                     <iframe
-                      src={`${project.files[0].url}#toolbar=0&navpanes=0&scrollbar=0&page=1&view=FitH`}
-                      title={project.files[0].name}
+                      src={`${previewFile.url}#toolbar=0&navpanes=0&scrollbar=0&page=1&view=FitH`}
+                      title={previewFile.name}
                       className="w-full h-full"
                       style={{ border: "none" }}
                       scrolling="no"
@@ -195,13 +232,39 @@ export default function ProjectDetail() {
               )}
 
               {/* Files */}
-              {project.files && project.files.length > 0 && (
+              {visibleFiles && visibleFiles.length > 0 && (
                 <div className="mt-4 space-y-2">
                   <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.4)", marginBottom: "0.5rem" }}>
-                    $ ls ./files
+                    {selectedFolder ? `$ ls ./files/${selectedFolder.name}` : "$ ls ./files"}
                   </p>
-                  {project.files.map((file: any, i: number) => (
-                    file.protection ? (
+
+                  {selectedFolder && (
+                    <button
+                      onClick={() => setSelectedFolder(null)}
+                      className="btn-neon mb-4"
+                    >
+                      ← back
+                    </button>
+                  )}
+
+                  {visibleFiles.map((file: any, i: number) =>
+                    file.type === "folder" ? (
+                      <button
+                        key={i}
+                        onClick={() => setSelectedFolder(file)}
+                        className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 w-full text-left"
+                        style={{
+                          background: "rgba(100,255,218,0.03)",
+                          border: "1px solid rgba(100,255,218,0.1)",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <span style={{ fontSize: "0.9rem" }}>📁</span>
+                        <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.85rem", color: "#a8b2d8", flex: 1 }}>
+                          {file.name}
+                        </span>
+                      </button>
+                    ) : file.protection ? (
                       <ProtectedDownload
                         key={i}
                         url={file.url}
@@ -219,20 +282,14 @@ export default function ProjectDetail() {
                           border: "1px solid rgba(100,255,218,0.1)",
                           cursor: "pointer",
                         }}
-                        onMouseEnter={(e) => {
-                          (e.currentTarget as HTMLButtonElement).style.background = "rgba(100,255,218,0.07)";
-                          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.25)";
-                        }}
-                        onMouseLeave={(e) => {
-                          (e.currentTarget as HTMLButtonElement).style.background = "rgba(100,255,218,0.03)";
-                          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.1)";
-                        }}
                       >
-                        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", color: "rgba(100,255,218,0.5)" }}>📄</span>
-                        <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.85rem", color: "#a8b2d8", flex: 1 }}>{file.name}</span>
+                        <span style={{ fontSize: "0.9rem" }}>📄</span>
+                        <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.85rem", color: "#a8b2d8", flex: 1 }}>
+                          {file.name}
+                        </span>
                       </button>
                     )
-                  ))}
+                  )}
                 </div>
               )}
             </motion.div>
