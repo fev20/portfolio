@@ -180,18 +180,13 @@ export default function ProjectDetail() {
                 </div>
               )}
 
-              {project.photos && project.photos.length > 0 && (
+              {/* Photos */}
+              {(project as any).photos && (project as any).photos.length > 0 && (
                 <div>
-                  <p
-                    style={{
-                      fontFamily: "'JetBrains Mono', monospace",
-                      fontSize: "0.7rem",
-                      color: "rgba(100,255,218,0.4)",
-                      marginBottom: "0.5rem",
-                    }}
-                  >
+                  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.4)", marginBottom: "0.5rem" }}>
                     PHOTO
                   </p>
+
                   <div
                     className="rounded-xl overflow-hidden"
                     style={{
@@ -200,13 +195,14 @@ export default function ProjectDetail() {
                     }}
                   >
                     <img
-                      src={project.photos[0]}
-                      alt={`${project.title} seminar photo`}
+                      src={(project as any).photos[0]}
+                      alt={`${project.title} photo`}
                       className="w-full"
                       style={{
                         display: "block",
-                        objectFit: "cover",
+                        width: "100%",
                         maxHeight: "520px",
+                        objectFit: "cover",
                       }}
                     />
                   </div>
