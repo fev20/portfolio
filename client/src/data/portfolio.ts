@@ -138,12 +138,12 @@ export const projects = [
     id: "sejong-hacktheon",
     number: "02",
     category: "CTF & Security Activities",
-    title: "세종 핵테온",
+    title: "세종 핵테온 2025",
     description: "",
     tags: ["CTF", "Hackathon", "Security"],
     links: { github: "", report: "" },
     color: "#38BDF8",
-    files: [],
+    files: [{name: "세종 핵테온(2025) Write-up", url: "/files/Write_up/Sejong_Hackathon1.pdf", protection: false}],
   },
   {
     id: "chungcheong-contest",
@@ -154,7 +154,7 @@ export const projects = [
     tags: ["CTF", "사이버보안", "경진대회"],
     links: { github: "", report: "" },
     color: "#38BDF8",
-    files: [],
+    files: [{name: "충청권 사이버보안 경진대회 Write-up", url: "/files/Write_up/Chungcheong_Contest.pdf", protection: false}],
   },
   {
     id: "kuctf",
@@ -165,7 +165,18 @@ export const projects = [
     tags: ["CTF", "KUCTF", "Security"],
     links: { github: "", report: "" },
     color: "#38BDF8",
-    files: [],
+    files: [{name: "KUCTF Write-up", url: "/files/Write_up/KUCTF.pdf", protection: false}],
+  },
+  {
+    id: "sejong-hacktheon",
+    number: "05",
+    category: "CTF & Security Activities",
+    title: "세종 핵테온 2026",
+    description: "",
+    tags: ["CTF", "Hackathon", "Security"],
+    links: { github: "", report: "" },
+    color: "#38BDF8",
+    files: [{name: "세종 핵테온(2026) Write-up", url: "/files/Write_up/Sejong_Hackathon2.pdf", protection: false}],
   },
 
   // ── Security Education ─────────────────────────────────────────
