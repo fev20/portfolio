@@ -210,7 +210,7 @@ export const projects = [
     tags: ["Web Security", "Education", "Teaching"],
     links: { github: "", report: "" },
     color: "#A855F7",
-    files: [],
+    files: [{name: "seKUrity 신입부원 XSS 교육 자료", url: "/files/XSS.pdf", protection: false}],
   },
   {
     id: "crypto-study",
@@ -221,7 +221,10 @@ export const projects = [
     tags: ["Cryptography", "Study", "Presentation"],
     links: { github: "", report: "" },
     color: "#A855F7",
-    files: [],
+    files: [
+      {name: "seKUrity 암호학 스터디(선형대수) 발표 자료", url: "/files/crypto.pdf", protection: false},
+      {name: "seKUrity 암호학 스터디(선형대수) 추가 자료", url: "/files/crypto_add.pdf", protection: false}
+    ],
   },
   {
     id: "sekurity-seminar",
@@ -232,7 +235,7 @@ export const projects = [
     tags: ["Seminar", "Presentation", "Security"],
     links: { github: "", report: "" },
     color: "#A855F7",
-    files: [],
+    files: [{name: "seKUrity 제6회 보안 세미나 발표 자료", url: "/files/seminar.pdf", protection: false}],
   },
   {
     id: "WHS",
