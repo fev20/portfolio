@@ -1,7 +1,7 @@
 ﻿import { useState } from "react";
 import { useParams, useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowLeft, Github, BookOpen, Tag } from "lucide-react";
+import { ArrowLeft, Github, BookOpen, Tag, Folder, FileText } from "lucide-react";
 import { projects } from "@/data/portfolio";
 import ProtectedDownload from "@/components/ProtectedDownload";
 import PageTransition from "@/components/PageTransition";
@@ -239,7 +239,7 @@ export default function ProjectDetail() {
                       onClick={() => setSelectedFolder(null)}
                       className="btn-neon mb-4"
                     >
-                      ??back
+                      <ArrowLeft size={12} /> back
                     </button>
                   )}
 
@@ -256,7 +256,7 @@ export default function ProjectDetail() {
                             cursor: "pointer",
                           }}
                         >
-                          <span style={{ fontSize: "0.9rem" }}>?뱚</span>
+                          <Folder size={16} style={{ color: "rgba(100,255,218,0.55)", flexShrink: 0 }} />
                           <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.85rem", color: "#a8b2d8", flex: 1 }}>
                             {file.name}
                           </span>
@@ -280,7 +280,7 @@ export default function ProjectDetail() {
                             cursor: "pointer",
                           }}
                         >
-                          <span style={{ fontSize: "0.9rem" }}>?뱞</span>
+                          <FileText size={16} style={{ color: "rgba(100,255,218,0.55)", flexShrink: 0 }} />
                           <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.85rem", color: "#a8b2d8", flex: 1 }}>
                             {file.name}
                           </span>
@@ -301,4 +301,5 @@ export default function ProjectDetail() {
     </>
   );
 }
+
 
