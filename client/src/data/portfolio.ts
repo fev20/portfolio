@@ -121,6 +121,28 @@ export const projects = [
     color: "#64ffda",
     files: [],
   },
+  {
+    id: "bug-bounty-research",
+    number: "04",
+    category: "Security Research",
+    title: "Bug Bounty Research",
+    description: "",
+    tags: ["Bug Bounty", "Web Security", "Research"],
+    links: { github: "", report: "" },
+    color: "#64ffda",
+    files: [
+      {
+        type: "folder",
+        name: "Findings",
+        files: [],
+      },
+      {
+        type: "folder",
+        name: "Research",
+        files: [],
+      },
+    ],
+  },
 
   // ── CTF & Security Activities ──────────────────────────────────
   {

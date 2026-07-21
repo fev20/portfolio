@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { useParams, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowLeft, Github, BookOpen, Tag } from "lucide-react";
@@ -21,15 +21,15 @@ export default function ProjectDetail() {
             $ project not found
           </p>
           <button onClick={() => navigate("/")} className="mt-4 btn-neon">
-            ← Back
+            ??Back
           </button>
         </div>
       </div>
     );
   }
 
-  const visibleFiles = selectedFolder ? selectedFolder.files : project.files;
-  const previewFile = project.files?.find((file: any) => file.type !== "folder" && !file.protection && file.url);
+  const visibleFiles = (selectedFolder ? selectedFolder.files : project.files) as any[] | undefined;
+  const previewFile = (project.files as any[] | undefined)?.find((file) => file.type !== "folder" && !file.protection && file.url);
 
   return (
     <>
@@ -162,7 +162,7 @@ export default function ProjectDetail() {
                       className="btn-neon flex items-center gap-2"
                     >
                       <Github size={14} />
-                      GitHub 보기
+                      GitHub 蹂닿린
                     </a>
                   )}
                   {project.links.report && (
@@ -174,7 +174,7 @@ export default function ProjectDetail() {
                       style={{ borderColor: "#a78bfa", color: "#a78bfa" }}
                     >
                       <BookOpen size={14} />
-                      보고서 보기
+                      蹂닿퀬??蹂닿린
                     </a>
                   )}
                 </div>
@@ -228,7 +228,7 @@ export default function ProjectDetail() {
               )}
 
               {/* Files */}
-              {visibleFiles && visibleFiles.length > 0 && (
+              {((visibleFiles && visibleFiles.length > 0) || selectedFolder) && (
                 <div className="mt-4 space-y-2">
                   <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.4)", marginBottom: "0.5rem" }}>
                     {selectedFolder ? `$ ls ./files/${selectedFolder.name}` : "$ ls ./files"}
@@ -239,52 +239,58 @@ export default function ProjectDetail() {
                       onClick={() => setSelectedFolder(null)}
                       className="btn-neon mb-4"
                     >
-                      ← back
+                      ??back
                     </button>
                   )}
 
-                  {visibleFiles.map((file: any, i: number) =>
-                    file.type === "folder" ? (
-                      <button
-                        key={i}
-                        onClick={() => setSelectedFolder(file)}
-                        className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 w-full text-left"
-                        style={{
-                          background: "rgba(100,255,218,0.03)",
-                          border: "1px solid rgba(100,255,218,0.1)",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <span style={{ fontSize: "0.9rem" }}>📁</span>
-                        <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.85rem", color: "#a8b2d8", flex: 1 }}>
-                          {file.name}
-                        </span>
-                      </button>
-                    ) : file.protection ? (
-                      <ProtectedDownload
-                        key={i}
-                        url={file.url}
-                        filename={file.name}
-                        label={file.name}
-                        protection={file.protection}
-                      />
-                    ) : (
-                      <button
-                        key={i}
-                        onClick={() => window.open(file.url, "_blank", "noopener,noreferrer")}
-                        className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 w-full text-left"
-                        style={{
-                          background: "rgba(100,255,218,0.03)",
-                          border: "1px solid rgba(100,255,218,0.1)",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <span style={{ fontSize: "0.9rem" }}>📄</span>
-                        <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.85rem", color: "#a8b2d8", flex: 1 }}>
-                          {file.name}
-                        </span>
-                      </button>
+                  {visibleFiles && visibleFiles.length > 0 ? (
+                    visibleFiles.map((file: any, i: number) =>
+                      file.type === "folder" ? (
+                        <button
+                          key={i}
+                          onClick={() => setSelectedFolder(file)}
+                          className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 w-full text-left"
+                          style={{
+                            background: "rgba(100,255,218,0.03)",
+                            border: "1px solid rgba(100,255,218,0.1)",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <span style={{ fontSize: "0.9rem" }}>?뱚</span>
+                          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.85rem", color: "#a8b2d8", flex: 1 }}>
+                            {file.name}
+                          </span>
+                        </button>
+                      ) : file.protection ? (
+                        <ProtectedDownload
+                          key={i}
+                          url={file.url}
+                          filename={file.name}
+                          label={file.name}
+                          protection={file.protection}
+                        />
+                      ) : (
+                        <button
+                          key={i}
+                          onClick={() => window.open(file.url, "_blank", "noopener,noreferrer")}
+                          className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 w-full text-left"
+                          style={{
+                            background: "rgba(100,255,218,0.03)",
+                            border: "1px solid rgba(100,255,218,0.1)",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <span style={{ fontSize: "0.9rem" }}>?뱞</span>
+                          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.85rem", color: "#a8b2d8", flex: 1 }}>
+                            {file.name}
+                          </span>
+                        </button>
+                      )
                     )
+                  ) : (
+                    <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.8rem", color: "#64748b" }}>
+                      empty folder
+                    </p>
                   )}
                 </div>
               )}
@@ -295,3 +301,4 @@ export default function ProjectDetail() {
     </>
   );
 }
+
