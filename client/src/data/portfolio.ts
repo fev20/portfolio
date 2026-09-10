@@ -381,7 +381,7 @@ export const projects = [
     id: "pentest-collaboration",
     number: "03",
     category: "Leadership & Community",
-    title: "화이트햇 스쿨 반장",
+    title: "화이트햇 스쿨 반장, PM",
     description: "",
     tags: ["Leadership", "Communication", "Community"],
     links: { github: "", report: "" },
@@ -395,7 +395,7 @@ export const experiences = [
   {
     period: "2026.06 — 현재",
     title: "화이트햇스쿨 4기",
-    role: "교육생, 반장",
+    role: "교육생, 반장, PM",
     description: "KISA(한국인터넷진흥원)에서 운영하는 사이버보안 전문 인재 양성 프로그램 화이트햇스쿨 4기 교육생으로 선발되었습니다. 보안 실무 중심 교육을 통해 전문 역량을 키우고 있습니다.",
     tags: ["KISA", "Cyber Security", "WhiteHat School"],
   },
