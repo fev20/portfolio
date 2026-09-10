@@ -155,7 +155,7 @@ export default function AboutSection() {
               />
               {/* Image */}
               <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663647836067/boFjbtwQQCT7GcN6J2dXvF/about-visual-ggmbHKHv4siR6FhDvFT2h9.webp"
+                src="/Security_concept.png"
                 alt="Security concept"
                 className="relative rounded-2xl"
                 style={{
