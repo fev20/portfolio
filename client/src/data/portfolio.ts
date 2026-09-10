@@ -378,7 +378,7 @@ export const projects = [
     files: [],
   },
   {
-    id: "pentest-collaboration",
+    id: "whs-class-leader",
     number: "03",
     category: "Leadership & Community",
     title: "화이트햇 스쿨 반장, PM",

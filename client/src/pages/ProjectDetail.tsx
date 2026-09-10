@@ -162,7 +162,7 @@ export default function ProjectDetail() {
                       className="btn-neon flex items-center gap-2"
                     >
                       <Github size={14} />
-                      GitHub 蹂닿린
+                      GitHub 보기
                     </a>
                   )}
                   {project.links.report && (
@@ -174,7 +174,7 @@ export default function ProjectDetail() {
                       style={{ borderColor: "#a78bfa", color: "#a78bfa" }}
                     >
                       <BookOpen size={14} />
-                      蹂닿퀬??蹂닿린
+                      보고서 보기
                     </a>
                   )}
                 </div>
