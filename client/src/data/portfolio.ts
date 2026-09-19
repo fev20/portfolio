@@ -80,6 +80,7 @@ export const skills = [
       "Linux",
       "Arduino",
       "Raspberry Pi",
+      "IDA"
     ],
   },
 ];
@@ -302,7 +303,7 @@ export const projects = [
     category: "Interactive Web Projects",
     title: "seKUrity 홈페이지 개발",
     description: "",
-    tags: ["Web Development", "React", "seKUrity"],
+    tags: ["Web Development", "node.js", "seKUrity"],
     links: { github: "https://github.com/kku-seKUrity/seku_homePage.git", report: "" },
     color: "#EC4899",
     files: [],
@@ -378,7 +379,7 @@ export const projects = [
     files: [],
   },
   {
-    id: "whs-class-leader",
+    id: "pentest-collaboration",
     number: "03",
     category: "Leadership & Community",
     title: "화이트햇 스쿨 반장, PM",
