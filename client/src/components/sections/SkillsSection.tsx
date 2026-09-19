@@ -77,7 +77,7 @@ export default function SkillsSection() {
                 className="nebula-card rounded-xl px-6 py-3"
               >
                 {/* Category header */}
-                <div className="flex items-center gap-3 mb-3">
+                <div className="flex items-center gap-3 mb-6">
                   <div
                     className="w-9 h-9 rounded-lg flex items-center justify-center"
                     style={{
