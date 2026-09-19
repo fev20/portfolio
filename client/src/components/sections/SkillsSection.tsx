@@ -74,10 +74,10 @@ export default function SkillsSection() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="nebula-card rounded-xl p-6"
+                className="nebula-card rounded-xl px-6 py-3"
               >
                 {/* Category header */}
-                <div className="flex items-center gap-3 mb-5">
+                <div className="flex items-center gap-3 mb-3">
                   <div
                     className="w-9 h-9 rounded-lg flex items-center justify-center"
                     style={{
@@ -100,7 +100,7 @@ export default function SkillsSection() {
                 </div>
 
                 {/* Skill tags */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2.5">
                   {category.items.map((skill, j) => (
                     <motion.span
                       key={skill}
@@ -112,6 +112,8 @@ export default function SkillsSection() {
                       }}
                       className="skill-tag"
                       style={{
+                        fontSize: "0.8125rem",
+                        padding: "0.25rem 0.875rem",
                         borderColor: `${category.color}30`,
                         color: category.color,
                         background: `${category.color}08`,

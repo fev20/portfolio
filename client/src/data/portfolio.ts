@@ -79,9 +79,12 @@ export const skills = [
       "BusyBox",
       "U-Boot",
       "QEMU",
+      "MIPS",
       "UART",
       "JTAG",
       "SPI Flash",
+      "SPI NOR",
+      "SquashFS",
     ],
   },
   {
