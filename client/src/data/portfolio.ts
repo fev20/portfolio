@@ -95,7 +95,6 @@ export const skills = [
       "IDA",
       "Binwalk",
       "QEMU",
-      "flashrom",
       "Git / GitHub",
       "Arduino",
       "Raspberry Pi",
