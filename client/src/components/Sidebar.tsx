@@ -5,7 +5,6 @@ import { verifyAuth, logout, setCachedRole, UserRole } from "@/utils/auth";
 import LoginModal from "@/components/LoginModal";
 import {
   profile,
-  skills,
   projects,
   experiences,
   education,
@@ -155,10 +154,6 @@ export default function Sidebar() {
   type SubItem = { label: string; path: string | null; scrollId?: string; children?: SubItem[] };
 
   const navItems = NAV_ITEMS.map((item) => {
-    if (item.id === "skills") return {
-      ...item,
-      subItems: skills.map((s): SubItem => ({ label: s.category, path: null, scrollId: `skill-${s.category}` })),
-    };
     if (item.id === "projects") return {
       ...item,
       subItems: CATEGORY_ORDER.map((cat): SubItem => ({
