@@ -64,7 +64,7 @@ export default function SkillsSection() {
         </motion.div>
 
         {/* Skill categories */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 md:auto-rows-fr gap-6">
           {skills.map((category, i) => {
             const Icon = ICONS[category.icon] || Shield;
             return (
