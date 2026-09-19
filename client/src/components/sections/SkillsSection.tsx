@@ -74,7 +74,7 @@ export default function SkillsSection() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="nebula-card rounded-xl px-6 py-3"
+                className="nebula-card rounded-xl px-6 pt-3 pb-6"
               >
                 {/* Category header */}
                 <div className="flex items-center gap-3 mb-6">
