@@ -4,12 +4,13 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Shield, Code2, Wrench } from "lucide-react";
+import { Shield, Code2, Cpu, Wrench } from "lucide-react";
 import { skills } from "@/data/portfolio";
 
 const ICONS: Record<string, React.ElementType> = {
   shield: Shield,
   code: Code2,
+  cpu: Cpu,
   wrench: Wrench,
 };
 
@@ -63,7 +64,7 @@ export default function SkillsSection() {
         </motion.div>
 
         {/* Skill categories */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {skills.map((category, i) => {
             const Icon = ICONS[category.icon] || Shield;
             return (
