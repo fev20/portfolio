@@ -6,7 +6,7 @@ export const profile = {
   taglineEn: "Computer Engineering Student interested in Hardware Security, Web Security, and Secure Systems.",
   email: "isemy0317@kku.ac.kr",
   github: "https://github.com/fev20",
-  blog: "https://infobox7013.tistory.com/",
+  blog: "https://mielarchive.tistory.com/",
   notion: "",                       // ← 노션 URL (나중에 추가)
   linkedin: "",
 };
