@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import AnimalBackground from "@/components/AnimalBackground";
 import { useInView } from "framer-motion";
 import { useRef, type CSSProperties } from "react";
 import { useLocation } from "wouter";
@@ -52,6 +53,7 @@ export default function ProjectsSection() {
 
   return (
     <section id="projects" className="relative py-28" ref={ref}>
+      <AnimalBackground animal="mouse" placement="projects" />
       <div className="container relative z-10">
         {/* Section header */}
         <motion.div

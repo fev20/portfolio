@@ -5,11 +5,21 @@ const animals = {
   capybara: { sheet: "a", x: 695, y: 535, width: 640, height: 489 },
   squirrel: { sheet: "b", x: 525, y: 15, width: 500, height: 495 },
   hamster: { sheet: "b", x: 60, y: 40, width: 440, height: 480 },
+  dog: { sheet: "a", x: 10, y: 15, width: 540, height: 490 },
+  mouse: { sheet: "a", x: 1070, y: 50, width: 400, height: 480 },
+  otter: { sheet: "b", x: 55, y: 530, width: 445, height: 494 },
 } as const;
 
 interface AnimalBackgroundProps {
   animal: keyof typeof animals;
-  placement: "hero" | "skills" | "experience" | "contact";
+  placement:
+    | "hero"
+    | "about"
+    | "skills"
+    | "projects"
+    | "experience"
+    | "education"
+    | "contact";
 }
 
 export default function AnimalBackground({

@@ -70,10 +70,10 @@
   --rose-bright: #eac0d0;
   --rose-deep: #8d4961;
   --name-pink: #e6b7c4;
-  --sidebar-tint: #f5e7dd;
-  --sidebar-active: #eed9ca;
+  --sidebar-tint: #fbf5ef;
+  --sidebar-active: #f7ece3;
   --sidebar-ink: #795544;
-  --sidebar-line: #ead9cc;
+  --sidebar-line: #f1e5db;
   --font-display: "Miel Jelly", "Nunito Sans", "Malgun Gothic", sans-serif;
   --radius: 0.25rem;
   --background: var(--paper);
@@ -284,8 +284,7 @@
     width: var(--animal-size);
     aspect-ratio: var(--animal-aspect);
     overflow: hidden;
-    filter:
-      drop-shadow(0.65px 0 0 var(--animal-outline))
+    filter: drop-shadow(0.65px 0 0 var(--animal-outline))
       drop-shadow(-0.65px 0 0 var(--animal-outline))
       drop-shadow(0 0.65px 0 var(--animal-outline))
       drop-shadow(0 -0.65px 0 var(--animal-outline));
@@ -311,6 +310,21 @@
     top: 1rem;
     right: 1rem;
   }
+  .animal-background--about {
+    --animal-size: 160px;
+    top: -3rem;
+    left: 1rem;
+  }
+  .animal-background--projects {
+    --animal-size: 155px;
+    top: 0;
+    right: 1rem;
+  }
+  .animal-background--education {
+    --animal-size: 150px;
+    top: 1rem;
+    right: 1rem;
+  }
   .animal-background--experience {
     --animal-size: 165px;
     top: 1.5rem;
@@ -318,8 +332,8 @@
   }
   .animal-background--contact {
     --animal-size: 175px;
-    top: 1.5rem;
-    left: 1rem;
+    top: -1rem;
+    left: 4rem;
   }
   @media (min-width: 1024px) {
     .animal-background--hero {
@@ -332,6 +346,21 @@
       top: 1rem;
       right: 2rem;
     }
+    .animal-background--about {
+      --animal-size: 240px;
+      top: -7.5rem;
+      left: 2rem;
+    }
+    .animal-background--projects {
+      --animal-size: 240px;
+      top: 0;
+      right: 2rem;
+    }
+    .animal-background--education {
+      --animal-size: 230px;
+      top: 1rem;
+      right: 2rem;
+    }
     .animal-background--experience {
       --animal-size: 270px;
       top: 1.5rem;
@@ -339,8 +368,8 @@
     }
     .animal-background--contact {
       --animal-size: 280px;
-      top: 2rem;
-      left: 2rem;
+      top: -2rem;
+      left: 8rem;
     }
   }
 }

@@ -2,6 +2,7 @@
 // Design: warm paper and restrained pastel accents ??asymmetric layout with security visual
 
 import { motion } from "framer-motion";
+import AnimalBackground from "@/components/AnimalBackground";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { about } from "@/data/portfolio";
@@ -13,6 +14,7 @@ export default function AboutSection() {
 
   return (
     <section id="about" className="relative py-28" ref={ref}>
+      <AnimalBackground animal="dog" placement="about" />
       <div className="container relative z-10">
         {/* Introduction and visual */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">

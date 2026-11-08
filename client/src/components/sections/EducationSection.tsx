@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import AnimalBackground from "@/components/AnimalBackground";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { useLocation } from "wouter";
@@ -18,6 +19,7 @@ export default function EducationSection() {
 
   return (
     <section id="education" className="relative py-28" ref={ref}>
+      <AnimalBackground animal="otter" placement="education" />
       <div className="container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
