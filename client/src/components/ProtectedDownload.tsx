@@ -120,7 +120,7 @@ export default function ProtectedDownload({
     <>
       <button
         onClick={handleClick}
-        className="flex items-center gap-3 px-4 py-2.5 rounded-[2px] transition-all duration-200 w-full text-left"
+        className="flex items-center gap-3 px-4 py-2.5 rounded-[var(--radius-sm)] transition-all duration-200 w-full text-left"
         style={{
           background: "var(--sage-soft)",
           border: "1px solid var(--line)",

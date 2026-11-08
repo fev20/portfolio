@@ -51,11 +51,11 @@ export function ManusDialog({
       open={onOpenChange ? open : internalOpen}
       onOpenChange={handleOpenChange}
     >
-      <DialogContent className="py-5 bg-card rounded-[4px] w-[400px] shadow-sm border border-border p-0 gap-0 text-center">
+      <DialogContent className="py-5 bg-card rounded-[var(--radius)] w-[400px] shadow-sm border border-border p-0 gap-0 text-center">
         <div className="flex flex-col items-center gap-2 p-5 pt-12">
           {logo ? (
-            <div className="w-16 h-16 bg-background rounded-[4px] border border-border flex items-center justify-center">
-              <img src={logo} alt="Dialog graphic" className="w-10 h-10 rounded-[2px]" />
+            <div className="w-16 h-16 bg-background rounded-[var(--radius)] border border-border flex items-center justify-center">
+              <img src={logo} alt="Dialog graphic" className="w-10 h-10 rounded-[var(--radius-sm)]" />
             </div>
           ) : null}
 
@@ -74,7 +74,7 @@ export function ManusDialog({
           {/* Login button */}
           <Button
             onClick={onLogin}
-            className="w-full h-10 bg-primary hover:bg-[var(--sage-deep)] text-primary-foreground rounded-[2px] text-sm font-medium leading-5 tracking-[-0.154px]"
+            className="w-full h-10 bg-primary hover:bg-[var(--sage-deep)] text-primary-foreground rounded-[var(--radius-sm)] text-sm font-medium leading-5 tracking-[-0.154px]"
           >
             Login with Manus
           </Button>

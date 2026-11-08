@@ -1,4 +1,4 @@
-/* Cream, fresh pink, and apricot beige with Miel Jelly display type. */
+/* Reference palette: pastel pink, blush, cream, and apricot. */
 @import "tailwindcss";
 @import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
@@ -12,12 +12,12 @@
 }
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: var(--control-radius);
+  --radius-md: calc(var(--radius) - 4px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 0px);
-  --radius-2xl: calc(var(--radius) + 0px);
-  --radius-3xl: calc(var(--radius) + 0px);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -54,28 +54,34 @@
 
 :root {
   color-scheme: light;
-  --paper: #fffaf5;
-  --surface: #fffdfb;
-  --surface-muted: #f8eee4;
+  --palette-pink: #ffced8;
+  --palette-blush: #ffdddd;
+  --palette-cream: #fff4de;
+  --palette-apricot: #ffe8c4;
+  --paper: var(--palette-cream);
+  --surface: color-mix(in srgb, white 70%, var(--palette-cream));
+  --surface-muted: var(--palette-apricot);
   --ink: #503b36;
   --ink-secondary: #805f51;
   --ink-muted: #805f51;
-  --line: #efddd0;
-  --sage: #a46b4d;
-  --sage-soft: #f8ecdf;
-  --sage-bright: #ecc9b3;
-  --sage-deep: #895239;
-  --rose: #a85c76;
-  --rose-soft: #f8e8ee;
-  --rose-bright: #eac0d0;
-  --rose-deep: #8d4961;
-  --name-pink: #e6b7c4;
-  --sidebar-tint: #fbf5ef;
-  --sidebar-active: #f7ece3;
-  --sidebar-ink: #795544;
-  --sidebar-line: #f1e5db;
+  --line: color-mix(in srgb, var(--palette-apricot) 65%, var(--palette-pink));
+  --sage: #91633f;
+  --sage-soft: var(--palette-apricot);
+  --sage-bright: var(--palette-apricot);
+  --sage-deep: #795136;
+  --rose: #a55d73;
+  --rose-soft: var(--palette-blush);
+  --rose-bright: var(--palette-pink);
+  --rose-deep: #8e4960;
+  --name-pink: var(--palette-pink);
+  --sidebar-tint: color-mix(in srgb, white 55%, var(--palette-blush));
+  --sidebar-active: var(--palette-blush);
+  --sidebar-ink: #805b50;
+  --sidebar-line: var(--palette-blush);
   --font-display: "Miel Jelly", "Nunito Sans", "Malgun Gothic", sans-serif;
-  --radius: 0.25rem;
+  --radius: 1rem;
+  --control-radius: 0.5rem;
+  --radius-sm: var(--control-radius);
   --background: var(--paper);
   --foreground: var(--ink);
   --card: var(--surface);
@@ -246,7 +252,7 @@
     font-size: 0.85rem;
     font-weight: 600;
     padding: 0.65rem 1.25rem;
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
     transition:
       background 0.2s ease,
       border-color 0.2s ease,
@@ -262,7 +268,7 @@
     font-family: "JetBrains Mono", monospace;
     font-size: 0.75rem;
     padding: 0.25rem 0.75rem;
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
     border: 1px solid var(--line);
     color: var(--sage-deep);
     background: var(--sage-soft);
@@ -273,32 +279,37 @@
     padding: 2rem;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 4px;
+    border-radius: var(--radius);
     box-shadow: none;
   }
   .animal-background {
     --animal-size: 170px;
-    --animal-outline: rgb(211 185 171 / 45%);
+    --animal-color: var(--palette-pink);
     position: absolute;
     z-index: 0;
     width: var(--animal-size);
     aspect-ratio: var(--animal-aspect);
     overflow: hidden;
-    filter: drop-shadow(0.65px 0 0 var(--animal-outline))
-      drop-shadow(-0.65px 0 0 var(--animal-outline))
-      drop-shadow(0 0.65px 0 var(--animal-outline))
-      drop-shadow(0 -0.65px 0 var(--animal-outline));
     pointer-events: none;
     user-select: none;
   }
-  .animal-background img {
+  .animal-background::before {
+    content: "";
     position: absolute;
-    display: block;
-    width: calc(var(--animal-size) * var(--animal-sheet-width));
-    max-width: none;
-    height: auto;
-    left: calc(var(--animal-size) * var(--animal-offset-x));
-    top: calc(var(--animal-size) * var(--animal-offset-y));
+    inset: 0;
+    background: var(--animal-color);
+    -webkit-mask-image: var(--animal-sheet);
+    mask-image: var(--animal-sheet);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: calc(var(--animal-size) * var(--animal-sheet-width))
+      calc(var(--animal-size) * var(--animal-sheet-height));
+    mask-size: calc(var(--animal-size) * var(--animal-sheet-width))
+      calc(var(--animal-size) * var(--animal-sheet-height));
+    -webkit-mask-position: calc(var(--animal-size) * var(--animal-offset-x))
+      calc(var(--animal-size) * var(--animal-offset-y));
+    mask-position: calc(var(--animal-size) * var(--animal-offset-x))
+      calc(var(--animal-size) * var(--animal-offset-y));
   }
   .animal-background--hero {
     --animal-size: 180px;
@@ -311,6 +322,7 @@
     right: 1rem;
   }
   .animal-background--about {
+    --animal-color: var(--palette-apricot);
     --animal-size: 160px;
     top: -3rem;
     left: 1rem;
@@ -321,11 +333,13 @@
     right: 1rem;
   }
   .animal-background--education {
+    --animal-color: var(--palette-apricot);
     --animal-size: 150px;
     top: 1rem;
     right: 1rem;
   }
   .animal-background--experience {
+    --animal-color: var(--palette-blush);
     --animal-size: 165px;
     top: 1.5rem;
     right: 1rem;

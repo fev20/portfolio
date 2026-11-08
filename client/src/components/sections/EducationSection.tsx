@@ -77,7 +77,7 @@ export default function EducationSection() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                    className="paper-card rounded-[4px] p-5 flex items-start gap-4 cursor-pointer group"
+                    className="paper-card rounded-[var(--radius)] p-5 flex items-start gap-4 cursor-pointer group"
                     onClick={() => navigate(`/education/edu/${i}`)}
                     role="button"
                     tabIndex={0}
@@ -86,7 +86,7 @@ export default function EducationSection() {
                     }
                   >
                     <div
-                      className="w-10 h-10 rounded-[2px] flex items-center justify-center flex-shrink-0"
+                      className="w-10 h-10 rounded-[var(--radius-sm)] flex items-center justify-center flex-shrink-0"
                       style={{
                         background:
                           "color-mix(in srgb, var(--sage) 8%, transparent)",
@@ -172,7 +172,7 @@ export default function EducationSection() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.2 + i * 0.08 }}
-                    className="paper-card rounded-[4px] p-4 flex items-center gap-4 cursor-pointer group"
+                    className="paper-card rounded-[var(--radius)] p-4 flex items-center gap-4 cursor-pointer group"
                     style={{
                       borderColor:
                         "color-mix(in srgb, var(--rose) 10%, transparent)",
@@ -185,7 +185,7 @@ export default function EducationSection() {
                     }
                   >
                     <div
-                      className="w-8 h-8 rounded-[2px] flex items-center justify-center flex-shrink-0"
+                      className="w-8 h-8 rounded-[var(--radius-sm)] flex items-center justify-center flex-shrink-0"
                       style={{
                         background:
                           "color-mix(in srgb, var(--rose) 8%, transparent)",

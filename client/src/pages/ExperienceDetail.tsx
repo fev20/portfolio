@@ -64,7 +64,7 @@ export default function ExperienceDetail() {
           transition={{ duration: 0.6 }}
         >
           <div
-            className="inline-block mb-3 px-3 py-1 rounded-[2px]"
+            className="inline-block mb-3 px-3 py-1 rounded-[var(--radius-sm)]"
             style={{
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "0.72rem",
@@ -107,7 +107,7 @@ export default function ExperienceDetail() {
                   fontFamily: "'JetBrains Mono', monospace",
                   fontSize: "0.68rem",
                   padding: "3px 10px",
-                  borderRadius: "2px",
+                  borderRadius: "var(--radius-sm)",
                   background: "var(--sage-soft)",
                   border: "1px solid var(--line)",
                   color: "var(--sage)",

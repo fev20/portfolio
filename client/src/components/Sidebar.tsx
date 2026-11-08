@@ -67,7 +67,7 @@ function LoginBlock() {
     <div className="px-4 py-3">
       {userRole ? (
         <div
-          className="flex items-center justify-between px-3 py-2 rounded-[4px]"
+          className="flex items-center justify-between px-3 py-2 rounded-[var(--radius)]"
           style={{
             background: "var(--sidebar-tint)",
             border: "1px solid var(--sidebar-line)",
@@ -86,7 +86,7 @@ function LoginBlock() {
             style={{
               background: "none",
               border: "1px solid var(--sidebar-line)",
-              borderRadius: "2px",
+              borderRadius: "var(--radius-sm)",
               padding: "3px 8px",
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "0.6rem",
@@ -108,7 +108,7 @@ function LoginBlock() {
       ) : (
         <button
           onClick={() => setLocation("/login")}
-          className="w-full flex items-center gap-2 px-3 py-2 rounded-[2px] transition-all duration-200"
+          className="w-full flex items-center gap-2 px-3 py-2 rounded-[var(--radius-sm)] transition-all duration-200"
           style={{
             background: "var(--sidebar-tint)",
             border: "1px solid var(--sidebar-line)",
@@ -291,7 +291,7 @@ export default function Sidebar() {
           </div>
           <div className="flex justify-center mb-3">
             <div
-              className="rounded-[4px] overflow-hidden"
+              className="rounded-[var(--radius)] overflow-hidden"
               style={{
                 width: "120px",
                 height: "120px",
@@ -339,7 +339,7 @@ export default function Sidebar() {
                   <button
                     onClick={() => scrollToSection(item.id)}
                     className="w-full flex items-center gap-2 px-3 py-1.5 rounded transition-all relative"
-                    style={{ background: isActive ? "var(--sidebar-active)" : "transparent", borderRadius: "2px" }}
+                    style={{ background: isActive ? "var(--sidebar-active)" : "transparent", borderRadius: "var(--radius-sm)" }}
                   >
                     {isActive && (
                       <motion.div
@@ -506,7 +506,7 @@ export default function Sidebar() {
               title="GitHub"
               className="flex items-center justify-center transition-all"
               style={{
-                width: "36px", height: "36px", borderRadius: "2px",
+                width: "36px", height: "36px", borderRadius: "var(--radius-sm)",
                 border: "1px solid var(--sidebar-line)",
                 background: "var(--sidebar-tint)",
                 color: "var(--ink-secondary)",
@@ -534,7 +534,7 @@ export default function Sidebar() {
               title="Blog"
               className="flex items-center justify-center transition-all"
               style={{
-                width: "36px", height: "36px", borderRadius: "2px",
+                width: "36px", height: "36px", borderRadius: "var(--radius-sm)",
                 border: "1px solid var(--sidebar-line)",
                 background: "var(--sidebar-tint)",
                 color: "var(--ink-secondary)",
@@ -561,7 +561,7 @@ export default function Sidebar() {
               title="Email"
               className="flex items-center justify-center transition-all"
               style={{
-                width: "36px", height: "36px", borderRadius: "2px",
+                width: "36px", height: "36px", borderRadius: "var(--radius-sm)",
                 border: "1px solid var(--sidebar-line)",
                 background: "var(--sidebar-tint)",
                 color: "var(--ink-secondary)",

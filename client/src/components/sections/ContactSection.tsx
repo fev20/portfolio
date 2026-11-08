@@ -126,11 +126,11 @@ export default function ContactSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                className="paper-card rounded-[4px] p-4 flex items-center gap-4 group"
+                className="paper-card rounded-[var(--radius)] p-4 flex items-center gap-4 group"
                 style={{ textDecoration: "none" }}
               >
                 <div
-                  className="w-10 h-10 rounded-[2px] flex items-center justify-center flex-shrink-0 transition-all"
+                  className="w-10 h-10 rounded-[var(--radius-sm)] flex items-center justify-center flex-shrink-0 transition-all"
                   style={{
                     background: `color-mix(in srgb, ${contact.color} 6%, transparent)`,
                     border: `1px solid color-mix(in srgb, ${contact.color} 15%, transparent)`,

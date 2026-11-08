@@ -71,7 +71,7 @@ export default function ActivityDetail() {
           style={{
             background: "var(--sage-soft)",
             border: "1px solid var(--line)",
-            borderRadius: "4px",
+            borderRadius: "var(--radius)",
             padding: "2rem",
             minHeight: "300px",
           }}
@@ -113,7 +113,7 @@ export default function ActivityDetail() {
                   key={i}
                   src={src}
                   alt=""
-                  className="rounded-[4px] w-full object-cover"
+                  className="rounded-[var(--radius)] w-full object-cover"
                   style={{ border: "1px solid var(--line)" }}
                 />
               ))}
@@ -127,7 +127,7 @@ export default function ActivityDetail() {
                 <button
                     key={i}
                     onClick={() => window.open(file.url, "_blank", "noopener,noreferrer")}
-                    className="flex items-center gap-3 px-4 py-2.5 rounded-[2px] transition-all duration-200 w-full text-left"
+                    className="flex items-center gap-3 px-4 py-2.5 rounded-[var(--radius-sm)] transition-all duration-200 w-full text-left"
                     style={{
                     background: "var(--sage-soft)",
                     border: "1px solid var(--line)",

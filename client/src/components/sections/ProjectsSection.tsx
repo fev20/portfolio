@@ -103,7 +103,7 @@ export default function ProjectsSection() {
                 {/* Category header */}
                 <div className="flex items-center gap-4 mb-6">
                   <div
-                    className="w-8 h-8 rounded-[2px] flex items-center justify-center flex-shrink-0"
+                    className="w-8 h-8 rounded-[var(--radius-sm)] flex items-center justify-center flex-shrink-0"
                     style={{
                       background: categoryAppearance.soft,
                       border: `1px solid ${categoryAppearance.bright}`,
@@ -156,7 +156,7 @@ export default function ProjectsSection() {
                 {/* Cards in this category */}
                 {group.items.length === 0 ? (
                   <div
-                    className="rounded-[4px] p-5"
+                    className="rounded-[var(--radius)] p-5"
                     style={{
                       border: "1px dashed var(--line)",
                       background: "var(--surface)",
@@ -187,7 +187,7 @@ export default function ProjectsSection() {
                             duration: 0.6,
                             delay: gi * 0.1 + i * 0.12 + 0.2,
                           }}
-                          className="paper-card project-card rounded-[4px] overflow-hidden cursor-pointer group"
+                          className="paper-card project-card rounded-[var(--radius)] overflow-hidden cursor-pointer group"
                           style={
                             {
                               "--project-accent": accent,
@@ -246,7 +246,7 @@ export default function ProjectsSection() {
                                         color: accent,
                                         fontSize: "0.68rem",
                                         padding: "2px 8px",
-                                        borderRadius: "2px",
+                                        borderRadius: "var(--radius-sm)",
                                       }}
                                     >
                                       {tag}

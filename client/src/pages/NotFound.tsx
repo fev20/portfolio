@@ -12,7 +12,7 @@ export default function NotFound() {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-background">
-      <Card className="w-full max-w-lg mx-4 rounded-[4px] border-border bg-card shadow-sm">
+      <Card className="w-full max-w-lg mx-4 rounded-[var(--radius)] border-border bg-card shadow-sm">
         <CardContent className="pt-8 pb-8 text-center">
           <div className="flex justify-center mb-6">
             <div className="relative">
@@ -36,7 +36,7 @@ export default function NotFound() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
               onClick={handleGoHome}
-              className="bg-primary hover:bg-[var(--sage-deep)] text-primary-foreground px-6 py-2.5 rounded-[2px] transition-colors duration-200"
+              className="bg-primary hover:bg-[var(--sage-deep)] text-primary-foreground px-6 py-2.5 rounded-[var(--radius-sm)] transition-colors duration-200"
             >
               <Home className="w-4 h-4 mr-2" />
               Go Home

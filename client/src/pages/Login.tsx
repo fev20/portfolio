@@ -44,7 +44,7 @@ export default function Login() {
       style={{ background: "var(--paper)" }}
     >
       <div
-        className="w-full max-w-sm mx-4 rounded-[4px] p-8"
+        className="w-full max-w-sm mx-4 rounded-[var(--radius)] p-8"
         style={{
           background: "var(--surface)",
           border: "1px solid var(--line)",
@@ -89,7 +89,7 @@ export default function Login() {
         <div className="mb-4 relative">
           <button
             onClick={() => setDropdownOpen((v) => !v)}
-            className="w-full flex items-center justify-between px-4 py-2.5 rounded-[2px] transition-all duration-200"
+            className="w-full flex items-center justify-between px-4 py-2.5 rounded-[var(--radius-sm)] transition-all duration-200"
             style={{
               background: "var(--sage-soft)",
               border: `1px solid ${selected ? `color-mix(in srgb, ${selected.color} 34%, var(--line))` : "var(--line)"}`,
@@ -122,7 +122,7 @@ export default function Login() {
           {/* 드롭다운 목록 */}
           {dropdownOpen && (
             <div
-              className="absolute w-full mt-1 rounded-[2px] overflow-hidden z-10"
+              className="absolute w-full mt-1 rounded-[var(--radius-sm)] overflow-hidden z-10"
               style={{
                 background: "var(--surface)",
                 border: "1px solid var(--line)",
@@ -197,7 +197,7 @@ export default function Login() {
             onChange={(e) => { setPassword(e.target.value); setError(""); }}
             onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
             placeholder="password"
-            className="w-full px-4 py-2.5 rounded-[2px] outline-none"
+            className="w-full px-4 py-2.5 rounded-[var(--radius-sm)] outline-none"
             style={{
               background: "var(--sage-soft)",
               border: `1px solid ${error ? "var(--rose)" : "var(--line)"}`,
@@ -226,7 +226,7 @@ export default function Login() {
           <button
             onClick={handleSubmit}
             disabled={loading || !selectedRole}
-            className="flex-1 py-2.5 rounded-[2px] transition-all duration-200"
+            className="flex-1 py-2.5 rounded-[var(--radius-sm)] transition-all duration-200"
             style={{
               background: "var(--sage-soft)",
               border: "1px solid var(--line)",
@@ -240,7 +240,7 @@ export default function Login() {
           </button>
           <button
             onClick={() => setLocation("/")}
-            className="px-5 py-2.5 rounded-[2px]"
+            className="px-5 py-2.5 rounded-[var(--radius-sm)]"
             style={{
               background: "var(--sage-soft)",
               border: "1px solid var(--line)",
@@ -257,7 +257,7 @@ export default function Login() {
         {/* 비밀번호 요청 */}
         <button
           onClick={() => setLocation("/request-access")}
-          className="w-full mt-3 py-2.5 rounded-[2px] transition-all duration-200"
+          className="w-full mt-3 py-2.5 rounded-[var(--radius-sm)] transition-all duration-200"
           style={{
             background: "transparent",
             border: "1px solid var(--line)",

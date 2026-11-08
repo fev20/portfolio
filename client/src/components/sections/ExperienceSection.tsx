@@ -96,7 +96,7 @@ export default function ExperienceSection() {
                   data-timeline-card={i}
                 >
                   <div
-                    className="paper-card rounded-[4px] p-5 cursor-pointer group"
+                    className="paper-card rounded-[var(--radius)] p-5 cursor-pointer group"
                     onClick={() => navigate(`/experience/${i}`)}
                     role="button"
                     tabIndex={0}
@@ -170,7 +170,7 @@ export default function ExperienceSection() {
                             fontFamily: "'Nunito Sans', sans-serif",
                             fontSize: "0.65rem",
                             padding: "2px 8px",
-                            borderRadius: "2px",
+                            borderRadius: "var(--radius-sm)",
                             background:
                               "color-mix(in srgb, var(--sage) 5%, transparent)",
                             border:

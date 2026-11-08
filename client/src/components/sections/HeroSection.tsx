@@ -87,12 +87,6 @@ export default function HeroSection() {
               {profile.name}
             </h1>
             <p
-              className="mb-7 text-lg font-semibold tracking-wide"
-              style={{ color: "var(--sage-deep)" }}
-            >
-              {profile.nameEn}
-            </p>
-            <p
               className="mb-8 max-w-lg text-base leading-loose"
               style={{ color: "var(--ink-secondary)", wordBreak: "keep-all" }}
             >

@@ -63,12 +63,12 @@ export default function SkillsSection() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="paper-card rounded-[4px] px-6 pt-3 pb-6"
+                className="paper-card rounded-[var(--radius)] px-6 pt-3 pb-6"
               >
                 {/* Category header */}
                 <div className="flex items-center gap-3 mb-6">
                   <div
-                    className="w-9 h-9 rounded-[2px] flex items-center justify-center"
+                    className="w-9 h-9 rounded-[var(--radius-sm)] flex items-center justify-center"
                     style={{
                       background: `color-mix(in srgb, ${accent} 8%, transparent)`,
                       border: `1px solid color-mix(in srgb, ${accent} 19%, transparent)`,

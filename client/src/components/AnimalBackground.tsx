@@ -29,7 +29,9 @@ export default function AnimalBackground({
   const sprite = animals[animal];
   const style = {
     "--animal-aspect": `${sprite.width} / ${sprite.height}`,
+    "--animal-sheet": `url("${import.meta.env.BASE_URL}images/stickers/animal-sheet-${sprite.sheet}.png")`,
     "--animal-sheet-width": 1536 / sprite.width,
+    "--animal-sheet-height": 1024 / sprite.width,
     "--animal-offset-x": -sprite.x / sprite.width,
     "--animal-offset-y": -sprite.y / sprite.width,
   } as CSSProperties;
@@ -40,16 +42,6 @@ export default function AnimalBackground({
       style={style}
       aria-hidden="true"
       data-animal-background={animal}
-    >
-      <img
-        src={`${import.meta.env.BASE_URL}images/stickers/animal-sheet-${sprite.sheet}.png`}
-        alt=""
-        width={1536}
-        height={1024}
-        loading="lazy"
-        decoding="async"
-        draggable={false}
-      />
-    </div>
+    />
   );
 }

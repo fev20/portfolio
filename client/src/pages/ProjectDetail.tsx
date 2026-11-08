@@ -138,7 +138,7 @@ export default function ProjectDetail() {
                       fontFamily: "'JetBrains Mono', monospace",
                       fontSize: "0.72rem",
                       padding: "4px 10px",
-                      borderRadius: "2px",
+                      borderRadius: "var(--radius-sm)",
                       background: soft,
                       border: `1px solid ${bright}`,
                       color: accent,
@@ -245,7 +245,7 @@ export default function ProjectDetail() {
                     </p>
 
                     <div
-                      className="rounded-[4px] overflow-hidden"
+                      className="rounded-[var(--radius)] overflow-hidden"
                       style={{
                         border: `1px solid ${bright}`,
                         marginBottom: "2rem",
@@ -280,7 +280,7 @@ export default function ProjectDetail() {
                     PREVIEW
                   </p>
                   <div
-                    className="rounded-[4px] overflow-hidden"
+                    className="rounded-[var(--radius)] overflow-hidden"
                     style={{
                       border: `1px solid ${bright}`,
                       aspectRatio: "1 / 1.4142",
@@ -334,7 +334,7 @@ export default function ProjectDetail() {
                         <button
                           key={i}
                           onClick={() => setSelectedFolder(file)}
-                          className="flex items-center gap-3 px-4 py-2.5 rounded-[2px] transition-all duration-200 w-full text-left"
+                          className="flex items-center gap-3 px-4 py-2.5 rounded-[var(--radius-sm)] transition-all duration-200 w-full text-left"
                           style={{
                             background: `color-mix(in srgb, ${soft} 50%, var(--surface))`,
                             border: "1px solid var(--line)",
@@ -374,7 +374,7 @@ export default function ProjectDetail() {
                               "noopener,noreferrer"
                             )
                           }
-                          className="flex items-center gap-3 px-4 py-2.5 rounded-[2px] transition-all duration-200 w-full text-left"
+                          className="flex items-center gap-3 px-4 py-2.5 rounded-[var(--radius-sm)] transition-all duration-200 w-full text-left"
                           style={{
                             background: `color-mix(in srgb, ${soft} 50%, var(--surface))`,
                             border: "1px solid var(--line)",

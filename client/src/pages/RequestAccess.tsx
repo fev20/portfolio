@@ -25,7 +25,7 @@ export default function RequestAccess() {
       style={{ background: "var(--paper)" }}
     >
       <div
-        className="w-full max-w-lg mx-4 rounded-[4px] p-8"
+        className="w-full max-w-lg mx-4 rounded-[var(--radius)] p-8"
         style={{
           background: "var(--surface)",
           border: "1px solid var(--line)",
@@ -68,7 +68,7 @@ export default function RequestAccess() {
 
         {/* 예시 */}
         <div
-          className="mb-4 p-4 rounded-[4px]"
+          className="mb-4 p-4 rounded-[var(--radius)]"
           style={{
             background: "var(--sage-soft)",
             border: "1px solid var(--line)",
@@ -105,7 +105,7 @@ export default function RequestAccess() {
             onChange={(e) => setContent(e.target.value)}
             placeholder="위 예시 형식대로 작성해주세요"
             rows={6}
-            className="w-full px-4 py-3 rounded-[2px] outline-none resize-none"
+            className="w-full px-4 py-3 rounded-[var(--radius-sm)] outline-none resize-none"
             style={{
               background: "var(--sage-soft)",
               border: "1px solid var(--line)",
@@ -121,7 +121,7 @@ export default function RequestAccess() {
         <div className="flex gap-2">
           <button
             onClick={handleSend}
-            className="flex-1 py-2.5 rounded-[2px] transition-all duration-200"
+            className="flex-1 py-2.5 rounded-[var(--radius-sm)] transition-all duration-200"
             style={{
               background: "var(--sage-soft)",
               border: "1px solid var(--line)",
@@ -135,7 +135,7 @@ export default function RequestAccess() {
           </button>
           <button
             onClick={() => setLocation("/login")}
-            className="px-5 py-2.5 rounded-[2px]"
+            className="px-5 py-2.5 rounded-[var(--radius-sm)]"
             style={{
               background: "var(--sage-soft)",
               border: "1px solid var(--line)",

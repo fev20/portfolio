@@ -105,7 +105,7 @@ export default function EducationDetail() {
           className="flex items-start gap-6"
         >
           <div
-            className="w-16 h-16 rounded-[4px] flex items-center justify-center flex-shrink-0"
+            className="w-16 h-16 rounded-[var(--radius)] flex items-center justify-center flex-shrink-0"
             style={{
               background: `color-mix(in srgb, ${color} 6%, transparent)`,
               border: `1px solid color-mix(in srgb, ${color} 19%, transparent)`,
@@ -116,7 +116,7 @@ export default function EducationDetail() {
 
           <div>
             <div
-              className="inline-block mb-2 px-3 py-1 rounded-[2px] text-xs"
+              className="inline-block mb-2 px-3 py-1 rounded-[var(--radius-sm)] text-xs"
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
                 background: `color-mix(in srgb, ${color} 3%, transparent)`,
@@ -167,7 +167,7 @@ export default function EducationDetail() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="p-6 rounded-[4px] mb-6"
+            className="p-6 rounded-[var(--radius)] mb-6"
             style={{
               background: "var(--surface)",
               border: `1px solid color-mix(in srgb, ${color} 7%, transparent)`,
@@ -199,7 +199,7 @@ export default function EducationDetail() {
                 href={pdf}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-[2px] text-sm transition-all hover:opacity-80"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--radius-sm)] text-sm transition-all hover:opacity-80"
                 style={{
                   fontFamily: "'JetBrains Mono', monospace",
                   background: `color-mix(in srgb, ${color} 6%, transparent)`,
@@ -223,7 +223,7 @@ export default function EducationDetail() {
           >
             {(Array.isArray((item as any).image) ? (item as any).image : [(item as any).image]).map(
               (img: string, i: number) => (
-                <div key={i} className="rounded-[4px] overflow-hidden" style={{ border: `1px solid color-mix(in srgb, ${color} 7%, transparent)` }}>
+                <div key={i} className="rounded-[var(--radius)] overflow-hidden" style={{ border: `1px solid color-mix(in srgb, ${color} 7%, transparent)` }}>
                   <img src={img} alt={item.title} className="w-full h-auto" />
                 </div>
               )

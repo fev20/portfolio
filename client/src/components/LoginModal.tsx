@@ -42,7 +42,7 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-sm mx-4 rounded-[4px] p-6"
+        className="relative w-full max-w-sm mx-4 rounded-[var(--radius)] p-6"
         style={{
           background: "var(--surface)",
           border: "1px solid var(--line)",
@@ -66,7 +66,7 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
         <div className="mb-3 relative">
           <button
             onClick={() => setDropdownOpen((v) => !v)}
-            className="w-full flex items-center justify-between px-4 py-2.5 rounded-[2px]"
+            className="w-full flex items-center justify-between px-4 py-2.5 rounded-[var(--radius-sm)]"
             style={{
               background: "var(--sage-soft)",
               border: `1px solid ${selected ? `color-mix(in srgb, ${selected.color} 34%, var(--line))` : "var(--line)"}`,
@@ -81,7 +81,7 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
 
           {dropdownOpen && (
             <div
-              className="absolute w-full mt-1 rounded-[2px] overflow-hidden z-10"
+              className="absolute w-full mt-1 rounded-[var(--radius-sm)] overflow-hidden z-10"
               style={{ background: "var(--surface)", border: "1px solid var(--sage-soft)" }}
             >
               {accounts.map((acc) => (
@@ -119,7 +119,7 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
             onChange={(e) => { setPassword(e.target.value); setError(""); }}
             onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
             placeholder="password"
-            className="w-full px-4 py-2.5 rounded-[2px] outline-none"
+            className="w-full px-4 py-2.5 rounded-[var(--radius-sm)] outline-none"
             style={{
               background: "var(--sage-soft)",
               border: `1px solid ${error ? "var(--rose)" : "var(--line)"}`,
@@ -141,7 +141,7 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
           <button
             onClick={handleSubmit}
             disabled={loading || !selectedRole}
-            className="flex-1 py-2.5 rounded-[2px] transition-all duration-200"
+            className="flex-1 py-2.5 rounded-[var(--radius-sm)] transition-all duration-200"
             style={{
               background: "var(--sage-soft)",
               border: "1px solid var(--line)",
@@ -155,7 +155,7 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
           </button>
           <button
             onClick={onClose}
-            className="px-4 py-2.5 rounded-[2px]"
+            className="px-4 py-2.5 rounded-[var(--radius-sm)]"
             style={{
               background: "var(--sage-soft)",
               border: "1px solid var(--line)",

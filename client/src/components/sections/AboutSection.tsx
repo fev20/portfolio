@@ -103,7 +103,7 @@ export default function AboutSection() {
               ].map(stat => (
                 <div
                   key={stat.label}
-                  className="text-center p-2 rounded-[2px]"
+                  className="text-center p-2 rounded-[var(--radius-sm)]"
                   style={{
                     background:
                       "color-mix(in srgb, var(--sage) 4%, transparent)",
@@ -144,7 +144,7 @@ export default function AboutSection() {
             className="relative flex justify-center"
           >
             <div
-              className="relative w-full max-w-[420px] rounded-[4px] p-7 sm:p-9"
+              className="relative w-full max-w-[420px] rounded-[var(--radius)] p-7 sm:p-9"
               role="img"
               aria-label="Security research illustration"
               style={{
@@ -183,7 +183,7 @@ export default function AboutSection() {
                 aria-hidden="true"
               >
                 <div
-                  className="flex h-12 w-12 items-center justify-center rounded-[2px]"
+                  className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-sm)]"
                   style={{
                     background: "var(--rose-soft)",
                     color: "var(--rose)",
@@ -192,7 +192,7 @@ export default function AboutSection() {
                   <Code2 size={24} strokeWidth={1.5} />
                 </div>
                 <div
-                  className="flex h-28 w-24 items-center justify-center rounded-[4px]"
+                  className="flex h-28 w-24 items-center justify-center rounded-[var(--radius)]"
                   style={{
                     background: "var(--sage-soft)",
                     color: "var(--sage)",
@@ -201,7 +201,7 @@ export default function AboutSection() {
                   <ShieldCheck size={64} strokeWidth={1.3} />
                 </div>
                 <div
-                  className="flex h-12 w-12 items-center justify-center rounded-[2px]"
+                  className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-sm)]"
                   style={{
                     background: "var(--surface-muted)",
                     color: "var(--ink-secondary)",
@@ -212,20 +212,20 @@ export default function AboutSection() {
               </div>
               <div className="space-y-2.5" aria-hidden="true">
                 <div
-                  className="h-2 w-3/4 rounded-[2px]"
+                  className="h-2 w-3/4 rounded-[var(--radius-sm)]"
                   style={{ background: "var(--surface-muted)" }}
                 />
                 <div
-                  className="h-2 w-full rounded-[2px]"
+                  className="h-2 w-full rounded-[var(--radius-sm)]"
                   style={{ background: "var(--surface-muted)" }}
                 />
                 <div
-                  className="h-2 w-1/2 rounded-[2px]"
+                  className="h-2 w-1/2 rounded-[var(--radius-sm)]"
                   style={{ background: "var(--sage-soft)" }}
                 />
               </div>
               <div
-                className="mt-7 flex items-center gap-2 rounded-[2px] px-3 py-2.5"
+                className="mt-7 flex items-center gap-2 rounded-[var(--radius-sm)] px-3 py-2.5"
                 style={{
                   background: "var(--rose-soft)",
                   color: "var(--rose-deep)",
