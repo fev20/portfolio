@@ -23,7 +23,7 @@ export default function NotFound() {
 
           <h1 className="text-6xl font-extrabold text-foreground mb-2" style={{ fontFamily: "var(--font-display)", fontWeight: 800, letterSpacing: "normal" }}>404</h1>
 
-          <h2 className="text-xl font-bold text-foreground mb-4" style={{ fontFamily: "'Nunito Sans', sans-serif", fontWeight: 700, letterSpacing: "normal" }}>
+          <h2 className="text-xl font-bold text-foreground mb-4" style={{ fontFamily: "var(--font-body)", fontWeight: 700, letterSpacing: "normal" }}>
             Page Not Found
           </h2>
 

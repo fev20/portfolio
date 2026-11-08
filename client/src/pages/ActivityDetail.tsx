@@ -83,7 +83,7 @@ export default function ActivityDetail() {
                 <p
                   key={index}
                   style={{
-                    fontFamily: "'Nunito Sans', sans-serif",
+                    fontFamily: "var(--font-body)",
                     fontSize: "0.95rem",
                     color: "var(--ink-secondary)",
                     lineHeight: 1.8,
@@ -145,7 +145,7 @@ export default function ActivityDetail() {
                     </span>
                     <span
                     style={{
-                        fontFamily: "'Nunito Sans', sans-serif",
+                        fontFamily: "var(--font-body)",
                         fontSize: "0.85rem",
                         color: "var(--ink)",
                     }}

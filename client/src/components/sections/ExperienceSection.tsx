@@ -110,7 +110,7 @@ export default function ExperienceSection() {
                           <h3
                             style={{
                               letterSpacing: "normal",
-                              fontFamily: "'Nunito Sans', sans-serif",
+                              fontFamily: "var(--font-body)",
                               fontSize: "1rem",
                               fontWeight: 600,
                               color: "var(--ink)",
@@ -128,7 +128,7 @@ export default function ExperienceSection() {
                         </div>
                         <div
                           style={{
-                            fontFamily: "'Nunito Sans', sans-serif",
+                            fontFamily: "var(--font-body)",
                             fontSize: "0.75rem",
                             color: "var(--sage)",
                             marginTop: "2px",
@@ -139,7 +139,7 @@ export default function ExperienceSection() {
                       </div>
                       <span
                         style={{
-                          fontFamily: "'Nunito Sans', sans-serif",
+                          fontFamily: "var(--font-body)",
                           fontSize: "0.72rem",
                           color: "var(--ink-secondary)",
                           whiteSpace: "nowrap",
@@ -152,7 +152,7 @@ export default function ExperienceSection() {
 
                     <p
                       style={{
-                        fontFamily: "'Nunito Sans', sans-serif",
+                        fontFamily: "var(--font-body)",
                         fontSize: "0.88rem",
                         color: "var(--ink-secondary)",
                         lineHeight: 1.7,
@@ -167,7 +167,7 @@ export default function ExperienceSection() {
                         <span
                           key={tag}
                           style={{
-                            fontFamily: "'Nunito Sans', sans-serif",
+                            fontFamily: "var(--font-body)",
                             fontSize: "0.65rem",
                             padding: "2px 8px",
                             borderRadius: "var(--radius-sm)",

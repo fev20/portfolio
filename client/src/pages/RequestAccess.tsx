@@ -57,7 +57,7 @@ export default function RequestAccess() {
           </h1>
           <p
             style={{
-              fontFamily: "'Nunito Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "0.82rem",
               color: "var(--ink-muted)",
             }}

@@ -180,7 +180,7 @@ export default function ProjectDetail() {
                   </p>
                   <p
                     style={{
-                      fontFamily: "'Nunito Sans', sans-serif",
+                      fontFamily: "var(--font-body)",
                       fontSize: "1rem",
                       color: "var(--ink-secondary)",
                       lineHeight: 1.8,
@@ -347,7 +347,7 @@ export default function ProjectDetail() {
                           />
                           <span
                             style={{
-                              fontFamily: "'Nunito Sans', sans-serif",
+                              fontFamily: "var(--font-body)",
                               fontSize: "0.85rem",
                               color: "var(--ink)",
                               flex: 1,
@@ -387,7 +387,7 @@ export default function ProjectDetail() {
                           />
                           <span
                             style={{
-                              fontFamily: "'Nunito Sans', sans-serif",
+                              fontFamily: "var(--font-body)",
                               fontSize: "0.85rem",
                               color: "var(--ink)",
                               flex: 1,

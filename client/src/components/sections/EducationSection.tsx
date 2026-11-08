@@ -59,7 +59,7 @@ export default function EducationSection() {
               className="mb-5"
               style={{
                 fontWeight: 600,
-                fontFamily: "'Nunito Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: "0.75rem",
                 color: "var(--sage)",
                 letterSpacing: "normal",
@@ -101,7 +101,7 @@ export default function EducationSection() {
                         <div
                           style={{
                             letterSpacing: "normal",
-                            fontFamily: "'Nunito Sans', sans-serif",
+                            fontFamily: "var(--font-body)",
                             fontSize: "0.95rem",
                             fontWeight: 600,
                             color: "var(--ink)",
@@ -119,7 +119,7 @@ export default function EducationSection() {
                       </div>
                       <div
                         style={{
-                          fontFamily: "'Nunito Sans', sans-serif",
+                          fontFamily: "var(--font-body)",
                           fontSize: "0.85rem",
                           color: "var(--ink-secondary)",
                           marginTop: "2px",
@@ -129,7 +129,7 @@ export default function EducationSection() {
                       </div>
                       <div
                         style={{
-                          fontFamily: "'Nunito Sans', sans-serif",
+                          fontFamily: "var(--font-body)",
                           fontSize: "0.7rem",
                           color: "var(--ink-secondary)",
                           marginTop: "4px",
@@ -154,7 +154,7 @@ export default function EducationSection() {
               className="mb-5"
               style={{
                 fontWeight: 600,
-                fontFamily: "'Nunito Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: "0.75rem",
                 color: "var(--rose)",
                 letterSpacing: "normal",
@@ -199,7 +199,7 @@ export default function EducationSection() {
                       <div
                         style={{
                           letterSpacing: "normal",
-                          fontFamily: "'Nunito Sans', sans-serif",
+                          fontFamily: "var(--font-body)",
                           fontSize: "0.88rem",
                           fontWeight: 600,
                           color: "var(--ink)",
@@ -211,7 +211,7 @@ export default function EducationSection() {
                       </div>
                       <div
                         style={{
-                          fontFamily: "'Nunito Sans', sans-serif",
+                          fontFamily: "var(--font-body)",
                           fontSize: "0.68rem",
                           color: "var(--ink-secondary)",
                           marginTop: "2px",
@@ -223,7 +223,7 @@ export default function EducationSection() {
                     <div className="flex items-center gap-2 flex-shrink-0">
                       <span
                         style={{
-                          fontFamily: "'Nunito Sans', sans-serif",
+                          fontFamily: "var(--font-body)",
                           fontSize: "0.68rem",
                           color: "var(--rose)",
                         }}

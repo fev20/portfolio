@@ -54,10 +54,10 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
           <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "var(--sage)", marginBottom: "0.5rem" }}>
             $ authenticate --restricted
           </p>
-          <h2 style={{ letterSpacing: "normal", fontFamily: "'Nunito Sans', sans-serif", fontSize: "1.2rem", fontWeight: 700, color: "var(--ink)" }}>
+          <h2 style={{ letterSpacing: "normal", fontFamily: "var(--font-body)", fontSize: "1.2rem", fontWeight: 700, color: "var(--ink)" }}>
             접근 제한 파일
           </h2>
-          <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.82rem", color: "var(--ink-muted)", marginTop: "0.25rem" }}>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "0.82rem", color: "var(--ink-muted)", marginTop: "0.25rem" }}>
             이 파일은 권한이 있는 계정만 다운로드할 수 있습니다.
           </p>
         </div>
@@ -102,7 +102,7 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
                   <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: acc.color, flexShrink: 0 }} />
                   <div>
                     <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.8rem", fontWeight: 600, color: acc.color }}>{acc.label}</div>
-                    <div style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.7rem", color: "var(--ink-muted)" }}>{acc.desc}</div>
+                    <div style={{ fontFamily: "var(--font-body)", fontSize: "0.7rem", color: "var(--ink-muted)" }}>{acc.desc}</div>
                   </div>
                 </button>
               ))}

@@ -19,6 +19,7 @@ const NAV_ITEMS = [
   { id: "projects",   label: "Projects",   num: "03", sub: [] as string[] },
   { id: "experience", label: "Experience", num: "04", sub: [] as string[] },
   { id: "education",  label: "Education & Certifications", num: "05", sub: [] as string[] },
+  { id: "demos",      label: "Demos",      num: "06", sub: [] as string[] },
 ];
 
 const CATEGORY_ORDER = [
@@ -183,6 +184,10 @@ export default function Sidebar() {
   useEffect(() => {
     if (!isMainPage) return;
     const getActive = () => {
+      if (!document.getElementById("hero")) {
+        setActiveSection("hero");
+        return;
+      }
       const scrollY = window.scrollY;
       const windowH = window.innerHeight;
       const docH = document.documentElement.scrollHeight;
@@ -198,17 +203,27 @@ export default function Sidebar() {
       setActiveSection(current);
     };
     window.addEventListener("scroll", getActive, { passive: true });
+    window.addEventListener("resize", getActive);
+    window.addEventListener("portfolio:ready", getActive);
     getActive();
-    return () => window.removeEventListener("scroll", getActive);
+    return () => {
+      window.removeEventListener("scroll", getActive);
+      window.removeEventListener("resize", getActive);
+      window.removeEventListener("portfolio:ready", getActive);
+    };
   }, [isMainPage]);
 
   useEffect(() => {
     if (!isMainPage) return;
-    const pending = sessionStorage.getItem("pendingScroll");
-    if (!pending) return;
-    sessionStorage.removeItem("pendingScroll");
-    const timer = setTimeout(() => smoothScrollTo(pending), 800);
-    return () => clearTimeout(timer);
+    const consumePendingScroll = () => {
+      const pending = sessionStorage.getItem("pendingScroll");
+      if (!pending || !document.getElementById(pending)) return;
+      sessionStorage.removeItem("pendingScroll");
+      smoothScrollTo(pending);
+    };
+    window.addEventListener("portfolio:ready", consumePendingScroll);
+    consumePendingScroll();
+    return () => window.removeEventListener("portfolio:ready", consumePendingScroll);
   }, [isMainPage]);
 
   const scrollToSection = (id: string) => {
@@ -217,7 +232,9 @@ export default function Sidebar() {
       setLocation("/");
       return;
     }
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const section = document.getElementById(id);
+    if (section) section.scrollIntoView({ behavior: "smooth" });
+    else sessionStorage.setItem("pendingScroll", id);
   };
 
   const smoothScrollTo = (scrollId: string) => {
@@ -310,7 +327,7 @@ export default function Sidebar() {
             <div style={{ fontFamily: "var(--font-display)", fontSize: "1.5rem", fontWeight: 800, fontSynthesis: "none", color: "var(--ink)" }}>
               {displayName}
             </div>
-            <div style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.68rem", color: "var(--ink-secondary)", marginTop: "4px", lineHeight: 1.6 }}>
+            <div style={{ fontFamily: "var(--font-body)", fontSize: "0.68rem", color: "var(--ink-secondary)", marginTop: "4px", lineHeight: 1.6 }}>
               건국대학교 글로컬캠퍼스<br />컴퓨터공학과
             </div>
           </div>
@@ -327,7 +344,7 @@ export default function Sidebar() {
           >
             explore
           </div>
-          <nav className="px-2 pb-2">
+          <nav className="px-2 pb-2" aria-label="포트폴리오 섹션">
             {navItems.map((item) => {
               const isActive = isMainPage
                 ? activeSection === item.id
@@ -338,6 +355,7 @@ export default function Sidebar() {
                 <div key={item.id} className="mb-1" style={{ borderBottom: "1px solid var(--sidebar-line)", paddingBottom: "8px" }}>
                   <button
                     onClick={() => scrollToSection(item.id)}
+                    aria-current={isActive ? "location" : undefined}
                     className="w-full flex items-center gap-2 px-3 py-1.5 rounded transition-all relative"
                     style={{ background: isActive ? "var(--sidebar-active)" : "transparent", borderRadius: "var(--radius-sm)" }}
                   >
@@ -351,7 +369,7 @@ export default function Sidebar() {
                     <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)", minWidth: "18px" }}>
                       {item.num}
                     </span>
-                    <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.875rem", color: isActive ? "var(--ink)" : "var(--ink-secondary)", fontWeight: isActive ? 600 : 400, lineHeight: 1.4, flex: 1, textAlign: "left" }}>
+                    <span style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: isActive ? "var(--ink)" : "var(--ink-secondary)", fontWeight: isActive ? 600 : 400, lineHeight: 1.4, flex: 1, textAlign: "left" }}>
                       {item.label}
                     </span>
                     {item.subItems.length > 0 && (
@@ -587,8 +605,9 @@ export default function Sidebar() {
       </motion.aside>
 
       {/* ── Mobile bottom nav ── */}
-      <div
-        className="fixed bottom-0 left-0 right-0 z-40 lg:hidden flex items-center justify-around py-2"
+      <nav
+        aria-label="모바일 포트폴리오 섹션"
+        className="fixed bottom-0 left-0 right-0 z-40 lg:hidden flex items-stretch overflow-x-auto overscroll-x-contain px-1 py-2"
         style={{
           background: "var(--surface)",
           borderTop: "1px solid var(--sidebar-line)",
@@ -605,18 +624,19 @@ export default function Sidebar() {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className="flex flex-col items-center gap-0.5 px-1 py-1 min-w-0 flex-1"
+              aria-current={isActive ? "location" : undefined}
+              className="flex min-h-11 min-w-14 flex-[1_0_auto] flex-col items-center justify-center gap-0.5 whitespace-nowrap px-2 py-1"
             >
               <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem", color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)" }}>
                 {item.num}
               </span>
-              <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.65rem", color: isActive ? "var(--ink)" : "var(--ink-secondary)", fontWeight: isActive ? 600 : 400 }}>
+              <span style={{ fontFamily: "var(--font-body)", fontSize: "0.65rem", color: isActive ? "var(--ink)" : "var(--ink-secondary)", fontWeight: isActive ? 600 : 400 }}>
                 {item.id === "education" ? "Education" : item.label}
               </span>
             </button>
           );
         })}
-      </div>
+      </nav>
     </>
   );
 }

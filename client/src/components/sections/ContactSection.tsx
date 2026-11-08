@@ -67,7 +67,7 @@ export default function ContactSection() {
         >
           <span
             style={{
-              fontFamily: "'Nunito Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "0.62rem",
               color: "var(--sage)",
               letterSpacing: "0.12em",
@@ -103,7 +103,7 @@ export default function ContactSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
             style={{
-              fontFamily: "'Nunito Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "1rem",
               color: "var(--ink-secondary)",
               lineHeight: 1.8,
@@ -141,7 +141,7 @@ export default function ContactSection() {
                 <div>
                   <div
                     style={{
-                      fontFamily: "'Nunito Sans', sans-serif",
+                      fontFamily: "var(--font-body)",
                       fontSize: "0.65rem",
                       color: contact.color,
                       letterSpacing: "0.1em",
@@ -152,7 +152,7 @@ export default function ContactSection() {
                   </div>
                   <div
                     style={{
-                      fontFamily: "'Nunito Sans', sans-serif",
+                      fontFamily: "var(--font-body)",
                       fontSize: "0.85rem",
                       color: "var(--ink)",
                     }}
@@ -176,7 +176,7 @@ export default function ContactSection() {
       >
         <p
           style={{
-            fontFamily: "'Nunito Sans', sans-serif",
+            fontFamily: "var(--font-body)",
             fontSize: "0.7rem",
             color: "var(--ink-muted)",
           }}

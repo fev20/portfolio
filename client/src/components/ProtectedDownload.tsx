@@ -138,7 +138,7 @@ export default function ProtectedDownload({
         <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", color: accessible ? "var(--sage)" : "var(--rose)" }}>
           {accessible ? <FileText size={15} /> : <Lock size={15} />}
         </span>
-        <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", color: "var(--ink)", flex: 1 }}>
+        <span style={{ fontFamily: "var(--font-body)", fontSize: "0.85rem", color: "var(--ink)", flex: 1 }}>
           {label ?? filename}
         </span>
         {!accessible && (

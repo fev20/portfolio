@@ -115,7 +115,7 @@ export default function ProjectsSection() {
                     <div className="flex items-baseline gap-3">
                       <span
                         style={{
-                          fontFamily: "'Nunito Sans', sans-serif",
+                          fontFamily: "var(--font-body)",
                           fontSize: "0.65rem",
                           color: categoryAccent,
                         }}
@@ -125,7 +125,7 @@ export default function ProjectsSection() {
                       <h3
                         style={{
                           letterSpacing: "normal",
-                          fontFamily: "'Nunito Sans', sans-serif",
+                          fontFamily: "var(--font-body)",
                           fontSize: "1.15rem",
                           fontWeight: 600,
                           color: categoryAccent,
@@ -136,7 +136,7 @@ export default function ProjectsSection() {
                     </div>
                     <p
                       style={{
-                        fontFamily: "'Nunito Sans', sans-serif",
+                        fontFamily: "var(--font-body)",
                         fontSize: "0.7rem",
                         color: "var(--ink-secondary)",
                         marginTop: "2px",
@@ -164,7 +164,7 @@ export default function ProjectsSection() {
                   >
                     <p
                       style={{
-                        fontFamily: "'Nunito Sans', sans-serif",
+                        fontFamily: "var(--font-body)",
                         fontSize: "0.72rem",
                         color: "var(--ink-secondary)",
                       }}
@@ -222,7 +222,7 @@ export default function ProjectsSection() {
                                   <h3
                                     style={{
                                       letterSpacing: "normal",
-                                      fontFamily: "'Nunito Sans', sans-serif",
+                                      fontFamily: "var(--font-body)",
                                       fontSize: "1.1rem",
                                       fontWeight: 600,
                                       marginBottom: "0.5rem",
@@ -239,7 +239,7 @@ export default function ProjectsSection() {
                                     <span
                                       key={tag}
                                       style={{
-                                        fontFamily: "'Nunito Sans', sans-serif",
+                                        fontFamily: "var(--font-body)",
                                         background: soft,
                                         border: `1px solid ${bright}`,
                                         color: accent,
@@ -259,7 +259,7 @@ export default function ProjectsSection() {
                                 <div className="flex justify-end">
                                   <p
                                     style={{
-                                      fontFamily: "'Nunito Sans', sans-serif",
+                                      fontFamily: "var(--font-body)",
                                       fontSize: "0.8rem",
                                       color: accent,
                                     }}

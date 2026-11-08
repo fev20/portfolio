@@ -76,7 +76,7 @@ export default function Login() {
           </h1>
           <p
             style={{
-              fontFamily: "'Nunito Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "0.82rem",
               color: "var(--ink-muted)",
             }}
@@ -174,7 +174,7 @@ export default function Login() {
                     </div>
                     <div
                       style={{
-                        fontFamily: "'Nunito Sans', sans-serif",
+                        fontFamily: "var(--font-body)",
                         fontSize: "0.7rem",
                         color: "var(--ink-muted)",
                       }}

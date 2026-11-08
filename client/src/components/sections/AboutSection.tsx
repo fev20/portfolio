@@ -57,7 +57,7 @@ export default function AboutSection() {
                 className="mb-6 pl-4"
                 style={{
                   borderLeft: "2px solid var(--sage)",
-                  fontFamily: "'Nunito Sans', sans-serif",
+                  fontFamily: "var(--font-body)",
                   fontSize: "0.88rem",
                   color: "var(--sage)",
                   fontStyle: "italic",
@@ -76,7 +76,7 @@ export default function AboutSection() {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.1 + i * 0.15 }}
                   style={{
-                    fontFamily: "'Nunito Sans', sans-serif",
+                    fontFamily: "var(--font-body)",
                     fontSize: "0.97rem",
                     color: "var(--ink-secondary)",
                     lineHeight: 1.8,
@@ -113,7 +113,7 @@ export default function AboutSection() {
                 >
                   <div
                     style={{
-                      fontFamily: "'Nunito Sans', sans-serif",
+                      fontFamily: "var(--font-body)",
                       fontSize: "0.72rem",
                       fontWeight: 600,
                       color: "var(--sage)",
@@ -124,7 +124,7 @@ export default function AboutSection() {
                   </div>
                   <div
                     style={{
-                      fontFamily: "'Nunito Sans', sans-serif",
+                      fontFamily: "var(--font-body)",
                       fontSize: "0.65rem",
                       color: "var(--ink-secondary)",
                     }}

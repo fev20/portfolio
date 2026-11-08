@@ -1,7 +1,7 @@
 // Home.tsx — 메인 포트폴리오 페이지
 // Warm paper layout with sidebar navigation.
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LoadingScreen from "@/components/LoadingScreen";
 import HeroSection from "@/components/sections/HeroSection";
@@ -10,6 +10,7 @@ import SkillsSection from "@/components/sections/SkillsSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
 import EducationSection from "@/components/sections/EducationSection";
+import DemosSection from "@/components/sections/DemosSection";
 import ContactSection from "@/components/sections/ContactSection";
 
 export default function Home() {
@@ -18,6 +19,10 @@ export default function Home() {
   const handleLoadComplete = useCallback(() => {
     setLoaded(true);
   }, []);
+
+  useEffect(() => {
+    if (loaded) window.dispatchEvent(new Event("portfolio:ready"));
+  }, [loaded]);
 
   return (
     <div
@@ -46,6 +51,7 @@ export default function Home() {
               <ProjectsSection />
               <ExperienceSection />
               <EducationSection />
+              <DemosSection />
               <ContactSection />
             </main>
           </motion.div>

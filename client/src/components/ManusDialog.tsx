@@ -61,7 +61,7 @@ export function ManusDialog({
 
           {/* Title and subtitle */}
           {title ? (
-            <DialogTitle className="text-xl font-bold text-foreground leading-[26px] tracking-normal" style={{ fontFamily: "'Nunito Sans', sans-serif", fontWeight: 700, letterSpacing: "normal" }}>
+            <DialogTitle className="text-xl font-bold text-foreground leading-[26px] tracking-normal" style={{ fontFamily: "var(--font-body)", fontWeight: 700, letterSpacing: "normal" }}>
               {title}
             </DialogTitle>
           ) : null}

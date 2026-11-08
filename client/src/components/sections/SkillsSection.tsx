@@ -79,7 +79,7 @@ export default function SkillsSection() {
                   <h3
                     style={{
                       letterSpacing: "normal",
-                      fontFamily: "'Nunito Sans', sans-serif",
+                      fontFamily: "var(--font-body)",
                       fontSize: "1rem",
                       fontWeight: 600,
                       color: "var(--ink)",

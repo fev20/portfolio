@@ -141,7 +141,7 @@ export default function EducationDetail() {
             </h1>
 
             {isEdu && "subtitle" in item && (
-              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", color: "var(--ink-secondary)" }}>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", color: "var(--ink-secondary)" }}>
                 {(item as typeof education[0]).subtitle}
               </p>
             )}
@@ -175,7 +175,7 @@ export default function EducationDetail() {
           >
             <p
               style={{
-                fontFamily: "'Nunito Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: "0.95rem",
                 color: "var(--ink-secondary)",
                 lineHeight: 1.8,

@@ -130,7 +130,7 @@ export default function ExperienceDetail() {
             className="mb-3"
             style={{
               fontWeight: 700,
-              fontFamily: "'Nunito Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "0.72rem",
               color: "var(--sage)",
               letterSpacing: "normal",
@@ -140,7 +140,7 @@ export default function ExperienceDetail() {
           </h2>
           <p
             style={{
-              fontFamily: "'Nunito Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "1rem",
               color: "var(--ink-secondary)",
               lineHeight: 1.8,

@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
   { label: "Education", href: "#education" },
+  { label: "Demos", href: "#demos" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -103,6 +104,7 @@ export default function Navbar() {
                 <button
                   key={item.label}
                   onClick={() => scrollTo(item.href)}
+                  aria-current={isActive ? "location" : undefined}
                   className="relative px-3 py-1.5 text-sm transition-colors"
                   style={{
                     fontFamily: "'JetBrains Mono', monospace",
@@ -172,6 +174,7 @@ export default function Navbar() {
             <button
               key={item.label}
               onClick={() => scrollTo(item.href)}
+              aria-current={activeSection === item.href.slice(1) ? "location" : undefined}
               className="flex items-center gap-3 w-full px-6 py-3 text-left"
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
