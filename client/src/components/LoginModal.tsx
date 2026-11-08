@@ -7,9 +7,9 @@ interface LoginModalProps {
 }
 
 const accounts = [
-  { id: "admin", label: "admin", desc: "관리자", color: "#f59e0b" },
-  { id: "sekurity", label: "seKUrity", desc: "세쿠리티 소속", color: "#64ffda" },
-  { id: "whs", label: "WHS", desc: "화이트햇스쿨 소속", color: "#a78bfa" },
+  { id: "admin", label: "admin", desc: "관리자", color: "var(--ink-secondary)" },
+  { id: "sekurity", label: "seKUrity", desc: "세쿠리티 소속", color: "var(--sage)" },
+  { id: "whs", label: "WHS", desc: "화이트햇스쿨 소속", color: "var(--rose)" },
 ];
 
 export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
@@ -38,26 +38,26 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center"
-      style={{ background: "rgba(5,11,24,0.92)", backdropFilter: "blur(8px)" }}
+      style={{ background: "color-mix(in srgb, var(--ink) 24%, transparent)", backdropFilter: "blur(8px)" }}
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-sm mx-4 rounded-xl p-6"
+        className="relative w-full max-w-sm mx-4 rounded-[4px] p-6"
         style={{
-          background: "rgba(15,23,42,0.98)",
-          border: "1px solid rgba(100,255,218,0.15)",
+          background: "var(--surface)",
+          border: "1px solid var(--line)",
         }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* 헤더 */}
         <div className="mb-6">
-          <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.5)", marginBottom: "0.5rem" }}>
+          <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "var(--sage)", marginBottom: "0.5rem" }}>
             $ authenticate --restricted
           </p>
-          <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "1.2rem", fontWeight: 700, color: "#ccd6f6" }}>
+          <h2 style={{ letterSpacing: "normal", fontFamily: "'Nunito Sans', sans-serif", fontSize: "1.2rem", fontWeight: 700, color: "var(--ink)" }}>
             접근 제한 파일
           </h2>
-          <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.82rem", color: "#4a5568", marginTop: "0.25rem" }}>
+          <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.82rem", color: "var(--ink-muted)", marginTop: "0.25rem" }}>
             이 파일은 권한이 있는 계정만 다운로드할 수 있습니다.
           </p>
         </div>
@@ -66,23 +66,23 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
         <div className="mb-3 relative">
           <button
             onClick={() => setDropdownOpen((v) => !v)}
-            className="w-full flex items-center justify-between px-4 py-2.5 rounded-lg"
+            className="w-full flex items-center justify-between px-4 py-2.5 rounded-[2px]"
             style={{
-              background: "rgba(100,255,218,0.04)",
-              border: `1px solid ${selected ? selected.color + "55" : "rgba(100,255,218,0.15)"}`,
+              background: "var(--sage-soft)",
+              border: `1px solid ${selected ? `color-mix(in srgb, ${selected.color} 34%, var(--line))` : "var(--line)"}`,
               cursor: "pointer",
             }}
           >
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.85rem", color: selected ? selected.color : "#4a5568" }}>
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.85rem", color: selected ? selected.color : "var(--ink-muted)" }}>
               {selected ? `${selected.label} — ${selected.desc}` : "계정 선택"}
             </span>
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.4)", display: "inline-block", transition: "transform 0.2s", transform: dropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}>▾</span>
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "var(--sage)", display: "inline-block", transition: "transform 0.2s", transform: dropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}>▾</span>
           </button>
 
           {dropdownOpen && (
             <div
-              className="absolute w-full mt-1 rounded-lg overflow-hidden z-10"
-              style={{ background: "rgba(15,23,42,0.99)", border: "1px solid rgba(100,255,218,0.15)" }}
+              className="absolute w-full mt-1 rounded-[2px] overflow-hidden z-10"
+              style={{ background: "var(--surface)", border: "1px solid var(--sage-soft)" }}
             >
               {accounts.map((acc) => (
                 <button
@@ -90,19 +90,19 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
                   onClick={() => { setSelectedRole(acc.id); setDropdownOpen(false); setError(""); }}
                   className="w-full flex items-center gap-3 px-4 py-3 transition-all duration-150"
                   style={{
-                    background: selectedRole === acc.id ? `${acc.color}12` : "transparent",
+                    background: selectedRole === acc.id ? `color-mix(in srgb, ${acc.color} 7%, transparent)` : "transparent",
                     border: "none",
                     cursor: "pointer",
-                    borderBottom: "1px solid rgba(100,255,218,0.06)",
+                    borderBottom: "1px solid var(--line)",
                     textAlign: "left",
                   }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = `${acc.color}10`; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = selectedRole === acc.id ? `${acc.color}12` : "transparent"; }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = `color-mix(in srgb, ${acc.color} 6%, transparent)`; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = selectedRole === acc.id ? `color-mix(in srgb, ${acc.color} 7%, transparent)` : "transparent"; }}
                 >
                   <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: acc.color, flexShrink: 0 }} />
                   <div>
                     <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.8rem", fontWeight: 600, color: acc.color }}>{acc.label}</div>
-                    <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.7rem", color: "#4a5568" }}>{acc.desc}</div>
+                    <div style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.7rem", color: "var(--ink-muted)" }}>{acc.desc}</div>
                   </div>
                 </button>
               ))}
@@ -119,18 +119,18 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
             onChange={(e) => { setPassword(e.target.value); setError(""); }}
             onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
             placeholder="password"
-            className="w-full px-4 py-2.5 rounded-lg outline-none"
+            className="w-full px-4 py-2.5 rounded-[2px] outline-none"
             style={{
-              background: "rgba(100,255,218,0.04)",
-              border: `1px solid ${error ? "rgba(255,100,100,0.4)" : "rgba(100,255,218,0.15)"}`,
+              background: "var(--sage-soft)",
+              border: `1px solid ${error ? "var(--rose)" : "var(--line)"}`,
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "0.88rem",
-              color: "#ccd6f6",
+              color: "var(--ink)",
               letterSpacing: "0.1em",
             }}
           />
           {error && (
-            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.72rem", color: "rgba(255,100,100,0.8)", marginTop: "0.4rem" }}>
+            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.72rem", color: "var(--rose)", marginTop: "0.4rem" }}>
               {error}
             </p>
           )}
@@ -141,13 +141,13 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
           <button
             onClick={handleSubmit}
             disabled={loading || !selectedRole}
-            className="flex-1 py-2.5 rounded-lg transition-all duration-200"
+            className="flex-1 py-2.5 rounded-[2px] transition-all duration-200"
             style={{
-              background: "rgba(100,255,218,0.1)",
-              border: "1px solid rgba(100,255,218,0.2)",
+              background: "var(--sage-soft)",
+              border: "1px solid var(--line)",
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "0.8rem",
-              color: loading || !selectedRole ? "#4a5568" : "#64ffda",
+              color: loading || !selectedRole ? "var(--ink-muted)" : "var(--sage)",
               cursor: loading || !selectedRole ? "default" : "pointer",
             }}
           >
@@ -155,13 +155,13 @@ export default function LoginModal({ onSuccess, onClose }: LoginModalProps) {
           </button>
           <button
             onClick={onClose}
-            className="px-4 py-2.5 rounded-lg"
+            className="px-4 py-2.5 rounded-[2px]"
             style={{
-              background: "rgba(100,255,218,0.03)",
-              border: "1px solid rgba(100,255,218,0.08)",
+              background: "var(--sage-soft)",
+              border: "1px solid var(--line)",
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "0.8rem",
-              color: "#4a5568",
+              color: "var(--ink-muted)",
               cursor: "pointer",
             }}
           >

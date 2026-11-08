@@ -1,5 +1,5 @@
 // ExperienceDetail.tsx — 경험 상세 페이지
-// Design: Nebula Hacker
+// Design: Warm paper and soft pastel accents
 
 import { useState } from "react";
 import { useParams, useLocation } from "wouter";
@@ -16,12 +16,12 @@ export default function ExperienceDetail() {
 
   if (!exp) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: "#050b18" }}>
+      <div className="min-h-screen flex items-center justify-center" style={{ background: "var(--paper)" }}>
         <div className="text-center">
-          <p style={{ fontFamily: "'JetBrains Mono', monospace", color: "#64ffda" }}>
+          <p style={{ fontFamily: "'JetBrains Mono', monospace", color: "var(--sage)" }}>
             $ experience not found
           </p>
-          <button onClick={() => navigate("/")} className="mt-4 btn-neon">← Back</button>
+          <button onClick={() => navigate("/")} className="mt-4 btn-outline">← Back</button>
         </div>
       </div>
     );
@@ -33,7 +33,7 @@ export default function ExperienceDetail() {
         <PageTransition
           title={exp.title}
           subtitle={`EXPERIENCE · ${exp.period}`}
-          color="#64ffda"
+          color="var(--sage)"
           lines={[
             `$ cd ./experience/${exp.title.toLowerCase().replace(/\s+/g, "_")}`,
             `$ cat activity.log`,
@@ -44,13 +44,7 @@ export default function ExperienceDetail() {
         />
       )}
       {!loading && (
-      <div className="min-h-screen" style={{ background: "#050b18", color: "#ccd6f6" }}>
-      <div
-        className="fixed inset-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(ellipse 60% 50% at 50% 20%, rgba(100,255,218,0.05) 0%, transparent 70%)",
-        }}
-      />
+      <div className="min-h-screen" style={{ background: "var(--paper)", color: "var(--ink)" }}>
 
       <div className="relative z-10 max-w-3xl mx-auto px-6 py-16 lg:pl-24">
         <motion.button
@@ -58,7 +52,7 @@ export default function ExperienceDetail() {
           animate={{ opacity: 1, x: 0 }}
           onClick={() => navigate("/")}
           className="flex items-center gap-2 mb-10 group"
-          style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.8rem", color: "#8892b0" }}
+          style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.8rem", color: "var(--ink-secondary)" }}
         >
           <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
           cd ../experience
@@ -70,13 +64,13 @@ export default function ExperienceDetail() {
           transition={{ duration: 0.6 }}
         >
           <div
-            className="inline-block mb-3 px-3 py-1 rounded"
+            className="inline-block mb-3 px-3 py-1 rounded-[2px]"
             style={{
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "0.72rem",
-              background: "rgba(100,255,218,0.08)",
-              border: "1px solid rgba(100,255,218,0.2)",
-              color: "#64ffda",
+              background: "var(--sage-soft)",
+              border: "1px solid var(--line)",
+              color: "var(--sage)",
             }}
           >
             {exp.period}
@@ -84,10 +78,11 @@ export default function ExperienceDetail() {
 
           <h1
             style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "clamp(1.8rem, 4vw, 2.6rem)",
-              fontWeight: 700,
-              color: "#ccd6f6",
+              letterSpacing: "normal",
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(2rem, 4vw, 2.75rem)",
+              fontWeight: 800,
+              color: "var(--ink)",
               marginBottom: "0.5rem",
             }}
           >
@@ -97,7 +92,7 @@ export default function ExperienceDetail() {
             style={{
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "0.85rem",
-              color: "#64ffda",
+              color: "var(--sage)",
               marginBottom: "1.5rem",
             }}
           >
@@ -112,10 +107,10 @@ export default function ExperienceDetail() {
                   fontFamily: "'JetBrains Mono', monospace",
                   fontSize: "0.68rem",
                   padding: "3px 10px",
-                  borderRadius: "3px",
-                  background: "rgba(100,255,218,0.06)",
-                  border: "1px solid rgba(100,255,218,0.2)",
-                  color: "#64ffda",
+                  borderRadius: "2px",
+                  background: "var(--sage-soft)",
+                  border: "1px solid var(--line)",
+                  color: "var(--sage)",
                 }}
               >
                 {tag}
@@ -124,7 +119,7 @@ export default function ExperienceDetail() {
           </div>
         </motion.div>
 
-        <div className="h-px mb-8" style={{ background: "linear-gradient(90deg, rgba(100,255,218,0.3), transparent)" }} />
+        <div className="h-px mb-8" style={{ background: "var(--line)" }} />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -134,19 +129,20 @@ export default function ExperienceDetail() {
           <h2
             className="mb-3"
             style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontWeight: 700,
+              fontFamily: "'Nunito Sans', sans-serif",
               fontSize: "0.72rem",
-              color: "#64ffda",
-              letterSpacing: "0.15em",
+              color: "var(--sage)",
+              letterSpacing: "normal",
             }}
           >
             OVERVIEW
           </h2>
           <p
             style={{
-              fontFamily: "'Space Grotesk', sans-serif",
+              fontFamily: "'Nunito Sans', sans-serif",
               fontSize: "1rem",
-              color: "#8892b0",
+              color: "var(--ink-secondary)",
               lineHeight: 1.8,
             }}
           >

@@ -1,11 +1,12 @@
 // ContactSection.tsx — 연락처 섹션
-// Design: Nebula Hacker — centered with glowing contact cards
+// Design: warm paper and restrained pastel accents — simple contact cards
 
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Mail, Github, ExternalLink, BookOpen, Linkedin } from "lucide-react";
 import { profile } from "@/data/portfolio";
+import AnimalBackground from "@/components/AnimalBackground";
 
 export default function ContactSection() {
   const ref = useRef(null);
@@ -17,7 +18,7 @@ export default function ContactSection() {
       label: "Email",
       value: profile.email,
       href: `mailto:${profile.email}`,
-      color: "#64ffda",
+      color: "var(--sage)",
       show: !!profile.email,
     },
     {
@@ -25,7 +26,7 @@ export default function ContactSection() {
       label: "GitHub",
       value: profile.github?.replace("https://github.com/", "@"),
       href: profile.github,
-      color: "#ccd6f6",
+      color: "var(--ink)",
       show: !!profile.github,
     },
     {
@@ -33,7 +34,7 @@ export default function ContactSection() {
       label: "Blog",
       value: "블로그 방문하기",
       href: profile.blog,
-      color: "#a78bfa",
+      color: "var(--rose)",
       show: !!profile.blog,
     },
     {
@@ -41,7 +42,7 @@ export default function ContactSection() {
       label: "Notion",
       value: "노션 페이지",
       href: profile.notion,
-      color: "#38bdf8",
+      color: "var(--sage)",
       show: !!profile.notion,
     },
     {
@@ -49,22 +50,15 @@ export default function ContactSection() {
       label: "LinkedIn",
       value: "LinkedIn 프로필",
       href: profile.linkedin,
-      color: "#0ea5e9",
+      color: "var(--sage)",
       show: !!profile.linkedin,
     },
-  ].filter((c) => c.show);
+  ].filter(c => c.show);
 
   return (
     <section id="contact" className="relative py-28 pb-40" ref={ref}>
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 100%, rgba(100,255,218,0.05) 0%, transparent 70%)",
-        }}
-      />
-
-            <div className="container relative z-10">
+      <AnimalBackground animal="hamster" placement="contact" />
+      <div className="container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -73,28 +67,32 @@ export default function ContactSection() {
         >
           <span
             style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "'Nunito Sans', sans-serif",
               fontSize: "0.62rem",
-              color: "#64ffda55",
+              color: "var(--sage)",
               letterSpacing: "0.12em",
             }}
           >
-            contact.exe
+            SAY HELLO
           </span>
           <div className="flex items-center gap-3">
             <h2
               style={{
-                fontFamily: "'Space Grotesk', sans-serif",
-                fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
-                fontWeight: 700,
-                color: "#ccd6f6",
+                letterSpacing: "normal",
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(2rem, 3vw, 2.6rem)",
+                fontWeight: 800,
+                color: "var(--ink)",
               }}
             >
               Contact
             </h2>
             <div
               className="flex-1 h-px"
-              style={{ background: "rgba(100,255,218,0.15)", maxWidth: "200px" }}
+              style={{
+                background: "color-mix(in srgb, var(--sage) 15%, transparent)",
+                maxWidth: "200px",
+              }}
             />
           </div>
         </motion.div>
@@ -105,9 +103,9 @@ export default function ContactSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
             style={{
-              fontFamily: "'Space Grotesk', sans-serif",
+              fontFamily: "'Nunito Sans', sans-serif",
               fontSize: "1rem",
-              color: "#8892b0",
+              color: "var(--ink-secondary)",
               lineHeight: 1.8,
               marginBottom: "2.5rem",
             }}
@@ -121,19 +119,21 @@ export default function ContactSection() {
               <motion.a
                 key={contact.label}
                 href={contact.href}
-                target={contact.href?.startsWith("mailto") ? undefined : "_blank"}
+                target={
+                  contact.href?.startsWith("mailto") ? undefined : "_blank"
+                }
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                className="nebula-card rounded-xl p-4 flex items-center gap-4 group"
+                className="paper-card rounded-[4px] p-4 flex items-center gap-4 group"
                 style={{ textDecoration: "none" }}
               >
                 <div
-                  className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-all"
+                  className="w-10 h-10 rounded-[2px] flex items-center justify-center flex-shrink-0 transition-all"
                   style={{
-                    background: `${contact.color}10`,
-                    border: `1px solid ${contact.color}25`,
+                    background: `color-mix(in srgb, ${contact.color} 6%, transparent)`,
+                    border: `1px solid color-mix(in srgb, ${contact.color} 15%, transparent)`,
                   }}
                 >
                   <contact.icon size={16} style={{ color: contact.color }} />
@@ -141,7 +141,7 @@ export default function ContactSection() {
                 <div>
                   <div
                     style={{
-                      fontFamily: "'JetBrains Mono', monospace",
+                      fontFamily: "'Nunito Sans', sans-serif",
                       fontSize: "0.65rem",
                       color: contact.color,
                       letterSpacing: "0.1em",
@@ -152,9 +152,9 @@ export default function ContactSection() {
                   </div>
                   <div
                     style={{
-                      fontFamily: "'Space Grotesk', sans-serif",
+                      fontFamily: "'Nunito Sans', sans-serif",
                       fontSize: "0.85rem",
-                      color: "#ccd6f6",
+                      color: "var(--ink)",
                     }}
                   >
                     {contact.value}
@@ -170,17 +170,19 @@ export default function ContactSection() {
       <div
         className="absolute bottom-0 left-0 right-0 py-6 text-center"
         style={{
-          borderTop: "1px solid rgba(100,255,218,0.06)",
+          borderTop:
+            "1px solid color-mix(in srgb, var(--sage) 6%, transparent)",
         }}
       >
         <p
           style={{
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: "'Nunito Sans', sans-serif",
             fontSize: "0.7rem",
-            color: "#2d3748",
+            color: "var(--ink-muted)",
           }}
         >
-          유수민 · 건국대학교 글로컬캠퍼스 컴퓨터공학과 &nbsp;·&nbsp; {new Date().getFullYear()}
+          유수민 · 건국대학교 글로컬캠퍼스 컴퓨터공학과 &nbsp;·&nbsp;{" "}
+          {new Date().getFullYear()}
         </p>
       </div>
     </section>

@@ -1,6 +1,6 @@
 // ─── 기본 정보 ───────────────────────────────────────────────
 export const profile = {
-  name: "유수민",
+  name: "miel",
   nameEn: "Sumin Yoo",
   tagline: "하드웨어 보안과 웹 보안을 공부하는 컴퓨터공학 전공 학생입니다.",
   taglineEn: "Computer Engineering Student interested in Hardware Security, Web Security, and Secure Systems.",

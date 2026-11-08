@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
-import { verifyAuth, logout, setCachedRole, UserRole } from "@/utils/auth";
-import LoginModal from "@/components/LoginModal";
+import { verifyAuth, logout, UserRole } from "@/utils/auth";
 import {
   profile,
   projects,
@@ -59,23 +58,23 @@ function LoginBlock() {
   };
 
   const roleColor: Record<UserRole, string> = {
-    admin: "#f59e0b",
-    sekurity: "#64ffda",
-    whs: "#a78bfa",
+    admin: "var(--ink-secondary)",
+    sekurity: "var(--sidebar-ink)",
+    whs: "var(--rose)",
   };
 
   return (
     <div className="px-4 py-3">
       {userRole ? (
         <div
-          className="flex items-center justify-between px-3 py-2 rounded-lg"
+          className="flex items-center justify-between px-3 py-2 rounded-[4px]"
           style={{
-            background: "rgba(100,255,218,0.06)",
-            border: "1px solid rgba(100,255,218,0.15)",
+            background: "var(--sidebar-tint)",
+            border: "1px solid var(--sidebar-line)",
           }}
         >
           <div>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", color: "rgba(100,255,218,0.4)", marginBottom: "1px" }}>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", color: "var(--ink-secondary)", marginBottom: "1px" }}>
               logged in as
             </div>
             <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.72rem", fontWeight: 600, color: roleColor[userRole] }}>
@@ -86,21 +85,21 @@ function LoginBlock() {
             onClick={handleLogout}
             style={{
               background: "none",
-              border: "1px solid rgba(100,255,218,0.15)",
-              borderRadius: "6px",
+              border: "1px solid var(--sidebar-line)",
+              borderRadius: "2px",
               padding: "3px 8px",
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "0.6rem",
-              color: "#64748b",
+              color: "var(--ink-secondary)",
               cursor: "pointer",
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.color = "#64ffda";
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.4)";
+              (e.currentTarget as HTMLButtonElement).style.color = "var(--sidebar-ink)";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--sidebar-ink)";
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.color = "#64748b";
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.15)";
+              (e.currentTarget as HTMLButtonElement).style.color = "var(--ink-secondary)";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--sidebar-line)";
             }}
           >
             logout
@@ -109,27 +108,27 @@ function LoginBlock() {
       ) : (
         <button
           onClick={() => setLocation("/login")}
-          className="w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200"
+          className="w-full flex items-center gap-2 px-3 py-2 rounded-[2px] transition-all duration-200"
           style={{
-            background: "rgba(100,255,218,0.06)",
-            border: "1px solid rgba(100,255,218,0.2)",
+            background: "var(--sidebar-tint)",
+            border: "1px solid var(--sidebar-line)",
             cursor: "pointer",
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.background = "rgba(100,255,218,0.12)";
-            (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.35)";
+            (e.currentTarget as HTMLButtonElement).style.background = "var(--sidebar-active)";
+            (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--sidebar-ink)";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.background = "rgba(100,255,218,0.06)";
-            (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.2)";
+            (e.currentTarget as HTMLButtonElement).style.background = "var(--sidebar-tint)";
+            (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--sidebar-line)";
           }}
         >
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#64ffda" strokeWidth="2">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--sidebar-ink)" strokeWidth="2">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.68rem", color: "#64ffda" }}>
-            $ login
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.68rem", color: "var(--sidebar-ink)" }}>
+            login
           </span>
         </button>
       )}
@@ -246,7 +245,7 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* ── Desktop: 하나의 큰 터미널 창 ── */}
+      {/* ── Desktop: 종이 노트 스타일 내비게이션 ── */}
       <motion.aside
         initial={{ x: -260, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -254,83 +253,79 @@ export default function Sidebar() {
         className="fixed left-0 top-0 bottom-0 z-40 hidden lg:flex flex-col"
         style={{
           width: SIDEBAR_WIDTH,
-          background: "rgba(8, 14, 28, 0.98)",
-          border: "1px solid rgba(100,255,218,0.15)",
+          background: "var(--surface)",
+          border: "1px solid var(--sidebar-line)",
           borderLeft: "none",
-          backdropFilter: "blur(20px)",
+          boxShadow: "4px 0 20px color-mix(in srgb, var(--ink) 3%, transparent)",
         }}
       >
         {/* ── 최상단 타이틀바 ── */}
         <div
-          className="flex items-center justify-between px-3 py-2 flex-shrink-0"
+          className="flex items-center gap-2.5 px-4 py-4 flex-shrink-0"
           style={{
-            background: "rgba(100,255,218,0.06)",
-            borderBottom: "1px solid rgba(100,255,218,0.1)",
+            background: "var(--sidebar-tint)",
+            borderBottom: "1px solid var(--sidebar-line)",
           }}
         >
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-sm" style={{ background: "rgba(100,255,218,0.5)" }} />
-            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#64ffda", letterSpacing: "0.1em" }}>
-              portfolio.exe
-            </span>
-          </div>
-          <div className="flex items-center gap-1">
-            {["—", "□", "×"].map((s) => (
-              <span key={s} style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem", color: "#2d3748", padding: "0 2px" }}>{s}</span>
-            ))}
-          </div>
+          <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--sidebar-ink)" strokeWidth="1.6">
+            <path d="M4 4h7a3 3 0 0 1 3 3v14a4 4 0 0 0-4-3H4z" />
+            <path d="M14 7a3 3 0 0 1 3-3h3v14h-2a4 4 0 0 0-4 3" />
+          </svg>
+          <span style={{ fontFamily: "var(--font-display)", fontSize: "1.5rem", fontWeight: 800, fontSynthesis: "none", color: "var(--ink)", letterSpacing: "0.02em" }}>
+            portfolio
+          </span>
         </div>
         {/* ── login 블록 ── */}
         <LoginBlock />
 
-        {/* ── profile.exe 블록 ── */}
+        {/* ── profile 블록 ── */}
         <div
           className="flex-shrink-0 px-4 py-4"
-          style={{ borderBottom: "1px solid rgba(100,255,218,0.08)" }}
+          style={{ borderBottom: "1px solid var(--sidebar-line)" }}
         >
           <div
             className="mb-2"
-            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#64ffda44", letterSpacing: "0.1em" }}
+            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "var(--ink-secondary)", letterSpacing: "0.1em" }}
           >
-            profile.exe
+            profile
           </div>
           <div className="flex justify-center mb-3">
             <div
-              className="rounded-lg overflow-hidden"
+              className="rounded-[4px] overflow-hidden"
               style={{
                 width: "120px",
                 height: "120px",
-                border: "1px solid rgba(100,255,218,0.2)",
-                boxShadow: "0 0 16px rgba(100,255,218,0.06)",
+                background: "var(--surface)",
+                border: "1px solid var(--sidebar-line)",
               }}
             >
               <img
-                src="/Me.jpg"
-                alt="profile"
-                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", filter: "brightness(0.9) contrast(1.05)" }}
+                src="/profile-soft.png"
+                alt="프로필 일러스트"
+                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 60%" }}
               />
             </div>
           </div>
           <div className="text-center">
-            <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.9rem", fontWeight: 700, color: "#f1f5f9" }}>
+            <div style={{ fontFamily: "var(--font-display)", fontSize: "1.5rem", fontWeight: 800, fontSynthesis: "none", color: "var(--ink)" }}>
               {displayName}
             </div>
-            <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.68rem", color: "#94a3b8", marginTop: "4px", lineHeight: 1.6 }}>
+            <div style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.68rem", color: "var(--ink-secondary)", marginTop: "4px", lineHeight: 1.6 }}>
               건국대학교 글로컬캠퍼스<br />컴퓨터공학과
             </div>
           </div>
         </div>
 
         {/* ── 구분선 ── */}
-        <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(100,255,218,0.25), transparent)", flexShrink: 0 }} />
+        <div style={{ height: "1px", background: "var(--sidebar-line)", flexShrink: 0 }} />
 
-        {/* ── components.exe 블록 (스크롤 가능) ── */}
+        {/* ── explore 블록 (스크롤 가능) ── */}
         <div className="flex-1 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
           <div
             className="px-4 pt-3 pb-1"
-            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "#64ffda44", letterSpacing: "0.1em" }}
+            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "var(--ink-secondary)", letterSpacing: "0.1em" }}
           >
-            components.exe
+            explore
           </div>
           <nav className="px-2 pb-2">
             {navItems.map((item) => {
@@ -340,23 +335,23 @@ export default function Sidebar() {
                   ? location.startsWith("/education")
                   : location.startsWith(`/${item.id}`);
               return (
-                <div key={item.id} className="mb-1" style={{ borderBottom: "1px solid rgba(100,255,218,0.15)", paddingBottom: "8px" }}>
+                <div key={item.id} className="mb-1" style={{ borderBottom: "1px solid var(--sidebar-line)", paddingBottom: "8px" }}>
                   <button
                     onClick={() => scrollToSection(item.id)}
                     className="w-full flex items-center gap-2 px-3 py-1.5 rounded transition-all relative"
-                    style={{ background: isActive ? "rgba(100,255,218,0.07)" : "transparent" }}
+                    style={{ background: isActive ? "var(--sidebar-active)" : "transparent", borderRadius: "2px" }}
                   >
                     {isActive && (
                       <motion.div
                         layoutId="nav-active"
                         className="absolute left-0 top-1 bottom-1 w-0.5 rounded-full"
-                        style={{ background: "#64ffda" }}
+                        style={{ background: "var(--sidebar-ink)" }}
                       />
                     )}
-                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", color: isActive ? "#64ffda" : "#475569", minWidth: "18px" }}>
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)", minWidth: "18px" }}>
                       {item.num}
                     </span>
-                    <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.85rem", color: isActive ? "#e2e8f0" : "#94a3b8", fontWeight: isActive ? 600 : 400, flex: 1, textAlign: "left" }}>
+                    <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.875rem", color: isActive ? "var(--ink)" : "var(--ink-secondary)", fontWeight: isActive ? 600 : 400, lineHeight: 1.4, flex: 1, textAlign: "left" }}>
                       {item.label}
                     </span>
                     {item.subItems.length > 0 && (
@@ -365,7 +360,7 @@ export default function Sidebar() {
                         style={{
                           fontFamily: "'JetBrains Mono', monospace",
                           fontSize: "0.85rem",
-                          color: isActive ? "#64ffda" : "#64748b",
+                          color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)",
                           display: "inline-block",
                           transform: collapsed[item.id] ? "rotate(-90deg)" : "rotate(0deg)",
                           transition: "transform 0.2s",
@@ -380,25 +375,25 @@ export default function Sidebar() {
                   </button>
 
                   {item.subItems.length > 0 && !collapsed[item.id] && (
-                    <div className="ml-8 mt-0.5 space-y-0" style={{ borderTop: "1px solid rgba(100,255,218,0.1)", paddingTop: "4px", marginBottom: "8px" }}>
+                    <div className="ml-8 mt-0.5 space-y-0" style={{ borderTop: "1px solid var(--sidebar-line)", paddingTop: "4px", marginBottom: "8px" }}>
                       {item.subItems.map((sub, si) => (
                         <div key={si}>
                           {/* 상위 subItem 행 */}
                           <div
                             className="flex items-center gap-1.5 py-0.5 pl-2 transition-all"
                             style={{
-                              borderLeft: `1px solid ${isActive ? "rgba(100,255,218,0.18)" : "rgba(100,255,218,0.05)"}`,
+                              borderLeft: `1px solid ${isActive ? "color-mix(in srgb, var(--sidebar-ink) 18%, transparent)" : "color-mix(in srgb, var(--sidebar-ink) 5%, transparent)"}`,
                               cursor: sub.path || sub.scrollId ? "pointer" : "default",
                               marginTop: sub.label === "── Certifications ──" ? "10px" : undefined,
                             }}
                             onMouseEnter={(e) => {
                               if (sub.path || sub.scrollId) {
-                                (e.currentTarget.querySelector('span:first-child') as HTMLElement).style.color = "#64ffda";
+                                (e.currentTarget.querySelector('span:first-child') as HTMLElement).style.color = "var(--sidebar-ink)";
                               }
                             }}
                             onMouseLeave={(e) => {
                               if (sub.path || sub.scrollId) {
-                                (e.currentTarget.querySelector('span:first-child') as HTMLElement).style.color = isActive ? "#64ffda" : "#64748b";
+                                (e.currentTarget.querySelector('span:first-child') as HTMLElement).style.color = isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)";
                               }
                             }}
                           >
@@ -408,7 +403,7 @@ export default function Sidebar() {
                               style={{
                                 fontFamily: "'JetBrains Mono', monospace",
                                 fontSize: "0.62rem",
-                                color: isActive ? "#64ffda" : "#64748b",
+                                color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
@@ -431,7 +426,7 @@ export default function Sidebar() {
                                 style={{
                                   fontFamily: "'JetBrains Mono', monospace",
                                   fontSize: "0.75rem",
-                                  color: isActive ? "#64ffda" : "#64748b",
+                                  color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)",
                                   display: "inline-block",
                                   transform: collapsed[`sub-${item.id}-${si}`] ? "rotate(-90deg)" : "rotate(0deg)",
                                   transition: "transform 0.2s",
@@ -448,21 +443,21 @@ export default function Sidebar() {
 
                           {/* children 프로젝트 목록 */}
                           {sub.children && sub.children.length > 0 && !collapsed[`sub-${item.id}-${si}`] && (
-                            <div className="ml-3 mt-0.5" style={{ borderLeft: "1px solid rgba(100,255,218,0.06)" }}>
+                            <div className="ml-3 mt-0.5" style={{ borderLeft: "1px solid var(--sidebar-line)" }}>
                               {sub.children.map((child, ci) => (
                                 <div
                                   key={ci}
                                   onClick={() => handleSubClick(child.scrollId, child.path)}
                                   className="flex items-center py-0.5 pl-3 transition-all"
                                   style={{ cursor: "pointer" }}
-                                  onMouseEnter={(e) => { (e.currentTarget.querySelector('span') as HTMLElement).style.color = "#64ffda"; }}
-                                  onMouseLeave={(e) => { (e.currentTarget.querySelector('span') as HTMLElement).style.color = "#475569"; }}
+                                  onMouseEnter={(e) => { (e.currentTarget.querySelector('span') as HTMLElement).style.color = "var(--sidebar-ink)"; }}
+                                  onMouseLeave={(e) => { (e.currentTarget.querySelector('span') as HTMLElement).style.color = "var(--ink-secondary)"; }}
                                 >
                                   <span
                                     style={{
                                       fontFamily: "'JetBrains Mono', monospace",
                                       fontSize: "0.6rem",
-                                      color: "#475569",
+                                      color: "var(--ink-secondary)",
                                       whiteSpace: "nowrap",
                                       overflow: "hidden",
                                       textOverflow: "ellipsis",
@@ -487,20 +482,20 @@ export default function Sidebar() {
         </div>
 
         {/* ── 구분선 ── */}
-        <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(100,255,218,0.25), transparent)", flexShrink: 0 }} />
+        <div style={{ height: "1px", background: "var(--sidebar-line)", flexShrink: 0 }} />
 
-        {/* ── contact.exe 블록 ── */}
+        {/* ── contact 블록 ── */}
         <div className="flex-shrink-0 pb-4">
           <div
             style={{
               padding: "10px 16px 8px",
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "0.65rem",
-              color: "#64ffda55",
+              color: "var(--ink-secondary)",
               letterSpacing: "0.12em",
             }}
           >
-            contact.exe
+            contact
           </div>
           <div className="flex items-center justify-around px-4">
             {/* GitHub */}
@@ -511,20 +506,20 @@ export default function Sidebar() {
               title="GitHub"
               className="flex items-center justify-center transition-all"
               style={{
-                width: "36px", height: "36px", borderRadius: "50%",
-                border: "1px solid rgba(100,255,218,0.15)",
-                background: "rgba(100,255,218,0.04)",
-                color: "#64748b",
+                width: "36px", height: "36px", borderRadius: "2px",
+                border: "1px solid var(--sidebar-line)",
+                background: "var(--sidebar-tint)",
+                color: "var(--ink-secondary)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100,255,218,0.5)";
-                e.currentTarget.style.color = "#64ffda";
-                e.currentTarget.style.background = "rgba(100,255,218,0.1)";
+                e.currentTarget.style.borderColor = "var(--sidebar-ink)";
+                e.currentTarget.style.color = "var(--sidebar-ink)";
+                e.currentTarget.style.background = "var(--sidebar-active)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100,255,218,0.15)";
-                e.currentTarget.style.color = "#64748b";
-                e.currentTarget.style.background = "rgba(100,255,218,0.04)";
+                e.currentTarget.style.borderColor = "var(--sidebar-line)";
+                e.currentTarget.style.color = "var(--ink-secondary)";
+                e.currentTarget.style.background = "var(--sidebar-tint)";
               }}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -539,20 +534,20 @@ export default function Sidebar() {
               title="Blog"
               className="flex items-center justify-center transition-all"
               style={{
-                width: "36px", height: "36px", borderRadius: "50%",
-                border: "1px solid rgba(100,255,218,0.15)",
-                background: "rgba(100,255,218,0.04)",
-                color: "#64748b",
+                width: "36px", height: "36px", borderRadius: "2px",
+                border: "1px solid var(--sidebar-line)",
+                background: "var(--sidebar-tint)",
+                color: "var(--ink-secondary)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100,255,218,0.5)";
-                e.currentTarget.style.color = "#64ffda";
-                e.currentTarget.style.background = "rgba(100,255,218,0.1)";
+                e.currentTarget.style.borderColor = "var(--sidebar-ink)";
+                e.currentTarget.style.color = "var(--sidebar-ink)";
+                e.currentTarget.style.background = "var(--sidebar-active)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100,255,218,0.15)";
-                e.currentTarget.style.color = "#64748b";
-                e.currentTarget.style.background = "rgba(100,255,218,0.04)";
+                e.currentTarget.style.borderColor = "var(--sidebar-line)";
+                e.currentTarget.style.color = "var(--ink-secondary)";
+                e.currentTarget.style.background = "var(--sidebar-tint)";
               }}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -566,20 +561,20 @@ export default function Sidebar() {
               title="Email"
               className="flex items-center justify-center transition-all"
               style={{
-                width: "36px", height: "36px", borderRadius: "50%",
-                border: "1px solid rgba(100,255,218,0.15)",
-                background: "rgba(100,255,218,0.04)",
-                color: "#64748b",
+                width: "36px", height: "36px", borderRadius: "2px",
+                border: "1px solid var(--sidebar-line)",
+                background: "var(--sidebar-tint)",
+                color: "var(--ink-secondary)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100,255,218,0.5)";
-                e.currentTarget.style.color = "#64ffda";
-                e.currentTarget.style.background = "rgba(100,255,218,0.1)";
+                e.currentTarget.style.borderColor = "var(--sidebar-ink)";
+                e.currentTarget.style.color = "var(--sidebar-ink)";
+                e.currentTarget.style.background = "var(--sidebar-active)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100,255,218,0.15)";
-                e.currentTarget.style.color = "#64748b";
-                e.currentTarget.style.background = "rgba(100,255,218,0.04)";
+                e.currentTarget.style.borderColor = "var(--sidebar-line)";
+                e.currentTarget.style.color = "var(--ink-secondary)";
+                e.currentTarget.style.background = "var(--sidebar-tint)";
               }}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -595,9 +590,9 @@ export default function Sidebar() {
       <div
         className="fixed bottom-0 left-0 right-0 z-40 lg:hidden flex items-center justify-around py-2"
         style={{
-          background: "rgba(8,14,28,0.97)",
-          borderTop: "1px solid rgba(100,255,218,0.12)",
-          backdropFilter: "blur(20px)",
+          background: "var(--surface)",
+          borderTop: "1px solid var(--sidebar-line)",
+          boxShadow: "0 -4px 20px color-mix(in srgb, var(--ink) 4%, transparent)",
         }}
       >
         {NAV_ITEMS.map((item) => {
@@ -610,13 +605,13 @@ export default function Sidebar() {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className="flex flex-col items-center gap-0.5 px-2 py-1"
+              className="flex flex-col items-center gap-0.5 px-1 py-1 min-w-0 flex-1"
             >
-              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem", color: isActive ? "#64ffda" : "#475569" }}>
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem", color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)" }}>
                 {item.num}
               </span>
-              <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.65rem", color: isActive ? "#e2e8f0" : "#64748b", fontWeight: isActive ? 600 : 400 }}>
-                {item.label}
+              <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.65rem", color: isActive ? "var(--ink)" : "var(--ink-secondary)", fontWeight: isActive ? 600 : 400 }}>
+                {item.id === "education" ? "Education" : item.label}
               </span>
             </button>
           );

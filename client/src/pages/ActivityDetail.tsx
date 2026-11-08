@@ -1,4 +1,5 @@
 import { useParams } from "wouter";
+import { FileText } from "lucide-react";
 import { useLocation } from "wouter";
 import { nowActivities } from "@/data/portfolio";
 
@@ -12,7 +13,7 @@ export default function ActivityDetail() {
   if (!category || !item) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p style={{ color: "#64ffda", fontFamily: "'JetBrains Mono', monospace" }}>
+        <p style={{ color: "var(--sage)", fontFamily: "'JetBrains Mono', monospace" }}>
           페이지를 찾을 수 없어요.
         </p>
       </div>
@@ -31,7 +32,7 @@ export default function ActivityDetail() {
             cursor: "pointer",
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: "0.8rem",
-            color: "rgba(100,255,218,0.6)",
+            color: "var(--sage)",
             marginBottom: "2rem",
             display: "block",
             padding: 0,
@@ -45,7 +46,7 @@ export default function ActivityDetail() {
           style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: "0.75rem",
-            color: "#4a5568",
+            color: "var(--ink-muted)",
             marginBottom: "0.5rem",
           }}
         >
@@ -55,10 +56,11 @@ export default function ActivityDetail() {
         {/* 제목 */}
         <h1
           style={{
-            fontFamily: "'Space Grotesk', sans-serif",
-            fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
+            letterSpacing: "normal",
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(2rem, 4vw, 2.75rem)",
             fontWeight: 800,
-            color: "#ccd6f6",
+            color: "var(--ink)",
             marginBottom: "2rem",
           }}
         >
@@ -67,9 +69,9 @@ export default function ActivityDetail() {
 
         <div
           style={{
-            background: "rgba(100,255,218,0.02)",
-            border: "1px solid rgba(100,255,218,0.1)",
-            borderRadius: "12px",
+            background: "var(--sage-soft)",
+            border: "1px solid var(--line)",
+            borderRadius: "4px",
             padding: "2rem",
             minHeight: "300px",
           }}
@@ -81,9 +83,9 @@ export default function ActivityDetail() {
                 <p
                   key={index}
                   style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
+                    fontFamily: "'Nunito Sans', sans-serif",
                     fontSize: "0.95rem",
-                    color: "#8892b0",
+                    color: "var(--ink-secondary)",
                     lineHeight: 1.8,
                   }}
                 >
@@ -96,7 +98,7 @@ export default function ActivityDetail() {
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
                 fontSize: "0.8rem",
-                color: "#4a5568",
+                color: "var(--ink-muted)",
               }}
             >
               // 내용을 채워주세요
@@ -111,8 +113,8 @@ export default function ActivityDetail() {
                   key={i}
                   src={src}
                   alt=""
-                  className="rounded-lg w-full object-cover"
-                  style={{ border: "1px solid rgba(100,255,218,0.1)" }}
+                  className="rounded-[4px] w-full object-cover"
+                  style={{ border: "1px solid var(--line)" }}
                 />
               ))}
             </div>
@@ -125,10 +127,10 @@ export default function ActivityDetail() {
                 <button
                     key={i}
                     onClick={() => window.open(file.url, "_blank", "noopener,noreferrer")}
-                    className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 w-full text-left"
+                    className="flex items-center gap-3 px-4 py-2.5 rounded-[2px] transition-all duration-200 w-full text-left"
                     style={{
-                    background: "rgba(100,255,218,0.03)",
-                    border: "1px solid rgba(100,255,218,0.1)",
+                    background: "var(--sage-soft)",
+                    border: "1px solid var(--line)",
                     cursor: "pointer",
                     }}
                 >
@@ -136,16 +138,16 @@ export default function ActivityDetail() {
                     style={{
                         fontFamily: "'JetBrains Mono', monospace",
                         fontSize: "0.75rem",
-                        color: "rgba(100,255,218,0.5)",
+                        color: "var(--sage)",
                     }}
                     >
-                    📄
+                    <FileText size={15} />
                     </span>
                     <span
                     style={{
-                        fontFamily: "'Space Grotesk', sans-serif",
+                        fontFamily: "'Nunito Sans', sans-serif",
                         fontSize: "0.85rem",
-                        color: "#a8b2d8",
+                        color: "var(--ink)",
                     }}
                     >
                     {file.name}

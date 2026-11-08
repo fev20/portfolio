@@ -1,20 +1,23 @@
-/* =============================================================
-   NEBULA HACKER — Design System
-   Theme: Deep Space + Cybersecurity
-   Colors: #050b18 bg | #64ffda mint | #a78bfa lavender | #38bdf8 sky
-   Fonts: Space Grotesk (display) + JetBrains Mono (code/accent)
-   ============================================================= */
-
+/* Cream, fresh pink, and apricot beige with Miel Jelly display type. */
 @import "tailwindcss";
 @import "tw-animate-css";
-
 @custom-variant dark (&:is(.dark *));
+
+@font-face {
+  font-family: "Miel Jelly";
+  src: url("/fonts/miel-jelly/MielJelly-Regular.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 0px);
+  --radius-2xl: calc(var(--radius) + 0px);
+  --radius-3xl: calc(var(--radius) + 0px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -47,81 +50,110 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-
-  /* Custom nebula palette */
-  --color-space-bg: #050b18;
-  --color-space-card: #0f172a;
-  --color-space-card-hover: #1e293b;
-  --color-mint: #64ffda;
-  --color-lavender: #a78bfa;
-  --color-sky: #38bdf8;
-  --color-text-primary: #ccd6f6;
-  --color-text-secondary: #8892b0;
-  --color-text-muted: #4a5568;
 }
 
 :root {
-  --radius: 0.5rem;
-  --background: oklch(0.06 0.02 250);
-  --foreground: oklch(0.88 0.02 250);
-  --card: oklch(0.1 0.025 250);
-  --card-foreground: oklch(0.88 0.02 250);
-  --popover: oklch(0.1 0.025 250);
-  --popover-foreground: oklch(0.88 0.02 250);
-  --primary: oklch(0.85 0.15 170);
-  --primary-foreground: oklch(0.06 0.02 250);
-  --secondary: oklch(0.14 0.03 250);
-  --secondary-foreground: oklch(0.75 0.05 250);
-  --muted: oklch(0.14 0.03 250);
-  --muted-foreground: oklch(0.55 0.04 250);
-  --accent: oklch(0.7 0.12 290);
-  --accent-foreground: oklch(0.06 0.02 250);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 8%);
-  --input: oklch(1 0 0 / 10%);
-  --ring: oklch(0.85 0.15 170);
-  --chart-1: oklch(0.85 0.15 170);
-  --chart-2: oklch(0.7 0.12 290);
-  --chart-3: oklch(0.75 0.12 220);
-  --chart-4: oklch(0.65 0.1 200);
-  --chart-5: oklch(0.6 0.1 260);
-  --sidebar: oklch(0.08 0.02 250);
-  --sidebar-foreground: oklch(0.88 0.02 250);
-  --sidebar-primary: oklch(0.85 0.15 170);
-  --sidebar-primary-foreground: oklch(0.06 0.02 250);
-  --sidebar-accent: oklch(0.14 0.03 250);
-  --sidebar-accent-foreground: oklch(0.88 0.02 250);
-  --sidebar-border: oklch(1 0 0 / 8%);
-  --sidebar-ring: oklch(0.85 0.15 170);
+  color-scheme: light;
+  --paper: #fffaf5;
+  --surface: #fffdfb;
+  --surface-muted: #f8eee4;
+  --ink: #503b36;
+  --ink-secondary: #805f51;
+  --ink-muted: #805f51;
+  --line: #efddd0;
+  --sage: #a46b4d;
+  --sage-soft: #f8ecdf;
+  --sage-bright: #ecc9b3;
+  --sage-deep: #895239;
+  --rose: #a85c76;
+  --rose-soft: #f8e8ee;
+  --rose-bright: #eac0d0;
+  --rose-deep: #8d4961;
+  --name-pink: #e6b7c4;
+  --sidebar-tint: #f5e7dd;
+  --sidebar-active: #eed9ca;
+  --sidebar-ink: #795544;
+  --sidebar-line: #ead9cc;
+  --font-display: "Miel Jelly", "Nunito Sans", "Malgun Gothic", sans-serif;
+  --radius: 0.25rem;
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
+  --primary: var(--sage-deep);
+  --primary-foreground: var(--surface);
+  --secondary: var(--surface-muted);
+  --secondary-foreground: var(--ink);
+  --muted: var(--surface-muted);
+  --muted-foreground: var(--ink-secondary);
+  --accent: var(--rose-soft);
+  --accent-foreground: var(--rose-deep);
+  --destructive: var(--rose-deep);
+  --destructive-foreground: var(--surface);
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--sage);
+  --chart-1: var(--sage);
+  --chart-2: var(--rose);
+  --chart-3: var(--ink-secondary);
+  --chart-4: var(--sage-soft);
+  --chart-5: var(--rose-soft);
+  --sidebar: var(--surface);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--sidebar-ink);
+  --sidebar-primary-foreground: var(--surface);
+  --sidebar-accent: var(--sidebar-active);
+  --sidebar-accent-foreground: var(--sidebar-ink);
+  --sidebar-border: var(--sidebar-line);
+  --sidebar-ring: var(--sidebar-ink);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
   }
-
   body {
     @apply bg-background text-foreground;
-    font-family: 'Space Grotesk', sans-serif;
-    background-color: #050b18;
-    color: #ccd6f6;
+    font-family: "Nunito Sans", "Malgun Gothic", sans-serif;
+    line-height: 1.7;
     overflow-x: hidden;
   }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Nunito Sans", "Malgun Gothic", sans-serif;
     font-weight: 700;
+    letter-spacing: -0.025em;
   }
-
-  code, .mono {
-    font-family: 'JetBrains Mono', monospace;
+  h1,
+  h2,
+  .display-font {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-synthesis: none;
+    letter-spacing: normal;
   }
-
+  code,
+  .mono {
+    font-family: "JetBrains Mono", monospace;
+  }
+  ::selection {
+    color: var(--ink);
+    background: var(--rose-soft);
+  }
+  :focus-visible {
+    outline: 2px solid var(--sage);
+    outline-offset: 4px;
+  }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   [type="button"]:not(:disabled),
@@ -133,203 +165,219 @@
   input[type="radio"]:not(:disabled) {
     @apply cursor-pointer;
   }
-
-  /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #050b18;
+    background: var(--paper);
   }
   ::-webkit-scrollbar-thumb {
-    background: #1e293b;
+    background: var(--line);
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #64ffda44;
+    background: var(--ink-muted);
   }
 }
 
 @layer components {
   .container {
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
   }
-
   .flex {
     min-height: 0;
     min-width: 0;
   }
-
   @media (min-width: 640px) {
     .container {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
+      padding-inline: 1.5rem;
     }
   }
-
   @media (min-width: 1024px) {
     .container {
-      padding-left: 2rem;
-      padding-right: 2rem;
+      padding-inline: 2rem;
       max-width: 1200px;
     }
   }
-
-  /* Nebula card style */
-  .nebula-card {
-    background: rgba(15, 23, 42, 0.8);
-    border: 1px solid rgba(100, 255, 218, 0.1);
-    backdrop-filter: blur(12px);
-    transition: all 0.3s ease;
+  .paper-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: none;
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease,
+      transform 0.25s ease;
   }
-
-  .nebula-card:hover {
-    border-color: rgba(100, 255, 218, 0.3);
-    box-shadow: 0 0 20px rgba(100, 255, 218, 0.08), 0 8px 32px rgba(0, 0, 0, 0.4);
+  .paper-card:hover {
+    border-color: color-mix(in srgb, var(--sage) 45%, var(--line));
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--rose) 5%, transparent);
     transform: translateY(-2px);
   }
-
-  /* Mint glow text */
-  .mint-glow {
-    color: #64ffda;
-    text-shadow: 0 0 20px rgba(100, 255, 218, 0.4);
+  .text-sage {
+    color: var(--sage-deep);
   }
-
-  /* Section number decoration */
+  .project-card {
+    border-color: color-mix(in srgb, var(--project-bright) 55%, var(--line));
+    box-shadow: none;
+  }
+  .project-card:hover,
+  .project-card:focus-visible {
+    border-color: var(--project-bright);
+    box-shadow: none;
+  }
   .section-number {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 0.75rem;
-    color: #64ffda;
-    letter-spacing: 0.1em;
+    color: var(--rose);
+    letter-spacing: 0.08em;
   }
-
-  /* Neon border button */
-  .btn-neon {
-    border: 1px solid #64ffda;
-    color: #64ffda;
-    background: transparent;
-    font-family: 'JetBrains Mono', monospace;
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    background: var(--surface);
+    font-family: "Nunito Sans", sans-serif;
     font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    padding: 0.6rem 1.4rem;
-    border-radius: 4px;
-    transition: all 0.25s ease;
-    position: relative;
-    overflow: hidden;
+    font-weight: 600;
+    padding: 0.65rem 1.25rem;
+    border-radius: 2px;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease;
   }
-
-  .btn-neon::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(100, 255, 218, 0.08);
-    opacity: 0;
-    transition: opacity 0.25s ease;
+  .btn-outline:hover {
+    color: var(--sage-deep);
+    background: var(--sage-soft);
+    border-color: var(--sage);
+    transform: translateY(-2px);
   }
-
-  .btn-neon:hover::before {
-    opacity: 1;
-  }
-
-  .btn-neon:hover {
-    box-shadow: 0 0 16px rgba(100, 255, 218, 0.3);
-  }
-
-  /* Star particles */
-  .stars-layer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* Skill tag */
   .skill-tag {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 0.75rem;
     padding: 0.25rem 0.75rem;
-    border-radius: 3px;
-    border: 1px solid rgba(100, 255, 218, 0.2);
-    color: #64ffda;
-    background: rgba(100, 255, 218, 0.05);
+    border-radius: 2px;
+    border: 1px solid var(--line);
+    color: var(--sage-deep);
+    background: var(--sage-soft);
     white-space: nowrap;
   }
-}
-
-/* Star twinkle animation */
-@keyframes twinkle {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.2); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 8px rgba(100, 255, 218, 0.2); }
-  50% { box-shadow: 0 0 24px rgba(100, 255, 218, 0.5); }
-}
-
-@keyframes typing-cursor {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@keyframes scan-line {
-  0% { top: -5%; }
-  100% { top: 105%; }
+  .hero-note {
+    position: relative;
+    padding: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    box-shadow: none;
+  }
+  .animal-background {
+    --animal-size: 170px;
+    --animal-outline: rgb(211 185 171 / 45%);
+    position: absolute;
+    z-index: 0;
+    width: var(--animal-size);
+    aspect-ratio: var(--animal-aspect);
+    overflow: hidden;
+    filter:
+      drop-shadow(0.65px 0 0 var(--animal-outline))
+      drop-shadow(-0.65px 0 0 var(--animal-outline))
+      drop-shadow(0 0.65px 0 var(--animal-outline))
+      drop-shadow(0 -0.65px 0 var(--animal-outline));
+    pointer-events: none;
+    user-select: none;
+  }
+  .animal-background img {
+    position: absolute;
+    display: block;
+    width: calc(var(--animal-size) * var(--animal-sheet-width));
+    max-width: none;
+    height: auto;
+    left: calc(var(--animal-size) * var(--animal-offset-x));
+    top: calc(var(--animal-size) * var(--animal-offset-y));
+  }
+  .animal-background--hero {
+    --animal-size: 180px;
+    top: 1rem;
+    right: 1rem;
+  }
+  .animal-background--skills {
+    --animal-size: 200px;
+    top: 1rem;
+    right: 1rem;
+  }
+  .animal-background--experience {
+    --animal-size: 165px;
+    top: 1.5rem;
+    right: 1rem;
+  }
+  .animal-background--contact {
+    --animal-size: 175px;
+    top: 1.5rem;
+    left: 1rem;
+  }
+  @media (min-width: 1024px) {
+    .animal-background--hero {
+      --animal-size: 300px;
+      top: 2.5rem;
+      right: 3rem;
+    }
+    .animal-background--skills {
+      --animal-size: 330px;
+      top: 1rem;
+      right: 2rem;
+    }
+    .animal-background--experience {
+      --animal-size: 270px;
+      top: 1.5rem;
+      right: 2rem;
+    }
+    .animal-background--contact {
+      --animal-size: 280px;
+      top: 2rem;
+      left: 2rem;
+    }
+  }
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-
-@keyframes glitch {
-  0% { clip-path: inset(0 0 98% 0); transform: translateX(-2px); }
-  10% { clip-path: inset(30% 0 50% 0); transform: translateX(2px); }
-  20% { clip-path: inset(60% 0 20% 0); transform: translateX(-1px); }
-  30% { clip-path: inset(80% 0 5% 0); transform: translateX(1px); }
-  40% { clip-path: inset(0 0 98% 0); transform: translateX(0); }
-  100% { clip-path: inset(0 0 98% 0); transform: translateX(0); }
-}
-
 .animate-fade-in-up {
-  animation: fadeInUp 0.7s ease forwards;
+  animation: fadeInUp 0.6s ease forwards;
 }
-
 .animate-fade-in {
-  animation: fadeIn 0.5s ease forwards;
+  animation: fadeIn 0.4s ease forwards;
 }
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-.cursor-blink {
-  animation: typing-cursor 1s step-end infinite;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,5 +1,5 @@
 // Navbar.tsx — 상단 고정 네비게이션
-// Design: Nebula Hacker — frosted glass navbar with scroll indicator
+// Design: warm paper navigation with reddish beige accents
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -54,11 +54,11 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-40"
       style={{
         background: scrolled
-          ? "rgba(5, 11, 24, 0.92)"
+          ? "var(--surface)"
           : "transparent",
         backdropFilter: scrolled ? "blur(16px)" : "none",
         borderBottom: scrolled
-          ? "1px solid rgba(100,255,218,0.08)"
+          ? "1px solid var(--sidebar-line)"
           : "none",
         transition: "all 0.3s ease",
       }}
@@ -72,20 +72,21 @@ export default function Navbar() {
           >
             <span
               style={{
-                fontFamily: "'JetBrains Mono', monospace",
-                color: "#64ffda",
-                fontSize: "1.1rem",
-                fontWeight: 600,
+                color: "var(--rose)",
               }}
             >
-              &gt;_
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                <path d="M3 4h7a3 3 0 0 1 3 3v14a4 4 0 0 0-4-3H3z" />
+                <path d="M13 7a3 3 0 0 1 3-3h5v14h-4a4 4 0 0 0-4 3" />
+              </svg>
             </span>
             <span
               style={{
-                fontFamily: "'Space Grotesk', sans-serif",
-                color: "#ccd6f6",
-                fontSize: "0.9rem",
-                fontWeight: 600,
+                fontFamily: "var(--font-display)",
+                color: "var(--ink)",
+                fontSize: "1.5rem",
+                fontWeight: 800,
+                fontSynthesis: "none",
                 letterSpacing: "0.05em",
               }}
             >
@@ -105,11 +106,11 @@ export default function Navbar() {
                   className="relative px-3 py-1.5 text-sm transition-colors"
                   style={{
                     fontFamily: "'JetBrains Mono', monospace",
-                    color: isActive ? "#64ffda" : "#8892b0",
+                    color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)",
                     fontSize: "0.78rem",
                   }}
                 >
-                  <span style={{ color: "#64ffda44", marginRight: "2px" }}>
+                  <span style={{ color: "var(--ink-secondary)", marginRight: "2px" }}>
                     {String(i + 1).padStart(2, "0")}.
                   </span>
                   {item.label}
@@ -117,7 +118,7 @@ export default function Navbar() {
                     <motion.div
                       layoutId="nav-indicator"
                       className="absolute bottom-0 left-3 right-3 h-px"
-                      style={{ background: "#64ffda" }}
+                      style={{ background: "var(--sidebar-ink)" }}
                     />
                   )}
                 </button>
@@ -133,21 +134,21 @@ export default function Navbar() {
             <span
               className="block w-5 h-px transition-all"
               style={{
-                background: "#64ffda",
+                background: "var(--sidebar-ink)",
                 transform: menuOpen ? "rotate(45deg) translate(2px, 2px)" : "none",
               }}
             />
             <span
               className="block w-5 h-px transition-all"
               style={{
-                background: "#64ffda",
+                background: "var(--sidebar-ink)",
                 opacity: menuOpen ? 0 : 1,
               }}
             />
             <span
               className="block w-5 h-px transition-all"
               style={{
-                background: "#64ffda",
+                background: "var(--sidebar-ink)",
                 transform: menuOpen ? "rotate(-45deg) translate(2px, -2px)" : "none",
               }}
             />
@@ -163,8 +164,8 @@ export default function Navbar() {
           exit={{ opacity: 0, y: -10 }}
           className="md:hidden"
           style={{
-            background: "rgba(5,11,24,0.98)",
-            borderBottom: "1px solid rgba(100,255,218,0.1)",
+            background: "var(--surface)",
+            borderBottom: "1px solid var(--sidebar-line)",
           }}
         >
           {NAV_ITEMS.map((item, i) => (
@@ -175,11 +176,11 @@ export default function Navbar() {
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
                 fontSize: "0.85rem",
-                color: "#ccd6f6",
-                borderBottom: "1px solid rgba(100,255,218,0.05)",
+                color: "var(--ink)",
+                borderBottom: "1px solid var(--sidebar-line)",
               }}
             >
-              <span style={{ color: "#64ffda", fontSize: "0.7rem" }}>
+              <span style={{ color: "var(--sidebar-ink)", fontSize: "0.7rem" }}>
                 {String(i + 1).padStart(2, "0")}
               </span>
               {item.label}

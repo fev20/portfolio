@@ -19,7 +19,7 @@ function renderDescription(text: string) {
     <span key={i}>
       {line.split(/(\*\*.*?\*\*)/g).map((part, j) =>
         part.startsWith("**") && part.endsWith("**") ? (
-          <strong key={j} style={{ color: "#ccd6f6", fontWeight: 700 }}>
+          <strong key={j} style={{ color: "var(--ink)", fontWeight: 700 }}>
             {part.slice(2, -2)}
           </strong>
         ) : (
@@ -37,17 +37,17 @@ export default function EducationDetail() {
 
   const isEdu = type === "edu";
   const item = isEdu ? education[Number(index)] : certifications[Number(index)];
-  const color = isEdu ? "#64ffda" : "#a78bfa";
+  const color = isEdu ? "var(--sage)" : "var(--rose)";
   const [loading, setLoading] = useState(true);
 
   if (!item) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: "#050b18" }}>
+      <div className="min-h-screen flex items-center justify-center" style={{ background: "var(--paper)" }}>
         <div className="text-center">
-          <p style={{ fontFamily: "'JetBrains Mono', monospace", color: "#64ffda" }}>
+          <p style={{ fontFamily: "'JetBrains Mono', monospace", color: "var(--sage)" }}>
             $ record not found
           </p>
-          <button onClick={() => navigate("/")} className="mt-4 btn-neon">← Back</button>
+          <button onClick={() => navigate("/")} className="mt-4 btn-outline">← Back</button>
         </div>
       </div>
     );
@@ -84,13 +84,7 @@ export default function EducationDetail() {
         />
       )}
       {!loading && (
-    <div className="min-h-screen" style={{ background: "#050b18", color: "#ccd6f6" }}>
-      <div
-        className="fixed inset-0 pointer-events-none"
-        style={{
-          background: `radial-gradient(ellipse 60% 50% at 50% 20%, ${color}06 0%, transparent 70%)`,
-        }}
-      />
+    <div className="min-h-screen" style={{ background: "var(--paper)", color: "var(--ink)" }}>
 
       <div className="relative z-10 max-w-3xl mx-auto px-6 py-16 lg:pl-24">
         <motion.button
@@ -98,7 +92,7 @@ export default function EducationDetail() {
           animate={{ opacity: 1, x: 0 }}
           onClick={() => navigate("/")}
           className="flex items-center gap-2 mb-10 group"
-          style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.8rem", color: "#8892b0" }}
+          style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.8rem", color: "var(--ink-secondary)" }}
         >
           <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
           cd ../education
@@ -111,10 +105,10 @@ export default function EducationDetail() {
           className="flex items-start gap-6"
         >
           <div
-            className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0"
+            className="w-16 h-16 rounded-[4px] flex items-center justify-center flex-shrink-0"
             style={{
-              background: `${color}10`,
-              border: `1px solid ${color}30`,
+              background: `color-mix(in srgb, ${color} 6%, transparent)`,
+              border: `1px solid color-mix(in srgb, ${color} 19%, transparent)`,
             }}
           >
             <Icon size={28} style={{ color }} />
@@ -122,11 +116,11 @@ export default function EducationDetail() {
 
           <div>
             <div
-              className="inline-block mb-2 px-3 py-1 rounded text-xs"
+              className="inline-block mb-2 px-3 py-1 rounded-[2px] text-xs"
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
-                background: `${color}08`,
-                border: `1px solid ${color}20`,
+                background: `color-mix(in srgb, ${color} 3%, transparent)`,
+                border: `1px solid color-mix(in srgb, ${color} 13%, transparent)`,
                 color,
               }}
             >
@@ -135,10 +129,11 @@ export default function EducationDetail() {
 
             <h1
               style={{
-                fontFamily: "'Space Grotesk', sans-serif",
-                fontSize: "clamp(1.5rem, 3.5vw, 2.2rem)",
-                fontWeight: 700,
-                color: "#ccd6f6",
+                letterSpacing: "normal",
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(2rem, 4vw, 2.75rem)",
+                fontWeight: 800,
+                color: "var(--ink)",
                 marginBottom: "0.4rem",
               }}
             >
@@ -146,7 +141,7 @@ export default function EducationDetail() {
             </h1>
 
             {isEdu && "subtitle" in item && (
-              <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "1rem", color: "#8892b0" }}>
+              <p style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "1rem", color: "var(--ink-secondary)" }}>
                 {(item as typeof education[0]).subtitle}
               </p>
             )}
@@ -158,31 +153,31 @@ export default function EducationDetail() {
 
             <p
               className="mt-2"
-              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", color: "#4a5568" }}
+              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", color: "var(--ink-muted)" }}
             >
               {"period" in item ? (item as typeof education[0]).period : (item as typeof certifications[0]).year}
             </p>
           </div>
         </motion.div>
 
-        <div className="h-px my-8" style={{ background: `linear-gradient(90deg, ${color}30, transparent)` }} />
+        <div className="h-px my-8" style={{ background: "var(--line)" }} />
 
         {description && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="p-6 rounded-xl mb-6"
+            className="p-6 rounded-[4px] mb-6"
             style={{
-              background: "rgba(15,23,42,0.8)",
-              border: `1px solid ${color}12`,
+              background: "var(--surface)",
+              border: `1px solid color-mix(in srgb, ${color} 7%, transparent)`,
             }}
           >
             <p
               style={{
-                fontFamily: "'Space Grotesk', sans-serif",
+                fontFamily: "'Nunito Sans', sans-serif",
                 fontSize: "0.95rem",
-                color: "#8892b0",
+                color: "var(--ink-secondary)",
                 lineHeight: 1.8,
               }}
             >
@@ -204,11 +199,11 @@ export default function EducationDetail() {
                 href={pdf}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-all hover:opacity-80"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-[2px] text-sm transition-all hover:opacity-80"
                 style={{
                   fontFamily: "'JetBrains Mono', monospace",
-                  background: `${color}10`,
-                  border: `1px solid ${color}40`,
+                  background: `color-mix(in srgb, ${color} 6%, transparent)`,
+                  border: `1px solid color-mix(in srgb, ${color} 25%, transparent)`,
                   color,
                 }}
               >
@@ -228,7 +223,7 @@ export default function EducationDetail() {
           >
             {(Array.isArray((item as any).image) ? (item as any).image : [(item as any).image]).map(
               (img: string, i: number) => (
-                <div key={i} className="rounded-xl overflow-hidden" style={{ border: `1px solid ${color}12` }}>
+                <div key={i} className="rounded-[4px] overflow-hidden" style={{ border: `1px solid color-mix(in srgb, ${color} 7%, transparent)` }}>
                   <img src={img} alt={item.title} className="w-full h-auto" />
                 </div>
               )

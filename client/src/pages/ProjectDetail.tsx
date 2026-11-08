@@ -1,35 +1,60 @@
 ﻿import { useState } from "react";
 import { useParams, useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowLeft, Github, BookOpen, Tag, Folder, FileText } from "lucide-react";
+import {
+  ArrowLeft,
+  Github,
+  BookOpen,
+  Tag,
+  Folder,
+  FileText,
+} from "lucide-react";
 import { projects } from "@/data/portfolio";
+import {
+  getProjectAccent,
+  getProjectAppearance,
+} from "@/lib/projectAppearance";
 import ProtectedDownload from "@/components/ProtectedDownload";
 import PageTransition from "@/components/PageTransition";
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const [, navigate] = useLocation();
-  const project = projects.find((p) => p.id === id);
+  const project = projects.find(p => p.id === id);
+  const accent = getProjectAccent(project);
+  const { soft, bright } = getProjectAppearance(project);
   const [loading, setLoading] = useState(true);
   const [selectedFolder, setSelectedFolder] = useState<any | null>(null);
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: "#050b18" }}>
+      <div
+        className="min-h-screen flex items-center justify-center"
+        style={{ background: "var(--paper)" }}
+      >
         <div className="text-center">
-          <p style={{ fontFamily: "'JetBrains Mono', monospace", color: "#64ffda" }}>
+          <p
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              color: "var(--sage)",
+            }}
+          >
             $ project not found
           </p>
-          <button onClick={() => navigate("/")} className="mt-4 btn-neon">
-            ??Back
+          <button onClick={() => navigate("/")} className="mt-4 btn-outline">
+            ← Back
           </button>
         </div>
       </div>
     );
   }
 
-  const visibleFiles = (selectedFolder ? selectedFolder.files : project.files) as any[] | undefined;
-  const previewFile = (project.files as any[] | undefined)?.find((file) => file.type !== "folder" && !file.protection && file.url);
+  const visibleFiles = (
+    selectedFolder ? selectedFolder.files : project.files
+  ) as any[] | undefined;
+  const previewFile = (project.files as any[] | undefined)?.find(
+    file => file.type !== "folder" && !file.protection && file.url
+  );
 
   return (
     <>
@@ -37,7 +62,7 @@ export default function ProjectDetail() {
         <PageTransition
           title={project.title}
           subtitle={`PROJECT ${project.number}`}
-          color={project.color}
+          color={accent}
           lines={[
             `$ cd ./projects/${project.id}`,
             `$ cat README.md`,
@@ -49,15 +74,10 @@ export default function ProjectDetail() {
       )}
 
       {!loading && (
-        <div className="min-h-screen" style={{ background: "#050b18", color: "#ccd6f6" }}>
-          {/* Background glow */}
-          <div
-            className="fixed inset-0 pointer-events-none"
-            style={{
-              background: `radial-gradient(ellipse 60% 50% at 50% 20%, ${project.color}08 0%, transparent 70%)`,
-            }}
-          />
-
+        <div
+          className="min-h-screen"
+          style={{ background: "var(--paper)", color: "var(--ink)" }}
+        >
           <div className="relative z-10 max-w-3xl mx-auto px-6 py-16 lg:pl-24">
             {/* Back button */}
             <motion.button
@@ -69,10 +89,13 @@ export default function ProjectDetail() {
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
                 fontSize: "0.8rem",
-                color: "#8892b0",
+                color: "var(--ink-secondary)",
               }}
             >
-              <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
+              <ArrowLeft
+                size={14}
+                className="transition-transform group-hover:-translate-x-1"
+              />
               cd ../projects
             </motion.button>
 
@@ -86,7 +109,7 @@ export default function ProjectDetail() {
                 className="text-7xl font-bold mb-4 select-none"
                 style={{
                   fontFamily: "'JetBrains Mono', monospace",
-                  color: `${project.color}55`,
+                  color: bright,
                   lineHeight: 1,
                 }}
               >
@@ -94,10 +117,11 @@ export default function ProjectDetail() {
               </div>
               <h1
                 style={{
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
-                  fontWeight: 700,
-                  color: "#ccd6f6",
+                  letterSpacing: "normal",
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(2rem, 4vw, 2.75rem)",
+                  fontWeight: 800,
+                  color: "var(--ink)",
                   marginBottom: "1rem",
                 }}
               >
@@ -106,7 +130,7 @@ export default function ProjectDetail() {
 
               {/* Tags */}
               <div className="flex flex-wrap gap-2 mb-8">
-                {project.tags.map((tag) => (
+                {project.tags.map(tag => (
                   <span
                     key={tag}
                     className="flex items-center gap-1"
@@ -114,10 +138,10 @@ export default function ProjectDetail() {
                       fontFamily: "'JetBrains Mono', monospace",
                       fontSize: "0.72rem",
                       padding: "4px 10px",
-                      borderRadius: "4px",
-                      background: `${project.color}10`,
-                      border: `1px solid ${project.color}30`,
-                      color: project.color,
+                      borderRadius: "2px",
+                      background: soft,
+                      border: `1px solid ${bright}`,
+                      color: accent,
                     }}
                   >
                     <Tag size={10} />
@@ -130,7 +154,9 @@ export default function ProjectDetail() {
             {/* Divider */}
             <div
               className="h-px mb-8"
-              style={{ background: `linear-gradient(90deg, ${project.color}40, transparent)` }}
+              style={{
+                background: bright,
+              }}
             />
 
             {/* Content */}
@@ -142,10 +168,24 @@ export default function ProjectDetail() {
             >
               {project.description && (
                 <div>
-                  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.4)", marginBottom: "0.5rem" }}>
+                  <p
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "0.7rem",
+                      color: accent,
+                      marginBottom: "0.5rem",
+                    }}
+                  >
                     OVERVIEW
                   </p>
-                  <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "1rem", color: "#8892b0", lineHeight: 1.8 }}>
+                  <p
+                    style={{
+                      fontFamily: "'Nunito Sans', sans-serif",
+                      fontSize: "1rem",
+                      color: "var(--ink-secondary)",
+                      lineHeight: 1.8,
+                    }}
+                  >
                     {project.description}
                   </p>
                 </div>
@@ -159,7 +199,12 @@ export default function ProjectDetail() {
                       href={project.links.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-neon flex items-center gap-2"
+                      className="btn-outline flex items-center gap-2"
+                      style={{
+                        borderColor: accent,
+                        color: accent,
+                        background: `color-mix(in srgb, ${soft} 50%, var(--surface))`,
+                      }}
                     >
                       <Github size={14} />
                       GitHub 보기
@@ -170,8 +215,12 @@ export default function ProjectDetail() {
                       href={project.links.report}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-neon flex items-center gap-2"
-                      style={{ borderColor: "#a78bfa", color: "#a78bfa" }}
+                      className="btn-outline flex items-center gap-2"
+                      style={{
+                        borderColor: accent,
+                        color: accent,
+                        background: `color-mix(in srgb, ${soft} 50%, var(--surface))`,
+                      }}
                     >
                       <BookOpen size={14} />
                       보고서 보기
@@ -181,41 +230,62 @@ export default function ProjectDetail() {
               )}
 
               {/* Photos */}
-              {(project as any).photos && (project as any).photos.length > 0 && (
-                <div>
-                  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.4)", marginBottom: "0.5rem" }}>
-                    PHOTO
-                  </p>
-
-                  <div
-                    className="rounded-xl overflow-hidden"
-                    style={{
-                      border: `1px solid ${project.color}20`,
-                      marginBottom: "2rem",
-                    }}
-                  >
-                    <img
-                      src={(project as any).photos[0]}
-                      alt={`${project.title} photo`}
-                      className="w-full"
+              {(project as any).photos &&
+                (project as any).photos.length > 0 && (
+                  <div>
+                    <p
                       style={{
-                        display: "block",
-                        width: "100%",
-                        maxHeight: "520px",
-                        objectFit: "cover",
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontSize: "0.7rem",
+                        color: accent,
+                        marginBottom: "0.5rem",
                       }}
-                    />
+                    >
+                      PHOTO
+                    </p>
+
+                    <div
+                      className="rounded-[4px] overflow-hidden"
+                      style={{
+                        border: `1px solid ${bright}`,
+                        marginBottom: "2rem",
+                      }}
+                    >
+                      <img
+                        src={(project as any).photos[0]}
+                        alt={`${project.title} photo`}
+                        className="w-full"
+                        style={{
+                          display: "block",
+                          width: "100%",
+                          maxHeight: "520px",
+                          objectFit: "cover",
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
 
               {/* Preview */}
               {previewFile && (
                 <div>
-                  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.4)", marginBottom: "0.5rem" }}>
+                  <p
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "0.7rem",
+                      color: accent,
+                      marginBottom: "0.5rem",
+                    }}
+                  >
                     PREVIEW
                   </p>
-                  <div className="rounded-xl overflow-hidden" style={{ border: `1px solid ${project.color}20`, aspectRatio: "1 / 1.4142" }}>
+                  <div
+                    className="rounded-[4px] overflow-hidden"
+                    style={{
+                      border: `1px solid ${bright}`,
+                      aspectRatio: "1 / 1.4142",
+                    }}
+                  >
                     <iframe
                       src={`${previewFile.url}#toolbar=0&navpanes=0&scrollbar=0&page=1&view=FitH`}
                       title={previewFile.name}
@@ -228,16 +298,31 @@ export default function ProjectDetail() {
               )}
 
               {/* Files */}
-              {((visibleFiles && visibleFiles.length > 0) || selectedFolder) && (
+              {((visibleFiles && visibleFiles.length > 0) ||
+                selectedFolder) && (
                 <div className="mt-4 space-y-2">
-                  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.7rem", color: "rgba(100,255,218,0.4)", marginBottom: "0.5rem" }}>
-                    {selectedFolder ? `$ ls ./files/${selectedFolder.name}` : "$ ls ./files"}
+                  <p
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "0.7rem",
+                      color: accent,
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    {selectedFolder
+                      ? `$ ls ./files/${selectedFolder.name}`
+                      : "$ ls ./files"}
                   </p>
 
                   {selectedFolder && (
                     <button
                       onClick={() => setSelectedFolder(null)}
-                      className="btn-neon mb-4"
+                      className="btn-outline mb-4"
+                      style={{
+                        borderColor: accent,
+                        color: accent,
+                        background: `color-mix(in srgb, ${soft} 50%, var(--surface))`,
+                      }}
                     >
                       <ArrowLeft size={12} /> back
                     </button>
@@ -249,15 +334,25 @@ export default function ProjectDetail() {
                         <button
                           key={i}
                           onClick={() => setSelectedFolder(file)}
-                          className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 w-full text-left"
+                          className="flex items-center gap-3 px-4 py-2.5 rounded-[2px] transition-all duration-200 w-full text-left"
                           style={{
-                            background: "rgba(100,255,218,0.03)",
-                            border: "1px solid rgba(100,255,218,0.1)",
+                            background: `color-mix(in srgb, ${soft} 50%, var(--surface))`,
+                            border: "1px solid var(--line)",
                             cursor: "pointer",
                           }}
                         >
-                          <Folder size={16} style={{ color: "rgba(100,255,218,0.55)", flexShrink: 0 }} />
-                          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.85rem", color: "#a8b2d8", flex: 1 }}>
+                          <Folder
+                            size={16}
+                            style={{ color: accent, flexShrink: 0 }}
+                          />
+                          <span
+                            style={{
+                              fontFamily: "'Nunito Sans', sans-serif",
+                              fontSize: "0.85rem",
+                              color: "var(--ink)",
+                              flex: 1,
+                            }}
+                          >
                             {file.name}
                           </span>
                         </button>
@@ -272,23 +367,45 @@ export default function ProjectDetail() {
                       ) : (
                         <button
                           key={i}
-                          onClick={() => window.open(file.url, "_blank", "noopener,noreferrer")}
-                          className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 w-full text-left"
+                          onClick={() =>
+                            window.open(
+                              file.url,
+                              "_blank",
+                              "noopener,noreferrer"
+                            )
+                          }
+                          className="flex items-center gap-3 px-4 py-2.5 rounded-[2px] transition-all duration-200 w-full text-left"
                           style={{
-                            background: "rgba(100,255,218,0.03)",
-                            border: "1px solid rgba(100,255,218,0.1)",
+                            background: `color-mix(in srgb, ${soft} 50%, var(--surface))`,
+                            border: "1px solid var(--line)",
                             cursor: "pointer",
                           }}
                         >
-                          <FileText size={16} style={{ color: "rgba(100,255,218,0.55)", flexShrink: 0 }} />
-                          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.85rem", color: "#a8b2d8", flex: 1 }}>
+                          <FileText
+                            size={16}
+                            style={{ color: accent, flexShrink: 0 }}
+                          />
+                          <span
+                            style={{
+                              fontFamily: "'Nunito Sans', sans-serif",
+                              fontSize: "0.85rem",
+                              color: "var(--ink)",
+                              flex: 1,
+                            }}
+                          >
                             {file.name}
                           </span>
                         </button>
                       )
                     )
                   ) : (
-                    <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.8rem", color: "#64748b" }}>
+                    <p
+                      style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontSize: "0.8rem",
+                        color: "var(--ink-secondary)",
+                      }}
+                    >
                       empty folder
                     </p>
                   )}
@@ -301,5 +418,3 @@ export default function ProjectDetail() {
     </>
   );
 }
-
-

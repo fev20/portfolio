@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { FileText, Lock } from "lucide-react";
 import { buildApiUrl, verifyAuth, canAccess, setCachedRole, UserRole, FileProtection } from "@/utils/auth";
 import LoginModal from "@/components/LoginModal";
 
@@ -119,29 +120,29 @@ export default function ProtectedDownload({
     <>
       <button
         onClick={handleClick}
-        className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 w-full text-left"
+        className="flex items-center gap-3 px-4 py-2.5 rounded-[2px] transition-all duration-200 w-full text-left"
         style={{
-          background: "rgba(100,255,218,0.03)",
-          border: "1px solid rgba(100,255,218,0.1)",
+          background: "var(--sage-soft)",
+          border: "1px solid var(--line)",
           cursor: "pointer",
         }}
         onMouseEnter={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(100,255,218,0.07)";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.25)";
+          (e.currentTarget as HTMLButtonElement).style.background = "var(--sage-soft)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--line)";
         }}
         onMouseLeave={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(100,255,218,0.03)";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(100,255,218,0.1)";
+          (e.currentTarget as HTMLButtonElement).style.background = "var(--sage-soft)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--line)";
         }}
       >
-        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", color: accessible ? "rgba(100,255,218,0.5)" : "rgba(255,150,50,0.6)" }}>
-          {accessible ? "📄" : "🔒"}
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", color: accessible ? "var(--sage)" : "var(--rose)" }}>
+          {accessible ? <FileText size={15} /> : <Lock size={15} />}
         </span>
-        <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.85rem", color: "#a8b2d8", flex: 1 }}>
+        <span style={{ fontFamily: "'Nunito Sans', sans-serif", fontSize: "0.85rem", color: "var(--ink)", flex: 1 }}>
           {label ?? filename}
         </span>
         {!accessible && (
-          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.62rem", color: "rgba(255,150,50,0.5)" }}>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.62rem", color: "var(--rose)" }}>
             restricted
           </span>
         )}
@@ -152,7 +153,7 @@ export default function ProtectedDownload({
           style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: "0.72rem",
-            color: "rgba(255,100,100,0.8)",
+            color: "var(--rose)",
             marginTop: "0.4rem",
             paddingLeft: "0.5rem",
           }}

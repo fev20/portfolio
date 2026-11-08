@@ -17,9 +17,9 @@ export default function Login() {
   }, []);
 
   const accounts = [
-    { id: "admin", label: "admin", desc: "관리자", color: "#f59e0b" },
-    { id: "sekurity", label: "seKUrity", desc: "세쿠리티 소속", color: "#64ffda" },
-    { id: "whs", label: "WHS", desc: "화이트햇스쿨 소속", color: "#a78bfa" },
+    { id: "admin", label: "admin", desc: "관리자", color: "var(--ink-secondary)" },
+    { id: "sekurity", label: "seKUrity", desc: "세쿠리티 소속", color: "var(--sage)" },
+    { id: "whs", label: "WHS", desc: "화이트햇스쿨 소속", color: "var(--rose)" },
   ];
 
   const selected = accounts.find((a) => a.id === selectedRole);
@@ -41,13 +41,13 @@ export default function Login() {
   return (
     <div
       className="min-h-screen flex items-center justify-center"
-      style={{ background: "rgba(5,11,24,1)" }}
+      style={{ background: "var(--paper)" }}
     >
       <div
-        className="w-full max-w-sm mx-4 rounded-xl p-8"
+        className="w-full max-w-sm mx-4 rounded-[4px] p-8"
         style={{
-          background: "rgba(15,23,42,0.98)",
-          border: "1px solid rgba(100,255,218,0.15)",
+          background: "var(--surface)",
+          border: "1px solid var(--line)",
         }}
       >
         {/* 헤더 */}
@@ -56,7 +56,7 @@ export default function Login() {
             style={{
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "0.7rem",
-              color: "rgba(100,255,218,0.5)",
+              color: "var(--sage)",
               marginBottom: "0.75rem",
             }}
           >
@@ -64,10 +64,11 @@ export default function Login() {
           </p>
           <h1
             style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "1.6rem",
+              letterSpacing: "normal",
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(2rem, 4vw, 2.75rem)",
               fontWeight: 800,
-              color: "#ccd6f6",
+              color: "var(--ink)",
               marginBottom: "0.4rem",
             }}
           >
@@ -75,9 +76,9 @@ export default function Login() {
           </h1>
           <p
             style={{
-              fontFamily: "'Space Grotesk', sans-serif",
+              fontFamily: "'Nunito Sans', sans-serif",
               fontSize: "0.82rem",
-              color: "#4a5568",
+              color: "var(--ink-muted)",
             }}
           >
             권한이 필요한 파일을 열람하려면 로그인해주세요.
@@ -88,10 +89,10 @@ export default function Login() {
         <div className="mb-4 relative">
           <button
             onClick={() => setDropdownOpen((v) => !v)}
-            className="w-full flex items-center justify-between px-4 py-2.5 rounded-lg transition-all duration-200"
+            className="w-full flex items-center justify-between px-4 py-2.5 rounded-[2px] transition-all duration-200"
             style={{
-              background: "rgba(100,255,218,0.04)",
-              border: `1px solid ${selected ? selected.color + "55" : "rgba(100,255,218,0.15)"}`,
+              background: "var(--sage-soft)",
+              border: `1px solid ${selected ? `color-mix(in srgb, ${selected.color} 34%, var(--line))` : "var(--line)"}`,
               cursor: "pointer",
             }}
           >
@@ -99,7 +100,7 @@ export default function Login() {
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
                 fontSize: "0.85rem",
-                color: selected ? selected.color : "#4a5568",
+                color: selected ? selected.color : "var(--ink-muted)",
               }}
             >
               {selected ? `${selected.label} — ${selected.desc}` : "계정 선택"}
@@ -108,7 +109,7 @@ export default function Login() {
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
                 fontSize: "0.7rem",
-                color: "rgba(100,255,218,0.4)",
+                color: "var(--sage)",
                 transition: "transform 0.2s",
                 display: "inline-block",
                 transform: dropdownOpen ? "rotate(180deg)" : "rotate(0deg)",
@@ -121,10 +122,10 @@ export default function Login() {
           {/* 드롭다운 목록 */}
           {dropdownOpen && (
             <div
-              className="absolute w-full mt-1 rounded-lg overflow-hidden z-10"
+              className="absolute w-full mt-1 rounded-[2px] overflow-hidden z-10"
               style={{
-                background: "rgba(15,23,42,0.99)",
-                border: "1px solid rgba(100,255,218,0.15)",
+                background: "var(--surface)",
+                border: "1px solid var(--line)",
               }}
             >
               {accounts.map((acc) => (
@@ -137,18 +138,18 @@ export default function Login() {
                   }}
                   className="w-full flex items-center gap-3 px-4 py-3 transition-all duration-150"
                   style={{
-                    background: selectedRole === acc.id ? `${acc.color}12` : "transparent",
+                    background: selectedRole === acc.id ? `color-mix(in srgb, ${acc.color} 7%, transparent)` : "transparent",
                     border: "none",
                     cursor: "pointer",
-                    borderBottom: "1px solid rgba(100,255,218,0.06)",
+                    borderBottom: "1px solid var(--line)",
                     textAlign: "left",
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.background = `${acc.color}10`;
+                    (e.currentTarget as HTMLButtonElement).style.background = `color-mix(in srgb, ${acc.color} 6%, transparent)`;
                   }}
                   onMouseLeave={(e) => {
                     (e.currentTarget as HTMLButtonElement).style.background =
-                      selectedRole === acc.id ? `${acc.color}12` : "transparent";
+                      selectedRole === acc.id ? `color-mix(in srgb, ${acc.color} 7%, transparent)` : "transparent";
                   }}
                 >
                   <div
@@ -173,9 +174,9 @@ export default function Login() {
                     </div>
                     <div
                       style={{
-                        fontFamily: "'Space Grotesk', sans-serif",
+                        fontFamily: "'Nunito Sans', sans-serif",
                         fontSize: "0.7rem",
-                        color: "#4a5568",
+                        color: "var(--ink-muted)",
                       }}
                     >
                       {acc.desc}
@@ -196,13 +197,13 @@ export default function Login() {
             onChange={(e) => { setPassword(e.target.value); setError(""); }}
             onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
             placeholder="password"
-            className="w-full px-4 py-2.5 rounded-lg outline-none"
+            className="w-full px-4 py-2.5 rounded-[2px] outline-none"
             style={{
-              background: "rgba(100,255,218,0.04)",
-              border: `1px solid ${error ? "rgba(255,100,100,0.4)" : "rgba(100,255,218,0.15)"}`,
+              background: "var(--sage-soft)",
+              border: `1px solid ${error ? "var(--rose)" : "var(--line)"}`,
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "0.88rem",
-              color: "#ccd6f6",
+              color: "var(--ink)",
               letterSpacing: "0.1em",
             }}
           />
@@ -211,7 +212,7 @@ export default function Login() {
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
                 fontSize: "0.72rem",
-                color: "rgba(255,100,100,0.8)",
+                color: "var(--rose)",
                 marginTop: "0.4rem",
               }}
             >
@@ -225,13 +226,13 @@ export default function Login() {
           <button
             onClick={handleSubmit}
             disabled={loading || !selectedRole}
-            className="flex-1 py-2.5 rounded-lg transition-all duration-200"
+            className="flex-1 py-2.5 rounded-[2px] transition-all duration-200"
             style={{
-              background: "rgba(100,255,218,0.1)",
-              border: "1px solid rgba(100,255,218,0.2)",
+              background: "var(--sage-soft)",
+              border: "1px solid var(--line)",
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "0.85rem",
-              color: loading || !selectedRole ? "#4a5568" : "#64ffda",
+              color: loading || !selectedRole ? "var(--ink-muted)" : "var(--sage)",
               cursor: loading || !selectedRole ? "default" : "pointer",
             }}
           >
@@ -239,13 +240,13 @@ export default function Login() {
           </button>
           <button
             onClick={() => setLocation("/")}
-            className="px-5 py-2.5 rounded-lg"
+            className="px-5 py-2.5 rounded-[2px]"
             style={{
-              background: "rgba(100,255,218,0.03)",
-              border: "1px solid rgba(100,255,218,0.08)",
+              background: "var(--sage-soft)",
+              border: "1px solid var(--line)",
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: "0.85rem",
-              color: "#4a5568",
+              color: "var(--ink-muted)",
               cursor: "pointer",
             }}
           >
@@ -256,13 +257,13 @@ export default function Login() {
         {/* 비밀번호 요청 */}
         <button
           onClick={() => setLocation("/request-access")}
-          className="w-full mt-3 py-2.5 rounded-lg transition-all duration-200"
+          className="w-full mt-3 py-2.5 rounded-[2px] transition-all duration-200"
           style={{
             background: "transparent",
-            border: "1px solid rgba(100,255,218,0.08)",
+            border: "1px solid var(--line)",
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: "0.78rem",
-            color: "#4a5568",
+            color: "var(--ink-muted)",
             cursor: "pointer",
           }}
         >

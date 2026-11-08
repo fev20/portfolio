@@ -1,12 +1,13 @@
 // ExperienceSection.tsx — 활동 경험 섹션
-// Design: Nebula Hacker — clickable timeline cards
+// Design: warm paper and restrained pastel accents — clickable timeline cards
 
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import { useLocation } from "wouter";
 import { ArrowUpRight } from "lucide-react";
 import { experiences } from "@/data/portfolio";
+import AnimalBackground from "@/components/AnimalBackground";
 
 export default function ExperienceSection() {
   const ref = useRef(null);
@@ -15,14 +16,7 @@ export default function ExperienceSection() {
 
   return (
     <section id="experience" className="relative py-28" ref={ref}>
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 10% 50%, rgba(100,255,218,0.03) 0%, transparent 70%)",
-        }}
-      />
-
+      <AnimalBackground animal="squirrel" placement="experience" />
       <div className="container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -33,136 +27,164 @@ export default function ExperienceSection() {
           <span className="section-number">04.</span>
           <h2
             style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
-              fontWeight: 700,
-              color: "#ccd6f6",
+              letterSpacing: "normal",
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(2rem, 3vw, 2.6rem)",
+              fontWeight: 800,
+              color: "var(--ink)",
             }}
           >
             Experience
           </h2>
           <div
             className="flex-1 h-px"
-            style={{ background: "rgba(100,255,218,0.15)", maxWidth: "200px" }}
+            style={{
+              background: "color-mix(in srgb, var(--sage) 15%, transparent)",
+              maxWidth: "200px",
+            }}
           />
         </motion.div>
 
-        <div className="relative">
+        <div
+          className="relative"
+          style={
+            {
+              "--timeline-axis": "8px",
+              "--timeline-gutter": "40px",
+            } as CSSProperties
+          }
+        >
           {/* Timeline line */}
           <div
-            className="absolute left-0 top-0 bottom-0 w-px hidden md:block"
+            className="pointer-events-none absolute top-0 bottom-0 w-px hidden md:block"
+            data-timeline-rail
+            aria-hidden="true"
             style={{
-              background: "linear-gradient(to bottom, transparent, rgba(100,255,218,0.2), transparent)",
-              left: "7px",
+              background: "var(--line)",
+              left: "var(--timeline-axis)",
+              transform: "translateX(-50%)",
             }}
           />
 
-          <div className="space-y-5 md:pl-10">
+          <div className="space-y-5">
             {experiences.map((exp, i) => (
-              <motion.div
+              <div
                 key={i}
                 id={`experience-${i}`}
-                initial={{ opacity: 0, x: -30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="relative"
+                className="relative md:pl-[var(--timeline-gutter)]"
+                data-timeline-entry={i}
               >
                 {/* Timeline dot */}
                 <div
-                  className="absolute hidden md:block w-3.5 h-3.5 rounded-full"
+                  className="pointer-events-none absolute z-10 hidden md:block w-3.5 h-3.5 rounded-full"
+                  data-timeline-dot={i}
+                  aria-hidden="true"
                   style={{
-                    left: "-2.75rem",
+                    left: "var(--timeline-axis)",
+                    transform: "translateX(-50%)",
                     top: "1.1rem",
-                    background: "#050b18",
-                    border: "2px solid rgba(100,255,218,0.4)",
-                    boxShadow: "0 0 8px rgba(100,255,218,0.2)",
+                    background: "var(--paper)",
+                    border:
+                      "2px solid color-mix(in srgb, var(--sage) 40%, transparent)",
                   }}
                 />
 
-                <div
-                  className="nebula-card rounded-xl p-5 cursor-pointer group"
-                  onClick={() => navigate(`/experience/${i}`)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => e.key === "Enter" && navigate(`/experience/${i}`)}
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                  data-timeline-card={i}
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <h3
+                  <div
+                    className="paper-card rounded-[4px] p-5 cursor-pointer group"
+                    onClick={() => navigate(`/experience/${i}`)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={e =>
+                      e.key === "Enter" && navigate(`/experience/${i}`)
+                    }
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <h3
+                            style={{
+                              letterSpacing: "normal",
+                              fontFamily: "'Nunito Sans', sans-serif",
+                              fontSize: "1rem",
+                              fontWeight: 600,
+                              color: "var(--ink)",
+                              transition: "color 0.2s",
+                            }}
+                            className="group-hover:text-[var(--sage-deep)]"
+                          >
+                            {exp.title}
+                          </h3>
+                          <ArrowUpRight
+                            size={13}
+                            className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"
+                            style={{ color: "var(--sage)" }}
+                          />
+                        </div>
+                        <div
                           style={{
-                            fontFamily: "'Space Grotesk', sans-serif",
-                            fontSize: "1rem",
-                            fontWeight: 600,
-                            color: "#ccd6f6",
-                            transition: "color 0.2s",
+                            fontFamily: "'Nunito Sans', sans-serif",
+                            fontSize: "0.75rem",
+                            color: "var(--sage)",
+                            marginTop: "2px",
                           }}
-                          className="group-hover:text-[#64ffda]"
                         >
-                          {exp.title}
-                        </h3>
-                        <ArrowUpRight
-                          size={13}
-                          className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"
-                          style={{ color: "#64ffda" }}
-                        />
+                          {exp.role}
+                        </div>
                       </div>
-                      <div
+                      <span
                         style={{
-                          fontFamily: "'JetBrains Mono', monospace",
-                          fontSize: "0.75rem",
-                          color: "#64ffda",
-                          marginTop: "2px",
+                          fontFamily: "'Nunito Sans', sans-serif",
+                          fontSize: "0.72rem",
+                          color: "var(--ink-secondary)",
+                          whiteSpace: "nowrap",
+                          paddingTop: "2px",
                         }}
                       >
-                        {exp.role}
-                      </div>
+                        {exp.period}
+                      </span>
                     </div>
-                    <span
+
+                    <p
                       style={{
-                        fontFamily: "'JetBrains Mono', monospace",
-                        fontSize: "0.72rem",
-                        color: "#4a5568",
-                        whiteSpace: "nowrap",
-                        paddingTop: "2px",
+                        fontFamily: "'Nunito Sans', sans-serif",
+                        fontSize: "0.88rem",
+                        color: "var(--ink-secondary)",
+                        lineHeight: 1.7,
+                        marginBottom: "0.75rem",
                       }}
                     >
-                      {exp.period}
-                    </span>
-                  </div>
+                      {exp.description}
+                    </p>
 
-                  <p
-                    style={{
-                      fontFamily: "'Space Grotesk', sans-serif",
-                      fontSize: "0.88rem",
-                      color: "#8892b0",
-                      lineHeight: 1.7,
-                      marginBottom: "0.75rem",
-                    }}
-                  >
-                    {exp.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-1.5">
-                    {exp.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        style={{
-                          fontFamily: "'JetBrains Mono', monospace",
-                          fontSize: "0.65rem",
-                          padding: "2px 8px",
-                          borderRadius: "3px",
-                          background: "rgba(100,255,218,0.05)",
-                          border: "1px solid rgba(100,255,218,0.15)",
-                          color: "#64ffda",
-                        }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                    <div className="flex flex-wrap gap-1.5">
+                      {exp.tags.map(tag => (
+                        <span
+                          key={tag}
+                          style={{
+                            fontFamily: "'Nunito Sans', sans-serif",
+                            fontSize: "0.65rem",
+                            padding: "2px 8px",
+                            borderRadius: "2px",
+                            background:
+                              "color-mix(in srgb, var(--sage) 5%, transparent)",
+                            border:
+                              "1px solid color-mix(in srgb, var(--sage) 15%, transparent)",
+                            color: "var(--sage)",
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             ))}
           </div>
         </div>

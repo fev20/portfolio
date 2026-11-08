@@ -1,10 +1,11 @@
 ﻿// AboutSection.tsx ??About ?뱀뀡
-// Design: Nebula Hacker ??asymmetric layout with security visual
+// Design: warm paper and restrained pastel accents ??asymmetric layout with security visual
 
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { about } from "@/data/portfolio";
+import { ShieldCheck, LockKeyhole, Code2, Cpu } from "lucide-react";
 
 export default function AboutSection() {
   const ref = useRef(null);
@@ -12,17 +13,8 @@ export default function AboutSection() {
 
   return (
     <section id="about" className="relative py-28" ref={ref}>
-      {/* Section background glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 80% 50%, rgba(167,139,250,0.04) 0%, transparent 70%)",
-        }}
-      />
-
       <div className="container relative z-10">
-        {/* ?곷떒 2而щ읆: ?띿뒪??+ ?대?吏 */}
+        {/* Introduction and visual */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left: Text */}
           <motion.div
@@ -35,17 +27,22 @@ export default function AboutSection() {
               <span className="section-number">01.</span>
               <h2
                 style={{
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
-                  fontWeight: 700,
-                  color: "#ccd6f6",
+                  letterSpacing: "normal",
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(2rem, 3vw, 2.6rem)",
+                  fontWeight: 800,
+                  color: "var(--ink)",
                 }}
               >
                 About Me
               </h2>
               <div
                 className="flex-1 h-px"
-                style={{ background: "rgba(100,255,218,0.15)", maxWidth: "120px" }}
+                style={{
+                  background:
+                    "color-mix(in srgb, var(--sage) 15%, transparent)",
+                  maxWidth: "120px",
+                }}
               />
             </div>
 
@@ -57,10 +54,10 @@ export default function AboutSection() {
                 transition={{ duration: 0.6, delay: 0.05 }}
                 className="mb-6 pl-4"
                 style={{
-                  borderLeft: "2px solid #64ffda",
-                  fontFamily: "'JetBrains Mono', monospace",
+                  borderLeft: "2px solid var(--sage)",
+                  fontFamily: "'Nunito Sans', sans-serif",
                   fontSize: "0.88rem",
-                  color: "#64ffda",
+                  color: "var(--sage)",
                   fontStyle: "italic",
                 }}
               >
@@ -77,9 +74,9 @@ export default function AboutSection() {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.1 + i * 0.15 }}
                   style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
+                    fontFamily: "'Nunito Sans', sans-serif",
                     fontSize: "0.97rem",
-                    color: "#8892b0",
+                    color: "var(--ink-secondary)",
                     lineHeight: 1.8,
                   }}
                 >
@@ -88,12 +85,12 @@ export default function AboutSection() {
               ))}
             </div>
 
-            {/* Quick stats ???꾩껜 ?덈퉬 */}
+            {/* Quick stats */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="grid grid-cols-5 gap-2 mt-8"
+              className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-2 mt-8"
             >
               {[
                 { value: "seKUrity", label: "Security Club" },
@@ -101,21 +98,23 @@ export default function AboutSection() {
                 { value: "Web Pentest", label: "Security Testing" },
                 { value: "Fault Injection", label: "HW Security" },
                 { value: "Vice President", label: "Leadership" },
-              ].map((stat) => (
+              ].map(stat => (
                 <div
                   key={stat.label}
-                  className="text-center p-2 rounded-lg"
+                  className="text-center p-2 rounded-[2px]"
                   style={{
-                    background: "rgba(100,255,218,0.04)",
-                    border: "1px solid rgba(100,255,218,0.1)",
+                    background:
+                      "color-mix(in srgb, var(--sage) 4%, transparent)",
+                    border:
+                      "1px solid color-mix(in srgb, var(--sage) 10%, transparent)",
                   }}
                 >
                   <div
                     style={{
-                      fontFamily: "'JetBrains Mono', monospace",
+                      fontFamily: "'Nunito Sans', sans-serif",
                       fontSize: "0.72rem",
                       fontWeight: 600,
-                      color: "#64ffda",
+                      color: "var(--sage)",
                       marginBottom: "2px",
                     }}
                   >
@@ -123,9 +122,9 @@ export default function AboutSection() {
                   </div>
                   <div
                     style={{
-                      fontFamily: "'Space Grotesk', sans-serif",
+                      fontFamily: "'Nunito Sans', sans-serif",
                       fontSize: "0.65rem",
-                      color: "#4a5568",
+                      color: "var(--ink-secondary)",
                     }}
                   >
                     {stat.label}
@@ -142,65 +141,96 @@ export default function AboutSection() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="relative flex justify-center"
           >
-            <div className="relative">
-              {/* Glow ring */}
+            <div
+              className="relative w-full max-w-[420px] rounded-[4px] p-7 sm:p-9"
+              role="img"
+              aria-label="Security research illustration"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--line)",
+                boxShadow: "none",
+              }}
+            >
               <div
-                className="absolute inset-0 rounded-2xl animate-pulse-glow"
-                style={{
-                  background: "rgba(100,255,218,0.03)",
-                  border: "1px solid rgba(100,255,218,0.15)",
-                  transform: "scale(1.04)",
-                  borderRadius: "16px",
-                }}
-              />
-              {/* Image */}
-              <img
-                src="/Security_concept.png"
-                alt="Security concept"
-                className="relative rounded-2xl"
-                style={{
-                  width: "100%",
-                  maxWidth: "420px",
-                  aspectRatio: "4/3",
-                  objectFit: "cover",
-                  filter: "saturate(0.85) brightness(0.9)",
-                }}
-              />
-              {/* Corner decorations */}
-              <div
-                className="absolute top-3 left-3 w-6 h-6"
-                style={{
-                  borderTop: "2px solid #64ffda",
-                  borderLeft: "2px solid #64ffda",
-                  borderRadius: "2px 0 0 0",
-                }}
-              />
-              <div
-                className="absolute bottom-3 right-3 w-6 h-6"
-                style={{
-                  borderBottom: "2px solid #64ffda",
-                  borderRight: "2px solid #64ffda",
-                  borderRadius: "0 0 2px 0",
-                }}
-              />
-              {/* Floating badge */}
-              <div
-                className="absolute -bottom-4 -right-4 px-4 py-2 rounded-lg"
-                style={{
-                  background: "rgba(15,23,42,0.95)",
-                  border: "1px solid rgba(100,255,218,0.2)",
-                  backdropFilter: "blur(8px)",
-                }}
+                className="flex items-center justify-between pb-4"
+                style={{ borderBottom: "1px solid var(--line)" }}
               >
                 <span
+                  className="text-xs"
+                  style={{ color: "var(--ink-secondary)" }}
+                >
+                  Security notes
+                </span>
+                <div className="flex gap-1.5" aria-hidden="true">
+                  <span
+                    className="h-2 w-2 rounded-full"
+                    style={{ background: "var(--sage-soft)" }}
+                  />
+                  <span
+                    className="h-2 w-2 rounded-full"
+                    style={{ background: "var(--rose-soft)" }}
+                  />
+                  <span
+                    className="h-2 w-2 rounded-full"
+                    style={{ background: "var(--surface-muted)" }}
+                  />
+                </div>
+              </div>
+              <div
+                className="flex items-center justify-center gap-5 py-10"
+                aria-hidden="true"
+              >
+                <div
+                  className="flex h-12 w-12 items-center justify-center rounded-[2px]"
                   style={{
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: "0.75rem",
-                    color: "#64ffda",
+                    background: "var(--rose-soft)",
+                    color: "var(--rose)",
                   }}
                 >
-                  $ security_researcher
-                </span>
+                  <Code2 size={24} strokeWidth={1.5} />
+                </div>
+                <div
+                  className="flex h-28 w-24 items-center justify-center rounded-[4px]"
+                  style={{
+                    background: "var(--sage-soft)",
+                    color: "var(--sage)",
+                  }}
+                >
+                  <ShieldCheck size={64} strokeWidth={1.3} />
+                </div>
+                <div
+                  className="flex h-12 w-12 items-center justify-center rounded-[2px]"
+                  style={{
+                    background: "var(--surface-muted)",
+                    color: "var(--ink-secondary)",
+                  }}
+                >
+                  <Cpu size={24} strokeWidth={1.5} />
+                </div>
+              </div>
+              <div className="space-y-2.5" aria-hidden="true">
+                <div
+                  className="h-2 w-3/4 rounded-[2px]"
+                  style={{ background: "var(--surface-muted)" }}
+                />
+                <div
+                  className="h-2 w-full rounded-[2px]"
+                  style={{ background: "var(--surface-muted)" }}
+                />
+                <div
+                  className="h-2 w-1/2 rounded-[2px]"
+                  style={{ background: "var(--sage-soft)" }}
+                />
+              </div>
+              <div
+                className="mt-7 flex items-center gap-2 rounded-[2px] px-3 py-2.5"
+                style={{
+                  background: "var(--rose-soft)",
+                  color: "var(--rose-deep)",
+                }}
+              >
+                <LockKeyhole size={14} strokeWidth={1.5} />
+                <span className="text-xs">Security researcher</span>
               </div>
             </div>
           </motion.div>
@@ -209,5 +239,3 @@ export default function AboutSection() {
     </section>
   );
 }
-
-

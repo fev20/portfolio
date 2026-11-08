@@ -1,11 +1,12 @@
 // SkillsSection.tsx — 기술 스택 섹션
-// Design: Nebula Hacker — category cards with glowing skill tags
+// Design: warm paper and restrained pastel accents — category cards with soft skill tags
 
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Shield, Code2, Cpu, Wrench } from "lucide-react";
 import { skills } from "@/data/portfolio";
+import AnimalBackground from "@/components/AnimalBackground";
 
 const ICONS: Record<string, React.ElementType> = {
   shield: Shield,
@@ -20,24 +21,7 @@ export default function SkillsSection() {
 
   return (
     <section id="skills" className="relative py-28" ref={ref}>
-      {/* Background */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: `url(https://d2xsxph8kpxj0f.cloudfront.net/310519663647836067/boFjbtwQQCT7GcN6J2dXvF/skills-bg-DdjRLhDoavV7TZoFdCdkGE.webp)`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.06,
-        }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 60% at 20% 50%, rgba(100,255,218,0.04) 0%, transparent 70%)",
-        }}
-      />
-
+      <AnimalBackground animal="capybara" placement="skills" />
       <div className="container relative z-10">
         {/* Section header */}
         <motion.div
@@ -49,17 +33,21 @@ export default function SkillsSection() {
           <span className="section-number">02.</span>
           <h2
             style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
-              fontWeight: 700,
-              color: "#ccd6f6",
+              letterSpacing: "normal",
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(2rem, 3vw, 2.6rem)",
+              fontWeight: 800,
+              color: "var(--ink)",
             }}
           >
             Skills
           </h2>
           <div
             className="flex-1 h-px"
-            style={{ background: "rgba(100,255,218,0.15)", maxWidth: "200px" }}
+            style={{
+              background: "color-mix(in srgb, var(--sage) 15%, transparent)",
+              maxWidth: "200px",
+            }}
           />
         </motion.div>
 
@@ -67,6 +55,7 @@ export default function SkillsSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 md:auto-rows-fr gap-6">
           {skills.map((category, i) => {
             const Icon = ICONS[category.icon] || Shield;
+            const accent = i % 2 === 0 ? "var(--sage)" : "var(--rose)";
             return (
               <motion.div
                 key={category.category}
@@ -74,25 +63,26 @@ export default function SkillsSection() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="nebula-card rounded-xl px-6 pt-3 pb-6"
+                className="paper-card rounded-[4px] px-6 pt-3 pb-6"
               >
                 {/* Category header */}
                 <div className="flex items-center gap-3 mb-6">
                   <div
-                    className="w-9 h-9 rounded-lg flex items-center justify-center"
+                    className="w-9 h-9 rounded-[2px] flex items-center justify-center"
                     style={{
-                      background: `${category.color}15`,
-                      border: `1px solid ${category.color}30`,
+                      background: `color-mix(in srgb, ${accent} 8%, transparent)`,
+                      border: `1px solid color-mix(in srgb, ${accent} 19%, transparent)`,
                     }}
                   >
-                    <Icon size={16} style={{ color: category.color }} />
+                    <Icon size={16} style={{ color: accent }} />
                   </div>
                   <h3
                     style={{
-                      fontFamily: "'Space Grotesk', sans-serif",
+                      letterSpacing: "normal",
+                      fontFamily: "'Nunito Sans', sans-serif",
                       fontSize: "1rem",
                       fontWeight: 600,
-                      color: "#ccd6f6",
+                      color: "var(--ink)",
                     }}
                   >
                     {category.category}
@@ -114,9 +104,9 @@ export default function SkillsSection() {
                       style={{
                         fontSize: "0.8125rem",
                         padding: "0.25rem 0.875rem",
-                        borderColor: `${category.color}30`,
-                        color: category.color,
-                        background: `${category.color}08`,
+                        borderColor: `color-mix(in srgb, ${accent} 19%, transparent)`,
+                        color: accent,
+                        background: `color-mix(in srgb, ${accent} 3%, transparent)`,
                       }}
                     >
                       {skill}

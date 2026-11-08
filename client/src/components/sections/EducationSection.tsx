@@ -18,14 +18,6 @@ export default function EducationSection() {
 
   return (
     <section id="education" className="relative py-28" ref={ref}>
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 50% at 80% 50%, rgba(167,139,250,0.04) 0%, transparent 70%)",
-        }}
-      />
-
       <div className="container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -36,17 +28,21 @@ export default function EducationSection() {
           <span className="section-number">05.</span>
           <h2
             style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
-              fontWeight: 700,
-              color: "#ccd6f6",
+              letterSpacing: "normal",
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(2rem, 3vw, 2.6rem)",
+              fontWeight: 800,
+              color: "var(--ink)",
             }}
           >
             Education & Certification
           </h2>
           <div
             className="flex-1 h-px"
-            style={{ background: "rgba(100,255,218,0.15)", maxWidth: "200px" }}
+            style={{
+              background: "color-mix(in srgb, var(--sage) 15%, transparent)",
+              maxWidth: "200px",
+            }}
           />
         </motion.div>
 
@@ -60,10 +56,11 @@ export default function EducationSection() {
             <h3
               className="mb-5"
               style={{
-                fontFamily: "'JetBrains Mono', monospace",
+                fontWeight: 600,
+                fontFamily: "'Nunito Sans', sans-serif",
                 fontSize: "0.75rem",
-                color: "#64ffda",
-                letterSpacing: "0.15em",
+                color: "var(--sage)",
+                letterSpacing: "normal",
               }}
             >
               EDUCATION
@@ -78,46 +75,51 @@ export default function EducationSection() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                    className="nebula-card rounded-xl p-5 flex items-start gap-4 cursor-pointer group"
+                    className="paper-card rounded-[4px] p-5 flex items-start gap-4 cursor-pointer group"
                     onClick={() => navigate(`/education/edu/${i}`)}
                     role="button"
                     tabIndex={0}
-                    onKeyDown={(e) => e.key === "Enter" && navigate(`/education/edu/${i}`)}
+                    onKeyDown={e =>
+                      e.key === "Enter" && navigate(`/education/edu/${i}`)
+                    }
                   >
                     <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                      className="w-10 h-10 rounded-[2px] flex items-center justify-center flex-shrink-0"
                       style={{
-                        background: "rgba(100,255,218,0.08)",
-                        border: "1px solid rgba(100,255,218,0.2)",
+                        background:
+                          "color-mix(in srgb, var(--sage) 8%, transparent)",
+                        border:
+                          "1px solid color-mix(in srgb, var(--sage) 20%, transparent)",
                       }}
                     >
-                      <Icon size={18} style={{ color: "#64ffda" }} />
+                      <Icon size={18} style={{ color: "var(--sage)" }} />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
                         <div
                           style={{
-                            fontFamily: "'Space Grotesk', sans-serif",
+                            letterSpacing: "normal",
+                            fontFamily: "'Nunito Sans', sans-serif",
                             fontSize: "0.95rem",
                             fontWeight: 600,
-                            color: "#ccd6f6",
+                            color: "var(--ink)",
                             transition: "color 0.2s",
                           }}
-                          className="group-hover:text-[#64ffda]"
+                          className="group-hover:text-[var(--sage-deep)]"
                         >
                           {edu.title}
                         </div>
                         <ArrowUpRight
                           size={13}
                           className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"
-                          style={{ color: "#64ffda" }}
+                          style={{ color: "var(--sage)" }}
                         />
                       </div>
                       <div
                         style={{
-                          fontFamily: "'Space Grotesk', sans-serif",
+                          fontFamily: "'Nunito Sans', sans-serif",
                           fontSize: "0.85rem",
-                          color: "#8892b0",
+                          color: "var(--ink-secondary)",
                           marginTop: "2px",
                         }}
                       >
@@ -125,9 +127,9 @@ export default function EducationSection() {
                       </div>
                       <div
                         style={{
-                          fontFamily: "'JetBrains Mono', monospace",
+                          fontFamily: "'Nunito Sans', sans-serif",
                           fontSize: "0.7rem",
-                          color: "#4a5568",
+                          color: "var(--ink-secondary)",
                           marginTop: "4px",
                         }}
                       >
@@ -149,10 +151,11 @@ export default function EducationSection() {
             <h3
               className="mb-5"
               style={{
-                fontFamily: "'JetBrains Mono', monospace",
+                fontWeight: 600,
+                fontFamily: "'Nunito Sans', sans-serif",
                 fontSize: "0.75rem",
-                color: "#a78bfa",
-                letterSpacing: "0.15em",
+                color: "var(--rose)",
+                letterSpacing: "normal",
               }}
             >
               CERTIFICATIONS
@@ -167,40 +170,48 @@ export default function EducationSection() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.2 + i * 0.08 }}
-                    className="nebula-card rounded-xl p-4 flex items-center gap-4 cursor-pointer group"
-                    style={{ borderColor: "rgba(167,139,250,0.1)" }}
+                    className="paper-card rounded-[4px] p-4 flex items-center gap-4 cursor-pointer group"
+                    style={{
+                      borderColor:
+                        "color-mix(in srgb, var(--rose) 10%, transparent)",
+                    }}
                     onClick={() => navigate(`/education/cert/${i}`)}
                     role="button"
                     tabIndex={0}
-                    onKeyDown={(e) => e.key === "Enter" && navigate(`/education/cert/${i}`)}
+                    onKeyDown={e =>
+                      e.key === "Enter" && navigate(`/education/cert/${i}`)
+                    }
                   >
                     <div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                      className="w-8 h-8 rounded-[2px] flex items-center justify-center flex-shrink-0"
                       style={{
-                        background: "rgba(167,139,250,0.08)",
-                        border: "1px solid rgba(167,139,250,0.2)",
+                        background:
+                          "color-mix(in srgb, var(--rose) 8%, transparent)",
+                        border:
+                          "1px solid color-mix(in srgb, var(--rose) 20%, transparent)",
                       }}
                     >
-                      <Icon size={14} style={{ color: "#a78bfa" }} />
+                      <Icon size={14} style={{ color: "var(--rose)" }} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div
                         style={{
-                          fontFamily: "'Space Grotesk', sans-serif",
+                          letterSpacing: "normal",
+                          fontFamily: "'Nunito Sans', sans-serif",
                           fontSize: "0.88rem",
-                          fontWeight: 500,
-                          color: "#ccd6f6",
+                          fontWeight: 600,
+                          color: "var(--ink)",
                           transition: "color 0.2s",
                         }}
-                        className="group-hover:text-[#a78bfa]"
+                        className="group-hover:text-[var(--rose-deep)]"
                       >
                         {cert.title}
                       </div>
                       <div
                         style={{
-                          fontFamily: "'JetBrains Mono', monospace",
+                          fontFamily: "'Nunito Sans', sans-serif",
                           fontSize: "0.68rem",
-                          color: "#4a5568",
+                          color: "var(--ink-secondary)",
                           marginTop: "2px",
                         }}
                       >
@@ -210,10 +221,9 @@ export default function EducationSection() {
                     <div className="flex items-center gap-2 flex-shrink-0">
                       <span
                         style={{
-                          fontFamily: "'JetBrains Mono', monospace",
+                          fontFamily: "'Nunito Sans', sans-serif",
                           fontSize: "0.68rem",
-                          color: "#a78bfa",
-                          opacity: 0.7,
+                          color: "var(--rose)",
                         }}
                       >
                         {cert.year}
@@ -221,7 +231,7 @@ export default function EducationSection() {
                       <ArrowUpRight
                         size={12}
                         className="opacity-0 group-hover:opacity-100 transition-opacity"
-                        style={{ color: "#a78bfa" }}
+                        style={{ color: "var(--rose)" }}
                       />
                     </div>
                   </motion.div>
