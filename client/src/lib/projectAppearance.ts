@@ -13,14 +13,18 @@ type Project = (typeof projects)[number];
 
 const PROJECT_APPEARANCES = [
   {
-    accent: "var(--sage)",
+    accent: "var(--sage-deep)",
     soft: "var(--sage-soft)",
     bright: "var(--sage-bright)",
+    number: "color-mix(in srgb, var(--sage) 80%, var(--sage-bright))",
+    outline: "color-mix(in srgb, var(--sage-deep) 65%, var(--sage-bright))",
   },
   {
-    accent: "var(--rose)",
+    accent: "var(--rose-deep)",
     soft: "var(--rose-soft)",
     bright: "var(--rose-bright)",
+    number: "color-mix(in srgb, var(--rose) 80%, var(--rose-bright))",
+    outline: "color-mix(in srgb, var(--rose-deep) 65%, var(--rose-bright))",
   },
 ] as const;
 

@@ -226,12 +226,13 @@
     color: var(--sage-deep);
   }
   .project-card {
-    border-color: color-mix(in srgb, var(--project-bright) 55%, var(--line));
+    background: var(--surface);
+    border-color: var(--project-outline);
     box-shadow: none;
   }
   .project-card:hover,
   .project-card:focus-visible {
-    border-color: var(--project-bright);
+    border-color: var(--project-accent);
     box-shadow: none;
   }
   .section-number {

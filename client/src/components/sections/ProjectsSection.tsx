@@ -148,7 +148,7 @@ export default function ProjectsSection() {
                   <div
                     className="flex-1 h-px ml-2"
                     style={{
-                      background: categoryAppearance.bright,
+                      background: categoryAppearance.outline,
                     }}
                   />
                 </div>
@@ -175,7 +175,7 @@ export default function ProjectsSection() {
                 ) : (
                   <div className="space-y-4">
                     {group.items.map((project, i) => {
-                      const { accent, soft, bright } =
+                      const { accent, soft, bright, number, outline } =
                         getProjectAppearance(project);
                       return (
                         <motion.div
@@ -191,8 +191,7 @@ export default function ProjectsSection() {
                           style={
                             {
                               "--project-accent": accent,
-                              "--project-bright": bright,
-                              background: `color-mix(in srgb, ${soft} 50%, var(--surface))`,
+                              "--project-outline": outline,
                             } as CSSProperties
                           }
                           onClick={() => navigate(`/project/${project.id}`)}
@@ -213,7 +212,7 @@ export default function ProjectsSection() {
                                     letterSpacing: "normal",
                                     fontWeight: 800,
                                     fontFamily: "var(--font-display)",
-                                    color: bright,
+                                    color: number,
                                     lineHeight: 1,
                                   }}
                                 >
@@ -274,9 +273,9 @@ export default function ProjectsSection() {
 
                           {/* Bottom accent line */}
                           <div
-                            className="h-0.5 transition-all"
+                            className="h-1 transition-all"
                             style={{
-                              background: bright,
+                              background: outline,
                             }}
                           />
                         </motion.div>

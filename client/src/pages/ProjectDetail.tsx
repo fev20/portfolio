@@ -22,7 +22,7 @@ export default function ProjectDetail() {
   const [, navigate] = useLocation();
   const project = projects.find(p => p.id === id);
   const accent = getProjectAccent(project);
-  const { soft, bright } = getProjectAppearance(project);
+  const { soft, bright, number } = getProjectAppearance(project);
   const [loading, setLoading] = useState(true);
   const [selectedFolder, setSelectedFolder] = useState<any | null>(null);
 
@@ -109,7 +109,7 @@ export default function ProjectDetail() {
                 className="text-7xl font-bold mb-4 select-none"
                 style={{
                   fontFamily: "'JetBrains Mono', monospace",
-                  color: bright,
+                  color: number,
                   lineHeight: 1,
                 }}
               >
