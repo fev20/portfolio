@@ -5,6 +5,7 @@ import {
   Cpu,
   Github,
   Mail,
+  Play,
   ShieldCheck,
   Sprout,
   ExternalLink,
@@ -107,6 +108,18 @@ export default function HeroSection() {
                   {link.label}
                 </a>
               ))}
+              <button
+                type="button"
+                className="btn-outline"
+                onClick={() =>
+                  document
+                    .getElementById("demos")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                <Play size={15} strokeWidth={1.7} aria-hidden="true" />
+                영상 보러 가기
+              </button>
             </div>
             <button
               onClick={() =>
