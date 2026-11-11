@@ -11,6 +11,16 @@
   font-display: swap;
 }
 
+/* Locus's regular webfont, using the version published by Project Noonnu. */
+@font-face {
+  font-family: "Locus Sangsang";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/locus_sangsang.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme inline {
   --font-sans: var(--font-body);
   --radius-sm: var(--control-radius);
@@ -80,8 +90,8 @@
   --sidebar-ink: #805b50;
   --sidebar-line: var(--palette-blush);
   --font-body:
-    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
-    "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    "Locus Sangsang", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI",
+    "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --font-display: "Miel Jelly", var(--font-body);
   --radius: 1rem;
   --control-radius: 0.5rem;
