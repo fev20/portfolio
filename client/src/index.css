@@ -212,23 +212,23 @@
   }
   html::-webkit-scrollbar,
   body::-webkit-scrollbar {
-    width: 12px;
+    width: 14px;
   }
   html::-webkit-scrollbar-thumb,
   body::-webkit-scrollbar-thumb {
-    background: var(--sage);
+    background: var(--palette-pink);
     border-radius: 999px;
   }
   html::-webkit-scrollbar-thumb:hover,
   html::-webkit-scrollbar-thumb:active,
   body::-webkit-scrollbar-thumb:hover,
   body::-webkit-scrollbar-thumb:active {
-    background: var(--sage-deep);
+    background: color-mix(in srgb, var(--palette-pink) 80%, var(--rose));
   }
   @supports not selector(::-webkit-scrollbar) {
     html {
       scrollbar-width: auto;
-      scrollbar-color: var(--sage) var(--paper);
+      scrollbar-color: var(--palette-pink) var(--paper);
     }
   }
 }
