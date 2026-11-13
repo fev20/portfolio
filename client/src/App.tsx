@@ -7,6 +7,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import ProjectDetail from "./pages/ProjectDetail";
+import DemoDetail from "./pages/DemoDetail";
 import ExperienceDetail from "./pages/ExperienceDetail";
 import EducationDetail from "./pages/EducationDetail";
 import Sidebar from "./components/Sidebar";
@@ -21,6 +22,7 @@ function AppRoutes() {
       <Route path="/login" component={Login} />
       <Route path="/request-access" component={RequestAccess} />
       <Route path="/project/:id" component={ProjectDetail} />
+      <Route path="/demos/:id" component={DemoDetail} />
       <Route path="/experience/:index" component={ExperienceDetail} />
       <Route path="/activity/:category/:item" component={ActivityDetail} />
       <Route path="/education/:type/:index" component={EducationDetail} />

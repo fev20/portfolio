@@ -206,10 +206,6 @@ const plugins = [react(), tailwindcss(), vitePluginManusRuntime(), vitePluginMan
 
 export default defineConfig({
   plugins,
-  // Prepare the dependency used by the lazy demo modal before the first click.
-  optimizeDeps: {
-    include: ["@radix-ui/react-dialog"],
-  },
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),

@@ -4,14 +4,12 @@ import { describe, expect, it } from "vitest";
 import { Router } from "wouter";
 import { useHashLocation } from "wouter/use-hash-location";
 import DemosSection from "./DemosSection";
-import { projects } from "../../data/portfolio";
 import type { Demo } from "../../data/demos";
 
-const pending: Demo = {
-  id: "test-pending",
+const demo: Demo = {
+  id: "sample demo/1",
   title: "검증용 카드",
   description: "카드 표시 검증",
-  sourceType: "file",
 };
 
 function render(items: Demo[]) {
@@ -24,41 +22,71 @@ function render(items: Demo[]) {
   );
 }
 
-describe("DemosSection content states", () => {
-  it("shows the requested empty state without an invented project or player", () => {
+describe("DemosSection", () => {
+  it("shows the original empty state without a demo link or player", () => {
     const html = render([]);
+
     expect(html).toContain("촬영한 프로젝트 영상을 이곳에 기록할 예정입니다.");
-    expect(html).not.toMatch(/<video|<iframe|<article|영상 보기/);
+    expect(html).not.toMatch(/<a\b|<video\b|<iframe\b/);
   });
 
-  it("shows an unplayable pending card and omits absent metadata", () => {
+  it("uses a single detail link for the entire card", () => {
+    const html = render([demo]);
+
+    expect(html.match(/<a\b/g)).toHaveLength(1);
+    expect(html).toContain(`href="#/demos/${encodeURIComponent(demo.id)}"`);
+    expect(html).toMatch(/<a\b[^>]*>.*검증용 카드.*카드 표시 검증.*<\/a>/);
+    expect(html).not.toMatch(/<button\b|aria-haspopup/);
+  });
+
+  it("keeps video sources off the list even when clips are configured", () => {
     const html = render([
-      { ...pending, role: "  ", projectId: "not-a-project" },
+      {
+        ...demo,
+        mainVideo: {
+          id: "main",
+          title: "대표 영상",
+          sourceType: "youtube",
+          src: "https://youtu.be/dQw4w9WgXcQ",
+        },
+        steps: [
+          {
+            id: "step",
+            title: "단계 영상",
+            sourceType: "file",
+            src: "/test-only.mp4",
+          },
+        ],
+      },
     ]);
-    expect(html).toContain("영상 준비 중");
-    expect(html).not.toMatch(/<button|<video|<iframe|<dl|프로젝트 보기/);
-  });
 
-  it("links pending cards only to a real existing project", () => {
-    const html = render([{ ...pending, projectId: projects[0].id }]);
-    expect(html).toContain(`#/project/${projects[0].id}`);
-    expect(html).toContain("프로젝트 보기");
-    expect(html).not.toContain("영상 보기");
-  });
-
-  it("offers playback for a source without loading media on initial render", () => {
-    // Test fixture only; no sample media is added to the portfolio data.
-    const html = render([{ ...pending, src: "/test-only.mp4" }]);
-    expect(html).toContain("영상 보기");
-    expect(html).toContain('aria-haspopup="dialog"');
-    expect(html).not.toMatch(/<video|<iframe|영상 준비 중/);
+    expect(html).not.toMatch(/<video\b|<iframe\b|<source\b|영상 보기/);
+    expect(html).not.toContain("youtu.be");
     expect(html).not.toContain("/test-only.mp4");
   });
 
-  it("renders only supplied optional metadata", () => {
-    const html = render([{ ...pending, role: "표시 검증" }]);
-    expect(html).toContain("담당 역할");
-    expect(html).toContain("표시 검증");
-    expect(html).not.toMatch(/재생 시간|기록일/);
+  it("prefers the demo thumbnail and falls back to the main clip thumbnail", () => {
+    const mainVideo: Demo["mainVideo"] = {
+      id: "main",
+      title: "대표 영상",
+      sourceType: "file",
+      thumbnail: "/images/demo-main.png",
+    };
+    const explicit = render([
+      { ...demo, thumbnail: "/images/demo-cover.png", mainVideo },
+    ]);
+    const fallback = render([{ ...demo, thumbnail: "  ", mainVideo }]);
+
+    expect(explicit).toContain('src="/images/demo-cover.png"');
+    expect(explicit).not.toContain("/images/demo-main.png");
+    expect(fallback).toContain('src="/images/demo-main.png"');
+    expect(fallback).toContain('loading="lazy"');
+  });
+
+  it("shows the pastel placeholder when no thumbnail is configured", () => {
+    const html = render([{ ...demo, thumbnail: "  " }]);
+
+    expect(html).toContain("lucide-clapperboard");
+    expect(html).not.toMatch(/<img\b/);
   });
 });

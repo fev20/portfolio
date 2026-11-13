@@ -1,22 +1,26 @@
-/**
- * Demos 영상 목록. 파일은 client/public/videos, 썸네일은
- * client/public/images/demos에 두고 /videos/...처럼 경로를 작성합니다.
- * sourceType: "file" | "youtube". src가 비어 있으면 영상 준비 중입니다.
- * projectId는 portfolio.ts의 실제 프로젝트 id를 사용합니다.
- * 선택 항목은 확인된 값이 있을 때만 추가합니다.
- */
+/** One video on a demo project's detail page. */
+export interface DemoClip {
+  id: string;
+  title: string;
+  sourceType: "file" | "youtube";
+  src?: string;
+  thumbnail?: string;
+  description?: string;
+  duration?: string;
+}
+
+/** One list card and its detail page. See docs/demos.md for data entry. */
 export interface Demo {
   id: string;
   title: string;
   description: string;
   thumbnail?: string;
-  sourceType: "file" | "youtube";
-  src?: string;
-  duration?: string;
+  mainVideo?: DemoClip;
+  steps?: DemoClip[];
   recordedAt?: string;
   role?: string;
   projectId?: string;
 }
 
-// 현재 프로젝트 데이터에 DOOM 포팅 항목이 없고, 제공된 영상도 없습니다.
+// Add real project records here when their materials are available.
 export const demos: Demo[] = [];

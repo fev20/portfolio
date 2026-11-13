@@ -1,79 +1,44 @@
-import { lazy, Suspense, useRef, useState } from "react";
 import { Link } from "wouter";
-import { ArrowUpRight, Clapperboard, Film, Play } from "lucide-react";
+import { ArrowRight, Clapperboard, Film } from "lucide-react";
 import { demos, type Demo } from "@/data/demos";
-import { projects } from "@/data/portfolio";
-import { resolveDemoSource } from "@/lib/demoMedia";
 
-const DemoVideoModal = lazy(() => import("@/components/DemoVideoModal"));
+function DemoThumbnail({ demo }: { demo: Demo }) {
+  const thumbnail = demo.thumbnail?.trim() || demo.mainVideo?.thumbnail?.trim();
 
-function DemoPoster({ demo, ready }: { demo: Demo; ready: boolean }) {
   return (
-    <>
-      {demo.thumbnail?.trim() ? (
+    <div
+      className="relative flex aspect-video w-[clamp(5.5rem,24vw,11.5rem)] shrink-0 items-center justify-center overflow-hidden rounded-[var(--radius-sm)] border"
+      style={{
+        background: "var(--rose-soft)",
+        borderColor: "var(--rose-bright)",
+      }}
+      aria-hidden="true"
+    >
+      {thumbnail ? (
         <img
-          src={demo.thumbnail}
-          alt={`${demo.title} 영상 썸네일`}
+          src={thumbnail}
+          alt=""
           className="absolute inset-0 h-full w-full object-contain"
           loading="lazy"
           decoding="async"
         />
       ) : (
-        <div className="flex h-full flex-col items-center justify-center gap-3">
-          <span
-            className="flex h-16 w-16 items-center justify-center rounded-2xl border"
-            style={{
-              background: "var(--surface)",
-              borderColor: "var(--rose-bright)",
-              color: "var(--rose-deep)",
-            }}
-          >
-            <Clapperboard size={28} strokeWidth={1.4} aria-hidden="true" />
-          </span>
-          <span className="text-sm font-medium">
-            {ready ? "동작 영상" : "영상 준비 중"}
-          </span>
-        </div>
-      )}
-      {ready && (
         <span
-          className="absolute bottom-4 right-4 flex h-11 w-11 items-center justify-center rounded-full border shadow-sm transition-transform group-hover:scale-105"
+          className="flex size-8 items-center justify-center rounded-lg border sm:size-12"
           style={{
-            color: "var(--rose-deep)",
             background: "var(--surface)",
-            borderColor: "var(--rose)",
+            borderColor: "var(--rose-bright)",
+            color: "var(--rose-deep)",
           }}
         >
-          <Play size={18} fill="currentColor" aria-hidden="true" />
+          <Clapperboard className="size-4 sm:size-6" strokeWidth={1.4} />
         </span>
       )}
-      {!ready && demo.thumbnail?.trim() && (
-        <span
-          className="absolute bottom-3 left-3 rounded-md px-3 py-1 text-sm font-medium"
-          style={{ background: "var(--surface)", color: "var(--rose-deep)" }}
-        >
-          영상 준비 중
-        </span>
-      )}
-    </>
+    </div>
   );
 }
 
 export default function DemosSection({ items = demos }: { items?: Demo[] }) {
-  const [selectedDemo, setSelectedDemo] = useState<Demo | null>(null);
-  const [playerRequested, setPlayerRequested] = useState(false);
-  const returnFocusRef = useRef<HTMLButtonElement | null>(null);
-  const source = selectedDemo
-    ? resolveDemoSource(selectedDemo.sourceType, selectedDemo.src)
-    : null;
-
-  function openDemo(demo: Demo, trigger: HTMLButtonElement) {
-    if (!resolveDemoSource(demo.sourceType, demo.src)) return;
-    returnFocusRef.current = trigger;
-    setPlayerRequested(true);
-    setSelectedDemo(demo);
-  }
-
   return (
     <section
       id="demos"
@@ -130,132 +95,34 @@ export default function DemosSection({ items = demos }: { items?: Demo[] }) {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
-            {items.map(demo => {
-              const ready = Boolean(
-                resolveDemoSource(demo.sourceType, demo.src)
-              );
-              const linkedProject = projects.find(p => p.id === demo.projectId);
-              const metadata = [
-                { label: "재생 시간", value: demo.duration },
-                { label: "기록일", value: demo.recordedAt },
-                { label: "담당 역할", value: demo.role },
-              ].filter(item => item.value?.trim());
-              const posterClass =
-                "relative block aspect-video w-full overflow-hidden border-b text-[var(--rose-deep)]";
-              const posterStyle = {
-                background: "var(--rose-soft)",
-                borderColor: "var(--rose-bright)",
-              };
-
-              return (
-                <article
-                  key={demo.id}
-                  className={`overflow-hidden rounded-[var(--radius)] border${
-                    items.length === 1
-                      ? " lg:col-span-2 lg:mx-auto lg:w-full lg:max-w-xl"
-                      : ""
-                  }`}
-                  style={{
-                    background: "var(--surface)",
-                    borderColor:
-                      "color-mix(in srgb, var(--rose-deep) 50%, var(--rose-bright))",
-                  }}
-                  aria-label={demo.title}
+          <ul className="space-y-4" role="list">
+            {items.map(demo => (
+              <li key={demo.id}>
+                <Link
+                  href={`/demos/${encodeURIComponent(demo.id)}`}
+                  className="paper-card group flex items-center gap-3 p-3 sm:gap-5 sm:p-4"
                 >
-                  {ready ? (
-                    <button
-                      type="button"
-                      className={`${posterClass} group`}
-                      style={posterStyle}
-                      aria-label={`${demo.title} 영상 보기`}
-                      aria-haspopup="dialog"
-                      onClick={event => openDemo(demo, event.currentTarget)}
-                    >
-                      <DemoPoster demo={demo} ready />
-                    </button>
-                  ) : (
-                    <div className={posterClass} style={posterStyle}>
-                      <DemoPoster demo={demo} ready={false} />
-                    </div>
-                  )}
-                  <div className="p-6">
-                    <h3 className="mb-3 break-words text-lg font-semibold">
+                  <DemoThumbnail demo={demo} />
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-sm leading-snug font-semibold [overflow-wrap:anywhere] sm:text-lg">
                       {demo.title}
                     </h3>
-                    {demo.description?.trim() && (
-                      <p
-                        className="text-sm leading-relaxed"
-                        style={{ color: "var(--ink-secondary)" }}
-                      >
+                    {demo.description.trim() && (
+                      <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-[var(--ink-secondary)] [overflow-wrap:anywhere] sm:text-sm">
                         {demo.description}
                       </p>
                     )}
-                    {metadata.length > 0 && (
-                      <dl className="mt-5 space-y-2 text-sm">
-                        {metadata.map(item => (
-                          <div key={item.label} className="flex gap-3">
-                            <dt className="shrink-0 text-[var(--ink-secondary)]">
-                              {item.label}
-                            </dt>
-                            <dd className="min-w-0 break-words">
-                              {item.value}
-                            </dd>
-                          </div>
-                        ))}
-                      </dl>
-                    )}
-                    {(ready || linkedProject) && (
-                      <div className="mt-6 flex flex-wrap items-center gap-4">
-                        {ready && (
-                          <button
-                            type="button"
-                            className="btn-outline"
-                            aria-haspopup="dialog"
-                            onClick={event =>
-                              openDemo(demo, event.currentTarget)
-                            }
-                          >
-                            <Play size={15} aria-hidden="true" />
-                            영상 보기
-                          </button>
-                        )}
-                        {linkedProject && (
-                          <Link
-                            href={`/project/${encodeURIComponent(linkedProject.id)}`}
-                            className="inline-flex items-center gap-1.5 py-2 text-sm font-semibold underline-offset-4 hover:underline"
-                            style={{ color: "var(--rose-deep)" }}
-                          >
-                            프로젝트 보기
-                            <ArrowUpRight size={15} aria-hidden="true" />
-                          </Link>
-                        )}
-                      </div>
-                    )}
                   </div>
-                </article>
-              );
-            })}
-          </div>
+                  <ArrowRight
+                    className="size-4 shrink-0 text-[var(--ink-muted)] transition-transform group-hover:translate-x-0.5 sm:size-5"
+                    aria-hidden="true"
+                  />
+                </Link>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
-      {playerRequested && (
-        <Suspense
-          fallback={
-            <p role="status" className="sr-only">
-              영상 플레이어를 불러오는 중입니다.
-            </p>
-          }
-        >
-          <DemoVideoModal
-            title={selectedDemo?.title ?? ""}
-            description={selectedDemo?.description ?? ""}
-            source={source}
-            onClose={() => setSelectedDemo(null)}
-            returnFocusRef={returnFocusRef}
-          />
-        </Suspense>
-      )}
     </section>
   );
 }
