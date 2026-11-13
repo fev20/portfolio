@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 
 const aiApproaches = {
   buildFirst: "바로 구현",
@@ -10,7 +10,7 @@ function ProjectHeading({ title, approach }: { title: string; approach: keyof ty
   return (
     <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
       <h3 className="text-xl font-semibold sm:text-2xl">{title}</h3>
-      <span className="skill-tag">{aiApproaches[approach]}</span>
+      <span className="skill-tag font-medium">{aiApproaches[approach]}</span>
     </div>
   );
 }
@@ -38,7 +38,7 @@ export default function AiDevelopmentSection() {
           <h3 id="ai-approaches" className="text-sm font-semibold text-[var(--ink-secondary)]">AI 활용 방식</h3>
           <ul aria-labelledby="ai-approaches" className="flex flex-wrap gap-2">
             {Object.values(aiApproaches).map(label => (
-              <li key={label} className="skill-tag">{label}</li>
+              <li key={label} className="skill-tag font-medium">{label}</li>
             ))}
           </ul>
         </div>
@@ -78,9 +78,6 @@ export default function AiDevelopmentSection() {
               공개 데모 체험하기
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
             </a>
-            <p className="text-sm leading-relaxed text-[var(--ink-secondary)]">
-              로그인 없이 열립니다. 새로고침하면 예제로 돌아갑니다.
-            </p>
           </div>
         </article>
 
@@ -114,9 +111,6 @@ export default function AiDevelopmentSection() {
               코드 지도 열기
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
             </a>
-            <p className="text-sm leading-relaxed text-[var(--ink-secondary)]">
-              로그인 없이 열립니다. 선택한 폴더는 현재 탭에서만 분석합니다.
-            </p>
           </div>
         </article>
 
@@ -137,9 +131,10 @@ export default function AiDevelopmentSection() {
             <a
               href={`${import.meta.env.BASE_URL}rrip-reproduction/RRIP_Reproduction_Source.zip`}
               download
-              className="inline-flex min-h-11 items-center text-sm font-semibold text-[var(--rose-deep)] underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--rose-deep)]"
+              className="group inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--rose-bright)] bg-[var(--rose-soft)] px-4 text-sm font-semibold text-[var(--rose-deep)] transition-colors hover:border-[var(--rose)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--rose-deep)]"
             >
               재현 코드·데이터 다운로드
+              <Download className="size-4" aria-hidden="true" />
             </a>
           </div>
         </article>
