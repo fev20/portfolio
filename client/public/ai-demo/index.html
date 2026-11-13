@@ -14,8 +14,11 @@
     <div class="nav-label">공개 데모</div><nav id="nav" aria-label="작업 메뉴"></nav>
     <div class="sidebar-foot"><span class="status-dot"></span> 내 브라우저에서 처리<br><small>선택한 노트와 펌웨어는<br>외부 분석 서버로 전송하지 않아요.</small></div>
   </aside>
-  <div class="workspace"><header class="topbar"><button id="menu-toggle" class="icon-button" aria-label="메뉴 열기" aria-expanded="false">☰</button><div id="breadcrumb">작업실 / 전체 보기</div><div class="top-right"><a class="button secondary" href="/?section=ai-development">포트폴리오로 돌아가기</a></div></header>
-  <main id="main" tabindex="-1"></main><footer class="footer">Miel Research Desk <span>노트 · 기록 · 실험</span></footer></div>
+  <div class="workspace"><header class="topbar"><button id="menu-toggle" class="icon-button" aria-label="메뉴 열기" aria-expanded="false">☰</button><div id="breadcrumb">작업실 / 전체 보기</div></header>
+  <main id="main" tabindex="-1">
+    <a class="portfolio-back" href="../?section=ai-development">← 포트폴리오</a>
+    <div id="view"></div>
+  </main><footer class="footer">Miel Research Desk <span>노트 · 기록 · 실험</span></footer></div>
   <div id="toast" role="status" aria-live="polite"></div>
   <div id="busy" class="busy" hidden><div><span class="spinner"></span><strong id="busy-message">분석 중</strong><p>파일 크기에 따라 잠시 걸릴 수 있어요.</p><button id="cancel-work" class="button secondary">취소</button></div></div>
   <dialog id="record-dialog"></dialog>

@@ -7,11 +7,13 @@
 <style>
 :root{color-scheme:light;--ink:#202c3c;--muted:#4b5d71;--paper:#f6f8fa;--accent:#00605c;--line:#d7e1e7;--card:#fff;--mono:'IBM Plex Mono',Consolas,monospace}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.68 'Noto Sans CJK KR','Malgun Gothic',system-ui,sans-serif}main{max-width:960px;margin:auto;padding:36px 24px 48px}header{padding:30px 0 22px;border-bottom:1px solid var(--line)}h1,h2{line-height:1.23;letter-spacing:-.045em;color:#122339}h1{font-size:clamp(2.3rem,5vw,3.6rem);margin:5px 0 16px}h2{font-size:clamp(1.55rem,3vw,2rem);margin:0 0 12px}.source{font-size:.9rem;color:var(--muted);font-weight:650}.intro{max-width:670px;margin:0;color:var(--muted);font-size:1.06rem}section{padding:25px 0;border-bottom:1px solid var(--line)}p{margin:.5rem 0 1rem}a{color:var(--accent);text-underline-offset:.2em}figure{margin:14px 0 0}img{display:block;width:100%;height:auto}figcaption,.small{color:var(--muted);font-size:.9rem}.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:15px 0}.controls button{font:inherit;padding:4px 12px;border-radius:7px;border:1px solid #9cafb7;background:#fff;color:var(--ink);cursor:pointer}.controls button:disabled{color:#5c6d79;background:#eef1f4;cursor:default}.controls input{accent-color:var(--accent);width:min(42vw,255px)}output,code{font-family:var(--mono)}.trace{display:flex;gap:5px;flex-wrap:wrap;font-family:var(--mono);margin:10px 0}.trace span{padding:2px 8px;border-radius:6px;background:#e9eef2}.trace .current{color:white;background:var(--accent)}.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:9px;background:var(--card)}table{border-collapse:collapse;width:100%;text-align:left;white-space:nowrap}th,td{padding:9px 12px;border-bottom:1px solid var(--line);font-size:.92rem}thead{background:#eef3f6}tbody tr:last-child>*{border-bottom:0}th[scope=row]{font-weight:600}.slots{font-family:var(--mono)}.hit{color:var(--accent);font-weight:700}.miss{color:#813821;font-weight:700}.figure{max-width:760px}.formula{padding:10px 14px;border-left:3px solid var(--accent);background:#e8f1f0;overflow:auto}li+li{margin-top:4px}footer{padding-top:17px;color:var(--muted);font-size:.92rem}summary{cursor:pointer;color:var(--accent);font-weight:650}@media(max-width:520px){main{padding:18px 15px 28px}header{padding-top:15px}th,td{padding:8px 9px}.controls{gap:7px}}
+.portfolio-back { display: inline-block; margin-bottom: 16px; font-size: .875rem; font-weight: 500; line-height: 1.5; text-decoration: underline; text-underline-offset: .22em; }
+header { padding-top: 0; }
 </style>
 </head>
 <body>
 <main>
-<a href="../?section=ai-development">← 포트폴리오</a>
+<a class="portfolio-back" href="../?section=ai-development">← 포트폴리오</a>
 <header>
 <div class="source">ISCA 2010 · 논문 그림 3 재현</div>
 <h1>순차 읽기가 캐시를 비울 때</h1>

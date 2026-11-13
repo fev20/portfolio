@@ -34,7 +34,7 @@ async function init(){
   route();
 }
 function route(){const requested=location.hash.slice(1).split('?')[0];state.page=nav.some(([id])=>id===requested)?requested:'home';$('#sidebar').classList.remove('open');$('#menu-toggle').setAttribute('aria-expanded','false');document.querySelectorAll('[data-nav]').forEach(a=>{const active=a.dataset.nav===state.page;a.classList.toggle('active',active);active?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current');});$('#breadcrumb').textContent=`작업실 / ${nav.find(([id])=>id===state.page)[1]}`;render();window.scrollTo({top:0});}
-function render(){const funcs={home:renderHome,vault:renderVault,graph:renderGraph,ledger:renderLedger,firmware:renderFirmware,dev:renderDev,help:renderHelp};$('#main').innerHTML=funcs[state.page]();if(state.page==='graph'&&state.audit)mountGraph();}
+function render(){const funcs={home:renderHome,vault:renderVault,graph:renderGraph,ledger:renderLedger,firmware:renderFirmware,dev:renderDev,help:renderHelp};$('#view').innerHTML=funcs[state.page]();if(state.page==='graph'&&state.audit)mountGraph();}
 function renderHome(){
   const a=state.audit,s=a?.summary;const ready=state.records.filter(r=>r.evidenceStatus==='본인 확인 완료').length;
   return head('PUBLIC DEMO','Miel Research Desk','AI로 만든 노트·연구 기록·파일 분석 도구를 로그인 없이 체험할 수 있습니다.')+
@@ -146,4 +146,4 @@ async function handleClick(ev){const target=ev.target.closest('button,a');if(!ta
 }
 function handleInput(ev){const id=ev.target.id;if(id==='issue-search'){state.issueSearch=ev.target.value;state.issuePage=0;$('#issue-results').innerHTML=issueResults();}if(id==='graph-search'){state.graphSearch=ev.target.value;$('#graph-list').innerHTML=graphList();}if(id==='ledger-search'){state.ledgerSearch=ev.target.value;$('#ledger-results').innerHTML=ledgerCards();}}
 function handleChange(ev){if(ev.target.id==='graph-mode'){state.graphMode=ev.target.value;mountGraph();}if(ev.target.id==='ledger-filter'){state.ledgerFilter=ev.target.value;$('#ledger-results').innerHTML=ledgerCards();}}
-init().catch(err=>{$('#main').innerHTML=`<section class="card empty"><h1>작업실을 열지 못했어요</h1><p>${e(err.message)}</p><p>페이지를 새로고침해 주세요.</p></section>`;});
+init().catch(err=>{$('#view').innerHTML=`<section class="card empty"><h1>작업실을 열지 못했어요</h1><p>${e(err.message)}</p><p>페이지를 새로고침해 주세요.</p></section>`;});
