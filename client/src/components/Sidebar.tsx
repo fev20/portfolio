@@ -299,7 +299,7 @@ export default function Sidebar() {
 
         {/* ── profile 블록 ── */}
         <div
-          className="flex-shrink-0 px-4 py-3"
+          className="flex-shrink-0 px-4 py-4"
           style={{ borderBottom: "1px solid var(--sidebar-line)" }}
         >
           <div
@@ -312,8 +312,8 @@ export default function Sidebar() {
             <div
               className="rounded-[var(--radius)] overflow-hidden"
               style={{
-                width: "96px",
-                height: "96px",
+                width: "120px",
+                height: "120px",
                 background: "var(--surface)",
                 border: "1px solid var(--sidebar-line)",
               }}
@@ -350,7 +350,7 @@ export default function Sidebar() {
             {navItems.map((item) => {
               const isActive = currentNavId === item.id;
               return (
-                <div key={item.id} className="border-b border-[var(--sidebar-line)] py-0.5">
+                <div key={item.id} className="mb-1 border-b border-[var(--sidebar-line)] pb-2">
                   <div className="flex items-stretch gap-1 rounded-[var(--radius-sm)]" style={{ background: isActive ? "var(--sidebar-active)" : "transparent" }}>
                     <button
                       type="button"

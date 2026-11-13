@@ -20,7 +20,7 @@ export default function SkillsSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="skills" className="relative py-12 sm:py-16 lg:py-20" ref={ref}>
+    <section id="skills" className="relative py-28" ref={ref}>
       <AnimalBackground animal="capybara" placement="skills" />
       <div className="container relative z-10">
         {/* Section header */}
@@ -28,7 +28,7 @@ export default function SkillsSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-3 mb-7 sm:mb-9"
+          className="flex items-center gap-3 mb-14"
         >
           <span className="section-number">02.</span>
           <h2

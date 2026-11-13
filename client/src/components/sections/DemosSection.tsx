@@ -42,7 +42,7 @@ export default function DemosSection({ items = demos }: { items?: Demo[] }) {
   return (
     <section
       id="demos"
-      className="relative py-12 sm:py-16 lg:py-20"
+      className="relative py-28"
       aria-labelledby="demos-title"
     >
       <div className="container relative z-10">

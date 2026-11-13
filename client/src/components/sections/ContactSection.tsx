@@ -56,7 +56,7 @@ export default function ContactSection() {
   ].filter(c => c.show);
 
   return (
-    <section id="contact" className="relative py-12 sm:py-16 lg:py-20 pb-40" ref={ref}>
+    <section id="contact" className="relative py-28 pb-40" ref={ref}>
       <AnimalBackground animal="hamster" placement="contact" />
       <div className="container relative z-10">
         <motion.div
