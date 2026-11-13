@@ -153,6 +153,14 @@ export default function AiDevelopmentSection() {
           >
             <ProjectLink path="deadline-calendar/">마감달력 데모 열기</ProjectLink>
           </ProjectCard>
+
+          <ProjectCard
+            title="모아 · 자료 검색 앱"
+            approach="planFirst"
+            description="파일 이름을 잊어도 기억나는 내용으로 자료를 찾는 흐름을 먼저 구상했습니다. 이후 한글 이미지의 글자 인식, PDF 페이지 검색, 윈도우의 오프라인 자료 저장을 구현했습니다. 공개 데모에서는 가상 자료를 검색하고 일치하는 페이지를 열어볼 수 있습니다."
+          >
+            <ProjectLink path="moa-demo/">구현 과정과 데모 보기</ProjectLink>
+          </ProjectCard>
         </div>
       </div>
     </section>
