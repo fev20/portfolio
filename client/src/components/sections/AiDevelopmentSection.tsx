@@ -119,6 +119,30 @@ export default function AiDevelopmentSection() {
             </p>
           </div>
         </article>
+
+        <article className="paper-card mt-5 p-5 sm:p-8">
+          <ProjectHeading title="RRIP 캐시 교체 논문 재현" approach="buildFirst" />
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--ink-secondary)] [word-break:keep-all] sm:text-base">
+            ISCA 2010 논문의 캐시 접근을 한 단계씩 따라가며 LRU, NRU, SRRIP의 차이를 확인합니다.
+            AI가 논문의 그림 3과 식 (1)을 재현하고, DOOM 화면 버퍼를 가정한 모의실험으로 확장했습니다.
+          </p>
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <a
+              href={`${import.meta.env.BASE_URL}rrip-reproduction/`}
+              className="group inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--rose-bright)] bg-[var(--rose-soft)] px-4 text-sm font-semibold text-[var(--rose-deep)] transition-colors hover:border-[var(--rose)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--rose-deep)]"
+            >
+              논문 재현 보고서 열기
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+            </a>
+            <a
+              href={`${import.meta.env.BASE_URL}rrip-reproduction/RRIP_Reproduction_Source.zip`}
+              download
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-[var(--rose-deep)] underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--rose-deep)]"
+            >
+              재현 코드·데이터 다운로드
+            </a>
+          </div>
+        </article>
       </div>
     </section>
   );
