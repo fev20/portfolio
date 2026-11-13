@@ -101,6 +101,17 @@ export default function ExperienceDetail() {
           >
             {exp.title}
           </h1>
+          {exp.website && (
+            <a
+              href={exp.website.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline mt-2 mb-4"
+            >
+              {exp.website.label}
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
+          )}
           <p
             style={{
               fontFamily: "'JetBrains Mono', monospace",

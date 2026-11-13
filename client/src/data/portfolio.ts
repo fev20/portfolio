@@ -559,6 +559,10 @@ export const experiences = [
     projectId: "andlab-android-hardware",
     period: "2026.10 — 현재",
     title: "AND-LAB",
+    website: {
+      label: "안드랩 바로가기",
+      href: "https://wtcyj.github.io/and-lab/",
+    },
     role: "하드웨어 담당",
     status: "활동 중",
     description:
