@@ -10,19 +10,20 @@ import {
   Folder,
   FileText,
 } from "lucide-react";
-import { projects } from "@/data/portfolio";
+import { useProjects, type Project, type ProjectFolder } from "@/data/projects";
 import {
   getProjectAccent,
   getProjectAppearance,
 } from "@/lib/projectAppearance";
 import ProtectedDownload from "@/components/ProtectedDownload";
 import PageTransition from "@/components/PageTransition";
-
-type Project = (typeof projects)[number];
+import ProjectMedia from "@/components/ProjectMedia";
+import { projectAssetUrl } from "@/lib/projectMedia";
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const [, navigate] = useLocation();
+  const projects = useProjects();
   const project = projects.find(p => p.id === id);
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
@@ -79,7 +80,7 @@ function ProjectDetailContent({
   const accent = getProjectAccent(project);
   const { soft, bright, number } = getProjectAppearance(project);
   const [loading, setLoading] = useState(true);
-  const [selectedFolder, setSelectedFolder] = useState<any | null>(null);
+  const [selectedFolder, setSelectedFolder] = useState<ProjectFolder | null>(null);
 
   const metadata = [
     { label: "소속", value: project.organization },
@@ -91,16 +92,20 @@ function ProjectDetailContent({
     { href: project.links.site, label: "사이트 보기", Icon: Globe },
     { href: project.links.github, label: "GitHub 보기", Icon: Github },
     { href: project.links.report, label: "보고서 보기", Icon: BookOpen },
-  ].filter(link => link.href?.trim());
+  ]
+    .map(link => ({ ...link, href: projectAssetUrl(link.href ?? "") }))
+    .filter(link => link.href);
   const sections = project.sections?.filter(
     section => section.paragraphs?.length || section.items?.length
   );
 
-  const visibleFiles = (
-    selectedFolder ? selectedFolder.files : project.files
-  ) as any[] | undefined;
-  const previewFile = (project.files as any[] | undefined)?.find(
-    file => file.type !== "folder" && !file.protection && file.url
+  const visibleFiles = selectedFolder ? selectedFolder.files : project.files;
+  const previewFile = project.files?.find(
+    file =>
+      file.type !== "folder" &&
+      !file.protection &&
+      /^\/(?!\/).*\.pdf$/i.test(file.url) &&
+      projectAssetUrl(file.url)
   );
 
   return (
@@ -113,7 +118,7 @@ function ProjectDetailContent({
           lines={[
             `$ cd ./projects/${project.id}`,
             `$ cat README.md`,
-            `$ loading ${project.tags[0].toLowerCase()} modules...`,
+            `$ loading ${project.tags[0]?.toLowerCase() || "project"} modules...`,
             `> project data loaded.`,
           ]}
           onComplete={() => setLoading(false)}
@@ -244,6 +249,7 @@ function ProjectDetailContent({
                     OVERVIEW
                   </p>
                   <p
+                    className="whitespace-pre-wrap [overflow-wrap:anywhere]"
                     style={{
                       fontFamily: "var(--font-body)",
                       fontSize: "1rem",
@@ -289,7 +295,12 @@ function ProjectDetailContent({
                   </h2>
                   <div className="space-y-3 leading-relaxed text-muted-foreground">
                     {section.paragraphs?.map(paragraph => (
-                      <p key={paragraph}>{paragraph}</p>
+                      <p
+                        key={paragraph}
+                        className="whitespace-pre-wrap [overflow-wrap:anywhere]"
+                      >
+                        {paragraph}
+                      </p>
                     ))}
                     {section.items && section.items.length > 0 && (
                       <ul className="list-disc space-y-1.5 pl-5">
@@ -302,45 +313,14 @@ function ProjectDetailContent({
                 </section>
               ))}
 
-              {/* Photos */}
-              {(project as any).photos &&
-                (project as any).photos.length > 0 && (
-                  <div>
-                    <p
-                      style={{
-                        fontFamily: "'JetBrains Mono', monospace",
-                        fontSize: "0.7rem",
-                        color: accent,
-                        marginBottom: "0.5rem",
-                      }}
-                    >
-                      PHOTO
-                    </p>
-
-                    <div
-                      className="rounded-[var(--radius)] overflow-hidden"
-                      style={{
-                        border: `1px solid ${bright}`,
-                        marginBottom: "2rem",
-                      }}
-                    >
-                      <img
-                        src={(project as any).photos[0]}
-                        alt={`${project.title} photo`}
-                        className="w-full"
-                        style={{
-                          display: "block",
-                          width: "100%",
-                          maxHeight: "520px",
-                          objectFit: "cover",
-                        }}
-                      />
-                    </div>
-                  </div>
-                )}
+              <ProjectMedia
+                project={project}
+                accent={accent}
+                borderColor={bright}
+              />
 
               {/* Preview */}
-              {previewFile && (
+              {previewFile && previewFile.type !== "folder" && (
                 <div>
                   <p
                     style={{
@@ -360,7 +340,7 @@ function ProjectDetailContent({
                     }}
                   >
                     <iframe
-                      src={`${previewFile.url}#toolbar=0&navpanes=0&scrollbar=0&page=1&view=FitH`}
+                      src={`${projectAssetUrl(previewFile.url)}#toolbar=0&navpanes=0&scrollbar=0&page=1&view=FitH`}
                       title={previewFile.name}
                       className="w-full h-full"
                       style={{ border: "none" }}
@@ -402,7 +382,7 @@ function ProjectDetailContent({
                   )}
 
                   {visibleFiles && visibleFiles.length > 0 ? (
-                    visibleFiles.map((file: any, i: number) =>
+                    visibleFiles.map((file, i) =>
                       file.type === "folder" ? (
                         <button
                           key={i}
@@ -440,13 +420,12 @@ function ProjectDetailContent({
                       ) : (
                         <button
                           key={i}
-                          onClick={() =>
-                            window.open(
-                              file.url,
-                              "_blank",
-                              "noopener,noreferrer"
-                            )
-                          }
+                          onClick={() => {
+                            const url = projectAssetUrl(file.url);
+                            if (url) {
+                              window.open(url, "_blank", "noopener,noreferrer");
+                            }
+                          }}
                           className="flex items-center gap-3 px-4 py-2.5 rounded-[var(--radius-sm)] transition-all duration-200 w-full text-left"
                           style={{
                             background: `color-mix(in srgb, ${soft} 50%, var(--surface))`,

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { projects } from "@/data/portfolio";
+import { useProjects } from "@/data/projects";
 import { findExperience } from "@/lib/experienceNavigation";
 import PageTransition from "@/components/PageTransition";
 
@@ -13,6 +13,7 @@ export default function ExperienceDetail() {
   const { index } = useParams<{ index: string }>();
   const exp = findExperience(index);
   const [loading, setLoading] = useState(true);
+  const projects = useProjects();
   const relatedProject = projects.find(project => project.id === exp?.projectId);
 
   useEffect(() => {

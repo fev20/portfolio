@@ -4,7 +4,7 @@ import { useInView } from "framer-motion";
 import { useRef, type CSSProperties } from "react";
 import { useLocation } from "wouter";
 import { Shield, Terminal, BookOpen, Globe, Settings, Cpu } from "lucide-react";
-import { projects } from "@/data/portfolio";
+import { useProjects } from "@/data/projects";
 import {
   PROJECT_CATEGORY_ORDER,
   getProjectAppearance,
@@ -45,6 +45,7 @@ export default function ProjectsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [, navigate] = useLocation();
+  const projects = useProjects();
 
   const grouped = PROJECT_CATEGORY_ORDER.map(cat => ({
     category: cat,
@@ -179,8 +180,9 @@ export default function ProjectsSection() {
                         getProjectAppearance(project);
                       return (
                         <motion.div
-                          key={`${project.id}-${i}`}
+                          key={project.id}
                           id={`project-${project.id}`}
+                          data-project-id={project.id}
                           initial={{ opacity: 0, y: 30 }}
                           animate={isInView ? { opacity: 1, y: 0 } : {}}
                           transition={{
@@ -194,13 +196,18 @@ export default function ProjectsSection() {
                               "--project-outline": outline,
                             } as CSSProperties
                           }
-                          onClick={() => navigate(`/project/${project.id}`)}
+                          onClick={() =>
+                            navigate(`/project/${encodeURIComponent(project.id)}`)
+                          }
                           role="button"
                           tabIndex={0}
-                          onKeyDown={e =>
-                            e.key === "Enter" &&
-                            navigate(`/project/${project.id}`)
-                          }
+                          onKeyDown={event => {
+                            if (event.target !== event.currentTarget) return;
+                            if (event.key === "Enter" || event.key === " ") {
+                              event.preventDefault();
+                              navigate(`/project/${encodeURIComponent(project.id)}`);
+                            }
+                          }}
                         >
                           <div className="p-6 md:p-8">
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -228,7 +235,7 @@ export default function ProjectsSection() {
                                       marginBottom: "0.5rem",
                                       transition: "color 0.2s",
                                     }}
-                                    className="text-[var(--ink)] group-hover:text-[var(--project-accent)]"
+                                    className="[overflow-wrap:anywhere] text-[var(--ink)] group-hover:text-[var(--project-accent)]"
                                   >
                                     {project.title}
                                   </h3>

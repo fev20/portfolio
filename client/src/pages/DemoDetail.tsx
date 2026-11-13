@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Link, useParams } from "wouter";
 import DemoInlineVideo from "@/components/DemoInlineVideo";
 import { demos, type Demo, type DemoClip } from "@/data/demos";
-import { projects } from "@/data/portfolio";
+import { useProjects } from "@/data/projects";
 import NotFound from "@/pages/NotFound";
 
 function DemoClipDetails({ clip }: { clip?: DemoClip }) {
@@ -19,6 +19,7 @@ function DemoClipDetails({ clip }: { clip?: DemoClip }) {
 
 export function DemoProjectContent({ demo }: { demo: Demo }) {
   const [activeClip, setActiveClip] = useState<string | null>(null);
+  const projects = useProjects();
   const linkedProject = projects.find(project => project.id === demo.projectId);
   const metadata = [
     { label: "기록일", value: demo.recordedAt },

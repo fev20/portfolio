@@ -72,7 +72,7 @@ base: "/portfolio/", // username.github.io/portfolio 형태 사용 시
 
 ## 포트폴리오 내용 수정
 
-모든 내용은 `client/src/data/portfolio.ts` 파일에서 수정합니다:
+프로젝트는 `client/src/data/projects.json`에서 관리합니다. 그 외 아래 내용은 `client/src/data/portfolio.ts`에서 수정합니다.
 
 | 항목 | 수정 위치 |
 |------|-----------|
@@ -81,9 +81,11 @@ base: "/portfolio/", // username.github.io/portfolio 형태 사용 시
 | 이력서 PDF | `files` 배열의 `resume` 항목 |
 | About 소개글 | `about.paragraphs` |
 | 기술 스택 | `skills` 배열 |
-| 프로젝트 | `projects` 배열 |
+| 프로젝트 | `client/src/data/projects.json`의 배열 |
 | 활동 경험 | `experiences` 배열 |
 | 학력/자격증 | `education`, `certifications` 배열 |
+
+프로젝트의 `id`는 상세 주소에 사용합니다. 제목을 변경할 때는 기존 `id`를 유지하고, 새 프로젝트의 `id`는 중복되지 않게 정합니다. 기존 `sejong-hacktheon`과 `pentest-collaboration` 주소는 이전과 같은 항목을 표시합니다. 두 주소를 공유하던 나머지 카드는 각각 `sejong-hacktheon-2026`, `whs-class-lead`에서 열립니다.
 
 ### 이력서 PDF 추가 방법
 

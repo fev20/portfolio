@@ -1,4 +1,4 @@
-import type { projects } from "@/data/portfolio";
+import type { Project } from "@/data/projects";
 
 export const PROJECT_CATEGORY_ORDER = [
   "Security Research",
@@ -8,8 +8,6 @@ export const PROJECT_CATEGORY_ORDER = [
   "Embedded & Hardware Security",
   "Leadership & Community",
 ] as const;
-
-type Project = (typeof projects)[number];
 
 const PROJECT_APPEARANCES = [
   {

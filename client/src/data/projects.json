@@ -1,0 +1,646 @@
+[
+  {
+    "id": "cors-misconfiguration",
+    "number": "01",
+    "category": "Security Research",
+    "title": "CORS Misconfiguration 분석",
+    "description": "",
+    "tags": [
+      "CORS",
+      "Web Security",
+      "Security Research"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#64ffda",
+    "files": [
+      {
+        "name": "보안 스터디 CORS 분석 보고서",
+        "url": "/files/CORS_Misconfiguration.pdf",
+        "protection": false
+      }
+    ]
+  },
+  {
+    "id": "atm-skimming",
+    "number": "02",
+    "category": "Security Research",
+    "title": "ATM Skimming 분석",
+    "description": "",
+    "tags": [
+      "ATM Skimming",
+      "Hardware Security",
+      "Security Research"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#64ffda",
+    "files": [
+      {
+        "name": "보안 스터디 ATM Skimming 분석 보고서",
+        "url": "/files/ATM_Skimming.pdf",
+        "protection": false
+      }
+    ]
+  },
+  {
+    "id": "crypto-contest",
+    "number": "03",
+    "category": "Security Research",
+    "title": "암호 분석 경진대회 참가",
+    "description": "",
+    "tags": [
+      "Cryptography",
+      "Contest",
+      "Security Research"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#64ffda",
+    "files": []
+  },
+  {
+    "id": "bug-bounty-research",
+    "number": "04",
+    "category": "Security Research",
+    "title": "Bug Bounty Research",
+    "description": "",
+    "tags": [
+      "Bug Bounty",
+      "Web Security",
+      "Research"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#64ffda",
+    "files": [
+      {
+        "type": "folder",
+        "name": "Findings",
+        "files": []
+      },
+      {
+        "type": "folder",
+        "name": "Research",
+        "files": []
+      }
+    ]
+  },
+  {
+    "id": "msg-ctf",
+    "number": "01",
+    "category": "CTF & Security Activities",
+    "title": "msg CTF 참가",
+    "description": "",
+    "tags": [
+      "CTF",
+      "msg CTF",
+      "Web Security"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#38BDF8",
+    "files": []
+  },
+  {
+    "id": "sejong-hacktheon",
+    "number": "02",
+    "category": "CTF & Security Activities",
+    "title": "세종 핵테온 2025",
+    "description": "",
+    "tags": [
+      "CTF",
+      "Hackathon",
+      "Security"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#38BDF8",
+    "files": [
+      {
+        "name": "세종 핵테온(2025) Write-up",
+        "url": "/files/Write_up/Sejong_Hackathon1.pdf",
+        "protection": false
+      }
+    ]
+  },
+  {
+    "id": "chungcheong-contest",
+    "number": "03",
+    "category": "CTF & Security Activities",
+    "title": "충청권 사이버보안 경진대회",
+    "description": "",
+    "tags": [
+      "CTF",
+      "사이버보안",
+      "경진대회"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#38BDF8",
+    "files": [
+      {
+        "name": "충청권 사이버보안 경진대회 Write-up",
+        "url": "/files/Write_up/Chungcheong_Contest.pdf",
+        "protection": false
+      }
+    ]
+  },
+  {
+    "id": "kuctf",
+    "number": "04",
+    "category": "CTF & Security Activities",
+    "title": "KUCTF",
+    "description": "",
+    "tags": [
+      "CTF",
+      "KUCTF",
+      "Security"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#38BDF8",
+    "files": [
+      {
+        "name": "KUCTF Write-up",
+        "url": "/files/Write_up/KUCTF.pdf",
+        "protection": false
+      }
+    ]
+  },
+  {
+    "id": "sejong-hacktheon-2026",
+    "number": "05",
+    "category": "CTF & Security Activities",
+    "title": "세종 핵테온 2026",
+    "description": "",
+    "tags": [
+      "CTF",
+      "Hackathon",
+      "Security"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#38BDF8",
+    "files": [
+      {
+        "name": "세종 핵테온(2026) Write-up",
+        "url": "/files/Write_up/Sejong_Hackathon2.pdf",
+        "protection": false
+      }
+    ]
+  },
+  {
+    "id": "sekurity-activity",
+    "number": "01",
+    "category": "Security Education",
+    "title": "seKUrity 활동",
+    "description": "seKUrity 소속 멘토들만 확인할 수 있는 파일입니다.",
+    "tags": [
+      "seKUrity",
+      "Security Club",
+      "Education"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#A855F7",
+    "files": [
+      {
+        "name": "seKUrity 1주차 과제(네트워크, HTTP, 웹, 개발자도구, 피들러",
+        "url": "/files/seKUrity1.pdf",
+        "protection": "sekurity"
+      },
+      {
+        "name": "seKUrity 2주차 과제(XSS)",
+        "url": "/files/seKUrity2.pdf",
+        "protection": "sekurity"
+      },
+      {
+        "name": "seKUrity 3주차 과제(불충분한 인증과 인가)",
+        "url": "/files/seKUrity3.pdf",
+        "protection": "sekurity"
+      },
+      {
+        "name": "seKUrity 4주차 과제(SQLi)",
+        "url": "/files/seKUrity4.pdf",
+        "protection": "sekurity"
+      },
+      {
+        "name": "seKUrity 5주차 과제(파일 다운로드 취약점)",
+        "url": "/files/seKUrity5.pdf",
+        "protection": "sekurity"
+      },
+      {
+        "name": "seKUrity 6주차 과제(파일 업로드 취약점)",
+        "url": "/files/seKUrity6.pdf",
+        "protection": "sekurity"
+      },
+      {
+        "name": "seKUrity 7주차 과제(OSi)",
+        "url": "/files/seKUrity7.pdf",
+        "protection": "sekurity"
+      },
+      {
+        "name": "seKUrity 8주차 과제(SSTi)",
+        "url": "/files/seKUrity8.pdf",
+        "protection": "sekurity"
+      },
+      {
+        "name": "seKUrity 9주차 과제(실습)",
+        "url": "/files/seKUrity9.pdf",
+        "protection": "sekurity"
+      }
+    ]
+  },
+  {
+    "id": "web-vuln-education",
+    "number": "02",
+    "category": "Security Education",
+    "title": "신입부원 웹 취약점 교육",
+    "description": "seKUrity에서 신입부원에게 XSS를 교육했던 자료입니다.",
+    "tags": [
+      "Web Security",
+      "Education",
+      "Teaching"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#A855F7",
+    "files": [
+      {
+        "name": "seKUrity 신입부원 XSS 교육 자료",
+        "url": "/files/XSS.pdf",
+        "protection": false
+      }
+    ]
+  },
+  {
+    "id": "crypto-study",
+    "number": "03",
+    "category": "Security Education",
+    "title": "암호학 스터디 발표",
+    "description": "",
+    "tags": [
+      "Cryptography",
+      "Study",
+      "Presentation"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#A855F7",
+    "files": [
+      {
+        "name": "seKUrity 암호학 스터디(선형대수) 발표 자료",
+        "url": "/files/crypto.pdf",
+        "protection": false
+      },
+      {
+        "name": "seKUrity 암호학 스터디(선형대수) 추가 자료",
+        "url": "/files/crypto_add.pdf",
+        "protection": false
+      }
+    ]
+  },
+  {
+    "id": "sekurity-seminar",
+    "number": "04",
+    "category": "Security Education",
+    "title": "제6회 seKUrity 보안 세미나 발표",
+    "description": "",
+    "tags": [
+      "Seminar",
+      "Presentation",
+      "Security"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#A855F7",
+    "photos": [
+      "/sekurity-seminar-6.jpg"
+    ],
+    "files": [
+      {
+        "name": "seKUrity 제6회 보안 세미나 발표 자료",
+        "url": "/files/seminar.pdf",
+        "protection": false
+      }
+    ]
+  },
+  {
+    "id": "WHS",
+    "number": "05",
+    "category": "Security Education",
+    "title": "화이트햇 스쿨 4기",
+    "description": "",
+    "tags": [
+      "WHS",
+      "Cyber Security",
+      "Education"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#A855F7",
+    "files": [
+      {
+        "type": "folder",
+        "name": "공통/개발",
+        "files": []
+      },
+      {
+        "type": "folder",
+        "name": "취약점",
+        "files": []
+      },
+      {
+        "type": "folder",
+        "name": "포렌식",
+        "files": []
+      },
+      {
+        "type": "folder",
+        "name": "보안운영관리/인프라/컨설팅",
+        "files": []
+      }
+    ]
+  },
+  {
+    "id": "sekurity-homepage",
+    "number": "01",
+    "category": "Interactive Web Projects",
+    "title": "seKUrity 홈페이지 개발",
+    "description": "",
+    "tags": [
+      "Web Development",
+      "node.js",
+      "seKUrity"
+    ],
+    "links": {
+      "github": "https://github.com/kku-seKUrity/seku_homePage.git",
+      "report": ""
+    },
+    "color": "#EC4899",
+    "files": []
+  },
+  {
+    "id": "portfolio-site",
+    "number": "02",
+    "category": "Interactive Web Projects",
+    "title": "React 포트폴리오 사이트 제작",
+    "description": "",
+    "tags": [
+      "React",
+      "TypeScript",
+      "Portfolio"
+    ],
+    "links": {
+      "github": "https://github.com/fev20",
+      "report": ""
+    },
+    "color": "#EC4899",
+    "files": []
+  },
+  {
+    "id": "escape-room",
+    "number": "03",
+    "category": "Interactive Web Projects",
+    "title": "React 방탈출 게임 제작",
+    "description": "",
+    "tags": [
+      "CTF",
+      "React",
+      "JavaScript",
+      "Game"
+    ],
+    "links": {
+      "github": "https://github.com/minsuk330/room-escape.git",
+      "report": ""
+    },
+    "color": "#EC4899",
+    "files": []
+  },
+  {
+    "id": "balloon-ride",
+    "number": "04",
+    "category": "Interactive Web Projects",
+    "title": "Balloon Ride",
+    "description": "",
+    "tags": [
+      "React",
+      "JavaScript",
+      "Game",
+      "Team Project"
+    ],
+    "links": {
+      "github": "https://github.com/soooonho/balloonride.git",
+      "report": ""
+    },
+    "color": "#EC4899",
+    "files": []
+  },
+  {
+    "id": "embediz-research-website",
+    "number": "05",
+    "category": "Interactive Web Projects",
+    "title": "Embediz 연구팀 웹사이트 기획·제작",
+    "description": "임베디드 보안 연구팀 Embediz의 프로젝트, 구성원, 연구 기록과 시연 영상을 공개하기 위해 기획·제작하고 GitHub Pages로 배포한 웹사이트입니다.",
+    "period": "2026.11",
+    "status": "공개 완료",
+    "tags": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "GitHub Pages"
+    ],
+    "links": {
+      "github": "https://github.com/fev20/Embediz",
+      "report": "",
+      "site": "https://fev20.github.io/Embediz/"
+    },
+    "color": "#EC4899",
+    "files": [],
+    "sections": [
+      {
+        "title": "제작 목적",
+        "paragraphs": [
+          "Embediz의 연구 활동과 프로젝트 결과를 외부에서도 확인할 수 있도록, 프로젝트 소개와 구성원, 연구 기록, 시연 자료를 한곳에 모은 공개 웹사이트를 구성했습니다."
+        ]
+      },
+      {
+        "title": "기획과 구성",
+        "paragraphs": [
+          "요구사항을 정리하고 팀 소개에서 프로젝트별 설명, 참여 구성원, 연구 기록으로 이어지는 정보 구조를 기획했습니다."
+        ],
+        "items": [
+          "연구팀을 소개하는 홈페이지 구성",
+          "프로젝트별 소개와 진행 상태 구분",
+          "프로젝트마다 다른 참여 구성원을 별도로 소개",
+          "연구 기록과 기술 설명을 담는 개별 페이지 구성",
+          "실기기 DOOM 시연 영상과 관련 자료 연결"
+        ]
+      },
+      {
+        "title": "배포와 검색 노출 준비",
+        "paragraphs": [
+          "검색 노출을 위한 기본 설정을 적용했습니다. 사이트맵 처리, 실제 색인과 검색 노출 여부는 아직 확인하지 않았습니다."
+        ],
+        "items": [
+          "GitHub 저장소를 통한 사이트 관리",
+          "GitHub Pages를 이용한 공개 배포",
+          "프로젝트와 연구 기록에 독립적인 페이지 주소 제공",
+          "검색엔진이 본문을 읽을 수 있는 정적 HTML 페이지 구성",
+          "페이지별 제목, 설명, 대표 주소와 구조화된 데이터 설정",
+          "XML 사이트맵 생성",
+          "Google Search Console 소유권 확인"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fault-injection",
+    "number": "01",
+    "category": "Embedded & Hardware Security",
+    "title": "Fault Injection 연구",
+    "description": "",
+    "tags": [
+      "Fault Injection",
+      "Voltage Glitching",
+      "Hardware Security"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#FB923C",
+    "files": []
+  },
+  {
+    "id": "andlab-android-hardware",
+    "number": "02",
+    "category": "Embedded & Hardware Security",
+    "title": "안드로이드 하드웨어 구조 연구",
+    "description": "AND-LAB에서 안드로이드 기기의 하드웨어와 부팅·보안 구조를 조사하고, 파인폰 기반 하드웨어 변경을 준비하는 프로젝트입니다.",
+    "organization": "AND-LAB",
+    "role": "하드웨어 담당",
+    "period": "2026.10 — 현재",
+    "status": "진행 중",
+    "tags": [
+      "Android",
+      "Hardware Security",
+      "Boot Process",
+      "PinePhone"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#FB923C",
+    "files": [],
+    "sections": [
+      {
+        "title": "프로젝트 소개",
+        "paragraphs": [
+          "안드로이드 기기의 하드웨어 구성과 소프트웨어 실행 과정이 어떻게 연결되는지 이해하고, 프로젝트에 필요한 하드웨어 변경과 실험 환경을 준비하는 연구 활동입니다."
+        ]
+      },
+      {
+        "title": "담당 역할",
+        "items": [
+          "AND-LAB 안드로이드 프로젝트의 하드웨어 분야 담당",
+          "기기의 하드웨어 구성과 관련 자료 조사",
+          "파인폰의 하드웨어 변경을 위한 구조 이해와 준비"
+        ]
+      },
+      {
+        "title": "현재 진행 내용",
+        "items": [
+          "안드로이드 기기의 주요 하드웨어 구성 요소 학습·조사",
+          "부트로더와 커널을 포함한 부팅 구조 조사",
+          "루팅 및 루팅 탐지의 동작 원리와 관련 선행 자료 학습",
+          "파인폰 기반 하드웨어 변경을 위한 기초 조사와 실험 준비"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "vice-president",
+    "number": "01",
+    "category": "Leadership & Community",
+    "title": "제5세대 부회장",
+    "description": "",
+    "tags": [
+      "Leadership",
+      "Club",
+      "Management"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#FACC15",
+    "files": []
+  },
+  {
+    "id": "pentest-collaboration",
+    "number": "02",
+    "category": "Leadership & Community",
+    "title": "웹 모의해킹 프로젝트 협업",
+    "description": "",
+    "tags": [
+      "Collaboration",
+      "Web Hacking",
+      "Team Project"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#FACC15",
+    "files": []
+  },
+  {
+    "id": "whs-class-lead",
+    "number": "03",
+    "category": "Leadership & Community",
+    "title": "화이트햇 스쿨 반장, PM",
+    "description": "",
+    "tags": [
+      "Leadership",
+      "Communication",
+      "Community"
+    ],
+    "links": {
+      "github": "",
+      "report": ""
+    },
+    "color": "#FACC15",
+    "files": []
+  }
+]

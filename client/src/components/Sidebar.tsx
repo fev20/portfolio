@@ -4,10 +4,10 @@ import { Link, useLocation } from "wouter";
 import { verifyAuth, logout, UserRole } from "@/utils/auth";
 import {
   profile,
-  projects,
   education,
   certifications,
 } from "@/data/portfolio";
+import { useProjects } from "@/data/projects";
 import { orderedExperiences } from "@/lib/experienceNavigation";
 import { PROJECT_CATEGORY_ORDER } from "@/lib/projectAppearance";
 
@@ -134,6 +134,7 @@ export default function Sidebar() {
   const [location, setLocation] = useLocation();
   const isMainPage = location === "/";
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
+  const projects = useProjects();
 
   const toggleCollapse = (id: string) => {
     setCollapsed(prev => ({ ...prev, [id]: !prev[id] }));
