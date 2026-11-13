@@ -153,7 +153,7 @@ export default function EducationDetail() {
 
             <p
               className="mt-2"
-              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", color: "var(--ink-muted)" }}
+              style={{ fontFamily: "var(--font-mono-label)", fontSize: "0.75rem", color: "var(--ink-muted)" }}
             >
               {"period" in item ? (item as typeof education[0]).period : (item as typeof certifications[0]).year}
             </p>
@@ -201,7 +201,7 @@ export default function EducationDetail() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--radius-sm)] text-sm transition-all hover:opacity-80"
                 style={{
-                  fontFamily: "'JetBrains Mono', monospace",
+                  fontFamily: "var(--font-mono-label)",
                   background: `color-mix(in srgb, ${color} 6%, transparent)`,
                   border: `1px solid color-mix(in srgb, ${color} 25%, transparent)`,
                   color,

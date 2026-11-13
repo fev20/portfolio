@@ -368,7 +368,7 @@ export default function Sidebar() {
                         style={{ background: "var(--sidebar-ink)" }}
                       />
                     )}
-                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)", minWidth: "18px" }}>
+                    <span style={{ fontFamily: "var(--font-mono-label)", fontSize: "0.6rem", color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)", minWidth: "18px" }}>
                       {item.num}
                     </span>
                     <span style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: isActive ? "var(--ink)" : "var(--ink-secondary)", fontWeight: isActive ? 600 : 400, lineHeight: 1.4, flex: 1, textAlign: "left" }}>
@@ -421,7 +421,7 @@ export default function Sidebar() {
                             <span
                               onClick={() => handleSubClick(sub.scrollId, sub.path)}
                               style={{
-                                fontFamily: "'JetBrains Mono', monospace",
+                                fontFamily: "var(--font-mono-label)",
                                 fontSize: "0.62rem",
                                 color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)",
                                 whiteSpace: "nowrap",
@@ -474,7 +474,7 @@ export default function Sidebar() {
                                 >
                                   <span
                                     style={{
-                                      fontFamily: "'JetBrains Mono', monospace",
+                                      fontFamily: "var(--font-mono-label)",
                                       fontSize: "0.6rem",
                                       whiteSpace: "nowrap",
                                       overflow: "hidden",
@@ -623,7 +623,7 @@ export default function Sidebar() {
               aria-current={isActive ? "location" : undefined}
               className="flex min-h-11 min-w-14 flex-[1_0_auto] flex-col items-center justify-center gap-0.5 whitespace-nowrap px-2 py-1"
             >
-              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem", color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)" }}>
+              <span style={{ fontFamily: "var(--font-mono-label)", fontSize: "0.55rem", color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)" }}>
                 {item.num}
               </span>
               <span style={{ fontFamily: "var(--font-body)", fontSize: "0.65rem", color: isActive ? "var(--ink)" : "var(--ink-secondary)", fontWeight: isActive ? 600 : 400 }}>

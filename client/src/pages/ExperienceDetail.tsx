@@ -76,7 +76,7 @@ export default function ExperienceDetail() {
           <div
             className="inline-block mb-3 px-3 py-1 rounded-[var(--radius-sm)]"
             style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "var(--font-mono-label)",
               fontSize: "0.72rem",
               background: "var(--sage-soft)",
               border: "1px solid var(--line)",
@@ -114,7 +114,7 @@ export default function ExperienceDetail() {
           )}
           <p
             style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "var(--font-mono-label)",
               fontSize: "0.85rem",
               color: "var(--sage)",
               marginBottom: "1.5rem",
@@ -128,7 +128,7 @@ export default function ExperienceDetail() {
               <span
                 key={tag}
                 style={{
-                  fontFamily: "'JetBrains Mono', monospace",
+                  fontFamily: "var(--font-mono-label)",
                   fontSize: "0.68rem",
                   padding: "3px 10px",
                   borderRadius: "var(--radius-sm)",

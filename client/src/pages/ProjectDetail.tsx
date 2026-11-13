@@ -155,9 +155,9 @@ function ProjectDetailContent({
               transition={{ duration: 0.6, delay: 0.1 }}
             >
               <div
-                className="text-7xl font-bold mb-4 select-none"
+                className="text-7xl mb-4 select-none"
                 style={{
-                  fontFamily: "'JetBrains Mono', monospace",
+                  fontFamily: "var(--font-mono-label)",
                   color: number,
                   lineHeight: 1,
                 }}
@@ -200,7 +200,7 @@ function ProjectDetailContent({
                     key={tag}
                     className="flex items-center gap-1"
                     style={{
-                      fontFamily: "'JetBrains Mono', monospace",
+                      fontFamily: "var(--font-mono-label)",
                       fontSize: "0.72rem",
                       padding: "4px 10px",
                       borderRadius: "var(--radius-sm)",

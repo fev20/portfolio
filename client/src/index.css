@@ -5,10 +5,20 @@
 
 @font-face {
   font-family: "Miel Jelly";
-  src: url("/fonts/miel-jelly/MielJelly-Regular.woff2") format("woff2");
+  src: url("/fonts/miel-jelly/MielJelly-Regular.woff2?v=0.5") format("woff2");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
+}
+
+/* Preserve the existing font for letters and punctuation in monospace labels. */
+@font-face {
+  font-family: "Concert One";
+  src: url("/fonts/concert-one/ConcertOne-Digits.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0030-0039;
 }
 
 /* Locus's regular webfont, using the version published by Project Noonnu. */
@@ -93,6 +103,7 @@
     "Locus Sangsang", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI",
     "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --font-display: "Miel Jelly", var(--font-body);
+  --font-mono-label: "Concert One", "JetBrains Mono", monospace;
   --radius: 1rem;
   --control-radius: 0.5rem;
   --radius-sm: var(--control-radius);
@@ -250,7 +261,7 @@
     box-shadow: none;
   }
   .section-number {
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-mono-label);
     font-size: 0.75rem;
     color: var(--rose);
     letter-spacing: 0.08em;
@@ -280,7 +291,7 @@
     transform: translateY(-2px);
   }
   .skill-tag {
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-mono-label);
     font-size: 0.75rem;
     padding: 0.25rem 0.75rem;
     border-radius: var(--radius-sm);
