@@ -32,7 +32,8 @@ export const demos: Demo[] = [
     mainVideo: { id: "full", title: "전체 영상", sourceType: "file" },
     steps: [
       { id: "hardware-disassembly", title: "하드웨어 분해", sourceType: "file" },
-      { id: "doom-port", title: "홈캠에 DOOM 이식", sourceType: "file" },
+      { id: "doom-port", title: "둠 포팅", sourceType: "file" },
+      { id: "gameplay", title: "실행 화면", sourceType: "file" },
     ],
   },
 ];
