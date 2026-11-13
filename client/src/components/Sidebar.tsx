@@ -21,6 +21,7 @@ const NAV_ITEMS = [
   { id: "experience", label: "Experience", num: "04", sub: [] as string[] },
   { id: "education",  label: "Education & Certifications", num: "05", sub: [] as string[] },
   { id: "demos",      label: "Demos",      num: "06", sub: [] as string[] },
+  { id: "ai-development", label: "AI 활용 개발", num: "07", sub: [] as string[] },
 ];
 
 function LoginBlock() {

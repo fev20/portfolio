@@ -11,6 +11,7 @@ import ProjectsSection from "@/components/sections/ProjectsSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
 import EducationSection from "@/components/sections/EducationSection";
 import DemosSection from "@/components/sections/DemosSection";
+import AiDevelopmentSection from "@/components/sections/AiDevelopmentSection";
 import ContactSection from "@/components/sections/ContactSection";
 
 export default function Home() {
@@ -21,7 +22,11 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (loaded) window.dispatchEvent(new Event("portfolio:ready"));
+    if (!loaded) return;
+    window.dispatchEvent(new Event("portfolio:ready"));
+    if (new URLSearchParams(window.location.search).get("section") === "ai-development") {
+      document.getElementById("ai-development")?.scrollIntoView();
+    }
   }, [loaded]);
 
   return (
@@ -52,6 +57,7 @@ export default function Home() {
               <ExperienceSection />
               <EducationSection />
               <DemosSection />
+              <AiDevelopmentSection />
               <ContactSection />
             </main>
           </motion.div>
