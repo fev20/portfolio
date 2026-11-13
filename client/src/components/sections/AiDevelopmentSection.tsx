@@ -10,10 +10,12 @@ const aiApproaches = {
 function ProjectCard({
   title,
   approach,
+  description,
   children,
 }: {
   title: string;
   approach: keyof typeof aiApproaches;
+  description: string;
   children: ReactNode;
 }) {
   return (
@@ -30,9 +32,36 @@ function ProjectCard({
         </h3>
       </summary>
       <div className="border-t border-[var(--line)] px-5 py-5 sm:px-8 sm:py-6">
-        {children}
+        <p className="max-w-3xl text-sm leading-relaxed text-[var(--ink-secondary)] [word-break:keep-all] sm:text-base">
+          {description}
+        </p>
+        <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+          {children}
+        </div>
       </div>
     </details>
+  );
+}
+
+function ProjectLink({
+  path,
+  download = false,
+  children,
+}: {
+  path: string;
+  download?: boolean;
+  children: ReactNode;
+}) {
+  const Icon = download ? Download : ArrowRight;
+  return (
+    <a
+      href={`${import.meta.env.BASE_URL}${path}`}
+      download={download}
+      className="group inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--rose-bright)] bg-[var(--rose-soft)] px-4 text-sm font-semibold text-[var(--rose-deep)] transition-colors hover:border-[var(--rose)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--rose-deep)]"
+    >
+      {children}
+      <Icon className="size-4" aria-hidden="true" />
+    </a>
   );
 }
 
@@ -65,96 +94,39 @@ export default function AiDevelopmentSection() {
         </div>
 
         <div className="grid gap-3">
-          <ProjectCard title="Miel Research Desk" approach="buildFirst">
-            <p className="max-w-3xl text-sm leading-relaxed text-[var(--ink-secondary)] [word-break:keep-all] sm:text-base">
-              옵시디언 링크 점검, 연구 활동 기록, 펌웨어 파일 비교를 브라우저에서 할 수 있는 도구입니다.
-              제가 해결할 문제와 요구사항을 정하고, AI가 자료 조사부터 구현과 테스트까지 수행했습니다.
-            </p>
-            <dl className="mt-6 grid gap-4 border-y border-[var(--line)] py-5 sm:grid-cols-3">
-              <div>
-                <dt className="text-sm font-semibold">노트 점검·관계 탐색</dt>
-                <dd className="mt-1 text-sm leading-relaxed text-[var(--ink-secondary)]">
-                  깨진 링크를 찾고, 노트 사이의 연결 경로를 확인합니다.
-                </dd>
-              </div>
-              <div>
-                <dt className="text-sm font-semibold">연구 원장</dt>
-                <dd className="mt-1 text-sm leading-relaxed text-[var(--ink-secondary)]">
-                  가상 연구 기록으로 활동, 역할, 결과를 정리해 봅니다.
-                </dd>
-              </div>
-              <div>
-                <dt className="text-sm font-semibold">펌웨어 비교</dt>
-                <dd className="mt-1 text-sm leading-relaxed text-[var(--ink-secondary)]">
-                  예제 바이너리의 헤더, 체크섬, 변경 바이트를 확인합니다.
-                </dd>
-              </div>
-            </dl>
-
-            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
-              <a
-                href="/ai-demo/"
-                className="group inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--rose-bright)] bg-[var(--rose-soft)] px-4 text-sm font-semibold text-[var(--rose-deep)] transition-colors hover:border-[var(--rose)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--rose-deep)]"
-              >
-                공개 데모 체험하기
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-              </a>
-            </div>
+          <ProjectCard
+            title="Miel Research Desk"
+            approach="buildFirst"
+            description="깨진 옵시디언 링크와 노트 사이의 연결 경로를 살펴보고, 예제 연구 기록을 정리하거나 펌웨어의 헤더·체크섬·바이트를 비교할 수 있습니다. 제가 요구사항을 정하고 AI가 조사, 구현, 테스트를 맡았습니다."
+          >
+            <ProjectLink path="ai-demo/">Research Desk 열기</ProjectLink>
           </ProjectCard>
 
-          <ProjectCard title="RISC-V 실행 실험실" approach="buildFirst">
-            <p className="max-w-3xl text-sm leading-relaxed text-[var(--ink-secondary)] [word-break:keep-all] sm:text-base">
-              배열 합계, 함수 호출, 바이트 복사를 실제 RV32I 명령으로 실행하며 레지스터와 메모리의 변화를 확인합니다.
-              AI가 실행기 구현과 검증을 맡았고, 동일한 바이너리의 실행 결과를 QEMU와 대조했습니다.
-            </p>
-            <a
-              href="/riscv-lab/"
-              className="group mt-6 inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--rose-bright)] bg-[var(--rose-soft)] px-4 text-sm font-semibold text-[var(--rose-deep)] transition-colors hover:border-[var(--rose)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--rose-deep)]"
-            >
-              RISC-V 실행기 열기
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-            </a>
+          <ProjectCard
+            title="RISC-V 실행 실험실"
+            approach="buildFirst"
+            description="배열 합계, 함수 호출, 바이트 복사를 실제 RV32I 명령으로 실행하며 레지스터와 메모리의 변화를 확인합니다. AI가 실행기를 구현하고, 동일한 바이너리의 실행 결과를 QEMU와 대조했습니다."
+          >
+            <ProjectLink path="riscv-lab/">RISC-V 실행기 열기</ProjectLink>
           </ProjectCard>
 
-          <ProjectCard title="오픈소스 코드 지도 생성기" approach="buildFirst">
-            <p className="max-w-3xl text-sm leading-relaxed text-[var(--ink-secondary)] [word-break:keep-all] sm:text-base">
-              Python 함수가 서로 어떻게 이어지는지 호출 지도로 탐색합니다.
-              공개 예제로 시작하거나, 내 프로젝트를 업로드 없이 분석하고
-              연결선마다 실제 코드와 줄 번호를 확인할 수 있습니다.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
-              <a
-                href={`${import.meta.env.BASE_URL}source-code-atlas/`}
-                className="group inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--rose-bright)] bg-[var(--rose-soft)] px-4 text-sm font-semibold text-[var(--rose-deep)] transition-colors hover:border-[var(--rose)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--rose-deep)]"
-              >
-                코드 지도 열기
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-              </a>
-            </div>
+          <ProjectCard
+            title="오픈소스 코드 지도 생성기"
+            approach="buildFirst"
+            description="Python 함수가 서로 어떻게 이어지는지 호출 지도로 탐색합니다. 공개 예제로 시작하거나 내 프로젝트를 업로드 없이 분석하고, 연결선마다 실제 코드와 줄 번호를 확인할 수 있습니다."
+          >
+            <ProjectLink path="source-code-atlas/">코드 지도 열기</ProjectLink>
           </ProjectCard>
 
-          <ProjectCard title="RRIP 캐시 교체 논문 재현" approach="buildFirst">
-            <p className="max-w-3xl text-sm leading-relaxed text-[var(--ink-secondary)] [word-break:keep-all] sm:text-base">
-              ISCA 2010 논문의 캐시 접근을 한 단계씩 따라가며 LRU, NRU, SRRIP의 차이를 확인합니다.
-              AI가 논문의 그림 3과 식 (1)을 재현하고, DOOM 화면 버퍼를 가정한 모의실험으로 확장했습니다.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
-              <a
-                href={`${import.meta.env.BASE_URL}rrip-reproduction/`}
-                className="group inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--rose-bright)] bg-[var(--rose-soft)] px-4 text-sm font-semibold text-[var(--rose-deep)] transition-colors hover:border-[var(--rose)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--rose-deep)]"
-              >
-                논문 재현 보고서 열기
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-              </a>
-              <a
-                href={`${import.meta.env.BASE_URL}rrip-reproduction/RRIP_Reproduction_Source.zip`}
-                download
-                className="group inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--rose-bright)] bg-[var(--rose-soft)] px-4 text-sm font-semibold text-[var(--rose-deep)] transition-colors hover:border-[var(--rose)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--rose-deep)]"
-              >
-                재현 코드·데이터 다운로드
-                <Download className="size-4" aria-hidden="true" />
-              </a>
-            </div>
+          <ProjectCard
+            title="RRIP 캐시 교체 논문 재현"
+            approach="buildFirst"
+            description="ISCA 2010 논문의 캐시 접근을 한 단계씩 따라가며 LRU, NRU, SRRIP의 차이를 확인합니다. AI가 논문의 그림 3과 식 (1)을 재현하고, DOOM 화면 버퍼를 가정한 모의실험으로 확장했습니다."
+          >
+            <ProjectLink path="rrip-reproduction/">논문 재현 보고서 열기</ProjectLink>
+            <ProjectLink path="rrip-reproduction/RRIP_Reproduction_Source.zip" download>
+              재현 코드·데이터 다운로드
+            </ProjectLink>
           </ProjectCard>
         </div>
       </div>
