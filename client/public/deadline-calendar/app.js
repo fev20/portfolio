@@ -2,7 +2,6 @@ const dayMilliseconds = 86_400_000;
 const sampleMonth = '2027-04';
 const initialDay = '10';
 const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
-const rainbow = ['#9060d4', '#6952c3', '#397acc', '#36a36f', '#e4bc36', '#e87b39', '#df4050'];
 const samples = [
   { id: 'sample-1', title: '참고 자료 수집', start: '2027-04-01', end: '2027-04-06', completed: true },
   { id: 'sample-2', title: '회의 안건 정리', start: '2027-04-04', end: '2027-04-08' },
@@ -58,24 +57,9 @@ function deadlineLabel(event) {
   return `D-${days}`;
 }
 
-function eventColor(event) {
+function urgencyPercent(event) {
   const days = Math.min(21, Math.max(0, daysBetween(current, event.end)));
-  const position = (21 - days) / 21 * (rainbow.length - 1);
-  const lower = Math.floor(position);
-  const first = rainbow[lower];
-  const next = rainbow[lower + 1];
-  const rgb = [1, 3, 5].map(index => {
-    const a = Number.parseInt(first.slice(index, index + 2), 16);
-    if (!next) return a;
-    const b = Number.parseInt(next.slice(index, index + 2), 16);
-    return Math.round(a + (b - a) * (position - lower));
-  });
-  const [r, g, b] = rgb.map(value => {
-    const channel = value / 255;
-    return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
-  });
-  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  return { fill: `rgb(${rgb.join(', ')})`, ink: luminance > 0.179 ? '#1a1725' : '#fff' };
+  return `${((21 - days) / 21) * 100}%`;
 }
 
 function node(tag, className = '', content = '') {
@@ -146,9 +130,7 @@ function renderCalendar() {
       bar.dataset.continuedEnd = String(event.end > weekEnd);
       bar.style.gridColumn = `${start + 1} / ${end + 2}`;
       bar.style.gridRow = String(lane + 1);
-      const color = eventColor(event);
-      bar.style.setProperty('--event-color', color.fill);
-      bar.style.setProperty('--event-ink', color.ink);
+      bar.style.setProperty('--urgency', urgencyPercent(event));
       const prefix = event.completed ? '✓ ' : event.starred ? '★ ' : '';
       bar.append(node('span', 'cal-bar-title', prefix + event.title), node('span', 'cal-bar-due', due));
       lanes.append(bar);
@@ -163,7 +145,7 @@ function eventRow(event) {
   const row = node('li', 'event-row');
   row.classList.toggle('complete', Boolean(event.completed));
   const dot = node('span', 'event-dot');
-  if (!event.completed) dot.style.backgroundColor = eventColor(event).fill;
+  if (!event.completed) dot.style.setProperty('--urgency', urgencyPercent(event));
   const title = button('row-name', event.title, `${event.title} 편집`, () => openEditor(event));
   const meta = node('span', 'row-meta', `${spanLabel(event)} · ${deadlineLabel(event)}`);
   const text = node('div', 'row-text');

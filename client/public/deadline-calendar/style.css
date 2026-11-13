@@ -10,6 +10,11 @@
   --on-accent: #fff;
   --focus: #865cc7;
   --danger: #ac2445;
+  --deadline-far: #ece8f2;
+  --deadline-due: #efcdd5;
+  --deadline-dot-far: #9c8cab;
+  --deadline-dot-due: #b36c7c;
+  --completed-fill: #eeedf0;
   --shadow: 0 16px 44px #3720570c;
   font: 16px/1.55 "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
 }
@@ -26,6 +31,11 @@
   --on-accent: #241434;
   --focus: #dbb6fc;
   --danger: #ff9cb0;
+  --deadline-far: #3d3449;
+  --deadline-due: #573541;
+  --deadline-dot-far: #a89ab9;
+  --deadline-dot-due: #ce8b9a;
+  --completed-fill: #37343d;
   --shadow: 0 16px 44px #0002;
 }
 
@@ -132,31 +142,43 @@ h1, h2, p { margin: 0; }
 .cal-day.outside { color: var(--muted); opacity: .77; }
 .cal-day time { min-width: 23px; height: 23px; display: inline-grid; place-items: center; border-radius: 50%; }
 .cal-day.current time { background: var(--accent); color: var(--on-accent); }
-.cal-lanes { grid-auto-rows: minmax(24px, auto); row-gap: 3px; }
+.cal-lanes { grid-auto-rows: 20px; row-gap: 3px; }
 .cal-bar {
+  position: relative;
+  isolation: isolate;
   min-width: 0;
-  min-height: 24px;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 5px;
-  padding: 3px 6px;
+  padding: 0 6px;
   margin-inline: 2px;
   border: none;
   border-radius: 4px;
-  background: var(--event-color);
-  color: var(--event-ink, #fff);
+  background: transparent;
+  color: var(--text);
   font-size: .72rem;
-  font-weight: 720;
+  font-weight: 600;
   text-align: start;
   line-height: 1.25;
   overflow: hidden;
 }
-.cal-bar:hover { filter: brightness(.91); }
-.cal-bar:focus-visible { outline-offset: -2px; outline-color: var(--event-ink, var(--focus)); }
-.cal-bar.complete { background: var(--soft); color: var(--muted); }
+.cal-bar::before {
+  content: "";
+  position: absolute;
+  inset: calc((100% - 18px) / 2) 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--deadline-far), var(--deadline-due) var(--urgency));
+}
+.cal-bar:hover::before { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text), transparent 75%); }
+.cal-bar:focus-visible { outline-offset: -1px; }
+.cal-bar.complete { color: var(--muted); }
+.cal-bar.complete::before { background: var(--completed-fill); }
 .cal-bar-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.cal-bar-due { margin-inline-start: auto; white-space: nowrap; }
+.cal-bar-due { margin-inline-start: auto; white-space: nowrap; font-weight: 500; }
 .cal-bar[data-continued-start="true"] { margin-inline-start: 0; border-start-start-radius: 0; border-end-start-radius: 0; }
 .cal-bar[data-continued-end="true"] { margin-inline-end: 0; border-start-end-radius: 0; border-end-end-radius: 0; }
 
@@ -177,7 +199,7 @@ h1, h2, p { margin: 0; }
   width: clamp(62px, 15vw, 140px);
   height: 6px;
   border-radius: 999px;
-  background: linear-gradient(to right, #9060d4, #6952c3, #397acc, #36a36f, #e4bc36, #e87b39, #df4050);
+  background: linear-gradient(to right, var(--deadline-dot-far), var(--deadline-dot-due));
 }
 
 .event-list { margin-top: 21px; padding: 15px 17px 9px; }
@@ -214,7 +236,7 @@ h1, h2, p { margin: 0; }
 }
 .row-name:hover { background: var(--soft); }
 .row-meta { display: block; padding-inline-start: 3px; font-variant-numeric: tabular-nums; font-weight: 450; }
-.event-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--event-color); flex: 0 0 auto; }
+.event-dot { width: 8px; height: 8px; border-radius: 50%; background: color-mix(in srgb, var(--deadline-dot-far), var(--deadline-dot-due) var(--urgency)); flex: 0 0 auto; }
 .event-row.complete .event-dot { background: var(--muted); }
 .event-row .overdue { color: var(--danger); }
 .completed-list { border-top: 1px solid var(--line); padding-top: 7px; color: var(--muted); }
@@ -292,6 +314,5 @@ h1, h2, p { margin: 0; }
   .editor-fields { grid-template-columns: 1fr; }
 }
 @media (pointer: coarse) {
-  .cal-lanes { grid-auto-rows: minmax(37px, auto); }
-  .cal-bar { min-height: 37px; }
+  .cal-lanes { grid-auto-rows: 30px; }
 }
