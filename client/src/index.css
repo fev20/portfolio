@@ -146,6 +146,7 @@
     @apply border-border outline-ring/50;
   }
   html {
+    overflow-y: auto;
     scroll-behavior: smooth;
     scroll-padding-top: 2rem;
   }
@@ -209,15 +210,19 @@
   ::-webkit-scrollbar-thumb:hover {
     background: var(--ink-muted);
   }
-  html::-webkit-scrollbar {
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
     width: 12px;
   }
-  html::-webkit-scrollbar-thumb {
+  html::-webkit-scrollbar-thumb,
+  body::-webkit-scrollbar-thumb {
     background: var(--sage);
     border-radius: 999px;
   }
   html::-webkit-scrollbar-thumb:hover,
-  html::-webkit-scrollbar-thumb:active {
+  html::-webkit-scrollbar-thumb:active,
+  body::-webkit-scrollbar-thumb:hover,
+  body::-webkit-scrollbar-thumb:active {
     background: var(--sage-deep);
   }
   @supports not selector(::-webkit-scrollbar) {
