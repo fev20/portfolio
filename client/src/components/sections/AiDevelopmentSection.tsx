@@ -14,7 +14,7 @@ export default function AiDevelopmentSection() {
             id="ai-development-title"
             className="text-[clamp(2rem,3vw,2.6rem)] text-[var(--ink)]"
           >
-            AI 활용 개발
+            AI in Practice
           </h2>
           <div className="h-px max-w-[200px] flex-1 bg-[var(--line)]" />
         </div>
