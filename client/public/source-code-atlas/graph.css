@@ -1,0 +1,162 @@
+.atlas-graph {
+  --graph-background: #0b1423;
+  --graph-grid: #22334a;
+  --graph-link: #536e90;
+  --graph-accent: #5be7bd;
+  --graph-cyan: #94c3ff;
+  --graph-unresolved: #e4ad7d;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  height: clamp(380px, 55vh, 470px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #344a66 var(--graph-background);
+  background: radial-gradient(circle, var(--graph-grid) 0.8px, transparent 1.1px) 0 0 / 19px 19px local,
+    var(--graph-background);
+  color: #dbe7f8;
+}
+
+.atlas-graph__canvas {
+  display: block;
+  max-width: none;
+  margin-inline: auto;
+  overflow: hidden;
+}
+
+.atlas-graph__empty {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 30px;
+  color: #b0c2d9;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.atlas-graph__vertex,
+.atlas-graph__edge {
+  cursor: pointer;
+  outline: none;
+}
+
+.atlas-graph__card {
+  fill: #142238;
+  stroke: #344d6a;
+  stroke-width: 1;
+}
+
+.atlas-graph__glyph-box {
+  fill: #213652;
+}
+
+.atlas-graph__glyph {
+  fill: var(--graph-cyan);
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.atlas-graph__name {
+  fill: #e8f1fd;
+  font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.atlas-graph__location {
+  fill: #a6b8d0;
+  font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+  font-size: 10px;
+}
+
+.atlas-graph__vertex text {
+  pointer-events: none;
+  user-select: none;
+}
+
+.atlas-graph__vertex.is-entry .atlas-graph__card {
+  fill: #102e31;
+  stroke: #4acdaa;
+}
+
+.atlas-graph__vertex.is-entry .atlas-graph__glyph-box {
+  fill: #1a4946;
+}
+
+.atlas-graph__vertex.is-entry .atlas-graph__glyph,
+.atlas-graph__vertex.is-entry .atlas-graph__name {
+  fill: #88f6d6;
+}
+
+.atlas-graph__vertex.is-unresolved .atlas-graph__card {
+  fill: #232332;
+  stroke: #997659;
+  stroke-dasharray: 4 3;
+}
+
+.atlas-graph__vertex.is-unresolved .atlas-graph__glyph-box {
+  fill: #443333;
+}
+
+.atlas-graph__vertex.is-unresolved .atlas-graph__glyph,
+.atlas-graph__vertex.is-unresolved .atlas-graph__location {
+  fill: var(--graph-unresolved);
+}
+
+.atlas-graph__vertex.is-selected .atlas-graph__card,
+.atlas-graph__vertex:hover .atlas-graph__card {
+  stroke: var(--graph-accent);
+  stroke-width: 2;
+}
+
+.atlas-graph__vertex:focus-visible .atlas-graph__card {
+  stroke: #f6fbff;
+  stroke-width: 3;
+}
+
+.atlas-graph__edge-line {
+  fill: none;
+  stroke: var(--graph-link);
+  stroke-width: 1.55;
+  pointer-events: none;
+}
+
+.atlas-graph__edge-hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 15;
+  pointer-events: stroke;
+}
+
+.atlas-graph__edge.is-unresolved .atlas-graph__edge-line {
+  stroke: #a17d64;
+  stroke-dasharray: 4 4;
+}
+
+.atlas-graph__edge.is-route .atlas-graph__edge-line {
+  stroke: var(--graph-accent);
+  stroke-width: 2;
+}
+
+.atlas-graph__edge.is-selected .atlas-graph__edge-line,
+.atlas-graph__edge:hover .atlas-graph__edge-line {
+  stroke: #9af6da;
+  stroke-width: 3;
+}
+
+.atlas-graph__edge:focus-visible .atlas-graph__edge-line {
+  stroke: #f6fbff;
+  stroke-width: 3;
+}
+
+.atlas-graph__marker--normal { fill: var(--graph-link); }
+.atlas-graph__marker--route { fill: var(--graph-accent); }
+.atlas-graph__marker--unresolved { fill: var(--graph-unresolved); }
+
+@media (max-width: 650px) {
+  .atlas-graph { height: 340px; }
+  .atlas-graph__edge-hit { stroke-width: 20; }
+}

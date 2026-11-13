@@ -74,6 +74,29 @@ export default function AiDevelopmentSection() {
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
           </a>
         </article>
+
+        <article className="paper-card mt-5 p-5 sm:p-8">
+          <h3 className="text-xl font-semibold sm:text-2xl">
+            오픈소스 코드 지도 생성기
+          </h3>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--ink-secondary)] [word-break:keep-all] sm:text-base">
+            Python 함수가 서로 어떻게 이어지는지 호출 지도로 탐색합니다.
+            공개 예제로 시작하거나, 내 프로젝트를 업로드 없이 분석하고
+            연결선마다 실제 코드와 줄 번호를 확인할 수 있습니다.
+          </p>
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <a
+              href={`${import.meta.env.BASE_URL}source-code-atlas/`}
+              className="group inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--rose-bright)] bg-[var(--rose-soft)] px-4 text-sm font-semibold text-[var(--rose-deep)] transition-colors hover:border-[var(--rose)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--rose-deep)]"
+            >
+              코드 지도 열기
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+            </a>
+            <p className="text-sm leading-relaxed text-[var(--ink-secondary)]">
+              로그인 없이 열립니다. 선택한 폴더는 현재 탭에서만 분석합니다.
+            </p>
+          </div>
+        </article>
       </div>
     </section>
   );

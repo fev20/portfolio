@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Python 프로젝트의 함수 호출 경로를 브라우저에서 탐색하고, 실제 소스에서 근거를 확인하세요.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; worker-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>오픈소스 코드 지도 생성기 · Code Atlas</title>
+  <link rel="icon" href="./atlas.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./graph.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main-content">본문으로 건너뛰기</a>
+  <header class="masthead">
+    <div class="shell header-inner">
+      <a class="brand" href="./" aria-label="Code Atlas 처음으로">
+        <img width="34" height="34" src="./atlas.svg" alt="">
+        <span>Code<span class="brand-accent"> Atlas</span></span>
+      </a>
+      <span class="runtime"><i></i> 브라우저에서만 분석</span>
+    </div>
+  </header>
+  <main class="shell" id="main-content">
+    <section class="hero" aria-labelledby="headline">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> AI 활용 프로젝트 <b>01 / PYTHON</b></p>
+        <h1 id="headline">오픈소스 코드<br>지도 생성기<span>.</span></h1>
+        <p class="lead">Python 프로젝트의 호출 흐름을 지도로 펼쳐보세요.<br class="desktop-only"> 진입점에서 출발해, 연결선 하나마다 실제 코드를 확인할 수 있습니다.</p>
+        <div class="actions">
+          <button type="button" class="button primary" id="open-example">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l10 6-10 6z"/></svg> 공개 예제 열기
+          </button>
+          <label class="button secondary folder-button" for="folder">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h7l2 2h9v10H3zM3 7V5h7l2 2h7v2"/></svg> Python 폴더 선택
+            <input id="folder" type="file" webkitdirectory multiple aria-describedby="privacy-note">
+          </label>
+        </div>
+        <p class="privacy-note" id="privacy-note">소스와 분석 결과는 전송하거나 저장하지 않습니다.</p>
+      </div>
+      <figure class="hero-figure" aria-hidden="true">
+        <figcaption><span><i></i> 호출 지도 미리보기</span><span>FIG. 01</span></figcaption>
+        <svg viewBox="0 0 460 280" fill="none">
+          <defs>
+            <pattern id="dots" width="17" height="17" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#34465b"/></pattern>
+            <marker id="hero-arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 6 3 0 6z" fill="#64d8b5"/></marker>
+          </defs>
+          <rect width="460" height="280" fill="url(#dots)" opacity=".55"/>
+          <circle cx="227" cy="140" r="83" stroke="#243f4e" stroke-dasharray="3 6"/>
+          <circle cx="227" cy="140" r="109" stroke="#223346"/>
+          <g stroke="#64d8b5" stroke-width="1.5" marker-end="url(#hero-arrow)">
+            <path d="M133 140H174"/><path d="M282 140h24q13 0 13-13V77q0-14 14-14h9"/>
+            <path d="M282 140h60"/><path d="M282 140h24q13 0 13 13v50q0 14 14 14h9"/>
+          </g>
+          <rect x="26" y="116" width="107" height="48" rx="8" fill="#1a3939" stroke="#59d5ad"/>
+          <rect x="175" y="116" width="107" height="48" rx="8" fill="#14263b" stroke="#447985"/>
+          <rect x="344" y="44" width="96" height="38" rx="7" fill="#14263b" stroke="#447985"/>
+          <rect x="344" y="121" width="96" height="38" rx="7" fill="#14263b" stroke="#447985"/>
+          <rect x="344" y="198" width="96" height="38" rx="7" fill="#14263b" stroke="#447985"/>
+          <g fill="#6fe6be" font-size="9"><text x="39" y="133">ENTRY POINT</text><text x="31" y="32">GRAPH / 01</text></g>
+          <g fill="#e7f2fa" font-size="13"><text x="39" y="151">main()</text><text x="188" y="145">fix_file()</text><text x="357" y="68">parse</text><text x="357" y="145">visit</text><text x="357" y="222">format</text></g>
+          <path d="M26 248h37m-37 0v-18m414 18h-37m37 0v-18" stroke="#50647c"/>
+        </svg>
+        <div class="figure-footer"><span>01 진입점</span><span>02 호출 관계</span><span>03 코드 근거</span></div>
+      </figure>
+    </section>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+
+    <section class="empty" id="empty" aria-label="탐색 방법">
+      <div class="section-label"><span>탐색 방법</span><span>QUICK START</span></div>
+      <div class="steps">
+        <article><span class="step-index">01</span><div><h2>진입점 선택</h2><p>자동으로 찾은 후보에서 시작하거나 원하는 함수를 고르세요.</p></div></article>
+        <article><span class="step-index">02</span><div><h2>호출 경로 따라가기</h2><p>함수를 검색하고 진입점에서 이어지는 경로를 그래프에서 확인하세요.</p></div></article>
+        <article><span class="step-index">03</span><div><h2>실제 코드 확인</h2><p>함수와 연결선을 선택하면 정의와 호출 위치가 열립니다.</p></div></article>
+      </div>
+    </section>
+
+    <section id="workspace" aria-label="코드 지도 작업 공간" hidden>
+      <div class="project-heading">
+        <div><p class="eyebrow" id="project-kind"></p><h2 id="project-title" tabindex="-1"></h2><p class="project-source" id="project-source"></p></div>
+        <div class="stats" id="stats"></div>
+      </div>
+      <div class="guides" id="guides" hidden></div>
+      <div class="workspace-grid">
+        <section class="panel navigator" aria-labelledby="nav-heading">
+          <div class="panel-title"><h3 id="nav-heading">함수 탐색</h3><span>01</span></div>
+          <div class="nav-controls">
+            <label for="entry">진입점</label>
+            <select id="entry"></select>
+            <label for="search">함수 검색</label>
+            <input id="search" type="search" placeholder="예: main, fix_file" autocomplete="off" spellcheck="false">
+          </div>
+          <p class="result-count" id="result-count"></p>
+          <div id="results" class="results"></div>
+        </section>
+        <section class="panel map-panel" aria-labelledby="graph-heading">
+          <div class="panel-title"><h3 id="graph-heading">호출 그래프</h3><span>02</span></div>
+          <div class="map-toolbar">
+            <div class="mode" aria-label="그래프 보기">
+              <button type="button" id="overview" aria-pressed="true">호출 지도</button>
+              <button type="button" id="path" aria-pressed="false">선택 함수 경로</button>
+            </div>
+            <div class="map-legend"><span><i></i> 확인됨</span><span><i></i> 미해결</span></div>
+          </div>
+          <p class="route" id="route"></p>
+          <div id="graph"></div>
+          <p class="graph-caption" id="graph-caption"></p>
+        </section>
+        <section class="panel evidence" aria-labelledby="evidence-heading" id="evidence">
+          <div class="panel-title"><h3 id="evidence-heading" tabindex="-1">코드 근거</h3><span>03</span></div>
+          <div id="details"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+  <footer class="shell footer"><span><strong>Code Atlas</strong> · Python 정적 분석 도구</span><span>실행 없이 읽고, 확인할 수 있는 호출만 연결합니다.</span></footer>
+</body>
+</html>
