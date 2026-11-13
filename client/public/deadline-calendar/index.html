@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>마감달력 데모</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="return-link" href="../?section=ai-development">← 포트폴리오</a>
+      <button type="button" class="theme-button button" id="theme" aria-pressed="false">다크 모드</button>
+    </div>
+  </header>
+  <main class="workspace">
+    <section class="intro" aria-labelledby="page-title">
+      <span class="eyebrow">공개 데모 · 가상 일정</span>
+      <h1 id="page-title">마감달력</h1>
+      <p>막대의 길이로 일정 기간을, 색으로 마감까지 남은 날을 확인하세요.</p>
+    </section>
+    <section class="demo-controls" aria-label="데모 기준일 조절">
+      <div class="date-control">
+        <label class="date-label" for="demo-day">기준일 <output id="reference" for="demo-day">4월 10일</output></label>
+        <input id="demo-day" type="range" min="1" max="30" value="10" step="1" aria-valuetext="4월 10일">
+      </div>
+      <button type="button" class="demo-reset button" id="reset">예시로 초기화</button>
+    </section>
+    <section aria-labelledby="month-title">
+      <div class="calendar-heading">
+        <h2 class="month-title" id="month-title">2027년 4월</h2>
+        <div class="month-controls">
+          <button type="button" class="button icon-button" id="previous" aria-label="이전 달">‹</button>
+          <button type="button" class="button" id="reference-month">기준일로</button>
+          <button type="button" class="button icon-button" id="next" aria-label="다음 달">›</button>
+          <button type="button" class="button" id="hide-completed" aria-pressed="false">완료 숨기기</button>
+        </div>
+      </div>
+      <div class="calendar-panel">
+        <div class="calendar" id="calendar"></div>
+        <div class="calendar-footer"><span>마감 21일 전</span><span class="legend-gradient" aria-hidden="true"></span><span>마감 당일</span></div>
+      </div>
+    </section>
+    <section class="event-list" aria-labelledby="list-title">
+      <div class="list-heading"><h2 id="list-title">일정 목록</h2><span id="event-count"></span></div>
+      <ul class="event-rows" id="active-events"></ul>
+      <p class="empty-state" id="empty-events" hidden>예정된 일정이 없어요.</p>
+      <details class="completed-list" id="completed-list" hidden>
+        <summary id="completed-count">완료한 일정</summary>
+        <ul class="event-rows" id="completed-events"></ul>
+      </details>
+      <p class="demo-note">일정은 이 화면에서만 바뀌며 새로 열면 예시로 돌아갑니다.</p>
+    </section>
+  </main>
+  <button type="button" class="add-button" id="add-event" aria-label="일정 추가" title="일정 추가">+</button>
+  <dialog class="editor" id="editor" aria-labelledby="editor-title">
+    <form class="editor-form" id="editor-form">
+      <div class="editor-heading">
+        <h2 id="editor-title">일정 추가</h2>
+        <button type="button" class="button icon-button" id="close-editor" aria-label="편집 닫기">×</button>
+      </div>
+      <label>일정 이름<input name="title" required maxlength="40" placeholder="예: 발표 연습" autocomplete="off"></label>
+      <div class="editor-fields">
+        <label>시작일<input name="start" type="date" min="1900-01-01" max="2199-12-31" required></label>
+        <label>마감일<input name="end" type="date" min="1900-01-01" max="2199-12-31" required></label>
+      </div>
+      <div class="editor-actions">
+        <button type="button" class="button" id="delete-event">삭제</button>
+        <button type="submit" class="button primary">저장</button>
+      </div>
+    </form>
+  </dialog>
+  <noscript><p>일정을 살펴보려면 자바스크립트를 켜주세요.</p></noscript>
+</body>
+</html>

@@ -11,11 +11,13 @@ function ProjectCard({
   title,
   approach,
   description,
+  preview,
   children,
 }: {
   title: string;
   approach: keyof typeof aiApproaches;
   description: string;
+  preview?: ReactNode;
   children: ReactNode;
 }) {
   return (
@@ -35,6 +37,7 @@ function ProjectCard({
         <p className="max-w-3xl text-sm leading-relaxed text-[var(--ink-secondary)] [word-break:keep-all] sm:text-base">
           {description}
         </p>
+        {preview}
         <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
           {children}
         </div>
@@ -127,6 +130,28 @@ export default function AiDevelopmentSection() {
             <ProjectLink path="rrip-reproduction/RRIP_Reproduction_Source.zip" download>
               재현 코드·데이터 다운로드
             </ProjectLink>
+          </ProjectCard>
+
+          <ProjectCard
+            title="마감달력"
+            approach="planFirst"
+            description="여러 날에 걸친 일정의 기간과 마감까지 남은 시간을 한눈에 보고 싶었습니다. 날짜 칸을 가로지르는 막대와 별표로 고정하는 마감순 목록을 먼저 구상했습니다. 이후 AI와 함께 월간 달력에 구현하고, 마감 21일 전부터 막대가 보라색에서 빨간색으로 변하도록 만들었습니다. 데모에서는 가상 일정으로 색 변화, 별표 고정, 완료 처리, 라이트·다크 모드를 체험할 수 있습니다."
+            preview={
+              <figure className="mt-5 max-w-md" aria-label="가상 일정으로 재구성한 구상. 자료 조사 일정은 1일부터 4일까지, 발표 준비 일정은 3일부터 7일까지입니다.">
+                <figcaption className="mb-2 text-xs font-medium text-[var(--ink-secondary)]">
+                  기간 막대 구상 · 가상 일정
+                </figcaption>
+                <div className="grid grid-cols-7 gap-y-1.5 overflow-hidden rounded-[var(--radius-sm)] border border-[var(--line)] pb-2" aria-hidden="true">
+                  {[1, 2, 3, 4, 5, 6, 7].map(day => (
+                    <span key={day} className="border-b border-[var(--line)] py-1.5 text-center text-xs tabular-nums text-[var(--ink-secondary)]">{day}</span>
+                  ))}
+                  <span className="col-span-4 col-start-1 mx-1 truncate rounded-sm bg-[var(--rose-soft)] px-2 py-1 text-xs font-medium text-[var(--rose-deep)]">자료 조사</span>
+                  <span className="col-span-5 col-start-3 mx-1 truncate rounded-sm bg-[var(--rose-soft)] px-2 py-1 text-xs font-medium text-[var(--rose-deep)]">발표 준비</span>
+                </div>
+              </figure>
+            }
+          >
+            <ProjectLink path="deadline-calendar/">마감달력 데모 열기</ProjectLink>
           </ProjectCard>
         </div>
       </div>
