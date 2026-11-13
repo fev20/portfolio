@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useLocation } from "wouter";
+import { Link, useLocation } from "wouter";
 import { verifyAuth, logout, UserRole } from "@/utils/auth";
 import {
   profile,
   projects,
-  experiences,
   education,
   certifications,
 } from "@/data/portfolio";
+import { orderedExperiences } from "@/lib/experienceNavigation";
+import { PROJECT_CATEGORY_ORDER } from "@/lib/projectAppearance";
 
 const SIDEBAR_WIDTH = "240px";
 
@@ -20,15 +21,6 @@ const NAV_ITEMS = [
   { id: "experience", label: "Experience", num: "04", sub: [] as string[] },
   { id: "education",  label: "Education & Certifications", num: "05", sub: [] as string[] },
   { id: "demos",      label: "Demos",      num: "06", sub: [] as string[] },
-];
-
-const CATEGORY_ORDER = [
-  "Security Research",
-  "CTF & Security Activities",
-  "Security Education",
-  "Interactive Web Projects",
-  "Service Operation & Improvement",
-  "Embedded & Hardware Practice",
 ];
 
 function LoginBlock() {
@@ -151,23 +143,32 @@ export default function Sidebar() {
     setLocation(path);
   };
 
-  type SubItem = { label: string; path: string | null; scrollId?: string; children?: SubItem[] };
+  type SubItem = {
+    label: string;
+    path: string | null;
+    scrollId?: string;
+    children?: { label: string; path: string }[];
+  };
 
   const navItems = NAV_ITEMS.map((item) => {
     if (item.id === "projects") return {
       ...item,
-      subItems: CATEGORY_ORDER.map((cat): SubItem => ({
+      subItems: PROJECT_CATEGORY_ORDER.map((cat): SubItem => ({
         label: cat,
         path: null,
         scrollId: `project-cat-${cat.replace(/\s+/g, "-")}`,
         children: projects
           .filter((p) => p.category === cat)
-          .map((p): SubItem => ({ label: p.title, path: `/project/${p.id}` })),
+          .map(p => ({ label: p.title, path: `/project/${encodeURIComponent(p.id)}` })),
       })),
     };
     if (item.id === "experience") return {
       ...item,
-      subItems: experiences.map((e, i): SubItem => ({ label: e.title, path: `/experience/${i}`, scrollId: `experience-${i}` })),
+      subItems: orderedExperiences.map(({ experience, routeId }): SubItem => ({
+        label: experience.title,
+        path: null,
+        scrollId: `experience-${routeId}`,
+      })),
     };
     if (item.id === "education") return {
       ...item,
@@ -259,6 +260,11 @@ export default function Sidebar() {
   };
 
   const displayName = profile.name === "이름" ? "fev20" : profile.name;
+  const currentNavId = isMainPage
+    ? activeSection
+    : location.startsWith("/project/")
+      ? "projects"
+      : location.split("/")[1];
 
   return (
     <>
@@ -346,11 +352,7 @@ export default function Sidebar() {
           </div>
           <nav className="px-2 pb-2" aria-label="포트폴리오 섹션">
             {navItems.map((item) => {
-              const isActive = isMainPage
-                ? activeSection === item.id
-                : item.id === "education"
-                  ? location.startsWith("/education")
-                  : location.startsWith(`/${item.id}`);
+              const isActive = currentNavId === item.id;
               return (
                 <div key={item.id} className="mb-1" style={{ borderBottom: "1px solid var(--sidebar-line)", paddingBottom: "8px" }}>
                   <button
@@ -463,19 +465,17 @@ export default function Sidebar() {
                           {sub.children && sub.children.length > 0 && !collapsed[`sub-${item.id}-${si}`] && (
                             <div className="ml-3 mt-0.5" style={{ borderLeft: "1px solid var(--sidebar-line)" }}>
                               {sub.children.map((child, ci) => (
-                                <div
+                                <Link
                                   key={ci}
-                                  onClick={() => handleSubClick(child.scrollId, child.path)}
-                                  className="flex items-center py-0.5 pl-3 transition-all"
-                                  style={{ cursor: "pointer" }}
-                                  onMouseEnter={(e) => { (e.currentTarget.querySelector('span') as HTMLElement).style.color = "var(--sidebar-ink)"; }}
-                                  onMouseLeave={(e) => { (e.currentTarget.querySelector('span') as HTMLElement).style.color = "var(--ink-secondary)"; }}
+                                  href={child.path}
+                                  aria-label={child.label}
+                                  title={child.label}
+                                  className="flex items-center py-0.5 pl-3 text-[var(--ink-secondary)] transition-colors hover:text-[var(--sidebar-ink)] focus-visible:text-[var(--sidebar-ink)]"
                                 >
                                   <span
                                     style={{
                                       fontFamily: "'JetBrains Mono', monospace",
                                       fontSize: "0.6rem",
-                                      color: "var(--ink-secondary)",
                                       whiteSpace: "nowrap",
                                       overflow: "hidden",
                                       textOverflow: "ellipsis",
@@ -485,7 +485,7 @@ export default function Sidebar() {
                                   >
                                     {">> "}{child.label}
                                   </span>
-                                </div>
+                                </Link>
                               ))}
                             </div>
                           )}
@@ -615,11 +615,7 @@ export default function Sidebar() {
         }}
       >
         {NAV_ITEMS.map((item) => {
-          const isActive = isMainPage
-            ? activeSection === item.id
-            : item.id === "education"
-              ? location.startsWith("/education")
-              : location.startsWith(`/${item.id}`);
+          const isActive = currentNavId === item.id;
           return (
             <button
               key={item.id}

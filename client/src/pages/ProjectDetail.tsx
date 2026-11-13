@@ -1,9 +1,10 @@
-﻿import { useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { useParams, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
   Github,
+  Globe,
   BookOpen,
   Tag,
   Folder,
@@ -17,14 +18,20 @@ import {
 import ProtectedDownload from "@/components/ProtectedDownload";
 import PageTransition from "@/components/PageTransition";
 
+type Project = (typeof projects)[number];
+
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const [, navigate] = useLocation();
   const project = projects.find(p => p.id === id);
-  const accent = getProjectAccent(project);
-  const { soft, bright, number } = getProjectAppearance(project);
-  const [loading, setLoading] = useState(true);
-  const [selectedFolder, setSelectedFolder] = useState<any | null>(null);
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [id]);
+
+  function backToProjects() {
+    sessionStorage.setItem("pendingScroll", "projects");
+    navigate("/");
+  }
 
   if (!project) {
     return (
@@ -41,13 +48,53 @@ export default function ProjectDetail() {
           >
             $ project not found
           </p>
-          <button onClick={() => navigate("/")} className="mt-4 btn-outline">
+          <button
+            type="button"
+            onClick={backToProjects}
+            className="mt-4 btn-outline"
+          >
             ← Back
           </button>
         </div>
       </div>
     );
   }
+
+  return (
+    <ProjectDetailContent
+      key={project.id}
+      project={project}
+      onBack={backToProjects}
+    />
+  );
+}
+
+function ProjectDetailContent({
+  project,
+  onBack,
+}: {
+  project: Project;
+  onBack: () => void;
+}) {
+  const accent = getProjectAccent(project);
+  const { soft, bright, number } = getProjectAppearance(project);
+  const [loading, setLoading] = useState(true);
+  const [selectedFolder, setSelectedFolder] = useState<any | null>(null);
+
+  const metadata = [
+    { label: "소속", value: project.organization },
+    { label: "역할", value: project.role },
+    { label: "기간", value: project.period },
+    { label: "상태", value: project.status },
+  ].filter(field => field.value?.trim());
+  const links = [
+    { href: project.links.site, label: "사이트 보기", Icon: Globe },
+    { href: project.links.github, label: "GitHub 보기", Icon: Github },
+    { href: project.links.report, label: "보고서 보기", Icon: BookOpen },
+  ].filter(link => link.href?.trim());
+  const sections = project.sections?.filter(
+    section => section.paragraphs?.length || section.items?.length
+  );
 
   const visibleFiles = (
     selectedFolder ? selectedFolder.files : project.files
@@ -78,14 +125,15 @@ export default function ProjectDetail() {
           className="min-h-screen"
           style={{ background: "var(--paper)", color: "var(--ink)" }}
         >
-          <div className="relative z-10 max-w-3xl mx-auto px-6 py-16 lg:pl-24">
+          <div className="relative z-10 max-w-3xl mx-auto px-6 pt-16 pb-28 lg:pl-24 lg:pb-16">
             {/* Back button */}
             <motion.button
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4 }}
-              onClick={() => navigate("/")}
-              className="flex items-center gap-2 mb-10 group"
+              type="button"
+              onClick={onBack}
+              className="flex min-h-11 items-center gap-2 mb-10 group"
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
                 fontSize: "0.8rem",
@@ -94,9 +142,10 @@ export default function ProjectDetail() {
             >
               <ArrowLeft
                 size={14}
+                aria-hidden="true"
                 className="transition-transform group-hover:-translate-x-1"
               />
-              cd ../projects
+              프로젝트 목록으로
             </motion.button>
 
             {/* Header */}
@@ -116,6 +165,7 @@ export default function ProjectDetail() {
                 {project.number}
               </div>
               <h1
+                className="[overflow-wrap:anywhere]"
                 style={{
                   letterSpacing: "normal",
                   fontFamily: "var(--font-display)",
@@ -127,6 +177,21 @@ export default function ProjectDetail() {
               >
                 {project.title}
               </h1>
+
+              {metadata.length > 0 && (
+                <dl className="mb-5 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
+                  {metadata.map(field => (
+                    <div key={field.label} className="flex min-w-0 gap-2">
+                      <dt className="w-10 shrink-0 text-muted-foreground">
+                        {field.label}
+                      </dt>
+                      <dd className="[overflow-wrap:anywhere] font-semibold">
+                        {field.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
 
               {/* Tags */}
               <div className="flex flex-wrap gap-2 mb-8">
@@ -192,42 +257,50 @@ export default function ProjectDetail() {
               )}
 
               {/* Links */}
-              {(project.links.github || project.links.report) && (
-                <div className="flex gap-4 pt-2">
-                  {project.links.github && (
+              {links.length > 0 && (
+                <div className="flex flex-wrap gap-3 pt-2">
+                  {links.map(({ href, label, Icon }) => (
                     <a
-                      href={project.links.github}
+                      key={label}
+                      href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-outline flex items-center gap-2"
+                      className="btn-outline min-h-11"
                       style={{
                         borderColor: accent,
                         color: accent,
                         background: `color-mix(in srgb, ${soft} 50%, var(--surface))`,
                       }}
                     >
-                      <Github size={14} />
-                      GitHub 보기
+                      <Icon size={14} aria-hidden="true" />
+                      {label}
                     </a>
-                  )}
-                  {project.links.report && (
-                    <a
-                      href={project.links.report}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-outline flex items-center gap-2"
-                      style={{
-                        borderColor: accent,
-                        color: accent,
-                        background: `color-mix(in srgb, ${soft} 50%, var(--surface))`,
-                      }}
-                    >
-                      <BookOpen size={14} />
-                      보고서 보기
-                    </a>
-                  )}
+                  ))}
                 </div>
               )}
+
+              {sections?.map(section => (
+                <section key={section.title}>
+                  <h2
+                    className="mb-3 text-lg font-bold tracking-normal"
+                    style={{ fontFamily: "var(--font-body)", color: accent }}
+                  >
+                    {section.title}
+                  </h2>
+                  <div className="space-y-3 leading-relaxed text-muted-foreground">
+                    {section.paragraphs?.map(paragraph => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                    {section.items && section.items.length > 0 && (
+                      <ul className="list-disc space-y-1.5 pl-5">
+                        {section.items.map(item => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </section>
+              ))}
 
               {/* Photos */}
               {(project as any).photos &&

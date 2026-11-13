@@ -67,6 +67,17 @@ export function DemoProjectContent({ demo }: { demo: Demo }) {
               <ArrowUpRight size={15} aria-hidden="true" />
             </Link>
           )}
+          {demo.relatedLink && (
+            <a
+              href={demo.relatedLink.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline"
+            >
+              {demo.relatedLink.label}
+              <ArrowUpRight size={15} aria-hidden="true" />
+            </a>
+          )}
         </header>
 
         <section aria-labelledby="demo-main-video-title">

@@ -358,6 +358,60 @@ export const projects = [
     color: "#EC4899",
     files: [],
   },
+  {
+    id: "embediz-research-website",
+    number: "05",
+    category: "Interactive Web Projects",
+    title: "Embediz 연구팀 웹사이트 기획·제작",
+    description:
+      "임베디드 보안 연구팀 Embediz의 프로젝트, 구성원, 연구 기록과 시연 영상을 공개하기 위해 기획·제작하고 GitHub Pages로 배포한 웹사이트입니다.",
+    period: "2026.11",
+    status: "공개 완료",
+    tags: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
+    links: {
+      github: "https://github.com/fev20/Embediz",
+      report: "",
+      site: "https://fev20.github.io/Embediz/",
+    },
+    color: "#EC4899",
+    files: [],
+    sections: [
+      {
+        title: "제작 목적",
+        paragraphs: [
+          "Embediz의 연구 활동과 프로젝트 결과를 외부에서도 확인할 수 있도록, 프로젝트 소개와 구성원, 연구 기록, 시연 자료를 한곳에 모은 공개 웹사이트를 구성했습니다.",
+        ],
+      },
+      {
+        title: "기획과 구성",
+        paragraphs: [
+          "요구사항을 정리하고 팀 소개에서 프로젝트별 설명, 참여 구성원, 연구 기록으로 이어지는 정보 구조를 기획했습니다.",
+        ],
+        items: [
+          "연구팀을 소개하는 홈페이지 구성",
+          "프로젝트별 소개와 진행 상태 구분",
+          "프로젝트마다 다른 참여 구성원을 별도로 소개",
+          "연구 기록과 기술 설명을 담는 개별 페이지 구성",
+          "실기기 DOOM 시연 영상과 관련 자료 연결",
+        ],
+      },
+      {
+        title: "배포와 검색 노출 준비",
+        paragraphs: [
+          "검색 노출을 위한 기본 설정을 적용했습니다. 사이트맵 처리, 실제 색인과 검색 노출 여부는 아직 확인하지 않았습니다.",
+        ],
+        items: [
+          "GitHub 저장소를 통한 사이트 관리",
+          "GitHub Pages를 이용한 공개 배포",
+          "프로젝트와 연구 기록에 독립적인 페이지 주소 제공",
+          "검색엔진이 본문을 읽을 수 있는 정적 HTML 페이지 구성",
+          "페이지별 제목, 설명, 대표 주소와 구조화된 데이터 설정",
+          "XML 사이트맵 생성",
+          "Google Search Console 소유권 확인",
+        ],
+      },
+    ],
+  },
 
   // ── Embedded & Hardware Security ───────────────────────────────
   {
@@ -370,6 +424,47 @@ export const projects = [
     links: { github: "", report: "" },
     color: "#FB923C",
     files: [],
+  },
+  {
+    id: "andlab-android-hardware",
+    number: "02",
+    category: "Embedded & Hardware Security",
+    title: "안드로이드 하드웨어 구조 연구",
+    description:
+      "AND-LAB에서 안드로이드 기기의 하드웨어와 부팅·보안 구조를 조사하고, 파인폰 기반 하드웨어 변경을 준비하는 프로젝트입니다.",
+    organization: "AND-LAB",
+    role: "하드웨어 담당",
+    period: "2026.10 — 현재",
+    status: "진행 중",
+    tags: ["Android", "Hardware Security", "Boot Process", "PinePhone"],
+    links: { github: "", report: "" },
+    color: "#FB923C",
+    files: [],
+    sections: [
+      {
+        title: "프로젝트 소개",
+        paragraphs: [
+          "안드로이드 기기의 하드웨어 구성과 소프트웨어 실행 과정이 어떻게 연결되는지 이해하고, 프로젝트에 필요한 하드웨어 변경과 실험 환경을 준비하는 연구 활동입니다.",
+        ],
+      },
+      {
+        title: "담당 역할",
+        items: [
+          "AND-LAB 안드로이드 프로젝트의 하드웨어 분야 담당",
+          "기기의 하드웨어 구성과 관련 자료 조사",
+          "파인폰의 하드웨어 변경을 위한 구조 이해와 준비",
+        ],
+      },
+      {
+        title: "현재 진행 내용",
+        items: [
+          "안드로이드 기기의 주요 하드웨어 구성 요소 학습·조사",
+          "부트로더와 커널을 포함한 부팅 구조 조사",
+          "루팅 및 루팅 탐지의 동작 원리와 관련 선행 자료 학습",
+          "파인폰 기반 하드웨어 변경을 위한 기초 조사와 실험 준비",
+        ],
+      },
+    ],
   },
 
   // ── Leadership & Community ─────────────────────────────────────
@@ -458,6 +553,17 @@ export const experiences = [
     role: "제 5세대 부원",
     description: "코딩 동아리 제 5세대 부원으로 활동하며 다양한 프로젝트에 참여하고 있습니다.",
     tags: ["Programming", "Project"],
+  },
+  {
+    id: "andlab-hardware",
+    projectId: "andlab-android-hardware",
+    period: "2026.10 — 현재",
+    title: "AND-LAB",
+    role: "하드웨어 담당",
+    status: "활동 중",
+    description:
+      "AND-LAB의 안드로이드 프로젝트에 하드웨어 담당으로 참여하고 있습니다. 안드로이드 기기의 하드웨어 구성과 부팅·보안 구조를 조사하며, 파인폰 기반 하드웨어 변경을 위한 기초 조사와 실험 준비를 진행하고 있습니다.",
+    tags: ["Android", "Hardware", "Hardware Security"],
   },
 ];
 

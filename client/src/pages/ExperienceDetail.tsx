@@ -1,18 +1,27 @@
 // ExperienceDetail.tsx — 경험 상세 페이지
 // Design: Warm paper and soft pastel accents
 
-import { useState } from "react";
-import { useParams, useLocation } from "wouter";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
-import { experiences } from "@/data/portfolio";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { projects } from "@/data/portfolio";
+import { findExperience } from "@/lib/experienceNavigation";
 import PageTransition from "@/components/PageTransition";
 
 export default function ExperienceDetail() {
   const { index } = useParams<{ index: string }>();
-  const [, navigate] = useLocation();
-  const exp = experiences[Number(index)];
+  const exp = findExperience(index);
   const [loading, setLoading] = useState(true);
+  const relatedProject = projects.find(project => project.id === exp?.projectId);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [index]);
+
+  const returnToExperience = () => {
+    sessionStorage.setItem("pendingScroll", "experience");
+  };
 
   if (!exp) {
     return (
@@ -21,7 +30,9 @@ export default function ExperienceDetail() {
           <p style={{ fontFamily: "'JetBrains Mono', monospace", color: "var(--sage)" }}>
             $ experience not found
           </p>
-          <button onClick={() => navigate("/")} className="mt-4 btn-outline">← Back</button>
+          <Link href="/" onClick={returnToExperience} className="mt-4 btn-outline">
+            ← Back
+          </Link>
         </div>
       </div>
     );
@@ -46,17 +57,16 @@ export default function ExperienceDetail() {
       {!loading && (
       <div className="min-h-screen" style={{ background: "var(--paper)", color: "var(--ink)" }}>
 
-      <div className="relative z-10 max-w-3xl mx-auto px-6 py-16 lg:pl-24">
-        <motion.button
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          onClick={() => navigate("/")}
-          className="flex items-center gap-2 mb-10 group"
+      <div className="relative z-10 max-w-3xl mx-auto px-6 pt-16 pb-24 lg:pb-16 lg:pl-24">
+        <Link
+          href="/"
+          onClick={returnToExperience}
+          className="inline-flex items-center gap-2 mb-10 group"
           style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.8rem", color: "var(--ink-secondary)" }}
         >
-          <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
-          cd ../experience
-        </motion.button>
+          <ArrowLeft size={14} aria-hidden="true" className="transition-transform group-hover:-translate-x-1" />
+          Experience 목록으로
+        </Link>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -75,6 +85,9 @@ export default function ExperienceDetail() {
           >
             {exp.period}
           </div>
+          {exp.status && (
+            <span className="skill-tag ml-2">{exp.status}</span>
+          )}
 
           <h1
             style={{
@@ -148,6 +161,15 @@ export default function ExperienceDetail() {
           >
             {exp.description}
           </p>
+          {relatedProject && (
+            <Link
+              href={`/project/${encodeURIComponent(relatedProject.id)}`}
+              className="btn-outline mt-6"
+            >
+              관련 프로젝트 보기
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </Link>
+          )}
         </motion.div>
       </div>
     </div>

@@ -20,6 +20,7 @@ export interface Demo {
   recordedAt?: string;
   role?: string;
   projectId?: string;
+  relatedLink?: { label: string; href: string };
 }
 
 export const demos: Demo[] = [
@@ -29,6 +30,10 @@ export const demos: Demo[] = [
     description:
       "IP 카메라의 펌웨어를 분석·수정해 DOOM을 포팅하고, 기기에서 실행되는 게임 화면을 웹 브라우저로 출력한 프로젝트입니다.",
     thumbnail: "/images/demos/doom-port.png",
+    relatedLink: {
+      label: "Embediz 팀 사이트",
+      href: "https://fev20.github.io/Embediz/",
+    },
     mainVideo: { id: "full", title: "전체 영상", sourceType: "file" },
     steps: [
       { id: "hardware-disassembly", title: "하드웨어 분해", sourceType: "file" },
