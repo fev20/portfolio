@@ -59,6 +59,21 @@ export default function AiDevelopmentSection() {
             </p>
           </div>
         </article>
+
+        <article className="paper-card mt-5 p-5 sm:p-8">
+          <h3 className="text-xl font-semibold sm:text-2xl">RISC-V 실행 실험실</h3>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--ink-secondary)] [word-break:keep-all] sm:text-base">
+            배열 합계, 함수 호출, 바이트 복사를 실제 RV32I 명령으로 실행하며 레지스터와 메모리의 변화를 확인합니다.
+            AI가 실행기 구현과 검증을 맡았고, 동일한 바이너리의 실행 결과를 QEMU와 대조했습니다.
+          </p>
+          <a
+            href="/riscv-lab/"
+            className="group mt-6 inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--rose-bright)] bg-[var(--rose-soft)] px-4 text-sm font-semibold text-[var(--rose-deep)] transition-colors hover:border-[var(--rose)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--rose-deep)]"
+          >
+            RISC-V 실행기 열기
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+          </a>
+        </article>
       </div>
     </section>
   );
