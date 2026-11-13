@@ -1,9 +1,9 @@
 import { ArrowRight } from "lucide-react";
 
 const aiApproaches = {
-  buildFirst: "일단 만들기",
-  planFirst: "뭘 만들지 구상 후 만들기",
-  tokenAware: "토큰 사용량 생각하며 만들기",
+  buildFirst: "바로 구현",
+  planFirst: "구상 후 구현",
+  tokenAware: "토큰 효율 고려",
 } as const;
 
 function ProjectHeading({ title, approach }: { title: string; approach: keyof typeof aiApproaches }) {
