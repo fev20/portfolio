@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RISC-V 실행 실험실</title>
+<style>:root {
+  color-scheme: light;
+  --paper: #f4f2ee;
+  --panel: #fffdf9;
+  --ink: #1e2a30;
+  --muted: #465860;
+  --line: #d5dcd9;
+  --accent: #075957;
+  --tint: #e1f1ed;
+  --mono: 'IBM Plex Mono', Consolas, 'Liberation Mono', monospace;
+  font: 16px/1.5 'Noto Sans CJK KR', 'Malgun Gothic', system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); }
+main { max-width: 1192px; margin: auto; padding: 36px clamp(16px, 4vw, 48px) 44px; }
+a { color: var(--accent); text-underline-offset: .22em; }
+button, select { font: inherit; color: inherit; border: 1px solid #91a5a2; border-radius: 6px; background: var(--panel); min-height: 44px; }
+button { cursor: pointer; font-weight: 650; padding: 7px 14px; }
+button:hover:not(:disabled) { background: var(--tint); }
+button:disabled { cursor: default; color: #54625d; border-color: #c8d0cc; background: #f2f3ef; }
+button.primary:not(:disabled) { background: var(--accent); color: white; border-color: var(--accent); }
+button.primary:hover:not(:disabled) { background: #074846; }
+select { padding: 6px 10px; max-width: 100%; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.masthead { margin-bottom: 24px; }
+.back { display: inline-block; font-size: .86rem; }
+.architecture { margin: 30px 0 2px; font: 700 .88rem/1.3 var(--mono); color: var(--accent); }
+h1 { font-size: clamp(2rem, 5vw, 3.7rem); line-height: 1.12; letter-spacing: -.055em; margin: 0; }
+.intro { color: var(--muted); margin: 11px 0 0; word-break: keep-all; }
+.panel { min-width: 0; border: 1px solid var(--line); background: var(--panel); border-radius: 10px; }
+.toolbar { padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 18px; }
+.picker label, .memory-controls label { font-weight: 650; margin-right: 8px; font-size: .92rem; }
+.picker p { word-break: keep-all; font-size: .88rem; color: var(--muted); margin: 6px 0 0; }
+.buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.machine-status { display: grid; grid-template-columns: 1.25fr 1fr 1.5fr 1fr; gap: 1px; border: 1px solid var(--line); background: var(--line); border-radius: 9px; margin: 12px 0; overflow: hidden; }
+.machine-status > div { padding: 9px 14px; min-width: 0; background: #eef3ef; }
+.machine-status span { display: block; color: var(--muted); font-size: .79rem; }
+.machine-status strong { display: block; overflow-wrap: anywhere; font: 700 1.02rem/1.5 var(--mono); }
+.workspace { display: grid; grid-template-columns: 1.1fr 1fr; gap: 12px; align-items: start; }
+.panel-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 12px; padding: 11px 14px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.panel-heading h2 { font-size: 1.03rem; margin: 0; }
+.panel-heading span { font-size: .78rem; color: var(--muted); }
+.panel-heading i { display: inline-block; width: .63em; height: .63em; border-radius: 100%; background: var(--accent); margin-right: 3px; }
+.instruction-list, .source-list { overflow: auto; height: 270px; padding: 6px 0; }
+.instruction-row, .source-row { display: grid; min-width: max-content; align-items: center; gap: 12px; padding: 4px 13px; font: .83rem/1.4 var(--mono); border-left: 3px solid transparent; }
+.instruction-row { grid-template-columns: 76px 68px auto; }
+.source-row { grid-template-columns: 25px auto; white-space: pre; }
+.instruction-row.current, .source-row.current { background: var(--tint); border-color: var(--accent); }
+.instruction-row span:first-child, .instruction-row span:nth-child(2), .source-row span:first-child { color: var(--muted); }
+.detail { margin: 0; min-height: 48px; padding: 10px 14px; color: var(--muted); border-top: 1px solid var(--line); font-size: .84rem; overflow-wrap: anywhere; }
+.register-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; padding: 8px; margin: 0; }
+.register-grid div { padding: 3px 6px; background: #f3f5f1; border-radius: 4px; }
+.register-grid .changed { background: var(--tint); box-shadow: inset 0 0 0 1px var(--accent); }
+.register-grid dt { color: var(--muted); font: .68rem/1.3 var(--mono); }
+.register-grid dd { margin: 1px 0 0; font: 650 .82rem/1.3 var(--mono); }
+.memory-controls { padding: 9px 13px 0; }
+.memory-grid { padding: 10px 12px 12px; overflow-x: auto; }
+.memory-row { display: grid; width: max-content; grid-template-columns: 78px repeat(8, 25px); align-items: center; gap: 2px; font: .82rem/1.4 var(--mono); }
+.memory-row span:not(:first-child) { text-align: center; padding: 3px 0; }
+.memory-row span:first-child { color: var(--muted); }
+.memory-row span.active { color: #044746; background: var(--tint); font-weight: 700; }
+footer { margin-top: 19px; color: var(--muted); font-size: .9rem; }
+summary { color: var(--accent); cursor: pointer; width: fit-content; font-weight: 650; }
+footer p { max-width: 75ch; margin: 6px 0; }
+@media (max-width: 820px) { .workspace { grid-template-columns: 1fr; } .register-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 500px) { main { padding-top: 20px; } .architecture { margin-top: 18px; } .toolbar { padding: 12px; } .buttons { display: grid; grid-template-columns: 1fr 1fr; width: 100%; } .machine-status { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <header class="masthead">
+    <a class="back" href="https://miel02.site/?section=ai-development">← 포트폴리오</a>
+    <p class="architecture">RV32I / 32-bit</p>
+    <h1>RISC-V 실행 실험실</h1>
+    <p class="intro">컴파일된 명령을 한 단계씩 실행하며 레지스터와 메모리가 바뀌는 순간을 확인하세요.</p>
+  </header>
+  <section class="panel toolbar" aria-label="실행 설정">
+    <div class="picker">
+      <label for="program">예제</label>
+      <select id="program"></select>
+      <p id="description"></p>
+    </div>
+    <div class="buttons">
+      <button id="step" type="button" class="primary">한 명령 실행</button>
+      <button id="run" type="button">연속 실행</button>
+      <button id="pause" type="button" disabled>일시 정지</button>
+      <button id="reset" type="button">초기화</button>
+    </div>
+  </section>
+  <section class="machine-status" aria-label="CPU 실행 상태">
+    <div><span>다음 명령 주소 (PC)</span><strong id="pc">—</strong></div>
+    <div><span>실행한 명령</span><strong id="count">0</strong></div>
+    <div><span>실행 상태</span><strong id="status" role="status">준비</strong></div>
+    <div><span>종료 값 (a0)</span><strong id="exit">—</strong></div>
+  </section>
+  <div class="workspace">
+    <section class="panel instructions" aria-labelledby="instruction-title">
+      <div class="panel-heading"><h2 id="instruction-title">명령어</h2><span><i></i> 다음 실행 위치</span></div>
+      <div class="instruction-list" id="instructions" tabindex="0" aria-label="디스어셈블리"></div>
+      <p id="last" class="detail">명령을 실행하면 이곳에 변화가 표시됩니다.</p>
+    </section>
+    <section class="panel registers" aria-labelledby="register-title">
+      <div class="panel-heading"><h2 id="register-title">레지스터</h2><span>16진수</span></div>
+      <dl id="registers" class="register-grid"></dl>
+    </section>
+    <section class="panel source" aria-labelledby="source-title">
+      <div class="panel-heading"><h2 id="source-title">예제 소스</h2><span id="filename"></span></div>
+      <div class="source-list" id="source" tabindex="0" aria-label="소스 코드"></div>
+      <p class="detail">다음 명령의 위치가 소스 줄과 연결되면 함께 강조됩니다.</p>
+    </section>
+    <section class="panel memory" aria-labelledby="memory-title">
+      <div class="panel-heading"><h2 id="memory-title">메모리</h2><span>리틀엔디언 · 바이트</span></div>
+      <div class="memory-controls">
+        <label for="memory-range">보기</label>
+        <select id="memory-range">
+          <option value="result">결과 버퍼</option>
+          <option value="last">최근 접근 주소</option>
+          <option value="stack">스택 포인터 주변</option>
+        </select>
+      </div>
+      <div id="memory" class="memory-grid" aria-label="주소와 바이트"></div>
+      <p id="memory-detail" class="detail">메모리 접근 기록이 없습니다.</p>
+    </section>
+  </div>
+  <footer><details><summary>지원 범위와 검증</summary><p>공개 예제만 내장한 RV32I 사용자 모드 모형입니다. 예제는 GCC로 컴파일했습니다. 브라우저의 JavaScript가 기계어를 직접 실행하고, 동일한 ELF 파일의 종료 시점 레지스터와 결과 버퍼를 QEMU 실행과 대조했습니다. 실행 상태는 이 페이지 안에서만 유지됩니다.</p><p><a href="https://docs.riscv.org/reference/isa/v20240411/unpriv/rv32.html">RISC-V RV32I 명세</a></p></details></footer>
+</main>
+<script type="application/json" id="program-data">[{"id":"sum","title":"배열 합계","description":"배열을 한 칸씩 읽고 누적합을 구한다. 최종 결과는 21이다.","filename":"sum.c","source":"volatile unsigned observed[4] __attribute__((section(\".result\")));\nvolatile int numbers[] = {7, -3, 12, 5};\n\nint demo(void)\n{\n    int sum = 0;\n    volatile unsigned length = 4;\n    for (unsigned i = 0; i \u003c length; i++) {\n        sum += numbers[i];\n    }\n    observed[0] = (unsigned)sum;\n    return sum;\n}\n","entry":65536,"segments":[{"address":65536,"bytes":"37010200ef00c002130405001305100097250000938505ff130600019308000473000000130504009308d00573000000130101ff930740002326f1008327c1006380070493070000130500003726010013070601939627003307d700032707003305e500938717000327c100e3e2e7feb727010023a0a7001301010167800000130500006ff0dffe1000000000000000037a5200017c01011b0c020018000000180000008cffffff5800000000440e1002480a0e00440b00","size":184,"flags":5},{"address":73728,"bytes":"0000000000000000000000000000000007000000fdffffff0c00000005000000","size":57344,"flags":6}],"instructions":[65536,65540,65544,65548,65552,65556,65560,65564,65568,65572,65576,65580,65584,65588,65592,65596,65600,65604,65608,65612,65616,65620,65624,65628,65632,65636,65640,65644,65648,65652,65656,65660,65664,65668],"lines":{"65584":5,"65588":7,"65592":7,"65596":8,"65600":8,"65604":8,"65608":6,"65612":9,"65616":9,"65620":9,"65624":9,"65628":9,"65632":9,"65636":8,"65640":8,"65644":8,"65648":11,"65652":11,"65656":13,"65660":13,"65664":6,"65668":6}},{"id":"stack","title":"함수 호출과 스택","description":"두 번의 함수 호출에서 반환 주소와 지역 변수가 스택에 어떻게 저장되는지 확인한다.","filename":"stack.c","source":"volatile unsigned observed[4] __attribute__((section(\".result\")));\nvolatile unsigned input = 5;\n\n__attribute__((noinline)) unsigned add_frame(unsigned value)\n{\n    volatile unsigned saved = value + 2;\n    return saved + 7;\n}\n\n__attribute__((noinline)) unsigned add_twice(unsigned value)\n{\n    unsigned first = add_frame(value);\n    return first + add_frame(value + 1);\n}\n\nint demo(void)\n{\n    unsigned result = add_twice(input);\n    observed[0] = result;\n    return (int)result;\n}\n","entry":65536,"segments":[{"address":65536,"bytes":"37010200ef00c008130405001305100097250000938505ff130600019308000473000000130504009308d00573000000130101ff130525002326a1000325c100130575001301010167800000130101ff2326110023248100232291009304050097000000e78000fd130405001385140097000000e78000fc330585008320c10003248100832441001301010167800000130101ff23261100b727010003a5070197000000e780c0fa372701002320a7008320c10013010101678000001000000000000000037a5200017c01011b0c0200140000001800000058ffffff1c00000000440e10540e000020000000300000005cffffff4400000000440e104c81018802890364c144c844c9440e0018000000540000007cffffff2c00000000440e104481015cc1440e00","size":296,"flags":5},{"address":73728,"bytes":"0000000000000000000000000000000005000000","size":57344,"flags":6}],"instructions":[65536,65540,65544,65548,65552,65556,65560,65564,65568,65572,65576,65580,65584,65588,65592,65596,65600,65604,65608,65612,65616,65620,65624,65628,65632,65636,65640,65644,65648,65652,65656,65660,65664,65668,65672,65676,65680,65684,65688,65692,65696,65700,65704,65708,65712,65716,65720],"lines":{"65584":5,"65588":6,"65592":6,"65596":7,"65600":8,"65604":8,"65608":8,"65612":11,"65616":11,"65620":11,"65624":11,"65628":11,"65632":12,"65636":12,"65640":12,"65644":13,"65648":13,"65652":13,"65656":14,"65660":14,"65664":14,"65668":14,"65672":14,"65676":14,"65680":17,"65684":17,"65688":18,"65692":18,"65696":18,"65700":18,"65704":19,"65708":19,"65712":21,"65716":21,"65720":21}},{"id":"copy","title":"바이트 복사","description":"6바이트를 결과 버퍼로 복사한다. 메모리에서 RV32I!가 만들어지는 과정을 확인할 수 있다.","filename":"copy.c","source":"volatile unsigned observed[4] __attribute__((section(\".result\")));\nvolatile unsigned char source[] = {0x52, 0x56, 0x33, 0x32, 0x49, 0x21};\n\nint demo(void)\n{\n    volatile unsigned char *target = (volatile unsigned char *)observed;\n    for (unsigned i = 0; i \u003c sizeof(source); i++) {\n        target[i] = source[i];\n    }\n    return (int)sizeof(source);\n}\n","entry":65536,"segments":[{"address":65536,"bytes":"37010200ef00c002130405001305100097250000938505ff130600019308000473000000130504009308d00573000000b72601009386060093070000b725010013066000138705013307f700034707001377f70f2380e6009387170093861600e392c7fe13056000678000001000000000000000037a5200017c01011b0c02001000000018000000a8ffffff3c00000000000000","size":148,"flags":5},{"address":73728,"bytes":"00000000000000000000000000000000525633324921","size":57344,"flags":6}],"instructions":[65536,65540,65544,65548,65552,65556,65560,65564,65568,65572,65576,65580,65584,65588,65592,65596,65600,65604,65608,65612,65616,65620,65624,65628,65632,65636,65640],"lines":{"65584":7,"65588":7,"65592":7,"65596":8,"65600":7,"65604":8,"65608":8,"65612":8,"65616":8,"65620":8,"65624":7,"65628":7,"65632":7,"65636":11,"65640":11}},{"id":"edges","title":"명령어 경계값","description":"x0 쓰기, 32비트 오버플로, 부호 확장, 분기와 시프트를 확인하는 어셈블리 예제.","filename":"edges.S","source":".section .result,\"aw\"\n.globl observed\nobserved: .word 0, 0, 0, 0\n\n.text\n.globl demo\ndemo:\n    la t0, observed\n    addi x0, x0, 15\n    addi t1, x0, -1\n    addi t2, t1, 1\n    bne t2, x0, fail\n    li t2, -128\n    sb t2, 12(t0)\n    lb t3, 12(t0)\n    lbu t4, 12(t0)\n    sw t3, 0(t0)\n    sw t4, 4(t0)\n    lui t5, 0x80000\n    slt t6, t5, x0\n    sltu t4, t5, x0\n    beq t6, t4, fail\n    srai t6, t5, 31\n    srli t5, t5, 31\n    xor t6, t6, t5\n    sw t6, 8(t0)\n    li a0, 42\n    ret\nfail:\n    li a0, 99\n    ret\n","entry":65536,"segments":[{"address":65536,"bytes":"37010200ef00c002130405001305100097250000938505ff130600019308000473000000130504009308d0057300000097220000938202fd1300f0001303f0ff9303130063920304930300f823867200038ec20083cec20023a0c20123a2d201370f0080b32f0f00b33e0f00638edf01935fff41135fff01b3cfef0123a4f2011305a002678000001305300667800000","size":144,"flags":5},{"address":73728,"bytes":"00000000000000000000000000000000","size":57344,"flags":6}],"instructions":[65536,65540,65544,65548,65552,65556,65560,65564,65568,65572,65576,65580,65584,65588,65592,65596,65600,65604,65608,65612,65616,65620,65624,65628,65632,65636,65640,65644,65648,65652,65656,65660,65664,65668,65672,65676],"lines":{"65584":8,"65588":8,"65592":9,"65596":10,"65600":11,"65604":12,"65608":13,"65612":14,"65616":15,"65620":16,"65624":17,"65628":18,"65632":19,"65636":20,"65640":21,"65644":22,"65648":23,"65652":24,"65656":25,"65660":26,"65664":27,"65668":28,"65672":30,"65676":31}}]</script>
+<script>'use strict';
+
+const ABI = 'zero ra sp gp tp t0 t1 t2 s0 s1 a0 a1 a2 a3 a4 a5 a6 a7 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 t3 t4 t5 t6'.split(' ');
+const hex = (value, digits = 8) => (value >>> 0).toString(16).padStart(digits, '0');
+const signed = (value, width) => (value << (32 - width)) >> (32 - width);
+
+function decode(word) {
+  const opcode = word & 0x7f;
+  const rd = (word >>> 7) & 31;
+  const fn = (word >>> 12) & 7;
+  const rs1 = (word >>> 15) & 31;
+  const rs2 = (word >>> 20) & 31;
+  const high = word >>> 25;
+  let name;
+  let immediate = signed(word >>> 20, 12);
+  let format;
+  switch (opcode) {
+    case 0x37: case 0x17:
+      name = opcode === 0x37 ? 'lui' : 'auipc';
+      immediate = word & 0xfffff000;
+      format = 'upper';
+      break;
+    case 0x6f:
+      name = 'jal';
+      immediate = signed(((word >>> 31) << 20) | (((word >>> 12) & 255) << 12) |
+        (((word >>> 20) & 1) << 11) | (((word >>> 21) & 1023) << 1), 21);
+      format = 'jump';
+      break;
+    case 0x67:
+      if (fn === 0) name = 'jalr';
+      format = 'load';
+      break;
+    case 0x63:
+      name = ['beq', 'bne', null, null, 'blt', 'bge', 'bltu', 'bgeu'][fn];
+      immediate = signed(((word >>> 31) << 12) | (((word >>> 7) & 1) << 11) |
+        (((word >>> 25) & 63) << 5) | (((word >>> 8) & 15) << 1), 13);
+      format = 'branch';
+      break;
+    case 0x03:
+      name = ['lb', 'lh', 'lw', null, 'lbu', 'lhu'][fn];
+      format = 'load';
+      break;
+    case 0x23:
+      name = ['sb', 'sh', 'sw'][fn];
+      immediate = signed((high << 5) | rd, 12);
+      format = 'store';
+      break;
+    case 0x13:
+      name = ['addi', 'slli', 'slti', 'sltiu', 'xori', 'srli', 'ori', 'andi'][fn];
+      if (fn === 1 || fn === 5) {
+        immediate = rs2;
+        if (fn === 5 && high === 32) name = 'srai';
+        else if (high !== 0) name = undefined;
+      }
+      format = 'immediate';
+      break;
+    case 0x33:
+      if (high === 0) name = ['add', 'sll', 'slt', 'sltu', 'xor', 'srl', 'or', 'and'][fn];
+      if (high === 32) name = {0: 'sub', 5: 'sra'}[fn];
+      format = 'register';
+      break;
+    case 0x0f:
+      if (fn === 0) name = 'fence';
+      break;
+    case 0x73:
+      if (word === 0x73) name = 'ecall';
+      if (word === 0x00100073) name = 'ebreak';
+      break;
+  }
+  if (!name) return null;
+  return {word, name, rd, rs1, rs2, immediate, format};
+}
+
+function assembly(instruction, address) {
+  if (!instruction) return '지원하지 않는 명령';
+  const {name, format, rd, rs1, rs2, immediate} = instruction;
+  const [dest, left, right] = [rd, rs1, rs2].map(index => ABI[index]);
+  const target = `0x${hex(address + immediate)}`;
+  const operands = {
+    upper: `${dest}, 0x${hex(immediate >>> 12, 1)}`,
+    jump: `${dest}, ${target}`,
+    branch: `${left}, ${right}, ${target}`,
+    load: `${dest}, ${immediate}(${left})`,
+    store: `${right}, ${immediate}(${left})`,
+    immediate: `${dest}, ${left}, ${immediate}`,
+    register: `${dest}, ${left}, ${right}`,
+  }[format];
+  return operands ? `${name} ${operands}` : name;
+}
+
+const LOADS = {lb: [1, true], lh: [2, true], lw: [4, false], lbu: [1, false], lhu: [2, false]};
+const STORES = {sb: 1, sh: 2, sw: 4};
+const BRANCHES = {
+  beq: (a, b) => a === b, bne: (a, b) => a !== b,
+  blt: (a, b) => (a | 0) < (b | 0), bge: (a, b) => (a | 0) >= (b | 0),
+  bltu: (a, b) => a < b, bgeu: (a, b) => a >= b,
+};
+const ALU = {
+  add: (a, b) => a + b, sub: (a, b) => a - b, sll: (a, b) => a << b,
+  slt: (a, b) => Number((a | 0) < (b | 0)), sltu: (a, b) => Number(a < (b >>> 0)),
+  xor: (a, b) => a ^ b, srl: (a, b) => a >>> b, sra: (a, b) => (a | 0) >> b,
+  or: (a, b) => a | b, and: (a, b) => a & b,
+};
+const IMMEDIATE_OPS = {addi: 'add', slli: 'sll', slti: 'slt', sltiu: 'sltu', xori: 'xor', srli: 'srl', srai: 'sra', ori: 'or', andi: 'and'};
+
+class Machine {
+  constructor(program) {
+    this.segments = program.segments;
+    this.registers = new Uint32Array(32);
+    this.memory = new Uint8Array(0x20000);
+    this.view = new DataView(this.memory.buffer);
+    for (const segment of this.segments) {
+      for (let index = 0; index < segment.bytes.length; index += 2) {
+        this.memory[segment.address + index / 2] = Number.parseInt(segment.bytes.slice(index, index + 2), 16);
+      }
+    }
+    this.pc = program.entry;
+    this.count = 0;
+    this.exit = null;
+    this.trap = null;
+    this.last = null;
+    this.stdout = [];
+  }
+
+  check(address, length, flag, alignment = 1) {
+    if (address % alignment !== 0) throw new Error(`정렬되지 않은 주소 0x${hex(address)}`);
+    const allowed = this.segments.some(segment => (segment.flags & flag) === flag &&
+      address >= segment.address && address + length <= segment.address + segment.size);
+    if (!allowed || address + length > this.memory.length) throw new Error(`접근할 수 없는 주소 0x${hex(address)}`);
+  }
+
+  fetch(address) {
+    this.check(address, 4, 1, 4);
+    return this.view.getUint32(address, true);
+  }
+
+  load(address, size, sign) {
+    this.check(address, size, 4, size);
+    if (size === 1) return sign ? this.view.getInt8(address) : this.view.getUint8(address);
+    if (size === 2) return sign ? this.view.getInt16(address, true) : this.view.getUint16(address, true);
+    return this.view.getUint32(address, true);
+  }
+
+  store(address, size, value) {
+    this.check(address, size, 2, size);
+    if (size === 1) this.view.setUint8(address, value);
+    if (size === 2) this.view.setUint16(address, value, true);
+    if (size === 4) this.view.setUint32(address, value, true);
+  }
+
+  step() {
+    if (this.trap !== null || this.exit !== null) return null;
+    const pc = this.pc;
+    const event = {pc, nextPc: pc, instruction: null, register: null, memory: null, note: ''};
+    try {
+      const word = this.fetch(pc);
+      const instruction = decode(word);
+      if (!instruction) throw new Error(`지원하지 않는 명령 0x${hex(word)}`);
+      event.instruction = instruction;
+      const {name, rd, rs1, rs2, immediate} = instruction;
+      const [a, b] = [this.registers[rs1], this.registers[rs2]];
+      let result;
+      let nextPc = (pc + 4) >>> 0;
+      let jump;
+      if (name === 'lui' || name === 'auipc') {
+        result = (name === 'auipc' ? pc : 0) + immediate;
+      } else if (name === 'jal' || name === 'jalr') {
+        jump = name === 'jal' ? pc + immediate : (a + immediate) & ~1;
+        result = nextPc;
+        event.note = '점프';
+      } else if (Object.hasOwn(BRANCHES, name)) {
+        if (BRANCHES[name](a, b)) {
+          jump = pc + immediate;
+          event.note = '분기 조건 충족';
+        } else {
+          event.note = '다음 명령으로 진행';
+        }
+      } else if (Object.hasOwn(LOADS, name) || Object.hasOwn(STORES, name)) {
+        const address = (a + immediate) >>> 0;
+        const isLoad = Object.hasOwn(LOADS, name);
+        const size = isLoad ? LOADS[name][0] : STORES[name];
+        if (isLoad) result = this.load(address, size, LOADS[name][1]);
+        else this.store(address, size, b);
+        event.memory = {address, size, kind: isLoad ? '읽기' : '쓰기'};
+      } else if (Object.hasOwn(ALU, name)) {
+        result = ALU[name](a, b);
+      } else if (Object.hasOwn(IMMEDIATE_OPS, name)) {
+        result = ALU[IMMEDIATE_OPS[name]](a, immediate);
+      } else if (name === 'ecall') {
+        const [arg0, arg1, arg2, syscall] = [10, 11, 12, 17].map(index => this.registers[index]);
+        if (syscall === 93) {
+          this.exit = arg0;
+          nextPc = pc;
+          event.note = '예제 실행 완료';
+        } else if (syscall === 64 && arg0 === 1) {
+          this.check(arg1, arg2, 4);
+          this.stdout.push(...this.memory.slice(arg1, arg1 + arg2));
+          this.writeRegister(10, arg2, event);
+          event.note = '결과 버퍼 출력';
+        } else {
+          throw new Error(`지원하지 않는 시스템 호출 ${syscall}`);
+        }
+      } else if (name === 'ebreak') {
+        throw new Error('EBREAK 중단점');
+      }
+      if (jump !== undefined) {
+        nextPc = jump >>> 0;
+        if (nextPc % 4 !== 0) throw new Error(`정렬되지 않은 점프 주소 0x${hex(nextPc)}`);
+      }
+      if (result !== undefined && rd !== 0) this.writeRegister(rd, result, event);
+      event.nextPc = nextPc;
+      this.pc = nextPc;
+      this.count++;
+    } catch (error) {
+      this.trap = error.message;
+      event.note = this.trap;
+    }
+    this.last = event;
+    return event;
+  }
+
+  writeRegister(index, value, event) {
+    const before = this.registers[index];
+    this.registers[index] = value;
+    if (before !== this.registers[index]) event.register = {index, before, value: this.registers[index]};
+  }
+}
+
+if (typeof module !== 'undefined') module.exports = {ABI, hex, decode, assembly, Machine};
+
+(() => {
+  const byId = id => document.getElementById(id);
+  const ui = Object.fromEntries(['program', 'description', 'step', 'run', 'pause', 'reset', 'pc', 'count', 'status', 'exit',
+    'instructions', 'last', 'registers', 'filename', 'source', 'memory-range', 'memory', 'memory-detail'].map(id => [id, byId(id)]));
+  const programs = JSON.parse(byId('program-data').textContent);
+  const addresses = new Map();
+  const sourceRows = new Map();
+  const registerRows = [];
+  let machine;
+  let program;
+  let timer = null;
+  let latestMemory = null;
+  let activeInstruction;
+  let activeSource;
+
+  function element(tag, value, className) {
+    const node = document.createElement(tag);
+    if (value !== undefined) node.textContent = value;
+    if (className) node.className = className;
+    return node;
+  }
+
+  for (const example of programs) ui.program.add(new Option(example.title, example.id));
+  for (const [index, label] of ABI.entries()) {
+    const row = element('div');
+    const value = element('dd');
+    row.append(element('dt', `x${index} ${label}`), value);
+    ui.registers.append(row);
+    registerRows.push({row, value});
+  }
+
+  function setup() {
+    stop();
+    program = programs.find(example => example.id === ui.program.value);
+    machine = new Machine(program);
+    latestMemory = null;
+    ui.description.textContent = program.description;
+    ui.filename.textContent = program.filename;
+    addresses.clear();
+    sourceRows.clear();
+    ui.instructions.replaceChildren();
+    ui.source.replaceChildren();
+    for (const addr of program.instructions) {
+      const word = machine.fetch(addr);
+      const row = element('div', undefined, 'instruction-row');
+      row.append(element('span', `0x${hex(addr, 5)}`), element('span', hex(word)),
+        element('span', assembly(decode(word), addr)));
+      addresses.set(addr, row);
+      ui.instructions.append(row);
+    }
+    program.source.trimEnd().split('\n').forEach((text, index) => {
+      const row = element('div', undefined, 'source-row');
+      row.append(element('span', index + 1), element('span', text));
+      sourceRows.set(index + 1, row);
+      ui.source.append(row);
+    });
+    ui.instructions.scrollTop = 0;
+    ui.source.scrollTop = 0;
+    render();
+  }
+
+  function highlight(previous, next, viewport) {
+    previous?.classList.remove('current');
+    previous?.removeAttribute('aria-current');
+    if (!next) return undefined;
+    next.classList.add('current');
+    next.setAttribute('aria-current', 'step');
+    const view = viewport.getBoundingClientRect();
+    const item = next.getBoundingClientRect();
+    if (item.top < view.top) viewport.scrollTop += item.top - view.top - 8;
+    if (item.bottom > view.bottom) viewport.scrollTop += item.bottom - view.bottom + 8;
+    return next;
+  }
+
+  function describeLast(event) {
+    if (!event) return '명령을 실행하면 이곳에 변화가 표시됩니다.';
+    const changes = [event.note];
+    if (event.register) {
+      const {index, before, value} = event.register;
+      changes.push(`${ABI[index]}: 0x${hex(before)} → 0x${hex(value)}`);
+    }
+    if (event.memory) changes.push(`${event.memory.size}바이트 ${event.memory.kind}`);
+    return [event.instruction?.name ?? '트랩', ...changes.filter(Boolean)].join(' · ');
+  }
+
+  function showMemory() {
+    const lastAddress = latestMemory?.address ?? 0x12000;
+    const stackAddress = machine.registers[2] || 0x20000;
+    const position = {'result': 0x12000, 'last': lastAddress & ~7, 'stack': Math.max(0x1f000, stackAddress - 16) & ~7}[ui['memory-range'].value];
+    const start = Math.min(position, machine.memory.length - 32);
+    ui.memory.replaceChildren();
+    for (let offset = 0; offset < 32; offset += 8) {
+      const address = start + offset;
+      const row = element('div', undefined, 'memory-row');
+      row.append(element('span', `0x${hex(address, 5)}`));
+      for (let byte = address; byte < address + 8; byte++) {
+        const visible = machine.segments.some(segment => (segment.flags & 4) && byte >= segment.address && byte < segment.address + segment.size);
+        const active = latestMemory && byte >= latestMemory.address && byte < latestMemory.address + latestMemory.size;
+        row.append(element('span', visible ? hex(machine.memory[byte], 2) : '–', active ? 'active' : ''));
+      }
+      ui.memory.append(row);
+    }
+    ui['memory-detail'].textContent = latestMemory ? `최근 접근 · 0x${hex(latestMemory.address)} · ${latestMemory.size}바이트 ${latestMemory.kind}` : '메모리 접근 기록이 없습니다.';
+  }
+
+  function render() {
+    const halted = machine.exit !== null || machine.trap !== null;
+    ui.pc.textContent = halted ? '—' : `0x${hex(machine.pc)}`;
+    ui.count.textContent = machine.count;
+    ui.status.textContent = machine.trap ? '트랩' : machine.exit !== null ? '실행 완료' : timer !== null ? '실행 중' : machine.count ? '정지' : '준비';
+    ui.exit.textContent = machine.exit === null ? '—' : String(machine.exit | 0);
+    ui.step.disabled = halted || timer !== null;
+    ui.run.disabled = halted || timer !== null;
+    ui.pause.disabled = timer === null;
+    activeInstruction = highlight(activeInstruction, halted ? undefined : addresses.get(machine.pc), ui.instructions);
+    activeSource = highlight(activeSource, halted ? undefined : sourceRows.get(program.lines[machine.pc]), ui.source);
+    for (const [index, {row, value}] of registerRows.entries()) {
+      value.textContent = hex(machine.registers[index]);
+      row.classList.toggle('changed', machine.last?.register?.index === index);
+    }
+    ui.last.textContent = describeLast(machine.last);
+    showMemory();
+  }
+
+  function stop() {
+    if (timer !== null) clearInterval(timer);
+    timer = null;
+  }
+
+  function advance() {
+    const event = machine.step();
+    if (event?.memory) latestMemory = event.memory;
+    if (machine.exit !== null || machine.trap !== null) stop();
+    render();
+  }
+
+  ui.program.addEventListener('change', setup);
+  ui.reset.addEventListener('click', setup);
+  ui.step.addEventListener('click', advance);
+  ui.run.addEventListener('click', () => { timer = setInterval(advance, 48); render(); });
+  ui.pause.addEventListener('click', () => { stop(); render(); });
+  ui['memory-range'].addEventListener('change', showMemory);
+  setup();
+})();
+</script>
+</body>
+</html>

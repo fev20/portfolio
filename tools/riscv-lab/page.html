@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RISC-V 실행 실험실</title>
+<style><!-- STYLE --></style>
+</head>
+<body>
+<main>
+  <header class="masthead">
+    <a class="back" href="https://miel02.site/?section=ai-development">← 포트폴리오</a>
+    <p class="architecture">RV32I / 32-bit</p>
+    <h1>RISC-V 실행 실험실</h1>
+    <p class="intro">컴파일된 명령을 한 단계씩 실행하며 레지스터와 메모리가 바뀌는 순간을 확인하세요.</p>
+  </header>
+  <section class="panel toolbar" aria-label="실행 설정">
+    <div class="picker">
+      <label for="program">예제</label>
+      <select id="program"></select>
+      <p id="description"></p>
+    </div>
+    <div class="buttons">
+      <button id="step" type="button" class="primary">한 명령 실행</button>
+      <button id="run" type="button">연속 실행</button>
+      <button id="pause" type="button" disabled>일시 정지</button>
+      <button id="reset" type="button">초기화</button>
+    </div>
+  </section>
+  <section class="machine-status" aria-label="CPU 실행 상태">
+    <div><span>다음 명령 주소 (PC)</span><strong id="pc">—</strong></div>
+    <div><span>실행한 명령</span><strong id="count">0</strong></div>
+    <div><span>실행 상태</span><strong id="status" role="status">준비</strong></div>
+    <div><span>종료 값 (a0)</span><strong id="exit">—</strong></div>
+  </section>
+  <div class="workspace">
+    <section class="panel instructions" aria-labelledby="instruction-title">
+      <div class="panel-heading"><h2 id="instruction-title">명령어</h2><span><i></i> 다음 실행 위치</span></div>
+      <div class="instruction-list" id="instructions" tabindex="0" aria-label="디스어셈블리"></div>
+      <p id="last" class="detail">명령을 실행하면 이곳에 변화가 표시됩니다.</p>
+    </section>
+    <section class="panel registers" aria-labelledby="register-title">
+      <div class="panel-heading"><h2 id="register-title">레지스터</h2><span>16진수</span></div>
+      <dl id="registers" class="register-grid"></dl>
+    </section>
+    <section class="panel source" aria-labelledby="source-title">
+      <div class="panel-heading"><h2 id="source-title">예제 소스</h2><span id="filename"></span></div>
+      <div class="source-list" id="source" tabindex="0" aria-label="소스 코드"></div>
+      <p class="detail">다음 명령의 위치가 소스 줄과 연결되면 함께 강조됩니다.</p>
+    </section>
+    <section class="panel memory" aria-labelledby="memory-title">
+      <div class="panel-heading"><h2 id="memory-title">메모리</h2><span>리틀엔디언 · 바이트</span></div>
+      <div class="memory-controls">
+        <label for="memory-range">보기</label>
+        <select id="memory-range">
+          <option value="result">결과 버퍼</option>
+          <option value="last">최근 접근 주소</option>
+          <option value="stack">스택 포인터 주변</option>
+        </select>
+      </div>
+      <div id="memory" class="memory-grid" aria-label="주소와 바이트"></div>
+      <p id="memory-detail" class="detail">메모리 접근 기록이 없습니다.</p>
+    </section>
+  </div>
+  <footer><details><summary>지원 범위와 검증</summary><p>공개 예제만 내장한 RV32I 사용자 모드 모형입니다. 예제는 GCC로 컴파일했습니다. 브라우저의 JavaScript가 기계어를 직접 실행하고, 동일한 ELF 파일의 종료 시점 레지스터와 결과 버퍼를 QEMU 실행과 대조했습니다. 실행 상태는 이 페이지 안에서만 유지됩니다.</p><p><a href="https://docs.riscv.org/reference/isa/v20240411/unpriv/rv32.html">RISC-V RV32I 명세</a></p></details></footer>
+</main>
+<script type="application/json" id="program-data">__PROGRAMS__</script>
+<script>/* ENGINE */
+/* INTERFACE */</script>
+</body>
+</html>
