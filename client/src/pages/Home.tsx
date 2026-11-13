@@ -23,9 +23,10 @@ export default function Home() {
 
   useEffect(() => {
     if (!loaded) return;
+    const hasPendingScroll = Boolean(sessionStorage.getItem("pendingScroll"));
     window.dispatchEvent(new Event("portfolio:ready"));
-    if (new URLSearchParams(window.location.search).get("section") === "ai-development") {
-      document.getElementById("ai-development")?.scrollIntoView();
+    if (!hasPendingScroll && new URLSearchParams(window.location.search).get("section") === "ai-development") {
+      document.getElementById("ai-development")?.scrollIntoView({ behavior: "instant" });
     }
   }, [loaded]);
 
@@ -47,7 +48,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             {/* Main content — no top Navbar, sidebar handles navigation */}
-            <main className="relative pb-20 lg:pb-0" style={{ zIndex: 1 }}>
+            <main className="relative pb-28 sm:pb-16 lg:pb-0" style={{ zIndex: 1 }}>
               <div id="hero">
                 <HeroSection />
               </div>

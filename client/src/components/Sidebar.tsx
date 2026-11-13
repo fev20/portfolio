@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { ChevronRight } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { verifyAuth, logout, UserRole } from "@/utils/auth";
 import {
@@ -12,6 +13,10 @@ import { orderedExperiences } from "@/lib/experienceNavigation";
 import { PROJECT_CATEGORY_ORDER } from "@/lib/projectAppearance";
 
 const SIDEBAR_WIDTH = "240px";
+
+function jumpTo(scrollId: string) {
+  document.getElementById(scrollId)?.scrollIntoView({ behavior: "instant", block: "start" });
+}
 
 const NAV_ITEMS = [
   { id: "hero",       label: "Home",       num: "00", sub: [] as string[] },
@@ -134,12 +139,9 @@ export default function Sidebar() {
   const [activeSection, setActiveSection] = useState("hero");
   const [location, setLocation] = useLocation();
   const isMainPage = location === "/";
-  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
   const projects = useProjects();
-
-  const toggleCollapse = (id: string) => {
-    setCollapsed(prev => ({ ...prev, [id]: !prev[id] }));
-  };
 
   const navigate = (path: string) => {
     setLocation(path);
@@ -222,7 +224,7 @@ export default function Sidebar() {
       const pending = sessionStorage.getItem("pendingScroll");
       if (!pending || !document.getElementById(pending)) return;
       sessionStorage.removeItem("pendingScroll");
-      smoothScrollTo(pending);
+      jumpTo(pending);
     };
     window.addEventListener("portfolio:ready", consumePendingScroll);
     consumePendingScroll();
@@ -236,16 +238,8 @@ export default function Sidebar() {
       return;
     }
     const section = document.getElementById(id);
-    if (section) section.scrollIntoView({ behavior: "smooth" });
+    if (section) jumpTo(id);
     else sessionStorage.setItem("pendingScroll", id);
-  };
-
-  const smoothScrollTo = (scrollId: string) => {
-    const el = document.getElementById(scrollId);
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.25;
-      window.scrollTo({ top, behavior: "smooth" });
-    }
   };
 
   const handleSubClick = (scrollId?: string, path?: string | null) => {
@@ -254,7 +248,7 @@ export default function Sidebar() {
         sessionStorage.setItem("pendingScroll", scrollId);
         setLocation("/");
       } else {
-        smoothScrollTo(scrollId);
+        jumpTo(scrollId);
       }
     } else if (path) {
       navigate(path);
@@ -305,7 +299,7 @@ export default function Sidebar() {
 
         {/* ── profile 블록 ── */}
         <div
-          className="flex-shrink-0 px-4 py-4"
+          className="flex-shrink-0 px-4 py-3"
           style={{ borderBottom: "1px solid var(--sidebar-line)" }}
         >
           <div
@@ -318,8 +312,8 @@ export default function Sidebar() {
             <div
               className="rounded-[var(--radius)] overflow-hidden"
               style={{
-                width: "120px",
-                height: "120px",
+                width: "96px",
+                height: "96px",
                 background: "var(--surface)",
                 border: "1px solid var(--sidebar-line)",
               }}
@@ -345,7 +339,7 @@ export default function Sidebar() {
         <div style={{ height: "1px", background: "var(--sidebar-line)", flexShrink: 0 }} />
 
         {/* ── explore 블록 (스크롤 가능) ── */}
-        <div className="flex-1 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
+        <div className="min-h-0 flex-1 overflow-y-auto" style={{ scrollbarWidth: "thin" }}>
           <div
             className="px-4 pt-3 pb-1"
             style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", color: "var(--ink-secondary)", letterSpacing: "0.1em" }}
@@ -356,47 +350,42 @@ export default function Sidebar() {
             {navItems.map((item) => {
               const isActive = currentNavId === item.id;
               return (
-                <div key={item.id} className="mb-1" style={{ borderBottom: "1px solid var(--sidebar-line)", paddingBottom: "8px" }}>
-                  <button
-                    onClick={() => scrollToSection(item.id)}
-                    aria-current={isActive ? "location" : undefined}
-                    className="w-full flex items-center gap-2 px-3 py-1.5 rounded transition-all relative"
-                    style={{ background: isActive ? "var(--sidebar-active)" : "transparent", borderRadius: "var(--radius-sm)" }}
-                  >
-                    {isActive && (
-                      <motion.div
-                        layoutId="nav-active"
-                        className="absolute left-0 top-1 bottom-1 w-0.5 rounded-full"
-                        style={{ background: "var(--sidebar-ink)" }}
-                      />
-                    )}
-                    <span style={{ fontFamily: "var(--font-mono-label)", fontSize: "0.6rem", color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)", minWidth: "18px" }}>
-                      {item.num}
-                    </span>
-                    <span style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: isActive ? "var(--ink)" : "var(--ink-secondary)", fontWeight: isActive ? 600 : 400, lineHeight: 1.4, flex: 1, textAlign: "left" }}>
-                      {item.label}
-                    </span>
-                    {item.subItems.length > 0 && (
-                      <span
-                        onClick={(e) => { e.stopPropagation(); toggleCollapse(item.id); }}
-                        style={{
-                          fontFamily: "'JetBrains Mono', monospace",
-                          fontSize: "0.85rem",
-                          color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)",
-                          display: "inline-block",
-                          transform: collapsed[item.id] ? "rotate(-90deg)" : "rotate(0deg)",
-                          transition: "transform 0.2s",
-                          padding: "2px 6px",
-                          lineHeight: 1,
-                          cursor: "pointer",
-                        }}
-                      >
-                        ▾
+                <div key={item.id} className="border-b border-[var(--sidebar-line)] py-0.5">
+                  <div className="flex items-stretch gap-1 rounded-[var(--radius-sm)]" style={{ background: isActive ? "var(--sidebar-active)" : "transparent" }}>
+                    <button
+                      type="button"
+                      onClick={() => scrollToSection(item.id)}
+                      aria-current={isActive ? "location" : undefined}
+                      className="relative flex min-h-8 min-w-0 flex-1 items-center gap-2 rounded-[var(--radius-sm)] px-3 py-1.5"
+                    >
+                      {isActive && (
+                        <motion.div
+                          layoutId="nav-active"
+                          className="absolute left-0 top-1 bottom-1 w-0.5 rounded-full"
+                          style={{ background: "var(--sidebar-ink)" }}
+                        />
+                      )}
+                      <span style={{ fontFamily: "var(--font-mono-label)", fontSize: "0.6rem", color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)", minWidth: "18px" }}>
+                        {item.num}
                       </span>
+                      <span style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: isActive ? "var(--ink)" : "var(--ink-secondary)", fontWeight: isActive ? 600 : 400, lineHeight: 1.4, flex: 1, textAlign: "left" }}>
+                        {item.label}
+                      </span>
+                    </button>
+                    {item.subItems.length > 0 && (
+                      <button
+                        type="button"
+                        aria-label={`${item.label} 하위 메뉴`}
+                        aria-expanded={expandedSection === item.id}
+                        onClick={() => setExpandedSection(current => current === item.id ? null : item.id)}
+                        className="group grid w-8 shrink-0 place-items-center rounded-[var(--radius-sm)] text-[var(--ink-secondary)] hover:bg-[var(--sidebar-tint)]"
+                      >
+                        <ChevronRight size={14} aria-hidden="true" className="transition-transform group-aria-expanded:rotate-90" />
+                      </button>
                     )}
-                  </button>
+                  </div>
 
-                  {item.subItems.length > 0 && !collapsed[item.id] && (
+                  {item.subItems.length > 0 && expandedSection === item.id && (
                     <div className="ml-8 mt-0.5 space-y-0" style={{ borderTop: "1px solid var(--sidebar-line)", paddingTop: "4px", marginBottom: "8px" }}>
                       {item.subItems.map((sub, si) => (
                         <div key={si}>
@@ -408,63 +397,46 @@ export default function Sidebar() {
                               cursor: sub.path || sub.scrollId ? "pointer" : "default",
                               marginTop: sub.label === "── Certifications ──" ? "10px" : undefined,
                             }}
-                            onMouseEnter={(e) => {
-                              if (sub.path || sub.scrollId) {
-                                (e.currentTarget.querySelector('span:first-child') as HTMLElement).style.color = "var(--sidebar-ink)";
-                              }
-                            }}
-                            onMouseLeave={(e) => {
-                              if (sub.path || sub.scrollId) {
-                                (e.currentTarget.querySelector('span:first-child') as HTMLElement).style.color = isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)";
-                              }
-                            }}
                           >
                             {/* 글자 클릭 → 스크롤 이동 */}
-                            <span
+                            <button
+                              type="button"
+                              disabled={!sub.path && !sub.scrollId}
+                              title={sub.label}
                               onClick={() => handleSubClick(sub.scrollId, sub.path)}
+                              className="text-[var(--ink-secondary)] enabled:hover:text-[var(--sidebar-ink)] enabled:focus-visible:text-[var(--sidebar-ink)]"
                               style={{
                                 fontFamily: "var(--font-mono-label)",
                                 fontSize: "0.62rem",
-                                color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
                                 maxWidth: "120px",
                                 transition: "color 0.2s",
                                 flex: 1,
+                                textAlign: "left",
                                 cursor: sub.path || sub.scrollId ? "pointer" : "default",
                               }}
                             >
                               {sub.path || sub.scrollId ? "> " : ""}{sub.label}
-                            </span>
+                            </button>
 
                             {/* 토글 버튼 클릭 → 토글만 */}
                             {sub.children && sub.children.length > 0 && (
-                              <span
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  toggleCollapse(`sub-${item.id}-${si}`);
-                                }}
-                                style={{
-                                  fontFamily: "'JetBrains Mono', monospace",
-                                  fontSize: "0.75rem",
-                                  color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)",
-                                  display: "inline-block",
-                                  transform: collapsed[`sub-${item.id}-${si}`] ? "rotate(-90deg)" : "rotate(0deg)",
-                                  transition: "transform 0.2s",
-                                  padding: "0 4px",
-                                  lineHeight: 1,
-                                  cursor: "pointer",
-                                  flexShrink: 0,
-                                }}
+                              <button
+                                type="button"
+                                aria-label={`${sub.label} 프로젝트 목록`}
+                                aria-expanded={expandedCategory === sub.label}
+                                onClick={() => setExpandedCategory(current => current === sub.label ? null : sub.label)}
+                                className="group grid size-6 shrink-0 place-items-center rounded text-[var(--ink-secondary)] hover:bg-[var(--sidebar-tint)]"
                               >
-                                ▾
-                              </span>
+                                <ChevronRight size={12} aria-hidden="true" className="transition-transform group-aria-expanded:rotate-90" />
+                              </button>
                             )}
                           </div>
 
                           {/* children 프로젝트 목록 */}
-                          {sub.children && sub.children.length > 0 && !collapsed[`sub-${item.id}-${si}`] && (
+                          {sub.children && sub.children.length > 0 && expandedCategory === sub.label && (
                             <div className="ml-3 mt-0.5" style={{ borderLeft: "1px solid var(--sidebar-line)" }}>
                               {sub.children.map((child, ci) => (
                                 <Link
@@ -609,7 +581,7 @@ export default function Sidebar() {
       {/* ── Mobile bottom nav ── */}
       <nav
         aria-label="모바일 포트폴리오 섹션"
-        className="fixed bottom-0 left-0 right-0 z-40 lg:hidden flex items-stretch overflow-x-auto overscroll-x-contain px-1 py-2"
+        className="fixed bottom-0 left-0 right-0 z-40 grid grid-cols-4 px-1 pt-1 pb-[max(0.25rem,env(safe-area-inset-bottom))] sm:grid-cols-8 lg:hidden"
         style={{
           background: "var(--surface)",
           borderTop: "1px solid var(--sidebar-line)",
@@ -623,7 +595,7 @@ export default function Sidebar() {
               key={item.id}
               onClick={() => scrollToSection(item.id)}
               aria-current={isActive ? "location" : undefined}
-              className="flex min-h-11 min-w-14 flex-[1_0_auto] flex-col items-center justify-center gap-0.5 whitespace-nowrap px-2 py-1"
+              className="flex min-h-11 min-w-0 flex-col items-center justify-center gap-0.5 rounded px-1 py-1 aria-[current=location]:bg-[var(--sidebar-active)]"
             >
               <span style={{ fontFamily: "var(--font-mono-label)", fontSize: "0.55rem", color: isActive ? "var(--sidebar-ink)" : "var(--ink-secondary)" }}>
                 {item.num}

@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import AnimalBackground from "@/components/AnimalBackground";
 import { useInView } from "framer-motion";
 import { useRef, type CSSProperties } from "react";
-import { useLocation } from "wouter";
-import { Shield, Terminal, BookOpen, Globe, Settings, Cpu } from "lucide-react";
+import { Link } from "wouter";
+import { ArrowUpRight, Shield, Terminal, BookOpen, Globe, Settings, Cpu } from "lucide-react";
 import { useProjects } from "@/data/projects";
 import {
   PROJECT_CATEGORY_ORDER,
@@ -44,7 +44,6 @@ const CATEGORY_META: Record<
 export default function ProjectsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [, navigate] = useLocation();
   const projects = useProjects();
 
   const grouped = PROJECT_CATEGORY_ORDER.map(cat => ({
@@ -53,7 +52,7 @@ export default function ProjectsSection() {
   }));
 
   return (
-    <section id="projects" className="relative py-28" ref={ref}>
+    <section id="projects" className="relative py-12 sm:py-16 lg:py-20" ref={ref}>
       <AnimalBackground animal="mouse" placement="projects" />
       <div className="container relative z-10">
         {/* Section header */}
@@ -61,7 +60,7 @@ export default function ProjectsSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-3 mb-14"
+          className="flex items-center gap-3 mb-7 sm:mb-9"
         >
           <span className="section-number">03.</span>
           <h2
@@ -85,7 +84,7 @@ export default function ProjectsSection() {
         </motion.div>
 
         {/* Category groups */}
-        <div className="space-y-16">
+        <div className="space-y-8 sm:space-y-10">
           {grouped.map((group, gi) => {
             const meta = CATEGORY_META[group.category];
             const Icon = meta.icon;
@@ -102,7 +101,7 @@ export default function ProjectsSection() {
                 transition={{ duration: 0.6, delay: gi * 0.1 }}
               >
                 {/* Category header */}
-                <div className="flex items-center gap-4 mb-6">
+                <div className="mb-4 flex items-center gap-3">
                   <div
                     className="w-8 h-8 rounded-[var(--radius-sm)] flex items-center justify-center flex-shrink-0"
                     style={{
@@ -174,118 +173,43 @@ export default function ProjectsSection() {
                     </p>
                   </div>
                 ) : (
-                  <div className="space-y-4">
-                    {group.items.map((project, i) => {
-                      const { accent, soft, bright, number, outline } =
-                        getProjectAppearance(project);
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {group.items.map(project => {
+                      const { accent, soft, bright, outline } = getProjectAppearance(project);
                       return (
-                        <motion.div
+                        <Link
                           key={project.id}
                           id={`project-${project.id}`}
                           data-project-id={project.id}
-                          initial={{ opacity: 0, y: 30 }}
-                          animate={isInView ? { opacity: 1, y: 0 } : {}}
-                          transition={{
-                            duration: 0.6,
-                            delay: gi * 0.1 + i * 0.12 + 0.2,
-                          }}
-                          className="paper-card project-card rounded-[var(--radius)] overflow-hidden cursor-pointer group"
-                          style={
-                            {
-                              "--project-accent": accent,
-                              "--project-outline": outline,
-                            } as CSSProperties
-                          }
-                          onClick={() =>
-                            navigate(`/project/${encodeURIComponent(project.id)}`)
-                          }
-                          role="button"
-                          tabIndex={0}
-                          onKeyDown={event => {
-                            if (event.target !== event.currentTarget) return;
-                            if (event.key === "Enter" || event.key === " ") {
-                              event.preventDefault();
-                              navigate(`/project/${encodeURIComponent(project.id)}`);
-                            }
-                          }}
+                          href={`/project/${encodeURIComponent(project.id)}`}
+                          className="paper-card project-card group block min-w-0 rounded-[var(--radius)] p-4"
+                          style={{ "--project-accent": accent, "--project-outline": outline } as CSSProperties}
                         >
-                          <div className="p-6 md:p-8">
-                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                              {/* Left: Number + Title */}
-                              <div className="lg:col-span-1">
-                                <div
-                                  className="text-6xl mb-3 select-none"
-                                  style={{
-                                    letterSpacing: "normal",
-                                    fontWeight: 800,
-                                    fontFamily: "var(--font-display)",
-                                    color: number,
-                                    lineHeight: 1,
-                                  }}
-                                >
-                                  {project.number}
-                                </div>
-                                <div className="flex items-start justify-between">
-                                  <h3
-                                    style={{
-                                      letterSpacing: "normal",
-                                      fontFamily: "var(--font-body)",
-                                      fontSize: "1.1rem",
-                                      fontWeight: 600,
-                                      marginBottom: "0.5rem",
-                                      transition: "color 0.2s",
-                                    }}
-                                    className="[overflow-wrap:anywhere] text-[var(--ink)] group-hover:text-[var(--project-accent)]"
-                                  >
-                                    {project.title}
-                                  </h3>
-                                </div>
-                                {/* Tags */}
-                                <div className="flex flex-wrap gap-1.5 mt-3">
-                                  {project.tags.map(tag => (
-                                    <span
-                                      key={tag}
-                                      style={{
-                                        fontFamily: "var(--font-body)",
-                                        background: soft,
-                                        border: `1px solid ${bright}`,
-                                        color: accent,
-                                        fontSize: "0.68rem",
-                                        padding: "2px 8px",
-                                        borderRadius: "var(--radius-sm)",
-                                      }}
-                                    >
-                                      {tag}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-
-                              {/* Right: Description + Role */}
-                              <div className="lg:col-span-2 space-y-4">
-                                <div className="flex justify-end">
-                                  <p
-                                    style={{
-                                      fontFamily: "var(--font-body)",
-                                      fontSize: "0.8rem",
-                                      color: accent,
-                                    }}
-                                  >
-                                    클릭하여 자세히 보기 →
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
+                          <div className="flex items-start gap-2.5">
+                            <span
+                              aria-hidden="true"
+                              className="mt-0.5 shrink-0 text-xs tabular-nums"
+                              style={{ color: accent }}
+                            >
+                              {project.number}
+                            </span>
+                            <h3 className="min-w-0 flex-1 text-sm font-semibold leading-snug text-[var(--ink)] [overflow-wrap:anywhere] group-hover:text-[var(--project-accent)] sm:text-base">
+                              {project.title}
+                            </h3>
+                            <ArrowUpRight size={16} aria-hidden="true" className="shrink-0 text-[var(--project-accent)]" />
                           </div>
-
-                          {/* Bottom accent line */}
-                          <div
-                            className="h-1 transition-all"
-                            style={{
-                              background: outline,
-                            }}
-                          />
-                        </motion.div>
+                          <div className="mt-2 flex flex-wrap gap-1">
+                            {project.tags.map(tag => (
+                              <span
+                                key={tag}
+                                className="max-w-full rounded-[var(--radius-sm)] border px-1.5 py-0.5 text-[0.68rem] [overflow-wrap:anywhere]"
+                                style={{ background: soft, borderColor: bright, color: accent }}
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </Link>
                       );
                     })}
                   </div>

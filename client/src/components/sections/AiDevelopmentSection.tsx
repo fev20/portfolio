@@ -4,7 +4,7 @@ export default function AiDevelopmentSection() {
   return (
     <section
       id="ai-development"
-      className="relative py-28"
+      className="relative py-12 sm:py-16 lg:py-20"
       aria-labelledby="ai-development-title"
     >
       <div className="container relative z-10">

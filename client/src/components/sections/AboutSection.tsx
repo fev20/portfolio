@@ -13,7 +13,7 @@ export default function AboutSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="relative py-28" ref={ref}>
+    <section id="about" className="relative py-12 sm:py-16 lg:py-20" ref={ref}>
       <AnimalBackground animal="dog" placement="about" />
       <div className="container relative z-10">
         {/* Introduction and visual */}
