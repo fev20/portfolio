@@ -70,17 +70,16 @@ export const skills = [
     ],
   },
   {
-    category: "Embedded / Firmware",
+    category: "Embedded Systems",
     icon: "cpu",
     color: "#fb923c",
     items: [
       "Embedded Linux",
-      "BusyBox",
-      "U-Boot",
-      "SquashFS",
-      "UART",
-      "JTAG",
-      "SPI NOR Flash",
+      "Bootloader",
+      "File Systems",
+      "Hardware Interfaces",
+      "Flash Memory",
+      "Firmware Modification",
     ],
   },
   {
